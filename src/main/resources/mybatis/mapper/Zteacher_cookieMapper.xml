@@ -1,0 +1,36 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itboyst.facedemo.mapper.Zteacher_cookieMapper">
+    <resultMap id="Zteacher_cookie" type="com.itboyst.facedemo.dto.Zteacher_cookie">
+        <id column="zteacherid" property="zteacherid" javaType="String"/>
+        <result column="zmajorID" property="zmajorID" javaType="String"/>
+        <result column="zauthorityID" property="zauthorityID" javaType="String"/>
+        <result column="zidentity" property="zidentity" javaType="String"/>
+        <result column="zpass" property="zpass" javaType="String"/>
+        <result column="zname" property="zname" javaType="String"/>
+        <result column="zsex" property="zsex" javaType="String"/>
+        <result column="zphone" property="zphone" javaType="String"/>
+        <result column="zfaceinfoID" property="zfaceinfoID" javaType="int"/>
+        <result column="zphoto" property="zphoto" javaType="String"/>
+        <result column="zteacher_scheduleid" property="zteacher_scheduleid"  javaType="String"/>
+        <result column="zscheduleID" property="zscheduleID" javaType="String"/>
+        <result column="zteacherID" property="zteacherID" javaType="String"/>
+        <result column="ztrainingroomid" property="ztrainingroomid" javaType="String"/>
+        <result column="zroomname" property="zroomname" javaType="String"/>
+        <result column="zlocation" property="zlocation" javaType="String"/>
+        <result column="znote" property="znote" javaType="String"/>
+
+    </resultMap>
+
+
+
+    <select id="findbyfacid"  resultType="com.itboyst.facedemo.dto.Zteacher_cookie">
+        SELECT A.zid zteacherid,A.zmajorid zmajorid,A.zauthorityID zauthorityID,A.zidentity zidentity,A.zpass zpass ,A.zname zname, A.zsex zsex,A.zphone zphone,A.zfaceinfoID zfaceinfoID,A.zphoto zphoto,C.zid zteacher_scheduleid,C.zscheduleID zscheduleID,C.zteacherID zteacherID,D.zid ztrainingroomid,D.zname zroomname,D.zlocation zlocation,D.znote znote
+        FROM zteacher A,zschedule B,zteacher_schedule C,ztraining_room D
+        WHERE A.zfaceinfoID=#{zfaceinfoID} AND A.zid=C.zteacherID AND C.zscheduleID=B.zid AND (NOW() BETWEEN B.zstartdate AND B.zenddate) AND B.ztrainingroomID=D.zid group by D.zid;
+    </select>
+
+
+
+</mapper>

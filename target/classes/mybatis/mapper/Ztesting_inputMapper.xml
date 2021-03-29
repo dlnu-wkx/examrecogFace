@@ -1,0 +1,54 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itboyst.facedemo.mapper.Ztesting_inputMapper">
+    <resultMap id="Ztesting_input" type="com.itboyst.facedemo.dto.Ztesting_input">
+        <id column="zid" property="zid" javaType="String"/>
+        <result column="zstudentscheduleID" property="zstudentscheduleID" javaType="String"/>
+        <result column="zsafetestingID" property="zsafetestingID" javaType="String"/>
+        <result column="zorder" property="zorder" javaType="int"/>
+        <result column="zstate" property="zstate" javaType="String"/>
+        <result column="zinput" property="zinput" javaType="String"/>
+        <result column="zscore" property="zscore" javaType="int"/>
+    </resultMap>
+
+
+
+    <!-- <select id="findscookiemes"  resultType="com.itboyst.facedemo.dto.Zstudent_cookie">
+           SELECT A.*,B.*,C.* FROM zcourse A,zschedule B,zstudent_schedule C WHERE A.zid=B.zcourseID AND B.ztrainingroomID=#{ztrainingroomID} AND #{zrecongnizetime} BETWEEN B.zstartdate AND B.zenddate AND B.zid=C.zscheduleID AND C.zstudentID=#{zstudentID}
+     </select>
+ -->
+
+   <!-- <insert id="insertstujounal" parameterType="com.itboyst.facedemo.dto.Zstudent_journal" >
+               INSERT INTO zstudent_journal (zid,zstudentID,ztype,zoperatedate, zoperatecontent) VALUES(#{zid}, #{zstudentID},#{ztype},#{zoperatedate}, NULL);
+    </insert>-->
+
+    <delete id="deleteftestinput" parameterType="com.itboyst.facedemo.dto.Ztesting_input">
+    	DELETE FROM ztesting_input WHERE zstudentscheduleID=#{zstudentscheduleID};
+  	</delete>
+
+
+
+    <insert id="addlist" parameterType="list" useGeneratedKeys="true">
+        INSERT into ztesting_input
+        (zid,zstudentscheduleID, zsafetestingID, zorder, zstate,zscore)
+        VALUES
+        <foreach collection="list" item="test" separator=",">
+            (#{test.zid},
+            #{test.zstudentscheduleID},
+            #{test.zsafetestingID},
+            #{test.zorder},
+            #{test.zstate},
+            0
+           )
+        </foreach>
+    </insert>
+
+
+
+    <update id="updatelist" parameterType="com.itboyst.facedemo.dto.Ztesting_input" >
+        UPDATE ztesting_input SET zinput=#{zinput} ,zstate=#{zstate},zscore=#{zscore} WHERE zid=#{zid}
+    </update>
+
+
+</mapper>

@@ -1,0 +1,59 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itboyst.facedemo.mapper.ZscheduleMapper">
+    <resultMap id="zschedule" type="com.itboyst.facedemo.dto.Zschedule">
+        <id column="zid" property="zid" javaType="String"/>
+        <result column="zcourseID" property="zcourseID" javaType="String"/>
+        <result column="ztrainingroomID" property="ztrainingroomID" javaType="String"/>
+        <result column="zstartdate" property="zstartdate" jdbcType="TIMESTAMP"/>
+        <result column="zenddate" property="zenddate" jdbcType="TIMESTAMP"/>
+        <result column="zsafetestingType" property="zsafetestingType" javaType="String"/>
+        <result column="zsafetestingNum" property="zsafetestingNum" javaType="int"/>
+        <result column="zsafetestingTotal" property="zsafetestingTotal" javaType="int"/>
+        <result column="zpassingscore" property="zpassingscore" javaType="int"/>
+        <result column="zselecttest" property="zselecttest" javaType="String"/>
+        <result column="zpowerstart" property="zpowerstart" javaType="String"/>
+
+    </resultMap>
+
+
+    <select id="selectbynt"  resultType="com.itboyst.facedemo.dto.Zschedule">
+           select B.* from zteacher A ,zschedule B,zteacher_schedule C where A.zid=C.zteacherID and C.zscheduleID=B.zid  and #{time} BETWEEN B.zstartdate AND B.zenddate  and A.zname=#{zname};
+    </select>
+
+    <update id="updatetestbyscheduleid" parameterType="com.itboyst.facedemo.dto.Zschedule" >
+        update zschedule set zselecttest = #{zselecttest},zpassingscore=#{zpassingscore} where zid=#{zid}
+    </update>
+
+    <update id="updatetestbychose" parameterType="com.itboyst.facedemo.dto.Zschedule" >
+        update zschedule set zselecttest = #{zselecttest},zpassingscore=#{zpassingscore} where zid=#{zid} and  zstudentID=(select zstudentID from zstudent_login where zrecognizeIP =(select zstudentPCIP from ztraining_facility where zid =#{zid}));
+    </update>
+
+    <select id="findbytime" resultType="com.itboyst.facedemo.dto.Zschedule">
+        select *  from zschedule where #{zstartdate} between zstartdate and zenddate and zcourseID !=(select zid from zcourse where zname='临时课程')
+    </select>
+
+    <insert id="addzschedule" parameterType="com.itboyst.facedemo.dto.Zschedule">
+            insert into zschedule (zid,zcourseID,ztrainingroomID,zstartdate,zenddate)
+            values (#{zid},#{zcourseID},#{ztrainingroomID},#{zstartdate},#{zenddate})
+    </insert>
+
+    <select id="findidbycourename" resultType="java.lang.String">
+        select zid
+        from zschedule
+        where zcourseID=(select zid from zcourse where zname=#{coursename}) and ztrainingroomID= #{ztrainingroomID}
+    </select>
+
+    <select id="findallzschedule" resultType="java.lang.String">
+        select zid
+        from zschedule
+        where zcourseID=(select zid from zcourse where zname=#{coursename})
+    </select>
+
+    <select id="findzschedulebyzid" resultType="com.itboyst.facedemo.dto.Zschedule">
+        select * from zschedule where zid=#{zid}
+    </select>
+
+
+</mapper>

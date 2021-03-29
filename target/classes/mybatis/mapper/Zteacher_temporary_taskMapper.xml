@@ -1,0 +1,36 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itboyst.facedemo.mapper.Zteacher_temporary_taskMapper">
+    <resultMap id="Zteacher_temporary_task" type="com.itboyst.facedemo.dto.Zteacher_temporary_task">
+        <id column="zid" property="zid" javaType="String"/>
+        <result column="zstudentID" property="zstudentID" javaType="String"/>
+        <result column="zscheduleID" property="zscheduleID" javaType="String"/>
+        <result column="ztype" property="ztype" javaType="String"/>
+        <result column="ztitle" property="ztitle" javaType="String"/>
+        <result column="zpublishtime" property="zpublishtime" javaType="String"/>
+        <result column="zcontentID" property="zcontentID" javaType="String"/>
+    </resultMap>
+
+
+        <select id="findtitle"  resultType="com.itboyst.facedemo.dto.Zteacher_temporary_task">
+            SELECT * FROM zteacher_temporary_task WHERE zstudentID=#{zstudentID} and zscheduleID=#{zscheduleID} ORDER BY ztitle;
+        </select>
+
+        <select id="findisintemp"  resultType="java.lang.Integer">
+            SELECT COUNT(*) FROM zteacher_temporary_task WHERE ztype='临时任务' AND zcontentID=#{zcontentID} AND zstudentID=#{zstudentID};
+        </select>
+
+        <select id="findisintemp2"  resultType="com.itboyst.facedemo.dto.Zteacher_temporary_task">
+             SELECT * FROM zteacher_temporary_task WHERE ztype='临时任务' AND zcontentID=#{zcontentID} AND zstudentID=#{zstudentID} order by zpublishtime desc limit 1 ;
+        </select>
+
+        <insert id="inserttemptask" parameterType="com.itboyst.facedemo.dto.Zteacher_temporary_task" >
+            INSERT INTO zteacher_temporary_task(zid,zstudentID,zscheduleID,ztype,ztitle,zpublishtime,zcontentID) VALUES(#{zid},#{zstudentID},#{zscheduleID},'临时任务',(select zname from ztraining_task where zid=#{zcontentID}),#{zpublishtime},#{zcontentID});
+        </insert>
+
+        <delete id="detemporarybydid" parameterType="java.lang.String">
+    	    DELETE FROM zteacher_temporary_task WHERE zstudentID=#{zstudentID} and zscheduleID=#{zscheduleID}
+  	    </delete>
+
+</mapper>

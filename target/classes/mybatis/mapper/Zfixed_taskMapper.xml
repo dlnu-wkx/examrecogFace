@@ -1,0 +1,22 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itboyst.facedemo.mapper.Zfixed_taskMapper">
+    <resultMap id="Zfixed_task" type="com.itboyst.facedemo.dto.Zfixed_task">
+        <id column="zassign_scheduleid" property="zassign_scheduleid" javaType="String"/>
+        <result column="zstudent_scheduleid" property="zstudent_scheduleid" javaType="String"/>
+        <result column="zname" property="zname" javaType="String"/>
+
+
+    </resultMap>
+
+
+
+
+    <select id="findallfixed"  resultType="com.itboyst.facedemo.dto.Zfixed_task">
+        SELECT A.zid as zassign_scheduleid ,B.zid as zstudent_scheduleid,B.zname as zname FROM zassign_schedule A, ztraining_task B, zstudent_schedule C WHERE A.zstudentscheduleID=#{zstudentscheduleID} and A.ztrainingtaskID=B.zid  AND A.zstudentscheduleID=C.zid AND C.zstate NOT LIKE '已结束' ORDER BY B.zname;
+    </select>
+
+
+
+</mapper>

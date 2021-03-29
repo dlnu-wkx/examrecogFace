@@ -1,0 +1,64 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itboyst.facedemo.mapper.Zstudent_scheduleMapper">
+    <resultMap id="Zstudent_schedule" type="com.itboyst.facedemo.dto.Zstudent_schedule">
+        <id column="zid" property="zid" javaType="String"/>
+        <result column="zscheduleID" property="zscheduleID" javaType="String"/>
+        <result column="zstudentID" property="zstudentID" javaType="String"/>
+        <result column="zstate" property="zstate" javaType="String"/>
+    </resultMap>
+
+    <update id="updatestate" parameterType="com.itboyst.facedemo.dto.Zstudent_schedule" >
+        update zstudent_schedule
+        <set >
+            <if test="zstate != null" >
+                zstate = #{zstate,jdbcType=DECIMAL},
+            </if>
+
+        </set>
+        where zscheduleID = #{zscheduleID,jdbcType=DECIMAL} AND zstudentID = #{zstudentID,jdbcType=DECIMAL} AND zstate="未上课"
+    </update>
+
+
+    <update id="updatestatebyscheduleid" parameterType="com.itboyst.facedemo.dto.Zstudent_schedule" >
+        update zstudent_schedule set zstate = #{zstate} where zscheduleID=#{zscheduleID}
+    </update>
+
+    <select id="findstudentidbyscheduleid"  resultType="com.itboyst.facedemo.dto.Zstudent_schedule">
+        SELECT zstudentID from zstudent_schedule where zscheduleID=#{zscheduleID}
+    </select>
+
+
+    <update id="updatetestbyscheduleid" parameterType="com.itboyst.facedemo.dto.Zstudent_schedule" >
+        update zstudent_schedule set zselecttest = #{zselecttest},zpassingscore=#{zpassingscore} where zscheduleID=#{zscheduleID}
+    </update>
+
+    <update id="updatetestbychose" parameterType="com.itboyst.facedemo.dto.Zstudent_schedule" >
+        update zstudent_schedule set zselecttest = #{zselecttest},zpassingscore=#{zpassingscore} where zscheduleID=#{zscheduleID} and zstudentID=(select zstudentID from zstudent_login where zrecognizeIP =(select zstudentPCIP from ztraining_facility where zid =#{zid}));
+    </update>
+
+    <insert id="addzstudentSchedule" parameterType="com.itboyst.facedemo.dto.Zstudent_schedule">
+        insert into zstudent_schedule (zid,zscheduleID,zstudentID,zstate)
+        values (#{zid},#{zscheduleID},#{zstudentID},#{zstate})
+    </insert>
+
+    <select id="findbyzstudentIDandzscheduleID" parameterType="java.lang.String" resultType="com.itboyst.facedemo.dto.Zstudent_schedule">
+
+        select * from zstudent_schedule where zscheduleID =#{zscheduleID} and zstudentID = #{zstudentID}
+    </select>
+
+
+    <delete id="deletelinshi" parameterType="java.lang.String">
+
+        DELETE FROM zstudent_schedule WHERE zscheduleID=#{zscheduleID} and zstudentID = #{zstudentID}
+
+    </delete>
+
+    <select id="findstudentscheduleid" parameterType="java.lang.String" resultType="java.lang.String">
+        select zid from zstudent_schedule where zscheduleID=#{zscheduleID} and zstudentID = #{zstudentID}
+
+    </select>
+
+
+</mapper>

@@ -1,0 +1,27 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itboyst.facedemo.mapper.TestscreenMapper">
+    <resultMap id="testscreen" type="com.itboyst.facedemo.dto.TestScreen">
+        <id column="id" property="id" javaType="String"/>
+        <result column="filename" property="filename" javaType="String"/>
+        <result column="type" property="type" javaType="String"/>
+        <result column="position" property="position" javaType="String"/>
+        <result column="orders" property="orders" javaType="int"/>
+        <result column="timein" property="timein" javaType="int"/>
+    </resultMap>
+
+    <insert id="insertscreen" parameterType="com.itboyst.facedemo.dto.TestScreen" >
+        INSERT INTO testscreeen (id,filename,type,position,orders,timein) VALUES(#{id}, #{filename}, #{type},#{position},#{orders},#{timein});
+    </insert>
+
+    <select id="findleftscreen2"  resultType="com.itboyst.facedemo.dto.TestScreen" >
+            SELECT * FROM testscreeen WHERE position='左' order by id;
+    </select>
+
+
+    <select id="findleftscreencount"  resultType="int" >
+            SELECT count(*) FROM testscreeen WHERE position='左';
+    </select>
+
+</mapper>

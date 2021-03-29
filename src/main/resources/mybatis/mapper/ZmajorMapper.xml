@@ -1,0 +1,25 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itboyst.facedemo.mapper.ZmajorMapper">
+    <resultMap id="zmajor" type="com.itboyst.facedemo.dto.Zmajor">
+        <id column="zid" property="zid" javaType="String"/>
+        <result column="zinstituteID" property="zinstituteID" javaType="String"/>
+        <result column="zorder" property="zorder" javaType="int"/>
+        <result column="zidentity" property="zidentity" javaType="String"/>
+        <result column="zname" property="zname" javaType="String"/>
+
+    </resultMap>
+
+
+
+
+    <select id="findallmajor"  resultType="com.itboyst.facedemo.dto.Zmajor">
+        SELECT * from zmajor
+    </select>
+
+    <select id="findzidbyzname" resultType="java.lang.String">
+        SELECT zid from zmajor where zname=#{zname}
+    </select>
+
+</mapper>

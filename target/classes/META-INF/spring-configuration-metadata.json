@@ -1,0 +1,47 @@
+{
+  "groups": [
+    {
+      "name": "config",
+      "type": "com.itboyst.facedemo.domain.Config",
+      "sourceType": "com.itboyst.facedemo.domain.Config"
+    }
+  ],
+  "properties": [
+    {
+      "name": "config.host-extra",
+      "type": "java.lang.String",
+      "sourceType": "com.itboyst.facedemo.domain.Config"
+    },
+    {
+      "name": "config.keepalive",
+      "type": "java.lang.String",
+      "sourceType": "com.itboyst.facedemo.domain.Config"
+    },
+    {
+      "name": "config.main-code",
+      "type": "java.lang.String",
+      "sourceType": "com.itboyst.facedemo.domain.Config"
+    },
+    {
+      "name": "config.push-host",
+      "type": "java.lang.String",
+      "sourceType": "com.itboyst.facedemo.domain.Config"
+    },
+    {
+      "name": "config.push-port",
+      "type": "java.lang.String",
+      "sourceType": "com.itboyst.facedemo.domain.Config"
+    },
+    {
+      "name": "config.sub-code",
+      "type": "java.lang.String",
+      "sourceType": "com.itboyst.facedemo.domain.Config"
+    },
+    {
+      "name": "config.version",
+      "type": "java.lang.String",
+      "sourceType": "com.itboyst.facedemo.domain.Config"
+    }
+  ],
+  "hints": []
+}

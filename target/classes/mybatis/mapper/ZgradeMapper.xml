@@ -1,0 +1,33 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itboyst.facedemo.mapper.ZgradeMapper">
+    <resultMap id="zgrade" type="com.itboyst.facedemo.dto.Zgrade">
+        <id column="zid" property="zid" javaType="String"/>
+        <result column="zmajorID" property="zmajorID" javaType="String"/>
+        <result column="zidentity" property="zidentity" javaType="String"/>
+        <result column="zname" property="zname" javaType="String"/>
+        <result column="zassistant" property="zassistant" javaType="String"/>
+
+    </resultMap>
+
+
+
+
+    <select id="findallgrade"  resultType="com.itboyst.facedemo.dto.Zgrade">
+        SELECT * from zgrade
+    </select>
+
+    <select id="findgradebynamelike"  resultType="java.lang.String">
+       select zname from zgrade where zname like CONCAT('%',#{zname},'%')
+    </select>
+
+    <select id="findgradebymajorid" resultType="com.itboyst.facedemo.dto.Zgrade">
+        select * from zgrade where zmajorID=#{id}
+    </select>
+
+    <select id="findzidbyzname" resultType="java.lang.String">
+        select zid from zgrade where zname=#{zname}
+    </select>
+
+</mapper>

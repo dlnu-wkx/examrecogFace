@@ -1,0 +1,82 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itboyst.facedemo.mapper.ZstudentMapper">
+    <resultMap id="zstudent" type="com.itboyst.facedemo.dto.Zstudent">
+        <id column="zid" property="zid" javaType="String"/>
+        <result column="zgradeID" property="zgradeID" javaType="String"/>
+        <result column="zidentity" property="zidentity" javaType="String"/>
+        <result column="zpass" property="zpass" javaType="String"/>
+        <result column="zname" property="zname" javaType="String"/>
+        <result column="zsex" property="zsex" javaType="String"/>
+        <result column="zphone" property="zphone" javaType="String"/>
+        <result column="zfaceinfoID" property="zfaceinfoID" javaType="int"/>
+        <result column="zphoto" property="zphoto" javaType="String"/>
+        <result column="zstatus" property="zstatus" javaType="String"/>
+
+    </resultMap>
+
+
+        <select id="findstudentnamelike" resultType="java.lang.String" >
+            select zidentity from zstudent where zidentity like CONCAT('%',#{name},'%')
+        </select>
+
+        <select id="findastudentbynamelike"  resultType="java.lang.String">
+            SELECT zname FROM zstudent WHERE zname  like CONCAT('%',#{zname},'%') AND  zstatus='审核通过';
+        </select>
+
+
+        <select id="findadoptstudent"  resultType="com.itboyst.facedemo.dto.Zstudent">
+            SELECT * FROM zstudent WHERE zfaceinfoID=#{zfaceinfoID}  AND  zstatus='审核通过';
+        </select>
+
+        <select id="findcountbyname"  resultType="java.lang.Integer">
+            select count(*) from zstudent where zidentity=#{zname}
+        </select>
+
+        <select id="findcountbystuname"  resultType="java.lang.Integer">
+            select count(*) from zstudent where zname=#{zname}
+        </select>
+
+        <select id="findnamebyzscheduleID"  resultType="java.lang.String">
+          select A.zname from zstudent A ,zstudent_schedule B where B.zstudentID=A.zid   and B.zscheduleID=#{zscheduleID} and zstate="在上课";
+        </select>
+
+
+
+        <insert id="registerstu" parameterType="com.itboyst.facedemo.dto.Zstudent" >
+               INSERT INTO zstudent (zid, zidentity, zname, zphoto ,zfaceinfoID, zstatus,zpass,zsex,zphone,zgradeID) VALUES(#{zid}, #{zidentity}, #{zname}, #{zphoto} ,#{zfaceinfoID}, #{zstatus},#{zpass},#{zsex},#{zphone},#{zgradeID});
+        </insert>
+
+       <select id="findStudentById"  resultType="com.itboyst.facedemo.dto.Zstudent">
+            SELECT * FROM zstudent WHERE zid=#{zstudentID} ;
+        </select>
+
+        <select id="findStudentNameByfacilityID"  resultType="java.lang.String">
+            SELECT A.zname
+            FROM zstudent A, zstudent_login B,(SELECT * from(SELECT zstudentID,zrecognizetime FROM zstudent_login WHERE zrecognizeIP=(SELECT zstudentPCIP FROM ztraining_facility WHERE zid=#{zid} and (zprogress='登陆' or zprogress ='安全测试' or zprogress='实训')) ORDER BY zrecognizetime DESC)b LIMIT 1)C
+            WHERE A.zid=B. zstudentID AND B.zstudentID=C.zstudentID and C.zrecognizetime =B.zrecognizetime and date(b.zrecognizetime) = curdate()
+        </select>
+
+        <select id="findstudentByZidentity"  resultType="com.itboyst.facedemo.dto.Zstudent">
+            SELECT * FROM zstudent WHERE zidentity=#{zidentity}  AND  zstatus='审核通过';
+        </select>
+
+        <select id="findallbystudentname"  resultType="com.itboyst.facedemo.dto.Zstudent">
+            SELECT * FROM zstudent WHERE zidentity=#{zname};
+        </select>
+
+        <select id="findstudentbyfaceid"  resultType="com.itboyst.facedemo.dto.Zstudent">
+            SELECT * FROM zstudent WHERE zidentity=#{zfaceinfoID};
+        </select>
+
+
+        <update id="updatestudent" parameterType="com.itboyst.facedemo.dto.Zstudent" >
+            UPDATE zstudent SET zname=#{zname},zpass=#{zpass},zsex=#{zsex},zphone=#{zphone},zfaceinfoID=#{zfaceinfoID},zphoto=#{zphoto},zstatus='待审核' WHERE zidentity=#{zidentity}
+        </update>
+
+        <select id="findAllstudentbygradeid" resultType="com.itboyst.facedemo.dto.Zstudent">
+           select a.zid,b.zname as zgradeID,a.zidentity,a.zname,a.zfaceinfoID,a.zpass,a.zphone,a.zphoto,a.zsex,a.zstatus
+            from zstudent a,zgrade b where a.zgradeID=#{zgradeID} and a.zgradeID=b.zid
+        </select>
+</mapper>

@@ -1,0 +1,25 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itboyst.facedemo.mapper.Ztraining_taskMapper">
+    <resultMap id="ztraining_task" type="com.itboyst.facedemo.dto.Ztraining_task">
+        <id column="zid" property="zid" javaType="String"/>
+        <result column="zcourseID" property="zcourseID" javaType="String"/>
+        <result column="zorder" property="zorder" javaType="int"/>
+        <result column="zname" property="zname" javaType="String"/>
+        <result column="ztype" property="ztype" javaType="String"/>
+    </resultMap>
+
+    <select id="findalltask"  resultType="com.itboyst.facedemo.dto.Ztraining_task">
+        select * from ztraining_task
+    </select>
+
+    <select id="findtasknamelike"  resultType="com.itboyst.facedemo.dto.Ztraining_task">
+        select * from ztraining_task where zname like "%"#{zname}"%"
+    </select>
+
+    <select id="findalltaskbyzcourseID"  resultType="com.itboyst.facedemo.dto.Ztraining_task">
+        select * from ztraining_task where zcourseID=#{zcourseID}
+    </select>
+
+</mapper>

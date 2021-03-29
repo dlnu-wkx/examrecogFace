@@ -1,0 +1,161 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itboyst.facedemo.mapper.Ztraining_facilityMapper">
+    <resultMap id="Ztraining_facility" type="com.itboyst.facedemo.dto.Ztraining_facility">
+        <id column="zid" property="zid" javaType="String"/>
+        <result column="ztrainingroomID" property="ztrainingroomID" javaType="String"/>
+        <result column="zidentity" property="zidentity" javaType="int"/>
+        <result column="ztype" property="ztype" javaType="String"/>
+        <result column="zpowerIP" property="zpowerIP" javaType="String"/>
+        <result column="zcameraIP" property="zcameraIP" javaType="String"/>
+        <result column="zstudentPCIP" property="zstudentPCIP" javaType="String"/>
+        <result column="zlocation" property="zlocation" javaType="String"/>
+        <result column="zpowerPort" property="zpowerPort" javaType="int"/>
+        <result column="zcameraName" property="zcameraName" javaType="String"/>
+        <result column="zoperationstatus" property="zoperationstatus" javaType="String"/>
+        <result column="zpowerstatus" property="zpowerstatus" javaType="String"/>
+
+        <result column="zpowerStatus1" property="zpowerStatus1" javaType="int"/>
+        <result column="zpowerStatus2" property="zpowerStatus2" javaType="int"/>
+        <result column="zpowerStatus3" property="zpowerStatus3" javaType="int"/>
+        <result column="zpowerStatus4" property="zpowerStatus4" javaType="int"/>
+        <result column="zpowerStatus5" property="zpowerStatus5" javaType="int"/>
+        <result column="zpowerStatus6" property="zpowerStatus6" javaType="int"/>
+        <result column="zpowerStatus7" property="zpowerStatus7" javaType="int"/>
+        <result column="zpowerStatus8" property="zpowerStatus8" javaType="int"/>
+        <result column="zsafetestingType" property="zsafetestingType" javaType="String"/>
+
+        <result column="zpassingscore" property="zpassingscore" javaType="int"/>
+        <result column="zsafetestingNum" property="zsafetestingNum" javaType="int"/>
+        <result column="zsafetestingTotal" property="zsafetestingTotal" javaType="int"/>
+        <result column="zselecttest" property="zselecttest" javaType="String"/>
+        <result column="zpowerstart" property="zpowerstart" javaType="String"/>
+        <result column="zprogress" property="zprogress" javaType="String"/>
+    </resultMap>
+
+
+    <select id="findfacilitybyid"  resultType="com.itboyst.facedemo.dto.Ztraining_facility">
+          SELECT * FROM ztraining_facility WHERE zid=#{zid}
+    </select>
+
+    <select id="findstunamebyfacid"  resultType="java.lang.String">
+          select zname from zstudent where zid=( select zstudentID from zstudent_login where zrecognizeIP=( select zstudentPCIP from ztraining_facility where zid=#{zid} and (zprogress='登陆' or  zprogress='安全测试' or zprogress='实训' )) ORDER BY zrecognizetime desc LIMIT 1)
+    </select>
+
+
+
+    <select id="findOpenPower"  resultType="java.lang.String">
+          SELECT zstudentPCIP FROM ztraining_facility WHERE zid=#{zid} AND zpowerstatus="已开机";
+    </select>
+
+    <select id="findcontrollerbyroomid"  resultType="com.itboyst.facedemo.dto.Ztraining_facility">
+          SELECT zpowerPort,zpowerIP FROM ztraining_facility WHERE ztrainingroomID=#{ztrainingroomID};
+    </select>
+
+    <select id="findcontrollerbyid"  resultType="com.itboyst.facedemo.dto.Ztraining_facility">
+          SELECT zpowerPort,zpowerIP FROM ztraining_facility WHERE zid=#{zid};
+    </select>
+
+    <select id="findtrain_fac"  resultType="com.itboyst.facedemo.dto.Ztraining_facility">
+          SELECT * FROM ztraining_facility WHERE zstudentPCIP=#{zstudentPCIP};
+    </select>
+
+    <select id="findfactibyrid"  resultType="com.itboyst.facedemo.dto.Ztraining_facility">
+          SELECT * FROM ztraining_facility WHERE ztrainingroomID=#{ztrainingroomID} ORDER BY zidentity;
+    </select>
+
+
+    <select id="findfactibyrid2"  resultType="com.itboyst.facedemo.dto.Ztraining_facility">
+        SELECT * FROM ztraining_facility WHERE ztrainingroomID=#{ztrainingroomID} and zprogress!='下课' and zprogress!='退出系统'  ORDER BY zidentity;
+    </select>
+
+    <select id="findfactibyztrainingroomID"  resultType="com.itboyst.facedemo.dto.Ztraining_facility">
+          SELECT * FROM ztraining_facility WHERE ztrainingroomID=#{ztrainingroomID} ORDER BY zidentity;
+    </select>
+
+    <select id="findfactsixportbyzid"  resultType="int">
+          SELECT zpowerStatus6 FROM ztraining_facility WHERE zstudentPCIP=#{IP}
+    </select>
+
+
+    <select id="findfactsixportbyzid2"  resultType="int">
+          SELECT zpowerStatus6 FROM ztraining_facility WHERE zid=#{zid}
+    </select>
+
+
+    <select id="findzprogressbyid"  resultType="java.lang.String">
+        SELECT zprogress FROM ztraining_facility WHERE zid=#{zid}
+    </select>
+
+
+    <update id="updatezprogressbyip" parameterType="com.itboyst.facedemo.dto.Ztraining_facility" >
+        update ztraining_facility set zprogress = #{zprogress} where zstudentPCIP = #{zstudentPCIP}
+    </update>
+
+    <select id="findzprogressByip" resultType="java.lang.String">
+        select zprogress from ztraining_facility WHERE zid=#{zid}
+    </select>
+
+    <update id="updateallfacility" parameterType="com.itboyst.facedemo.dto.Ztraining_facility" >
+        update ztraining_facility set zpowerstatus = #{zpowerstatus} where ztrainingroomID = #{ztrainingroomID}
+    </update>
+
+    <update id="updateallfacilitybyzid" parameterType="com.itboyst.facedemo.dto.Ztraining_facility" >
+        update ztraining_facility set zpowerstatus = #{zpowerstatus} where zid = #{zid}
+    </update>
+
+    <update id="updatefiveportbyzid" parameterType="com.itboyst.facedemo.dto.Ztraining_facility" >
+        update ztraining_facility set zpowerStatus5 = #{zpowerStatus5} where zid = #{zid}
+    </update>
+
+    <update id="updateoatportbyrid" parameterType="com.itboyst.facedemo.dto.Ztraining_facility" >
+        update ztraining_facility set zpowerStatus1 = #{zpowerStatus1} ,zpowerStatus2 = #{zpowerStatus2} where ztrainingroomID = #{ztrainingroomID}
+    </update>
+
+    <update id="updateportbyid" parameterType="com.itboyst.facedemo.dto.Ztraining_facility" >
+        update ztraining_facility set zpowerStatus6 = #{zpowerStatus6},zpowerStatus1 = #{zpowerStatus1},zpowerStatus2 = #{zpowerStatus2},zpowerStatus7 = #{zpowerStatus7} where zid = #{zid}
+    </update>
+
+    <update id="updatesixportbyid" parameterType="com.itboyst.facedemo.dto.Ztraining_facility" >
+        update ztraining_facility set zpowerStatus6 = #{zpowerStatus6} where zstudentPCIP = #{zstudentPCIP}
+    </update>
+
+    <update id="updateoneportbyip" parameterType="com.itboyst.facedemo.dto.Ztraining_facility" >
+        update ztraining_facility set zpowerStatus1 = #{zpowerStatus1} where zstudentPCIP = #{zstudentPCIP}
+    </update>
+
+    <update id="updattwoportbyip" parameterType="com.itboyst.facedemo.dto.Ztraining_facility" >
+        update ztraining_facility set zpowerStatus2 = #{zpowerStatus2} where zstudentPCIP = #{zstudentPCIP}
+    </update>
+
+    <update id="updatesixportbyroomid" parameterType="com.itboyst.facedemo.dto.Ztraining_facility" >
+        update ztraining_facility set zpowerStatus6 = #{zpowerStatus6} where ztrainingroomID = #{ztrainingroomID}
+    </update>
+
+    <update id="updatesevenportbyip" parameterType="com.itboyst.facedemo.dto.Ztraining_facility" >
+        update ztraining_facility set zpowerStatus7 = #{zpowerStatus7} where zstudentPCIP = #{zstudentPCIP}
+    </update>
+
+    <update id="updatefatestbyroomid" parameterType="com.itboyst.facedemo.dto.Ztraining_facility" >
+        update ztraining_facility set zsafetestingType = #{zsafetestingType} , zsafetestingNum=#{zsafetestingNum} , zpassingscore=#{zpassingscore} where ztrainingroomID = #{ztrainingroomID}
+    </update>
+
+    <update id="updatefatestbyid" parameterType="com.itboyst.facedemo.dto.Ztraining_facility" >
+        update ztraining_facility set zsafetestingType = #{zsafetestingType} , zsafetestingNum=#{zsafetestingNum} , zpassingscore=#{zpassingscore} where zid = #{zid}
+    </update>
+
+    <update id="updatefatestbyid2" parameterType="com.itboyst.facedemo.dto.Ztraining_facility" >
+        update ztraining_facility set zsafetestingType = #{zsafetestingType} , zsafetestingNum=#{zsafetestingNum} , zpassingscore=#{zpassingscore},zpowerStatus8=#{zpowerStatus8},zselecttest=#{zselecttest} where zid = #{zid}
+    </update>
+
+    <update id="overclass" parameterType="com.itboyst.facedemo.dto.Ztraining_facility" >
+        update ztraining_facility set zprogress = #{zprogress} where ztrainingroomID = #{ztrainingroomID}
+    </update>
+
+
+    <update id="updateoneatwobyrid" parameterType="com.itboyst.facedemo.dto.Ztraining_facility" >
+        update ztraining_facility set zpowerStatus1 = #{zpowerStatus1},zpowerStatus2 = #{zpowerStatus2} where ztrainingroomID = #{ztrainingroomID}
+    </update>
+
+</mapper>

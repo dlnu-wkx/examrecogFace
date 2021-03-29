@@ -1,0 +1,21 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itboyst.facedemo.mapper.Ztraining_task_assessMapper">
+    <resultMap id="Ztraining_task_assess" type="com.itboyst.facedemo.dto.Ztraining_task_assess">
+        <id column="zid" property="zid" javaType="String"/>
+        <result column="ztrainingtaskID" property="ztrainingtaskID" javaType="String"/>
+        <result column="zgroup" property="zgroup" javaType="String"/>
+        <result column="zorder" property="zorder" javaType="int"/>
+        <result column="ztechnicaldemand" property="ztechnicaldemand" javaType="String"/>
+    </resultMap>
+
+
+
+    <select id="findallbyztrainingtaskID"  resultType="com.itboyst.facedemo.dto.Ztraining_task_assess">
+          SELECT * FROM ztraining_task_assess WHERE ztrainingtaskID=#{ztrainingtaskID} order by zorder;
+    </select>
+
+
+
+</mapper>

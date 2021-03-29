@@ -1,0 +1,31 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itboyst.facedemo.mapper.Ztraining_task_contentMapper">
+    <resultMap id="Ztraining_task_content" type="com.itboyst.facedemo.dto.Ztraining_task_content">
+        <id column="zid" property="zid" javaType="String"/>
+        <result column="ztrainingtaskID" property="ztrainingtaskID" javaType="String"/>
+        <result column="zorder" property="zorder" javaType="int"/>
+        <result column="ztype" property="ztype" javaType="String"/>
+        <result column="zcontent" property="zcontent" javaType="String"/>
+        <result column="ztitle" property="ztitle" javaType="String"/>
+    </resultMap>
+
+
+    <select id="selectcontentbypage"  resultType="com.itboyst.facedemo.dto.Ztraining_task_content">
+       SELECT * FROM ztraining_task_content WHERE ztrainingtaskID=#{ztrainingtaskID} AND zorder=#{zorder};
+    </select>
+
+    <select id="findendpages"  resultType="java.lang.Integer">
+       SELECT MAX(zorder) as zorder  FROM ztraining_task_content WHERE ztrainingtaskID=#{ztrainingtaskID}
+    </select>
+
+    <select id="findpresentProgessByfacilityID" resultType="com.itboyst.facedemo.dto.Ztraining_task_content">
+        SELECT B.*
+        FROM ztask_content_log A, ztraining_task_content B, zassign_schedule C, zstudent_schedule D,(SELECT zstudentID,zrecognizetime FROM zstudent_login WHERE zrecognizeIP=(SELECT zstudentPCIP FROM ztraining_facility WHERE zid=#{facilityID}))E
+        WHERE (TIME_TO_SEC(NOW())- TIME_TO_SEC(A.zstarttime)&lt;3600) AND (A.zendtime>A.zstarttime) AND A. ztrainingtaskcontentID=B.zid AND zassignscheduleID=C.zid AND A. zassignscheduleID=C.zid AND C.ztrainingtaskID=B. ztrainingtaskID AND C. zstudentscheduleID=D.zid
+        AND D.zstudentID=E.zstudentID and DATE(A.zstarttime) = CURDATE() and E.zrecognizetime &lt; A.zendtime ORDER BY A.zstarttime DESC
+
+    </select>
+
+</mapper>

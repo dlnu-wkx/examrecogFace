@@ -1,0 +1,32 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itboyst.facedemo.mapper.Ztraining_roomMapper">
+    <resultMap id="ztraining_room" type="com.itboyst.facedemo.dto.ztraining_room">
+        <id column="zid" property="zid" javaType="String"/>
+        <result column="zname" property="zname" javaType="String"/>
+        <result column="zlocation" property="zlocation" javaType="String"/>
+        <result column="znote" property="znote" javaType="String"/>
+
+    </resultMap>
+
+
+
+
+
+    <select id="findbyrid"  resultType="com.itboyst.facedemo.dto.ztraining_room">
+          SELECT * FROM ztraining_room WHERE zid=#{zid};
+    </select>
+
+    <select id="findallztrainroom"  resultType="com.itboyst.facedemo.dto.ztraining_room">
+          SELECT * FROM ztraining_room ;
+    </select>
+
+    <select id="findztrainroomNamebyfacilityID"  resultType="java.lang.String">
+          SELECT b.zname from ztraining_camera a,ztraining_room  b
+         WHERE a.ztrainingroomID =b.zid   and a.zid=#{cameraID}
+    </select>
+
+
+
+</mapper>

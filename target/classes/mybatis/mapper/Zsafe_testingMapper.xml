@@ -1,0 +1,59 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itboyst.facedemo.mapper.Zsafe_testingMapper">
+    <resultMap id="zsafe_testing" type="com.itboyst.facedemo.dto.Zsafe_testingDto">
+        <id column="zid" property="zid" javaType="String"/>
+        <result column="ztestingtype" property="ztestingtype" javaType="String"/>
+        <result column="zlevel" property="zlevel" javaType="String"/>
+        <result column="ztitletype" property="ztitletype" javaType="String"/>
+        <result column="ztitlecontent" property="ztitlecontent" javaType="String"/>
+        <result column="zoptionA" property="zoptionA" javaType="String"/>
+        <result column="zoptionB" property="zoptionB" javaType="String"/>
+        <result column="zoptionC" property="zoptionC" javaType="String"/>
+        <result column="zoptionD" property="zoptionD" javaType="String"/>
+        <result column="zresult" property="zresult" javaType="String"/>
+        <result column="zcore" property="zcore" javaType="String"/>
+
+    </resultMap>
+
+
+
+    <select id="findallCbank" resultMap="zsafe_testing" resultType="com.itboyst.facedemo.dto.Zsafe_testingDto">
+        SELECT * FROM zsafe_testing  where ztitletype='选择'   ORDER BY RAND() LIMIT 3
+    </select>
+
+
+    <select id="findallJbank" resultMap="zsafe_testing" resultType="com.itboyst.facedemo.dto.Zsafe_testingDto">
+        SELECT * FROM zsafe_testing  where ztitletype='判断'   ORDER BY RAND() LIMIT 2
+    </select>
+
+    <select id="findnumberbytype" resultType="int">
+        SELECT count(*) FROM zsafe_testing  where ztype=#{ztype};
+    </select>
+
+
+    <!--
+        <insert id="insertUserFaceInfo" parameterType="com.itboyst.facedemo.domain.UserFaceInfo" >
+                INSERT INTO user_face_info (group_id,face_id,name,face_feature,fpath) VALUES (#{groupId},#{faceId},#{name},#{faceFeature},#{path})
+        </insert>
+
+        <select id="getUserFaceInfoByGroupId" resultMap="userFace2" parameterType="java.lang.Integer" resultType="com.itboyst.facedemo.dto.FaceUserInfo">
+            select face_id,name,face_feature from user_face_info
+        </select>-->
+    <select id="findrand10" resultMap="zsafe_testing" resultType="com.itboyst.facedemo.dto.Zsafe_testingDto">
+        SELECT * from zsafe_testing WHERE zid NOT IN (SELECT zsafetestingID FROM ztesting_input WHERE zstudentscheduleID =#{zstudentscheduleID }) AND ztestingtype=#{ztestingtype}  ORDER BY RAND() LIMIT 10;
+    </select>
+
+    <select id="findrandbynumber" resultMap="zsafe_testing" resultType="com.itboyst.facedemo.dto.Zsafe_testingDto">
+        SELECT * from zsafe_testing  where ztype=#{ztype} ORDER BY RAND() LIMIT #{number};
+    </select>
+
+    <select id="findallsafetype"  resultType="java.lang.String">
+        select ztype from zsafe_testing GROUP BY ztype
+    </select>
+
+
+
+
+</mapper>

@@ -1,0 +1,30 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itboyst.facedemo.mapper.Ztask_content_logMapper">
+    <resultMap id="Ztask_content_log" type="com.itboyst.facedemo.dto.Ztask_content_log">
+        <id column="zid" property="zid" javaType="String"/>
+        <result column="zassignscheduleID" property="zassignscheduleID" javaType="String"/>
+        <result column="ztrainingtaskcontentID" property="ztrainingtaskcontentID" javaType="String"/>
+        <result column="zstarttime" property="zstarttime" jdbcType="TIMESTAMP"/>
+        <result column="zendtime" property="zendtime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <select id="findnumcontentlog"   resultType="java.lang.Integer">
+     select  COUNT(*) from ztask_content_log where zassignscheduleID =#{zassignscheduleID} and ztrainingtaskcontentID=#{ztrainingtaskcontentID}
+    </select>
+
+    <insert id="insertcontentlog" parameterType="com.itboyst.facedemo.dto.Ztask_content_log" >
+               INSERT INTO ztask_content_log (zid, zassignscheduleID, ztrainingtaskcontentID, zstarttime) VALUES(#{zid},#{zassignscheduleID} , #{ztrainingtaskcontentID}, #{zstarttime} );
+    </insert>
+
+    <update id="updatecontentlogstart" parameterType="com.itboyst.facedemo.dto.Ztask_content_log" >
+        update ztask_content_log set zstarttime = #{zstarttime} where zassignscheduleID = #{zassignscheduleID} AND ztrainingtaskcontentID = #{ztrainingtaskcontentID}
+    </update>
+
+    <update id="updatecontentlogend" parameterType="com.itboyst.facedemo.dto.Ztask_content_log" >
+        update ztask_content_log set zendtime = #{zendtime} where zassignscheduleID = #{zassignscheduleID} AND ztrainingtaskcontentID = #{ztrainingtaskcontentID}
+    </update>
+
+
+</mapper>

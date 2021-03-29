@@ -1,0 +1,30 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itboyst.facedemo.mapper.Zstudent_journalMapper">
+    <resultMap id="Zstudent_journal" type="com.itboyst.facedemo.dto.Zstudent_journal">
+        <id column="zid" property="zid" javaType="String"/>
+        <result column="zstudentID" property="zstudentID" javaType="String"/>
+        <result column="ztype" property="ztype" javaType="String"/>
+        <result column="zoperatedate" property="zoperatedate" jdbcType="TIMESTAMP"/>
+        <result column="zoperatecontent" property="zoperatecontent" javaType="String"/>
+    </resultMap>
+
+
+
+   <!-- <select id="findscookiemes"  resultType="com.itboyst.facedemo.dto.Zstudent_cookie">
+          SELECT A.*,B.*,C.* FROM zcourse A,zschedule B,zstudent_schedule C WHERE A.zid=B.zcourseID AND B.ztrainingroomID=#{ztrainingroomID} AND #{zrecongnizetime} BETWEEN B.zstartdate AND B.zenddate AND B.zid=C.zscheduleID AND C.zstudentID=#{zstudentID}
+    </select>
+-->
+
+    <insert id="insertstujounal" parameterType="com.itboyst.facedemo.dto.Zstudent_journal" >
+               INSERT INTO zstudent_journal (zid,zstudentID,ztype,zoperatedate, zoperatecontent) VALUES(#{zid}, #{zstudentID},#{ztype},#{zoperatedate}, NULL);
+    </insert>
+
+    <select id="findstudentjournaltime" resultType="com.itboyst.facedemo.dto.Zstudent_journal">
+        select * from zstudent_journal where zstudentID=#{zstudentID}
+    </select>
+
+
+
+</mapper>

@@ -1,0 +1,14 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itboyst.facedemo.mapper.ZcourseMapper">
+
+    <insert id="insertCourse" parameterType="com.itboyst.facedemo.dto.Zcourse">
+        insert into zcourse (zid,zidentity,zname,ztype)
+        values (#{zid},#{zidentity},#{zname},#{ztype})
+    </insert>
+
+    <select id="findAllcourse" resultType="com.itboyst.facedemo.dto.Zcourse">
+        select  * from zcourse
+    </select>
+</mapper>

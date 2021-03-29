@@ -1,0 +1,96 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itboyst.facedemo.mapper.MybatisUserFaceInfoMapper">
+    <resultMap id="userFace" type="com.itboyst.facedemo.domain.UserFaceInfo">
+        <id column="id" property="id" javaType="int"/>
+        <result column="group_id" property="groupId" javaType="java.lang.Integer"/>
+        <result column="face_id" property="faceId" javaType="String"/>
+        <result column="phone_number" property="phoneNumber" javaType="String"/>
+        <result column="create_time" property="createTime" javaType="java.util.Date"/>
+        <result column="face_feature" property="faceFeature"/>
+    </resultMap>
+
+    <resultMap id="userFace2" type="com.itboyst.facedemo.dto.FaceUserInfo">
+        <id column="id" property="id" javaType="int"/>
+        <result column="group_id" property="groupId" javaType="java.lang.Integer"/>
+        <result column="face_id" property="faceId" javaType="String"/>
+        <result column="phone_number" property="phoneNumber" javaType="String"/>
+        <result column="create_time" property="createTime" javaType="java.util.Date"/>
+        <result column="face_feature" property="faceFeature"/>
+        <result column="fpath" property="path" javaType="String"/>
+    </resultMap>
+
+
+    <select id="findUserFaceInfoList" resultMap="userFace" resultType="com.itboyst.facedemo.domain.UserFaceInfo">
+        SELECT name,create_time from user_face_info
+    </select>
+
+    <select id="selectidbyname"  resultType="int">
+        SELECT id from user_face_info where fpath =#{fpath}
+    </select>
+
+
+    <select id="selectfaceidbyfpath"  resultType="String">
+        SELECT face_id from user_face_info where fpath =#{fpath}
+    </select>
+
+    <insert id="insertUserFaceInfo" parameterType="com.itboyst.facedemo.domain.UserFaceInfo">
+            INSERT INTO user_face_info (group_id,face_id,name,face_feature,fpath) VALUES (#{groupId},#{faceId},#{name},#{faceFeature},#{path})
+    </insert>
+
+    <select id="getUserFaceInfoByGroupId" resultMap="userFace2" parameterType="java.lang.Integer"
+            resultType="com.itboyst.facedemo.dto.FaceUserInfo">
+        select face_id,name,face_feature,fpath from user_face_info
+    </select>
+
+    <select id="findcountbyface" resultMap="userFace2" parameterType="java.lang.Integer"
+            resultType="com.itboyst.facedemo.dto.FaceUserInfo">
+        select count(*) from user_face_info where name= #{name}
+    </select>
+
+    <update id="updatelist" parameterType="com.itboyst.facedemo.dto.Ztesting_input" >
+        UPDATE ztesting_input SET zinput=#{zinput} ,zstate=#{zstate},zscore=#{zscore} WHERE zstudentscheduleID=#{zstudentscheduleID} AND zsafetestingID = #{zsafetestingID}
+    </update>
+
+    <update id="updateuserfopath" parameterType="com.itboyst.facedemo.domain.UserFaceInfo" >
+        UPDATE user_face_info SET fpath=#{path} WHERE face_id=#{face_id} and name=#{name}
+    </update>
+
+
+    <select id="findcountnamelike" resultType="java.lang.String" >
+        select name from user_face_info where name like CONCAT('%',#{name},'%')
+    </select>
+
+    <select id="findcountfaceid" resultType="java.lang.Integer" >
+        select count(*) from user_face_info where face_id=#{face_id}
+    </select>
+
+    <select id="findidbyfaceid" resultType="java.lang.Integer" >
+        select id from user_face_info where face_id=#{face_id}
+    </select>
+
+    <select id="findfopathByfaceid" resultType="java.lang.String">
+
+         select  fpath from user_face_info where id=#{id}
+    </select>
+
+    <select id="findAll" resultType="java.lang.Integer">
+        SELECT Auto_increment FROM information_schema.`TABLES` WHERE Table_Schema='schooltrain' AND table_name = 'user_face_info' limit 1
+    </select>
+
+    <delete id="deltempuser" parameterType="java.lang.String">
+        delete from user_face_info where face_id=#{face_id}
+    </delete>
+
+    <update id="updatefacefeature" parameterType="java.lang.String">
+        UPDATE user_face_info set face_feature =NULL where face_id = #{face_id}
+    </update>
+
+
+
+    <select id="findcreatimebyfaceid" resultType="java.sql.Timestamp">
+        select  create_time from user_face_info where face_id=#{face_id}
+    </select>
+
+</mapper>

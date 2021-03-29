@@ -1,0 +1,173 @@
+.lefelist{
+    width: 15%;
+    height: 95%;
+    float: left;
+    border: 1px solid black;
+}
+
+.rightlist{
+    width: 75%;
+    height: 80%;
+    float:left
+}
+.rightfirstson{
+    width: 100%;
+    height: 80%;
+}
+.rightfirstson_first{
+    width: 30%;
+    height: 100%;
+    float: left;
+}
+.rightfirstson_first_first{
+    width: 50%;
+    height: 15%;
+    text-align: center;
+    margin: 50% auto;
+}
+
+.rightfirstson_first_first_button{
+    width: 100%;
+    height: 100%;
+    background-color: blue;
+}
+
+.rightfirstson_second{
+    width: 70%;
+    height: 100%;
+    float: left;
+}
+
+.rightfirstson_second_first{
+    width: 29%;
+    height: 100%;
+    /*padding: 10%;*/
+    float: right;
+}
+
+.rightfirstson_second_first_select{
+    width: 68%;
+    height: 30px;
+}
+
+.rightfirstson_second_first_select2{
+    width: 100%;
+    height: 80%;
+}
+
+.rightfirstson_second_first_button{
+    width: 50%;
+    height: 50%;
+    text-align: center;
+    background-color: #71B863;
+    border-radius:32px;
+    font-size: 20px;
+}
+
+.rightfirstson_second_second{
+    width: 100%;
+    height: 100%;
+    display: none;
+    overflow: auto;
+}
+
+.rightfirstson_second_second_table{
+    width: 80%;
+    margin-top: 2%;
+    text-align: center;
+}
+
+.rightsecondson{
+    width: 100%;
+    height: 20%
+}
+.rightsecondson_first{
+    width: 100%;
+    height: 50%;
+}
+
+.rightsecondson_first_firstdiv{
+    float: left;
+    width: 20%;
+    height: 100%;
+}
+
+.rightsecondson_first_seconddiv{
+    float: left;
+    width: 30%;
+    height: 100%;
+}
+
+.rightsecondson_first_select{
+    width: 70%;
+    height: 80%;
+}
+
+.rightsecondson_first_button1{
+    width: 68%;
+    height: 30px;
+    background-color: cyan;
+}
+
+.rightsecondson_first_button2{
+    float: left;
+    width: 15%;
+    height: 100%;
+    background-color: blue;
+}
+
+.masking{
+    width: 100%;
+    height: 90%;
+    position: absolute;
+    background-color: #AEC2E6;
+    opacity:0.5;
+    z-index: 2;
+    display: none;
+}
+
+.pop-up{
+    width: 30%;
+    left:30%;
+    top:20%;
+    height: 60%;
+    position: absolute;
+    z-index: 3;
+    border: 1px solid black;
+    background-color: #FFFFFF;
+    display: none;
+}
+.pop-up_div{
+    margin: 10% auto;
+}
+.pop-up_div_input{
+    width: 50%;
+    height: 10%;
+}
+.pop-up_div_button{
+    width: 20%;
+    height:30px;
+    text-align: center;
+    background-color: #71B863;
+    border-radius:32px;
+}
+
+.right_parent1{
+    float: left;
+    width: 9.065%;
+    height:100%;
+    /*width: 9%;*/
+    border-left: 1px solid #c2c2c2;
+
+}
+
+.top1{
+    /*top: 0px;
+    left: 0px;*/
+    width: 100%;
+    height: 61px;
+    /*position: fixed;*/
+    background-color: #C7C7C7;
+    /*border: solid 1px #BBBBBB;*/
+    border-bottom:1px solid  #c2c2c2;
+}

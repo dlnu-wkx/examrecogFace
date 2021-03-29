@@ -1,0 +1,1067 @@
+.s_online{
+    width: 10%;
+    height: 10%;
+    position: absolute;
+    left: 40%;
+    top:3%;
+    z-index: 90;
+}
+.delivery_quanxuan2 {
+    width: 20%;
+    height: 40%;
+    top: -2%;
+    right: 10%;
+    position: absolute;
+}
+
+
+.power_bbox4{
+    width: 50%;
+    height: 50%;
+    left: 30%;
+    position: absolute;
+    top: 30%;
+}
+
+
+.p_center3{
+    left: 15%;
+    right: 10%;
+    width: 75%;
+    height: 70%;
+    top: 6.5%;
+    position: fixed;
+    overflow-y: auto;
+}
+
+.p_bbbox2{
+    top: 10%;
+    width: 100%;
+    height: 95%;
+    position: absolute;
+    overflow: auto;
+}
+
+
+.facebox{
+    width:50%;
+    height: 50%;
+    /* 以下属性垂直居中 */
+    position: fixed;
+    top: 25%;
+    bottom: 0;
+    left: 25%;
+    right: 0;
+    background-color: white;
+    z-index: 90;
+}
+
+.tablemargin{
+    width: 100%;
+    height: 15%;
+    position: absolute;
+}
+
+
+.p_testchose{
+    left: 10%;
+    bottom: 5%;
+    position: fixed;
+    width: 70%;
+    height: 15%;
+
+}
+
+
+
+.p_chose1{
+    left: 20%;
+    position: absolute;
+    top: 30%;
+    width: 30px;
+    height: 30px;
+}
+
+.p_chose2{
+    height: 20%;
+    width: 20%;
+    position: absolute;
+    left: 10%;
+}
+.p_chose3{
+    height: 20%;
+    width: 20%;
+    position: absolute;
+    left: 40%;
+}
+.p_chose4{
+    height: 20%;
+    width: 20%;
+    position: absolute;
+    left: 70%;
+}
+
+
+
+.closetime{
+    right: 20%;
+    bottom: 5%;
+    position: fixed;
+    height: 15%;
+    width: 30%;
+    background-color: #A5A5A5;
+}
+
+
+.parent{
+    width:100%;
+    height: 100%;
+    /* 以下属性垂直居中 */
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    background-color: #AEC2E6;
+    opacity:0.5;
+    z-index: 9;
+}
+.facebox_exit{
+    width:100%;
+    height: 100%;
+    /* 以下属性垂直居中 */
+    position: fixed;
+    top: 0%;
+    bottom: 0;
+    left: 0%;
+    right: 0;
+    background-color: white;
+    opacity:0.5;
+    z-index: 9;
+}
+
+.popup{
+     height: 25%;
+     width: 10%;
+     right: 9%;
+     bottom: 10%;
+     position: fixed;
+     background-color: #C8C8C8 ;
+ }
+
+
+.p_left{
+    width: 15%;
+    height: 68.5%;
+    left: 0%;
+    top: 6.5%;
+    border-right: 2px solid #BBBBBB;
+    overflow-y: auto;
+    display: block;
+    border-spacing: 0;
+    position: fixed;
+}
+
+
+.p_islogin{
+    left: 0%;
+    height: 20%;
+    width: 19%;
+    position: absolute;
+    border-right-style: solid;
+    border-right-color: black;
+    border-bottom-style: solid;
+    border-bottom-color: black;
+}
+
+
+.p_islobutton{
+    background-color: green;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    border-radius: 100%;
+    left: 0%;
+}
+
+.p_islobutton2{
+    background-color: #A5A5A5;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    border-radius: 100%;
+    left: 0%;
+}
+
+.p_islobutton3{
+    background-color: orange;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    border-radius: 100%;
+    left: 0%;
+}
+
+.p_faclinum{
+    left: 20%;
+    height: 20%;
+    width: 19%;
+    position: absolute;
+    border-right-style: solid;
+    border-bottom-style: solid;
+    border-bottom-color: black;
+    border-right-color: black;
+}
+
+.p_facliname{
+    left: 40%;
+    height: 20%;
+    width: 39%;
+    position: absolute;
+    border-right-style: solid;
+    border-right-color: black;
+    border-bottom-style: solid;
+    border-bottom-color: black;
+}
+
+
+.p_ispower{
+    left: 80%;
+    height: 20%;
+    width: 20%;
+    position: absolute;
+    /* border-right-style: solid; */
+    /* border-right-color: black; */
+    border-bottom-style: solid;
+    border-bottom-color: black;
+}
+
+
+.p_ispobutton1{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0%;
+    border-radius:100%;
+    background-color: #7F7F7F;
+}
+
+.p_ispobutton2{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0%;
+    border-radius: 100%;
+    background-color: green;
+}
+
+.p_ispobutton3{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0%;
+    border-radius: 100%;
+    background-color:orange;
+}
+
+
+.p_fistest{
+    left: 0%;
+    top: 21%;
+    height: 16%;
+    width: 35%;
+    position: absolute;
+    border-right-style: solid;
+    border-right-color: black;
+    border-bottom-style: solid;
+    border-bottom-color: black;
+    background-color: #4472C4;
+}
+
+.p_ftestnum{
+    left: 0%;
+    top: 38%;
+    height: 17%;
+    width: 35%;
+    position: absolute;
+    border-right-style: solid;
+    border-right-color: black;
+    border-bottom-style: solid;
+    border-bottom-color: black;
+    background-color: #4472C4;
+}
+
+
+
+
+
+.p_istest1{
+    left: 36%;
+    top: 21%;
+    width: 14%;
+    position: absolute;
+    height: 16%;
+    border-right-style: solid;
+    border-right-color: black;
+    border-bottom-style: solid;
+    border-bottom-color: black;
+    background-color: red;
+}
+.p_istest2{
+    left: 36%;
+    top: 21%;
+    width: 14%;
+    position: absolute;
+    height: 16%;
+    border-right-style: solid;
+    border-right-color: black;
+    border-bottom-style: solid;
+    border-bottom-color: black;
+    background-color: green;
+}
+
+
+
+.p_testnum{
+    left: 36%;
+    top: 38%;
+    width: 14%;
+    position: absolute;
+    height: 17%;
+    border-right-style: solid;
+    border-right-color: black;
+    border-bottom-style: solid;
+    border-bottom-color: black;
+    background-color: #4472C4;
+}
+
+
+.p_fispower{
+    left: 51%;
+    top: 21%;
+    position: absolute;
+    width: 33%;
+    height: 16%;
+    border-right-style: solid;
+    border-right-color: black;
+    border-bottom-style: solid;
+    border-bottom-color: black;
+    background-color: #4472C4;
+}
+
+.p_fpassnum{
+    left: 51%;
+    top: 38%;
+    position: absolute;
+    width: 33%;
+    height: 17%;
+    border-right-style: solid;
+    border-right-color: black;
+    border-bottom-style: solid;
+    border-bottom-color: black;
+    background-color: #4472C4;
+}
+
+
+.p_ispower2{
+    left: 85%;
+    top: 21%;
+    position: absolute;
+    height: 16%;
+    width: 15%;
+    border-bottom-style: solid;
+    border-bottom-color: black;
+    background-color: red;
+}
+
+.p_ispower3{
+    left: 85%;
+    top: 21%;
+    position: absolute;
+    height: 16%;
+    width: 15%;
+    border-bottom-style: solid;
+    border-bottom-color: black;
+    background-color: green;
+}
+
+
+.isin{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+
+.p_passnum{
+    left: 85%;
+    top: 38%;
+    position: absolute;
+    height: 17%;
+    width: 15%;
+    border-bottom-style:solid ;
+    border-bottom-color:black;
+    background-color:#4472C4;
+}
+
+
+
+.p_testtime1{
+    left: 0%;
+    top: 56%;
+    position: absolute;
+    height: 12%;
+    width: 19%;
+    border-bottom-style: solid;
+    border-bottom-color: black;
+    border-right-style: solid;
+    border-right-color: black;
+    background-color:#4472C4;
+}
+
+
+.p_testtime2{
+    left: 0%;
+    top: 56%;
+    position: absolute;
+    height: 12%;
+    width: 19%;
+    border-bottom-style: solid;
+    border-bottom-color: black;
+    border-right-style: solid;
+    border-right-color: black;
+    background-color:orange;
+}
+
+.p_testtime3{
+    left: 0%;
+    top: 56%;
+    position: absolute;
+    height: 12%;
+    width: 19%;
+    border-bottom-style: solid;
+    border-bottom-color: black;
+    border-right-style: solid;
+    border-right-color: black;
+    background-color:green;
+}
+
+.p_testtime4{
+    left: 0%;
+    top: 56%;
+    position: absolute;
+    height: 12%;
+    width: 19%;
+    border-bottom-style: solid;
+    border-bottom-color: black;
+    border-right-style: solid;
+    border-right-color: black;
+    background-color:red;
+}
+
+
+.p_testname1{
+    left: 20%;
+    top: 56%;
+    position: absolute;
+    height: 12%;
+    width: 80%;
+    border-bottom-style: solid;
+    border-bottom-color: black;
+    background-color:#4472C4;
+}
+
+
+.p_testname2{
+    left: 20%;
+    top: 56%;
+    position: absolute;
+    height: 12%;
+    width: 80%;
+    border-bottom-style: solid;
+    border-bottom-color: black;
+    background-color:orange;
+}
+
+.p_testname3{
+    left: 20%;
+    top: 56%;
+    position: absolute;
+    height: 12%;
+    width: 80%;
+    border-bottom-style: solid;
+    border-bottom-color: black;
+    background-color:green;
+}
+
+.p_testname4{
+    left: 20%;
+    top: 56%;
+    position: absolute;
+    height: 12%;
+    width: 80%;
+    border-bottom-style: solid;
+    border-bottom-color: black;
+    background-color:red;
+}
+
+
+.p_nowtask{
+    left: 0%;
+    top: 69%;
+    position: absolute;
+    height: 15%;
+    width: 100%;
+    border-bottom-style: solid;
+    border-bottom-color: black;
+    background-color:#4472C4;
+}
+
+.p_upheads1{
+    left: 0%;
+    top: 85%;
+    position: absolute;
+    height: 15%;
+    width: 20%;
+    border-right-style: solid;
+    border-right-color: black;
+    background-color: orange;
+}
+
+.p_upheads2{
+    left: 0%;
+    top: 85%;
+    position: absolute;
+    height: 15%;
+    width: 20%;
+    border-right-style: solid;
+    border-right-color: black;
+    background-color: #4472C4;
+}
+
+.p_leavereson1{
+    left: 21%;
+    top: 85%;
+    position: absolute;
+    height: 15%;
+    width: 79%;
+    border-right-style: solid;
+    border-right-color: black;
+    background-color: orange;
+}
+
+.topthchose{
+    width: 80%;
+    height: 80%;
+    left: 10%;
+    top: 10%;
+    position: absolute;
+}
+
+
+.p_leavereson2{
+    left: 21%;
+    top: 85%;
+    position: absolute;
+    height: 15%;
+    width: 79%;
+    border-right-style: solid;
+    border-right-color: black;
+    background-color: #4472C4;
+}
+
+
+.p_center{
+    left: 0%;
+    right: 10%;
+    width: 91%;
+    height: 70%;
+    top: 8.8%;
+    position: fixed;
+    overflow-y: auto;
+}
+
+.p_center2{
+    left: 1%;
+    right: 10%;
+    width: 90%;
+    height: 70%;
+    top: 8%;
+    position: fixed;
+    z-index: 99;
+    overflow-y: auto;
+}
+
+
+
+.P_fachoose{
+    left: 3%;
+    top:20%;
+    position: absolute;
+}
+
+.p_testbankchoose{
+    left: 3%;
+    top: 50%;
+    position: absolute;
+}
+
+.singlechoose{
+    left: 18%;
+    top: 20%;
+    position: absolute;
+    background-color: #4472C4;
+    color: white;
+    width: 8%;
+    height: 20%;
+}
+
+.p_stestchose{
+    left: 15%;
+    top: 50%;
+    position: absolute;
+    width: 8%;
+    height: 20%;
+}
+
+
+.allchoose{
+    left: 30%;
+    top: 20%;
+    position: absolute;
+    background-color: #4472C4;
+    color: white;
+    width: 8%;
+    height: 20%;
+}
+
+.p_testopen{
+    left: 40%;
+    top: 22%;
+    position: absolute;
+}
+
+
+.p_tetestnum{
+    left: 30%;
+    top: 50%;
+    position: absolute;
+}
+
+.p_stestnmchose{
+    left: 40%;
+    top: 50%;
+    position: absolute;
+    width: 8%;
+    height: 20%;
+}
+
+.chosetop{
+    top: -20%;
+    left: 0%;
+    width: 120%;
+    height: 60%;
+    position: absolute;
+    z-index: 99;
+    background-color: rgba(191, 149, 149, 0.8);
+    opacity: 0.8;
+}
+
+
+.p_headeventdiv{
+    left:30%;
+    top: 30%;
+    position: fixed;
+    width: 30%;
+    height: 30%;
+    z-index: 100;
+    background-color: whitesmoke;
+}
+
+
+.p_testisopen{
+    left: 50%;
+    top: 25%;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+}
+
+.p_isconnect{
+    left: 60%;
+    top: 22%;
+    position: absolute;
+}
+
+.p_tefpass{
+    left: 50%;
+    top: 50%;
+    position: absolute;
+}
+
+.p_isconnectopen{
+    left: 76%;
+    top: 25%;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+}
+
+.p_tepasschose{
+    left: 60%;
+    top: 50%;
+    position: absolute;
+    width: 8%;
+    height: 20%;
+}
+
+.p_tepasschose2{
+    left: 60%;
+    top: -35%;
+    position: absolute;
+    width: 8%;
+    height: 80%;
+    background-color: whitesmoke;
+}
+
+
+.p_chbuttonpa{
+    left: 70%;
+    top: 50%;
+    position: absolute;
+    width: 5%;
+    height: 20%;
+    background-color: #4472C4;
+}
+
+
+.p_trainroomchose{
+    left: 80%;
+    top: 20%;
+    position: absolute;
+    width: 10%;
+    height: 20%;
+}
+
+
+.p_clcik{
+    left: 85%;
+    top: 50%;
+    position: absolute;
+    width: 10%;
+    height: 20%;
+    background: orange;
+    color: white;
+}
+
+
+
+
+.p_bbbox{
+    left: 1%;
+    width: 100%;
+    height: 200%;
+    margin-left: 1%;
+}
+
+.power_bbox{
+    width: 15%;
+    position: absolute;
+    height: 12%;
+}
+
+.power_bbox2{
+    width: 18%;
+    height: 30%;
+    position: absolute;
+}
+
+.power_bbox3{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+
+.power_sbox{
+    bottom: 0%;
+    background-color: #70AD47;
+    height: 70%;
+    width: 80%;
+    position: absolute;
+}
+.p_check{
+    background-color: whitesmoke;
+    position: absolute;
+    height: 40%;
+    left: 12%;
+    top: 50%;
+    width: 40%;
+    transform: scale(1.5,1.5);
+}
+
+
+
+.p_right{
+    width: 9%;
+    height: 94%;
+    right: 2px;
+    position: absolute;
+    top: 8.5%;
+    border-left: 1px solid #BBBBBB;
+    background-color: #CDCDCD;
+    border-left: 1px solid #BBBBBB;
+}
+
+.p_text{
+    width: 90%;
+    height: 25%;
+    left: 0%;
+    top: 75%;
+    position: fixed;
+}
+
+.p_text2{
+    width: 90%;
+    height: 25%;
+    left: 0%;
+    top: 75%;
+    position: fixed;
+    border-top: 2px solid #BBBBBB;
+}
+
+
+.p_button1{
+    background-color: #FFC000;
+    border-right: 1px solid rgba(104, 103, 105, 0.73);
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 10px;
+    box-shadow: 0px 3px 0px rgba(0,0,0,.2);
+}
+.p_button2{
+    background-color:#70AD47;
+    border-right: 1px solid white;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 10px;
+    box-shadow: 0px 3px 0px rgba(0,0,0,.2);
+    margin-top: 0px;
+}
+.p_button3{
+     background-color:  #4472C4;
+     border: none;
+     color: white;
+     /*padding: 10px 10px;*/
+     text-align: center;
+     text-decoration: none;
+     display: inline-block;
+     font-size: 27px;
+     border-radius: 14px;
+     height: 80px;
+     width: 80px;
+     border-right: 1px solid white;
+     box-shadow: 0px 3px 0px rgba(0,0,0,.2);
+    position: absolute;
+ }
+.p_button3_1{
+    background-color:  #4472C4;
+    border: none;
+    color: white;
+    /*padding: 10px 10px;*/
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 27px;
+    border-radius: 14px;
+    height: 80px;
+    width: 80px;
+    border-right: 1px solid white;
+    box-shadow: 0px 3px 0px rgba(0,0,0,.2);
+    z-index: 10;
+}
+.p_button3_2{
+    background-color:  #4472C4;
+    border: none;
+    color: white;
+    /*padding: 10px 10px;*/
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 27px;
+    border-radius: 14px;
+    height: 80px;
+    width: 80px;
+    border-right: 1px solid white;
+    box-shadow: 0px 3px 0px rgba(0,0,0,.2);
+}
+.p_button3_3{
+    background-color:  #4472C4;
+    border: none;
+    color: white;
+    /*padding: 10px 10px;*/
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 27px;
+    border-radius: 14px;
+    height: 80px;
+    width: 80px;
+    border-right: 1px solid white;
+    box-shadow: 0px 3px 0px rgba(0,0,0,.2);
+}
+.p_button3_4{
+    background-color:  #4472C4;
+    border: none;
+    color: white;
+    /*padding: 10px 10px;*/
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 27px;
+    border-radius: 14px;
+    height: 80px;
+    width: 80px;
+    border-right: 1px solid white;
+    box-shadow: 0px 3px 0px rgba(0,0,0,.2);
+}
+.p_button4{
+    background-color:  #ED7D31;
+    border: none;
+    color: white;
+    /*padding: 10px 10px;*/
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 27px;
+    border-radius: 14px;
+    height: 80px;
+    width: 80px;
+    border-right: 1px solid white;
+    box-shadow: 0px 3px 0px rgba(0,0,0,.2);
+}
+
+
+
+.p_button5{
+    background-color:  #4472C4;
+    border:1px;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 10px;
+
+}
+
+.outdiv{
+    z-index: 10;
+    position: fixed;
+    right: 1.75%;
+    bottom: 18%;
+}
+
+.p_exit{
+    background-color:  #4472C4;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 27px;
+    border-radius: 14px;
+    height: 80px;
+    width: 80px;
+    border-right: 1px solid white;
+    box-shadow: 0px 3px 0px rgba(0,0,.3,.6);
+    position: absolute;
+    margin-top: 338%;
+    margin-left: -19%;
+    z-index: 10;
+}
+
+.p_information_delivery{
+    background-color:  #4472C4;
+    border: none;
+    color: white;
+    /*padding: 10px 10px;*/
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 27px;
+    border-radius: 14px;
+    height: 80px;
+    width: 80px;
+    border-right: 1px solid white;
+    box-shadow: 0px 3px 0px rgba(0,0,.3,.6);
+    position: absolute;
+    margin-top: 256%;
+    margin-left: -19%;
+    /* z-index: 10;*/
+}
+
+.p_information_service{
+    background-color: #4472C4;
+    border: none;
+    color: white;
+    /* padding: 10px 10px; */
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 27px;
+    border-radius: 14px;
+    height: 80px;
+    width: 80px;
+    border-right: 1px solid white;
+    box-shadow: 0px 3px 0px rgba(0,0,.3,.6);
+    position: absolute;
+    margin-top: 92%;
+    margin-left: -19%;
+}
+
+.p_field_management{
+    background-color: #4472C4;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 27px;
+    border-radius: 14px;
+    height: 80px;
+    width: 80px;
+    border-right: 1px solid white;
+    position: absolute;
+    margin-top: 10%;
+    margin-left: -19%;
+    box-shadow: 0px 3px 0px rgba(0,0,.3,.6);
+}
+.p_time_status{
+    background-color:  #4472C4;
+    border: none;
+    color: white;
+    /*padding: 10px 10px;*/
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 27px;
+    border-radius: 14px;
+    height: 80px;
+    width: 80px;
+    border-right: 1px solid white;
+    box-shadow: 0px 3px 0px rgba(0,0,.3,.6);
+    position: absolute;
+    margin-top: 174%;
+    margin-left: -19%;
+}

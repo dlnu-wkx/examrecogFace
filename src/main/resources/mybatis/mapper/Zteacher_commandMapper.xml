@@ -1,0 +1,86 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itboyst.facedemo.mapper.Zteacher_commandMapper">
+    <resultMap id="Zteacher_command" type="com.itboyst.facedemo.dto.Zteacher_command">
+        <id column="zid" property="zid" javaType="String"/>
+        <result column="ztrainingroomID" property="ztrainingroomID" javaType="String"/>
+        <result column="ztype" property="ztype" javaType="String"/>
+        <result column="zcontent" property="zcontent" javaType="String"/>
+        <result column="zpublishtime" property="zpublishtime" jdbcType="TIMESTAMP"/>
+        <result column="zstatus" property="zstatus" javaType="String"/>
+        <result column="zscheduleID" property="zscheduleID" javaType="String"/>
+        <result column="zduration" property="zduration" javaType="int"/>
+
+    </resultMap>
+
+
+
+<!--zstatus='有效'-->
+   <select id="findcommand"  resultType="com.itboyst.facedemo.dto.Zteacher_command">
+        SELECT * FROM zteacher_command WHERE ztrainingroomID=#{ztrainingroomID}  AND ((ztype="签到" OR ztype="查岗" ) AND zstatus="有效") OR (ztype="滚屏信息" and zstatus="有效" and (SELECT  zduration-TIMESTAMPDIFF(SECOND ,zpublishtime,IFNULL(NOW(),NOW())) from zteacher_command where ztrainingroomID=#{ztrainingroomID} and ztype='滚屏信息'  ORDER BY zpublishtime desc LIMIT 1)>0);
+    </select>
+
+    <select id="findscreencommand"  resultType="com.itboyst.facedemo.dto.Zteacher_command">
+        SELECT * FROM zteacher_command WHERE ztrainingroomID=#{ztrainingroomID} AND ztype="分屏信息" and zstatus="有效"  and zscheduleID=#{zscheduleID} order by zpublishtime desc limit 1
+    </select>
+
+
+    <select id="findcountgp"  resultType="int">
+        SELECT count(*) FROM zteacher_command WHERE ztrainingroomID=#{ztrainingroomID} AND  ztype="滚屏信息" AND zstatus="有效" ;
+    </select>
+
+
+    <select id="findscrenclose"  resultType="com.itboyst.facedemo.dto.Zteacher_command">
+        SELECT * FROM zteacher_command WHERE ztrainingroomID=#{ztrainingroomID} and zscheduleID=#{zscheduleID} AND  ztype='分屏信息' ORDER BY zpublishtime desc LIMIT 1 ;
+    </select>
+
+
+    <select id="findscrenclosefun"  resultType="com.itboyst.facedemo.dto.Zteacher_command">
+        SELECT * FROM zteacher_command WHERE ztrainingroomID=#{ztrainingroomID} and zscheduleID=#{zscheduleID} AND  ztype='分屏信息' and zstatus='有效' ORDER BY zpublishtime desc LIMIT 1 ;
+    </select>
+
+    <select id="findscrenclosefuncount"  resultType="int">
+        SELECT count(*) FROM zteacher_command WHERE ztrainingroomID=#{ztrainingroomID} and zscheduleID=#{zscheduleID} AND  ztype='分屏信息' and zstatus='有效' ORDER BY zpublishtime desc LIMIT 1 ;
+    </select>
+
+
+    <insert id="insertcommand" parameterType="com.itboyst.facedemo.dto.Zteacher_command" >
+        INSERT INTO zteacher_command (zid, ztrainingroomID, ztype, zcontent ,zpublishtime, zstatus,zscheduleID,zduration) VALUES(#{zid},#{ztrainingroomID} , #{ztype}, #{zcontent} ,#{zpublishtime}, #{zstatus},#{zscheduleID},#{zduration});
+    </insert>
+
+    <delete id="deletebefore" parameterType="com.itboyst.facedemo.dto.Zteacher_command">
+		delete from zteacher_command where ztrainingroomID= #{ztrainingroomID} and ztype=#{ztype}
+	</delete>
+
+    <update id="updatestate" parameterType="com.itboyst.facedemo.dto.Zteacher_command">
+        update zteacher_command set zstatus =#{zstatus} where ztrainingroomID=#{ztrainingroomID} and ztype=#{ztype} 
+    </update>
+
+    <select id="findcommandById"  resultType="com.itboyst.facedemo.dto.Zteacher_command">
+        SELECT * FROM zteacher_command WHERE zid=#{zid};
+    </select>
+
+    <update id="updateCommandByroomandZtype" parameterType="java.lang.String">
+        update zteacher_command set zstatus ="失效" where ztrainingroomID=#{ztrainingroomID} and ztype=#{ztype}
+    </update>
+
+    <update id="updatecontentbyid" parameterType="java.lang.String">
+        update zteacher_command set zcontent =#{zcontent} where zid=#{zid}
+    </update>
+
+    <update id="updateCommandByid" parameterType="java.lang.String">
+        update zteacher_command set zstatus =#{zstatus} where zid=#{zid}
+    </update>
+
+    <update id="updatestatbyclose" parameterType="com.itboyst.facedemo.dto.Zteacher_command">
+        update zteacher_command a , (select max(zpublishtime) btime from zteacher_command) b set a.zstatus =#{zstatus} where a.zpublishtime=b.btime  AND a.ztype='分屏信息' and ztrainingroomID=#{ztrainingroomID} and zscheduleID=#{zscheduleID}
+    </update>
+
+    <select id="findinspect" resultType="com.itboyst.facedemo.dto.Zteacher_command">
+
+        select * from zteacher_command  where ztype ='查岗' and  zstatus = '有效' and ztrainingroomID=#{ztrainingroomID}
+    </select>
+
+
+</mapper>

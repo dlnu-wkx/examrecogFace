@@ -1,0 +1,86 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itboyst.facedemo.mapper.Zstudent_eventMapper">
+    <resultMap id="Zstudent_event" type="com.itboyst.facedemo.dto.Zstudent_event">
+        <id column="zid" property="zid" javaType="String"/>
+        <result column="zstudentID" property="zstudentID" javaType="String"/>
+        <result column="zscheduleID" property="zscheduleID" javaType="String"/>
+        <result column="zrecognizeIP" property="zrecognizeIP" javaType="String"/>
+        <result column="ztype" property="ztype" javaType="String"/>
+        <result column="zcontent" property="zcontent" javaType="String"/>
+        <result column="zapplicationtime" property="zapplicationtime" jdbcType="TIMESTAMP"/>
+        <result column="zteacherID" property="zteacherID" javaType="String"/>
+        <result column="zhandletime" property="zhandletime" jdbcType="TIMESTAMP"/>
+        <result column="zhandlecontent" property="zhandlecontent" javaType="String"/>
+        <result column="zstatus" property="zstatus" javaType="String"/>
+    </resultMap>
+
+
+
+    <update id="updateeventstatus" parameterType="com.itboyst.facedemo.dto.Zstudent_event">
+        update zstudent_event set zstatus =#{zstatus} where zstudentID=#{zstudentID} and ztype=#{ztype} and zstatus='申请中'
+    </update>
+
+    <update id="updatealleventbystu" parameterType="com.itboyst.facedemo.dto.Zstudent_event">
+        update zstudent_event set zstatus =#{zstatus} where zrecognizeIP=#{zrecognizeIP} and zscheduleID=#{zscheduleID}
+    </update>
+
+    <update id="updatealleventbystu2" parameterType="com.itboyst.facedemo.dto.Zstudent_event">
+        update zstudent_event set zstatus =#{zstatus} where zstudentID=#{zstudentID} and zscheduleID=#{zscheduleID}
+    </update>
+
+    <update id="updateTeacherIDandStatus" parameterType="com.itboyst.facedemo.dto.Zstudent_event">
+        update zstudent_event set zhandlecontent =#{zhandlecontent} ,zteacherID=#{zteacherID},zhandletime=#{zhandletime} where zid=#{zid}
+    </update>
+
+
+    <update id="updatebeforebyip" parameterType="com.itboyst.facedemo.dto.Zstudent_event">
+        update zstudent_event set  zstatus =#{zstatus} where zrecognizeIP=#{zrecognizeIP}
+    </update>
+
+
+    <select id="findisevent"  resultType="java.lang.Integer">
+            SELECT count(*) FROM zstudnet_event WHERE zstudentID=#{zstudentID}  AND ztype='请假' and zstatus='申请中';
+    </select>
+
+    <select id="findisevent3"  resultType="com.itboyst.facedemo.dto.Zstudent_event">
+        SELECT * FROM zstudent_event WHERE zstudentID=#{zstudentID}   and zscheduleID=#{zscheduleID} and zstatus='申请中';
+    </select>
+
+    <select id="findisevent2"  resultType="int">
+        SELECT count(*) FROM zstudent_event WHERE zstudentID=#{zstudentID} and zrecognizeIP=#{zrecognizeIP}  AND (ztype='请假' or ztype='举手') and zstatus='申请中';
+    </select>
+
+
+    <select id="findupnumberbyfai"  resultType="com.itboyst.facedemo.dto.Zstudent_event" parameterType="java.lang.String">
+            select * from zstudent_event where zrecognizeIP=(select zstudentPCIP from ztraining_facility where zid= #{zid} ) and ztype= #{ztype}  and zstatus='申请中'  order by zapplicationtime desc limit 1
+    </select>
+
+    <select id="findupbyfacilityid"  resultType="com.itboyst.facedemo.dto.Zstudent_event">
+        select * from zstudent_event where zrecognizeIP = (select zstudentPCIP from ztraining_facility where zid=#{zid}) and zstatus='申请中'
+    </select>
+
+    <insert id="insertevent" parameterType="com.itboyst.facedemo.dto.Zstudent_event" >
+            INSERT INTO zstudent_event (zid, zstudentID, zscheduleID,zrecognizeIP,ztype, zcontent ,zapplicationtime,zstatus) VALUES(#{zid}, #{zstudentID}, #{zscheduleID},#{zrecognizeIP},#{ztype}, #{zcontent} ,#{zapplicationtime},#{zstatus});
+    </insert>
+
+
+    <delete id="deleteupmes" parameterType="java.lang.String">
+            DELETE FROM zstudent_event WHERE zid=#{zid}
+    </delete>
+
+    <!--   <select id="getUserFaceInfoByGroupId" resultMap="userFace2" parameterType="java.lang.Integer" resultType="com.itboyst.facedemo.dto.FaceUserInfo">
+           select face_id,name,face_feature from user_face_info
+       </select>-->
+    <delete id="deleteleave" parameterType="java.lang.String">
+            DELETE FROM zstudent_event WHERE zstudentID=#{zstudentID} and ztype=#{ztype}
+    </delete>
+
+
+    <select id="findRaiseHandByFacility" resultType="com.itboyst.facedemo.dto.Zstudent_event">
+    select max(a.zapplicationtime),a.zid,a.zstudentID,a.ztype,a.zstatus,a.zcontent,a.zhandletime
+    FROM zstudent_event a,(select * from (SELECT zstudentID,zrecognizetime FROM zstudent_login WHERE zrecognizeIP=(SELECT zstudentPCIP FROM ztraining_facility WHERE zid=#{zid}) ORDER BY zrecognizetime desc)c LIMIT 1)b
+    WHERE zstatus ='申请中' and zhandlecontent =''  AND (TIME_TO_SEC(NOW())- TIME_TO_SEC(zapplicationtime)>0) AND a.zstudentID=b.zstudentID and date(zapplicationtime) = curdate()
+     </select>
+</mapper>

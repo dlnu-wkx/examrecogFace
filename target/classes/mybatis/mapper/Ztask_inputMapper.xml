@@ -1,0 +1,29 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itboyst.facedemo.mapper.Ztask_inputMapper">
+    <resultMap id="Ztask_input" type="com.itboyst.facedemo.dto.Ztask_input">
+        <id column="zid" property="zid" javaType="String"/>
+        <result column="zassignscheduleID" property="zassignscheduleID" javaType="String"/>
+        <result column="ztrainingtaskassessID" property="ztrainingtaskassessID" javaType="String"/>
+        <result column="zselfcheck" property="zselfcheck" javaType="String"/>
+        <result column="zteachercheck" property="zteachercheck" javaType="String"/>
+    </resultMap>
+
+
+
+    <insert id="isnerttaskinput" parameterType="com.itboyst.facedemo.dto.Ztask_input" >
+               INSERT INTO ztask_input (zid,zassignscheduleID,ztrainingtaskassessID,zselfcheck) VALUES(#{zid}, #{zassignscheduleID},#{ztrainingtaskassessID},#{zselfcheck});
+    </insert>
+
+
+    <select id="findistaskinput"  resultType="java.lang.Integer" parameterType="com.itboyst.facedemo.dto.Ztask_input" >
+            SELECT COUNT(*) FROM ztask_input WHERE zassignscheduleID=#{zassignscheduleID} AND ztrainingtaskassessID=#{ztrainingtaskassessID};
+    </select>
+
+    <update id="updatetaskselfcheck" parameterType="com.itboyst.facedemo.dto.Ztask_input">
+        update ztask_input set zselfcheck = #{zselfcheck} where zassignscheduleID=#{zassignscheduleID} AND ztrainingtaskassessID=#{ztrainingtaskassessID};
+    </update>
+
+
+</mapper>

@@ -1,0 +1,56 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itboyst.facedemo.mapper.Zselect_messageMapper">
+    <resultMap id="zslect_message" type="com.itboyst.facedemo.dto.Zselect_message">
+        <id column="zid" property="zid" javaType="String"/>
+        <result column="studentname" property="studentname" javaType="String"/>
+        <result column="trainingroomname" property="trainingroomname" javaType="String"/>
+        <result column="mestime" property="mestime" jdbcType="TIMESTAMP"/>
+        <result column="deltetime" property="deltetime" jdbcType="TIMESTAMP"/>
+        <result column="facilityname" property="facilityname" javaType="String"/>
+        <result column="isintype" property="isintype" javaType="String"/>
+        <result column="leavereason" property="leavereason" javaType="String"/>
+        <result column="leavetype" property="leavetype" javaType="String"/>
+        <result column="approver" property="approver" javaType="String"/>
+        <result column="testtype" property="testtype" javaType="String"/>
+        <result column="score" property="score" javaType="int"/>
+
+    </resultMap>
+
+    <select id="findztaskinput"  resultType="com.itboyst.facedemo.dto.Zselect_message">
+        SELECT a.zname as studentname,d.zname as trainingroomname,f.zorder as score,e.zselfcheck as leavetype ,e.zteachercheck as approver,c.zchecktime as mestime from zstudent a,zstudent_schedule b,zassign_schedule c,ztraining_task d,ztask_input e,ztraining_task_assess f where a.zid=b.zstudentID and (a.zname =#{zname} or a.zgradeID in (select zid from zgrade where zname =#{zname})) and c.zstudentscheduleID=b.zid and e.zassignscheduleID=c.zid and e.ztrainingtaskassessID=f.zid and f.ztrainingtaskID=d.zid and c.zchecktime between #{starttime} and #{endtime}  ORDER BY c.zchecktime desc,f.zorder
+    </select>
+
+    <select id="findtasktime"  resultType="com.itboyst.facedemo.dto.Zselect_message">
+        SELECT a.zname as studentname,f.zname as trainingroomname ,e.zorder as score,c.zstarttime as mestime,c.zendtime as deltetime from zstudent a,zstudent_schedule b,ztask_content_log c,zassign_schedule d,ztraining_task_content e,ztraining_task f where a.zid=b.zstudentID and (a.zname =#{zname} or a.zgradeID in (select zid from zgrade where zname =#{zname}))  and c.zassignscheduleID=d.zid and c.ztrainingtaskcontentID=e.zid and d.zstudentscheduleID=b.zid and d.ztrainingtaskID=f.zid and c.zstarttime between #{starttime} and #{endtime} ORDER BY c.zstarttime desc
+    </select>
+
+    <select id="findattandance"  resultType="com.itboyst.facedemo.dto.Zselect_message">
+        select B.zname as studentname,C.zname as trainingroomname,A.zrecognizetime as mestime from zstudent_login A,zstudent B, ztraining_room C,ztraining_facility D,ztraining_camera E where A.zstudentID=B.zid and (B.zname =#{zname} or B. zgradeID in (select zid from zgrade where zname =#{zname})) and A.zcheck=#{zcheck}  and D.ztrainingroomID=C.zid and A.zrecognizetime between #{starttime} and #{endtime} group by A.zrecognizetime order by A.zrecognizetime desc
+    </select>
+
+    <select id="findattandance2"  resultType="com.itboyst.facedemo.dto.Zselect_message">
+        select B.zname as studentname,C.zname as trainingroomname,A.zrecognizetime as mestime from zstudent_login A,zstudent B, ztraining_room C,ztraining_facility D,ztraining_camera E where A.zstudentID=B.zid and (B.zname =#{zname} or B. zgradeID in (select zid from zgrade where zname =#{zname})) and A.zcheck=#{zcheck}  and  D.ztrainingroomID=C.zid   and A.zrecognizetime between #{starttime} and #{endtime}  group by A.zrecognizetime order by A.zrecognizetime desc
+    </select>
+
+
+    <select id="findinandout"  resultType="com.itboyst.facedemo.dto.Zselect_message">
+        select B.zname as studentname,C.zname as trainingroomname,D.zidentity as facilityname,A.zcheck as isintype,A.zrecognizetime as mestime from zstudent_login A,zstudent B, ztraining_room C,ztraining_facility D where A.zstudentID=B.zid and  (B.zname=#{zname}  or B. zgradeID in (select zid from zgrade where zname =#{zname})) and  (A.zcheck='登陆' or A.zcheck='退出') and A.zrecognizeIP=D.zstudentPCIP and D.ztrainingroomID=C.zid and A.zrecognizetime between #{starttime} and #{endtime} group by A.zrecognizetime order by B.zgradeID,B.zidentity, A.zrecognizetime desc
+    </select>
+
+    <select id="findupheads"  resultType="com.itboyst.facedemo.dto.Zselect_message">
+        select B.zname as studentname,C.zname as trainingroomname,D.zidentity as facilityname,A.zstatus as isintype,A.zapplicationtime as mestime ,A.zhandletime as deltetime from zstudent_event A,zstudent B, ztraining_room C,ztraining_facility D where A.zstudentID=B.zid and  (B.zname=#{zname}  or B. zgradeID in (select zid from zgrade where zname =#{zname})) and A.ztype=#{ztype} and A.zrecognizeIP=D.zstudentPCIP and D.ztrainingroomID=C.zid and A.zapplicationtime  between #{starttime} and #{endtime}  group by A.zapplicationtime order by B.zgradeID,B.zidentity, A.zapplicationtime desc
+    </select>
+
+    <select id="findallleave"  resultType="com.itboyst.facedemo.dto.Zselect_message">
+        select A.zteacherID as approver, B.zname as studentname,C.zname as trainingroomname,A.zcontent as leavereason,A.zstatus as isintype,A.zapplicationtime as mestime ,A.zhandletime as deltetime from zstudent_event A,zstudent B, ztraining_room C,ztraining_facility D  where A.zstudentID=B.zid and  (B.zname=#{zname}  or B. zgradeID in (select zid from zgrade where zname =#{zname})) and A.ztype='请假' and A.zrecognizeIP=D.zstudentPCIP  and D.ztrainingroomID=C.zid and A.zapplicationtime  between #{starttime} and #{endtime}  order by B.zgradeID,B.zidentity, A.zapplicationtime desc
+    </select>
+
+    <select id="findscorebyname"  resultType="com.itboyst.facedemo.dto.Zselect_message">
+        select B.zname as studentname,C.zname as trainingroomname,D.zidentity as facilityname,D.zsafetestingType as testtype, A.zscore as score,A.zchecktime as mestime from ztesting_score A,zstudent B, ztraining_room C,ztraining_facility D, zstudent_schedule E,zschedule F where  (B.zname =#{zname} or B. zgradeID in (select zid from zgrade where zname =#{zname})) and A.zrecognizeIP=D.zstudentPCIP and D.ztrainingroomID=C.zid and A.zstudentscheduleID=E.zid and B.zid=E.zstudentID and E.zscheduleID=F.zid and A.zchecktime  between #{starttime} and #{endtime} order by B.zgradeID,B.zidentity, A.zchecktime desc
+    </select>
+
+
+
+</mapper>

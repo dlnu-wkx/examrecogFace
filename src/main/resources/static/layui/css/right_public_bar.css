@@ -1,0 +1,113 @@
+.right_parent{
+    float: left;
+    width: 9%;
+    height:100%;
+    /*width: 9%;*/
+    border-left: 1px solid #c2c2c2;
+
+}
+.f_field_management{
+    background-color:  #4472C4;
+    border: none;
+    color: white;
+    /*padding: 10px 10px;*/
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 27px;
+    border-radius: 14px;
+    height: 80px;
+    width: 80px;
+    border-right: 1px solid white;
+    box-shadow: 0px 3px 0px rgba(0,0,0,.2);
+    margin-top: 10%;
+    margin-left: 25%;
+}
+.f_field_service{
+    color:#FFFFFF;
+    height: 80px;
+    display:block;
+    margin-left: 25%;
+    margin-top:40px;
+    width:80px;
+    background-color: #4472c4;
+    border-radius:14px;
+    text-align: center;
+    line-height: 30px;
+    font-size: 27px
+}
+.f_field_status{
+    color:#FFFFFF;
+    height: 80px;
+    display:block;
+    margin-left: 25%;
+    margin-top:40px;
+    width:80px;
+    background-color: #4472c4;
+    border-radius:14px;
+    text-align: center;
+    line-height: 30px;
+    font-size: 27px
+
+}
+.f_field_delivery{
+    color:#FFFFFF;
+    height: 80px;
+    display:block;
+    margin-left: 25%;
+    margin-top:40px;
+    width:80px;
+    background-color: #4472c4;
+    border-radius:14px;
+    text-align: center;
+    line-height: 30px;
+    font-size: 27px
+}
+.f_field_exit2{
+    color:#FFFFFF;
+    height: 80px;
+    display:block;
+    margin-left: 33.5%;
+    margin-top:70px;
+    width:80px;
+    background-color: #4472c4;
+    border-radius:14px;
+    text-align: center;
+    line-height: 27px;
+    font-size: 27px;
+    z-index:10;
+    position: absolute;
+
+}
+.f_field_exit{
+    color:#FFFFFF;
+    height: 80px;
+    display:block;
+    margin-left: 3%;
+    margin-top:70px;
+    width:80px;
+    background-color: #4472c4;
+    border-radius:14px;
+    text-align: center;
+    line-height: 27px;
+    font-size: 27px;
+    z-index:10;
+    position: absolute;
+
+}
+.f_field_exit_delivery{
+    color:#FFFFFF;
+    height: 80px;
+    display:block;
+    margin-left: 33.34%;
+    margin-top:70px;
+    width:80px;
+    background-color: #4472c4;
+    border-radius:14px;
+    text-align: center;
+    line-height: 27px;
+    font-size: 27px;
+    z-index:10;
+    position: absolute;
+
+}

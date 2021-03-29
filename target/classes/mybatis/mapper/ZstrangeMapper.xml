@@ -1,0 +1,19 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itboyst.facedemo.mapper.ZstrangeMapper">
+    <insert id="insertZstrange" parameterType="com.itboyst.facedemo.dto.Zstrange">
+        insert into zstrange (zid,zname,zrecognizetime,zcheck,ztype,zrecognizeIP,originalPictureUrl,zstatus)
+        values (#{zid},#{zname},#{zrecognizetime},#{zcheck},#{ztype},#{zrecognizeIP},#{originalPictureUrl},#{zstatus})
+    </insert>
+
+    <select id="findAll" resultType="com.itboyst.facedemo.dto.Zstrange">
+        select * from zstrange
+        where zrecognizeIP=#{zrecognizeIP} and zcheck=#{zcheck} and zrecognizetime between #{timestamp} and NOW()
+    </select>
+
+    <delete id="deleteOriginalPictureUrl" parameterType="java.lang.String">
+        delete from zstrange where originalPictureUrl=#{originalPictureUrl}
+    </delete>
+
+</mapper>

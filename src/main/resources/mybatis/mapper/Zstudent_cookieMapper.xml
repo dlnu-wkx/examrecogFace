@@ -1,0 +1,43 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itboyst.facedemo.mapper.Zstudent_cookieMapper">
+    <resultMap id="Zstudent_cookie" type="com.itboyst.facedemo.dto.Zstudent_cookie">
+        <id column="zid" property="zid" javaType="String"/>
+        <result column="zidentity" property="zidentity" javaType="String"/>
+        <result column="zname" property="zname" javaType="String"/>
+        <result column="znote" property="znote" javaType="String"/>
+        <result column="ztype" property="ztype" javaType="String"/>
+        <result column="zsafetestingType" property="zsafetestingType" javaType="String"/>
+        <result column="zscheduleid" property="zscheduleid" javaType="String"/>
+        <result column="zcourseID" property="zcourseID" javaType="String"/>
+        <result column="ztrainingroomID" property="ztrainingroomID" javaType="String"/>
+        <result column="zstartdate" property="zstartdate" jdbcType="TIMESTAMP"/>
+        <result column="zenddate" property="zenddate" jdbcType="TIMESTAMP"/>
+        <result column="zstudent_scheduleid" property="zstudent_scheduleid" javaType="String"/>
+        <result column="zscheduleID" property="zscheduleID" javaType="String"/>
+        <result column="zstudentID" property="zstudentID" javaType="String"/>
+        <result column="zselecttest" property="zselecttest" javaType="String"/>
+        <result column="zpassingscore" property="zpassingscore" javaType="int"/>
+        <result column="zstate" property="zstate" javaType="String"/>
+
+    </resultMap>
+
+
+
+    <select id="findscookiemes"  resultType="com.itboyst.facedemo.dto.Zstudent_cookie">
+    SELECT A.*,B.zcourseID as zcourseID,B.ztrainingroomID as ztrainingroomID,B.zstartdate as zstartdate,B.zenddate as zenddate,C.zid as zstudent_scheduleid,C.zscheduleID as zscheduleID, C.zstudentID as zstudentID,C.zstate as zstate
+    FROM zcourse A,zschedule B,zstudent_schedule C
+    WHERE A.zid=B.zcourseID AND B.ztrainingroomID=#{ztrainingroomID} AND #{zrecongnizetime} BETWEEN B.zstartdate AND B.zenddate AND B.zid=C.zscheduleID AND C.zstudentID=#{zstudentID}
+    </select>
+
+
+    <!--<insert id="registerstu" parameterType="com.itboyst.facedemo.dto.Zstudent" >
+               INSERT INTO zstudent (zid, zidentity, zname, zphone ,zfaceinfoID, zstatus) VALUES(#{zid}, #{zidentity}, #{zname}, #{zphone} ,#{zfaceinfoID}, #{zstatus});
+        </insert>
+-->
+
+
+
+
+</mapper>

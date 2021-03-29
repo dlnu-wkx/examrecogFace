@@ -1,0 +1,76 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itboyst.facedemo.mapper.InspectSitStudentMapper">
+    <resultMap id="inspectSitStudent" type="com.itboyst.facedemo.dto.InspectSitStudent">
+        <id column="zid" property="zstudentID" javaType="java.lang.String"/>
+        <result column="zname" property="zName" javaType="java.lang.String"/>
+        <result column="grade_name" property="zgradeName" javaType="java.lang.String"/>
+        <result column="zrecognizetime" property="zrecognizetime" javaType="java.sql.Timestamp"/>
+        <result column="ztrainingroomID" property="ztrainingroomID" javaType="java.lang.String"/>
+        <result column="originalPictureUrl" property="originalPictureUrl" javaType="java.lang.String"/>
+    </resultMap>
+    <select id="findStudentByDateAndTrainingId" resultMap="inspectSitStudent" resultType="com.itboyst.facedemo.dto.InspectSitStudent">
+		SELECT * FROM (select MAX(h.zrecognizetime) zrecognizetime ,h.grade_name,h.zid,h.zname,h.ztrainingroomID,h.originalPictureUrl from
+                  (select m.zrecognizetime,m.zid,m.zname,m.grade_name,n.ztrainingroomID,m.originalPictureUrl from
+                              (select c.zrecognizetime,d.zid,d.zname,f.zname grade_name,c.originalPictureUrl,c.zscheduleID from zstudent_login c ,zstudent d,zgrade f
+                              where d.zgradeID=f.zid  and d.zid=c.zstudentID and c.zcheck=#{zcheck}  and c.zrecognizetime BETWEEN #{timestamp} and NOW())m LEFT OUTER JOIN zschedule n
+                  on m.zscheduleID=n.zid)h
+            GROUP BY h.zid,h.ztrainingroomID) j
+      ORDER BY j.zrecognizetime DESC
+
+
+
+    </select>
+
+    <select id="inspectfindStudentByDateAndTrainingId" resultMap="inspectSitStudent" resultType="com.itboyst.facedemo.dto.InspectSitStudent">
+		SELECT * FROM (select MAX(h.zrecognizetime) zrecognizetime ,h.grade_name,h.zid,h.zname,h.ztrainingroomID,h.originalPictureUrl from
+                  (select m.zrecognizetime,m.zid,m.zname,m.grade_name,n.ztrainingroomID,m.originalPictureUrl from
+                              (select c.zrecognizetime,d.zid,d.zname,f.zname grade_name,c.originalPictureUrl,c.zscheduleID from zstudent_login c ,zstudent d,zgrade f
+                              where d.zgradeID=f.zid  and d.zid=c.zstudentID and (c.zcheck=#{zcheck} OR c.zcheck= '人脸识别') and c.zrecognizetime BETWEEN #{timestamp} and NOW())m LEFT OUTER JOIN zschedule n
+                  on m.zscheduleID=n.zid)h
+            GROUP BY h.zid,h.ztrainingroomID) j
+      ORDER BY j.zrecognizetime DESC
+
+
+
+    </select>
+
+
+    <select id="findStudentByDateAndTrainingIdASC" resultMap="inspectSitStudent" resultType="com.itboyst.facedemo.dto.InspectSitStudent">
+        select m.zrecognizetime,m.zid,m.zname,m.grade_name,n.ztrainingroomID,m.originalPictureUrl from
+												(select c.zrecognizetime,d.zid,d.zname,f.zname grade_name,c.originalPictureUrl,c.zscheduleID from zstudent_login c ,zstudent d,zgrade f
+												where d.zgradeID=f.zid  and d.zid=c.zstudentID  and c.zcheck=#{zcheck} and c.zrecognizetime BETWEEN #{timestamp} and NOW())m LEFT OUTER JOIN zschedule n
+								on m.zscheduleID=n.zid
+
+    </select>
+
+
+    <select id="inspectfindStudentByDateAndTrainingIdASC" resultMap="inspectSitStudent" resultType="com.itboyst.facedemo.dto.InspectSitStudent">
+        select m.zrecognizetime,m.zid,m.zname,m.grade_name,n.ztrainingroomID,m.originalPictureUrl from
+												(select c.zrecognizetime,d.zid,d.zname,f.zname grade_name,c.originalPictureUrl,c.zscheduleID from zstudent_login c ,zstudent d,zgrade f
+												where d.zgradeID=f.zid  and d.zid=c.zstudentID  and (c.zcheck=#{zcheck} OR c.zcheck= '人脸识别') and c.zrecognizetime BETWEEN #{timestamp} and NOW())m LEFT OUTER JOIN zschedule n
+								on m.zscheduleID=n.zid ORDER BY m.zrecognizetime DESC
+
+    </select>
+
+
+    <select id="findTeacherByDateAndTrainingIdASC" resultType="com.itboyst.facedemo.dto.InspectSitTeacher">
+
+        select a.zteacherID,b.zname as zName,b.zidentity as zgradeName,a.zrecognizetime,a.originalPictureUrl
+        from zteacher_login a, zteacher b
+        where a.zteacherID=b.zid and a.zrecognizeIP =#{camerasIP} and a.zcheck=#{zcheck} and a.zrecognizetime between #{timestamp} and NOW()
+
+    </select>
+
+
+    <select id="findTeacherByDateAndTrainingIDdistinct" resultType="com.itboyst.facedemo.dto.InspectSitTeacher">
+
+        select MAX(m.zrecognizetime) zrecognizetime ,m.zteacherID,m.zName,m.zgradeName,m.originalPictureUrl from  (select a.zteacherID,b.zname as zName,b.zidentity as zgradeName, a.zrecognizetime,a.originalPictureUrl
+                         from zteacher_login a, zteacher b
+                         where a.zteacherID=b.zid and a.zrecognizeIP =#{camerasIP} and a.zcheck=#{zcheck} and a.zrecognizetime between #{timestamp} and NOW())m
+        GROUP BY zName
+
+    </select>
+
+</mapper>

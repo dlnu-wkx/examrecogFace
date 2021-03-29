@@ -1,0 +1,25 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itboyst.facedemo.mapper.Zteacher_journalMapper">
+    <resultMap id="zteacherjournal" type="com.itboyst.facedemo.dto.Zteacher_journal">
+        <id column="zid" property="zid" javaType="String"/>
+        <result column="zteacherID" property="zteacherID" javaType="String"/>
+        <result column="ztype" property="ztype" javaType="String"/>
+        <result column="zoperatedate" property="zoperatedate" jdbcType="TIMESTAMP"/>
+        <result column="zoperatecontent" property="zoperatecontent" javaType="String"/>
+    </resultMap>
+
+
+
+
+    <insert id="insertteacherjournal" parameterType="com.itboyst.facedemo.dto.Zteacher_journal" >
+                INSERT INTO zteacher_journal (zid,zteacherID,ztype,zoperatedate, zoperatecontent) VALUES(#{zid},#{zteacherID},#{ztype},#{zoperatedate}, NULL);
+     </insert>
+
+
+    <select id="findteacherlogin" resultType="com.itboyst.facedemo.dto.Zteacher_journal">
+        select * from zteacher_journal where zteacherID=#{zteacherID}
+    </select>
+
+</mapper>

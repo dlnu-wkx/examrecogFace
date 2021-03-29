@@ -1,0 +1,26 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itboyst.facedemo.mapper.Zteacher_loginMapper">
+        <resultMap id="zteacherlogin" type="com.itboyst.facedemo.dto.InspectSitTeacher">
+            <result column="zteacherID" property="zteacherID" javaType="java.lang.String"/>
+            <result column="zname" property="zName" javaType="java.lang.String"/>
+            <result column="zidentity" property="zgradeName" javaType="java.lang.String"/>
+            <result column="zrecognizetime" property="zrecognizetime" javaType="java.sql.Timestamp"/>
+        </resultMap>
+
+    <select id="findAllloginByCameras" resultMap="zteacherlogin" resultType="com.itboyst.facedemo.dto.InspectSitTeacher">
+        select * from zteacher_login a, zteacher b where a.zteacherID=b.zid and a.zrecognizeIP ='192.168.1.156' and a.zrecognizetime between '2020-11-01' and NOW()
+
+    </select>
+    <delete id="delteacher" parameterType="java.lang.String">
+        delete from zteacher_login where originalPictureUrl=#{originalPictureUrl}
+    </delete>
+
+    <insert id="insertteacher" parameterType="com.itboyst.facedemo.dto.Zteacher_login" >
+        insert into zteacher_login (zid,zteacherID,zscheduleID,zrecognizetime,zcheck,ztype,zrecognizeIP,zstatus,originalPictureUrl)
+        values (#{zid},#{zteacherID},#{zscheduleID},#{zrecognizetime},#{zcheck},#{ztype},#{zrecognizeIP},'正常',#{originalPictureUrl})
+
+    </insert>
+
+</mapper>

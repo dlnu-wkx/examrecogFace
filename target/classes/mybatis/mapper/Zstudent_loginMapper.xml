@@ -1,0 +1,91 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itboyst.facedemo.mapper.Zstudent_loginMapper">
+    <resultMap id="zstudent_login" type="com.itboyst.facedemo.dto.Zstudent_login">
+        <id column="zid" property="zid" javaType="String"/>
+        <result column="zstudentID" property="zstudentID" javaType="String"/>
+        <result column="zrecognizetime" property="zrecongnizetime" jdbcType="TIMESTAMP"/>
+        <result column="ztype" property="ztype" javaType="String"/>
+        <result column="zrecognizeIP" property="zrecognizeIP" javaType="String"/>
+        <result column="originalPictureUrl" property="originalPictureUrl" javaType="String"/>
+        <result column="zstatus" property="zstatus" javaType="String"/>
+        <result column="ztesttime" property="ztesttime" javaType="int"/>
+        <result column="znowtaskname" property="znowtaskname" javaType="String"/>
+    </resultMap>
+
+
+    <delete id="deletefront" parameterType="com.itboyst.facedemo.dto.Zstudent_login">
+    	DELETE FROM zstudent_login WHERE zstudentID = #{zstudentID};
+  	</delete>
+
+
+    <select id="findtatbyip"  resultType="com.itboyst.facedemo.dto.Zstudent_login">
+        select * from zstudent_login where zrecognizeIP=(select zstudentPCIP from ztraining_facility WHERE zid= #{zid}) and zcheck='登陆'  ORDER BY zrecognizetime desc LIMIT 1;
+    </select>
+
+    <select id="findnowinbystuid"  resultType="com.itboyst.facedemo.dto.Zstudent_login">
+        select zrecognizetime as zrecongnizetime from zstudent_login  WHERE zstudentID= #{zstudentID} and zcheck='登陆'  ORDER BY zrecognizetime desc LIMIT 1;
+    </select>
+
+
+    <delete id="deletebyoriginalPictureUrl" parameterType="com.itboyst.facedemo.dto.Zstudent_login">
+    	DELETE FROM zstudent_login WHERE originalPictureUrl = #{originalPictureUrl};
+  	</delete>
+
+    <select id="findfront"  resultType="com.itboyst.facedemo.dto.Zstudent_login">
+            SELECT * FROM zstudent_login WHERE zstudentID = #{zstudentID}
+    </select>
+
+    <select id="findAllStudentLogin"  resultType="com.itboyst.facedemo.dto.Zstudent">
+            SELECT * FROM zstudent_login ORDER BY zrecognizetime DESC
+    </select>
+
+
+
+    <!--<insert id="insertnowmessage" parameterType="com.itboyst.facedemo.dto.Zstudent_login" >
+        INSERT INTO zstudent_login (zid,zstudentID,zrecognizetime,zcheck, ztype, zrecognizeIP) VALUES(#{zid}, #{zstudentID},#{zrecongnizetime},#{zcheck}, #{ztype}, #{zrecognizeIP});
+    </insert>-->
+
+    <update id="updateloginstate" parameterType="com.itboyst.facedemo.dto.Zstudent_login" >
+      UPDATE zstudent_login SET zstatus=#{zstatus} WHERE ztype='机床' AND zstatus='正常' AND zrecognizeIP IN (SELECT zstudentPCIP FROM ztraining_facility WHERE ztrainingroomID=#{ztrainingroomID});
+    </update>
+
+
+    <update id="updatetanbyipasch" parameterType="com.itboyst.facedemo.dto.Zstudent_login" >
+        UPDATE zstudent_login SET zstatus=#{zstatus} WHERE zrecognizeIP=#{zrecognizeIP} anad zscheduleID=#{zscheduleID}
+    </update>
+
+    <update id="updatetatbyip2" parameterType="com.itboyst.facedemo.dto.Zstudent_login" >
+        UPDATE zstudent_login SET ztesttime=#{ztesttime} ,znowtaskname=#{znowtaskname} where zrecognizeIP=#{zrecognizeIP}
+    </update>
+
+
+    <update id="updatetesttime" parameterType="java.lang.String" >
+        update zstudent_login set ztesttime=ztesttime+1 where zrecognizetime=( select max(a.zrecognizetime) from ( select * from zstudent_login where zstudentID=#{zstudentID} and zscheduleID=#{zscheduleID} )a)
+    </update>
+
+    <update id="updateznowtaskname" parameterType="java.lang.String" >
+        update zstudent_login set znowtaskname=#{znowtaskname} where zrecognizetime=( select max(a.zrecognizetime) from ( select * from zstudent_login where zstudentID=#{zstudentID} and zscheduleID=#{zscheduleID} )a)
+    </update>
+
+
+    <update id="removetat" parameterType="com.itboyst.facedemo.dto.Zstudent_login" >
+        update zstudent_login set znowtaskname=#{znowtaskname},ztesttime=#{ztesttime} where zrecognizeIP=#{zrecognizeIP} and zcheck=#{zcheck}
+    </update>
+
+    <!--删除登录表的相关学生之前的信息-->
+    <delete id="deleteStudentLoginByzidentity" parameterType="java.lang.String">
+    	DELETE FROM zstudent_login WHERE zstudentID=(SELECT zid FROM zstudent WHERE zidentity LIKE #{zidentity})
+  	</delete>
+
+    <insert id="insertnowmessage" parameterType="com.itboyst.facedemo.dto.Zstudent_login" >
+        INSERT INTO zstudent_login (zid,zstudentID,zscheduleID,zrecognizetime,zcheck, ztype, zrecognizeIP,zstatus,originalPictureUrl) VALUES(#{zid}, #{zstudentID}, #{zscheduleID},#{zrecongnizetime},#{zcheck}, #{ztype}, #{zrecognizeIP},#{zstatus},#{originalPictureUrl});
+    </insert>
+
+    <select id="findScheduleBytimeandzstudentID" resultType="java.lang.String">
+        SELECT b.zscheduleID from  zstudent a,zstudent_schedule b,zschedule c
+        where a.zid=#{zstudentID} and a.zid =b.zstudentID and b.zscheduleID =c.zid and #{timestamp} BETWEEN c.zstartdate and c.zenddate
+    </select>
+
+</mapper>

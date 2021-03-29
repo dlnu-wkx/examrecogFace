@@ -1,0 +1,38 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itboyst.facedemo.mapper.ZtempuserMapper">
+
+    <insert id="insertoneztempuser" parameterType="com.itboyst.facedemo.dto.Ztempuser">
+        insert into ztempuser(zid,zlogintime,ztype,zrecognizeIP,originalPictureUrl,zstatus)
+        values(#{zid},#{zlogintime},#{ztype},#{zrecognizeIP},#{originalPictureUrl},#{zstatus})
+    </insert>
+
+    <select id="findAlltempuserbytime" resultType="com.itboyst.facedemo.dto.Ztempuser">
+
+        select * from ztempuser where to_days(zlogintime) = to_days(now()) and zstatus = '申请中' ORDER BY zlogintime DESC
+
+    </select>
+
+    <update id="updatestatustostudent" parameterType="java.lang.String">
+        select * from ztempuser where  zstatus = '失效' and originalPictureUrl=#{originalPictureUrl}
+    </update>
+
+    <update id="update" parameterType="java.lang.String">
+        update ztempuser set zname=#{zname} where zid=#{zid}
+    </update>
+
+
+    <select id="findByzid" resultType="com.itboyst.facedemo.dto.Ztempuser" parameterType="java.lang.String">
+        select * from ztempuser where zid=#{zid}
+    </select>
+
+    <update id="upzstatusbyoriginalPictureUrl" parameterType="java.lang.String">
+        update ztempuser set zstatus='失效' where originalPictureUrl=#{originalPictureUrl}
+    </update>
+
+    <select id="findmaxtime" resultType="java.sql.Timestamp">
+        select MAX(zlogintime) logintime from ztempuser where ztype=#{studorteach}
+    </select>
+
+</mapper>

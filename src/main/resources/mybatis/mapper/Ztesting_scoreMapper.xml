@@ -1,0 +1,18 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itboyst.facedemo.mapper.Ztesting_scoreMapper">
+    <resultMap id="Ztesting_score" type="com.itboyst.facedemo.dto.Ztesting_score">
+        <id column="zid" property="zid" javaType="String"/>
+        <result column="zstudentscheduleID" property="zstudentscheduleID" javaType="String"/>
+        <result column="zrecognizeIP" property="zrecognizeIP" javaType="String"/>
+        <result column="zscore" property="zscore" javaType="int"/>
+        <result column="zchecktime" property="zchecktime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <insert id="insertscore" parameterType="com.itboyst.facedemo.dto.Ztesting_score" >
+        INSERT INTO ztesting_score (zid,zstudentscheduleID,zrecognizeIP,zscore,zchecktime) VALUES(#{zid}, #{zstudentscheduleID},#{zrecognizeIP},#{zscore}, #{zchecktime});
+    </insert>
+
+
+</mapper>

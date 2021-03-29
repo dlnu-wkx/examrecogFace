@@ -1,0 +1,14 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itboyst.facedemo.mapper.TimeStatusStudentMapper">
+
+    <select id="findByZtrainingroomID" resultType="com.itboyst.facedemo.dto.TimeStatusStudent">
+    select f.zstudentID,f.zname,f.zcameraIP,f.zpowerIP,f.zstudentPCIP,f.zidentity,f.zlocation,e.ztype,e.zstatus,e.zcontent from
+                  (select b.zstudentID,c.zcameraIP,c.zidentity,c.zlocation,c.zpowerIP,c.zstudentPCIP,d.zstate,h.zname
+                   from (select max(a.zrecognizetime),a.zrecognizeIP,a.zstatus,a.zstudentID from zstudent_login a GROUP BY a.zstudentID)b,ztraining_facility c,zstudent_schedule d,zstudent h
+                   where b.zrecognizeIP=c.zstudentPCIP and c.ztrainingroomID=#{ztrainingroomID} and d.zstudentID=b.zstudentID and h.zid=b.zstudentID)f
+     LEFT JOIN (select max(a.zapplicationtime),a.zstudentID,a.zcontent,a.zstatus,a.ztype,a.zhandletime from zstudent_event a GROUP BY a.zstudentID)e on f.zstudentID=e.zstudentID
+
+    </select>
+</mapper>

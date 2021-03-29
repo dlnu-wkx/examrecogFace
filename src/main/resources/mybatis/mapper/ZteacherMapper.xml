@@ -1,0 +1,56 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itboyst.facedemo.mapper.ZteacherMapper">
+    <resultMap id="zteacher" type="com.itboyst.facedemo.dto.Zteacher">
+        <id column="zid" property="zid" javaType="String"/>
+        <result column="zmajorID" property="zmajorID" javaType="String"/>
+        <result column="zauthorityID" property="zauthorityID" javaType="String"/>
+        <result column="zidentity" property="zidentity" javaType="String"/>
+        <result column="zpass" property="zpass" javaType="String"/>
+        <result column="zname" property="zname" javaType="String"/>
+        <result column="zsex" property="zsex" javaType="String"/>
+        <result column="zphone" property="zphone" javaType="String"/>
+        <result column="zfaceinfoID" property="zfaceinfoID" javaType="int"/>
+        <result column="zphoto" property="zphoto" javaType="String"/>
+
+    </resultMap>
+
+    <select id="findteachernamelike" resultType="java.lang.String" >
+            select zidentity from zteacher where zidentity like CONCAT('%',#{zname},'%')
+    </select>
+
+
+    <select id="selectbyname"  resultType="com.itboyst.facedemo.dto.Zteacher">
+            SELECT * FROM zteacher WHERE zidentity=#{zname};
+    </select>
+
+
+    <select id="selectteachernamebyid"  resultType="java.lang.String">
+        SELECT zname FROM zteacher WHERE zid=#{zid};
+    </select>
+
+
+    <insert id="registerteacher" parameterType="com.itboyst.facedemo.dto.Zteacher" >
+            INSERT INTO zteacher (zid, zmajorID, zidentity, zpass ,zname, zsex,zphone,zfaceinfoID,zphoto) VALUES(#{zid}, #{zmajorID}, #{zidentity}, #{zpass} ,#{zname}, #{zsex},#{zphone},#{zfaceinfoID},#{zphoto});
+    </insert>
+
+    <insert id="addtempteacher" parameterType="com.itboyst.facedemo.dto.Zteacher" >
+            INSERT INTO zteacher (zid, zmajorID, zauthorityID, zidentity, zpass ,zname, zsex,zphone,zfaceinfoID,zphoto) VALUES(#{zid}, #{zmajorID},#{zauthorityID}, #{zidentity}, #{zpass} ,#{zname}, #{zsex},#{zphone},#{zfaceinfoID},#{zphoto});
+    </insert>
+
+    <update id="updateteacher" parameterType="com.itboyst.facedemo.dto.Zteacher" >
+            UPDATE zteahcer SET zmajorID=#{zmajorID} ,zname=#{zname},zpass=#{zpass},zsex=#{zsex},zphone=#{zphone},zfaceinfoID=#{zfaceinfoID},zphoto=#{zphoto} WHERE zidentity=#{zidentity}
+    </update>
+
+    <select id="findteacherByzidentity" resultType="com.itboyst.facedemo.dto.Zteacher">
+
+            SELECT * FROM zteacher WHERE zidentity=#{zidentity};
+    </select>
+
+    <select id="findAllteacher" resultType="com.itboyst.facedemo.dto.Zteacher">
+        select * from zteacher
+
+    </select>
+
+</mapper>

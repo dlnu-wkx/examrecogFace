@@ -1,0 +1,29 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itboyst.facedemo.mapper.Ztraining_cameraMapper">
+
+    <select id="findAllByZtrainingroomID" resultType="com.itboyst.facedemo.dto.Ztraining_camera">
+
+        select * from ztraining_camera where ztrainingroomID=#{ZtrainingroomID} and ztitle=#{type}
+
+    </select>
+
+    <select id="findAllByZcameraIP" resultType="com.itboyst.facedemo.dto.Ztraining_camera">
+
+        SELECT * FROM ztraining_camera where zcameraIP =#{zcameraIP} and ztitle =#{ztitle} and ztrainingroomID=#{ztrainingroomID}
+
+    </select>
+
+    <update id="updateecamera" parameterType="com.itboyst.facedemo.dto.Ztraining_camera">
+
+        update ztraining_camera set zcameraName=#{zcameraName} where zcameraIP=#{zcameraIP}
+
+    </update>
+
+    <insert id="insertCamera" parameterType="com.itboyst.facedemo.dto.Ztraining_camera">
+        insert into ztraining_camera (zid,ztrainingroomID,zidentity,ztitle,zcameraIP,zcameraName,zwebaddress,zstatus)
+        values (#{zid},#{ztrainingroomID},#{zidentity},#{ztitle},#{zcameraIP},#{zcameraName},#{zwebaddress},#{zstatus})
+    </insert>
+
+</mapper>

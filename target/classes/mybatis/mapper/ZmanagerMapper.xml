@@ -1,0 +1,32 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itboyst.facedemo.mapper.ZmanagerMapper">
+    <resultMap id="zmanager" type="com.itboyst.facedemo.dto.Zmanager">
+        <id column="zid" property="zid" javaType="String"/>
+        <result column="zauthorityID" property="zauthorityID" javaType="String"/>
+        <result column="zidentity" property="zidentity" javaType="int"/>
+        <result column="zpass" property="zpass" javaType="String"/>
+        <result column="zname" property="zname" javaType="String"/>
+        <result column="zphone" property="zphone" javaType="String"/>
+    </resultMap>
+
+
+    <insert id="insertmanager" parameterType="com.itboyst.facedemo.dto.Zmanager" >
+        INSERT INTO zmanager (zid, zidentity, zpass ,zname, zphone) VALUES(#{zid}, #{zidentity}, #{zpass} ,#{zname},#{zphone});
+    </insert>
+
+    <select id="findallbymanagername"  resultType="com.itboyst.facedemo.dto.Zmanager">
+            SELECT * FROM zmanager WHERE zidentity=#{zname};
+    </select>
+
+    <update id="updatemanager" parameterType="com.itboyst.facedemo.dto.Zmanager" >
+            UPDATE zmanager SET zname=#{zname},zpass=#{zpass},zphone=#{zphone},zphoto=#{zphoto} WHERE zidentity=#{zidentity}
+    </update>
+
+    <select id="findmanagernamelike" resultType="java.lang.String" >
+            select zidentity from zmanager where zidentity like CONCAT('%',#{zname},'%')
+    </select>
+
+
+</mapper>
