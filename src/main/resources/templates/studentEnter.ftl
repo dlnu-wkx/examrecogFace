@@ -48,19 +48,19 @@
         <div class="leftfont"><font size="5" ></font></div>
         <div class="rightfont"><font size="5" >安浩智能学习工厂</font></div>
     </div>
-    <div class="layui-row ">
-        <div class="layui-col-xs1" align="center" style="width: 17%;font-size: 70px;margin-top: 40px">
+    <div class="layui-row " style="background-image: url(/images1/background.png); background-size: 100%; height: 100%">
+        <div class="layui-col-xs1" align="center" style="width: 17%;font-size: 70px;margin-top: 40px;color:#FFFFFF">
             欢迎
         </div>
         <div class="layui-col-xs9" align="center" style="width: 69%">
-            <div style="margin: 0,auto;margin-top:40px;height: 80px;text-align:center;line-height:40px;font-size: 40px;color: #E51C23">
+            <div style="margin: 0,auto;margin-top:40px;height: 80px;text-align:center;line-height:40px;font-size: 40px;color: #ffffff">
                 ${name}
             </div>
             <div style=";margin:0 auto;margin-top:0px;height: 100px"><img src='${path}'style='width: 15rem;height: 16rem;'></div>
-            <div style="margin: 0,auto;margin-top:220px;height: 80px;text-align:center;line-height:80px;font-size:34px;color:#0C0C0C"> 进入安浩智能学习工厂</div>
+            <div style="margin: 0,auto;margin-top:220px;height: 80px;text-align:center;line-height:80px;font-size:34px;color:#ffffff"> 进入安浩智能学习工厂</div>
             <div>
 
-                    <button style="color:#FFFFFF;height: 75px;display:block;margin:0 auto;margin-top:0px;width:211px;background-color:#71B863;border-radius:32px;text-align: center;line-height: 50px;font-size: 32px" onclick="test()" id="e_test">
+                    <button style="color:#FFFFFF;height: 75px;display:block;margin:0 auto;margin-top:0px;width:211px;background-color:#123360;border-radius:32px;text-align: center;line-height: 50px;font-size: 32px" onclick="test()" id="e_test">
                         开始测试    
                     </button>
             </div>

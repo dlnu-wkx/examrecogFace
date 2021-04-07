@@ -71,7 +71,7 @@
     width: 90%;
     height: 90%;
     /*position: fixed;*/
-    background-color: #CDCDCD;
+    /*background-color: #CDCDCD;*/
     overflow: auto;
     float: left;
 }
@@ -99,6 +99,7 @@
 }
 
 .i_font{
+    color:#ffffff;
     left: 18%;
     position: absolute;
 }
@@ -142,6 +143,7 @@
 
 
 .i_service{
+    color:#ffffff;
     top:20% ;
     left: 20%;
     position: absolute;
@@ -256,8 +258,8 @@
     /*right: -2px;*/
     /* top: 8.5%;*/
     /*position: absolute;*/
-    background-color: #CDCDCD;
-    border-left: 1px solid #BBBBBB;
+    /*background-color: #CDCDCD;*/
+    /*border-left: 1px solid #BBBBBB;*/
     /*margin-top: 53px;*/
     height: 100%;
     float: left;

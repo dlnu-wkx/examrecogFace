@@ -30,16 +30,16 @@
 </div>
 
 
-<div class="layui-layout layui-layout-admin"  style="background-color: #CDCDCD">
-    <div class="layui-header" style="border-bottom: 1px solid #c2c2c2;background-color: #CDCDCD">
-        <div class="layui-logo" style="osition: absolute;left: 0;top: 0;width: 200px;height: 100%;line-height: 60px;text-align: center;font-size: 16px;left:14px;letter-spacing:4px;color: #0C0C0C">登录界面</div>
+<div class="layui-layout layui-layout-admin"  style="background-image:url(/images1/background.png); background-size: 100%">
+    <div class="layui-header" style="border-bottom: 1px solid #c2c2c2">
+        <div class="layui-logo" style="osition: absolute;left: 0;top: 0;width: 200px;height: 100%;line-height: 60px;text-align: center;font-size: 23px;left:14px;letter-spacing:4px;color: #ffffff">登录界面</div>
         <ul class="layui-nav layui-layout-right" style="right: 35px">
-            <li class="layui-nav-item" style="letter-spacing:4px;left:30px;color: #0C0C0C">安浩智能学习工厂</li>
+            <li class="layui-nav-item" style="letter-spacing:4px;left:30px;font-size: 23px; color: #ffffff">安浩智能学习工厂</li>
         </ul>
     </div>
     <div class="layui-row ">
         <div class="layui-col-xs10" align="center" style="left: 150px">
-            <div style="margin: 0,auto;margin-top:40px;height: 80px;text-align:center;line-height:40px;font-size: 40px;color: #E51C23">
+            <div style="margin: 0,auto;margin-top:40px;height: 80px;text-align:center;line-height:40px;font-size: 40px;color: #ffffff">
                 欢迎使用安浩智能学习工厂
             </div>
             <!--摄像头的位置-->
@@ -53,19 +53,19 @@
                 </button>
             </div>-->
         </div>
-        <div class="layui-col-xs1" align="right" style="height:700px;left: 124px;border-left: 1px solid #c2c2c2;">
+        <div class="layui-col-xs1" align="right" style="height:700px;left: 75px;border-left: 0px solid #c2c2c2;">
             <div>
-        <button  style="pointer-events:none;color:#FFFFFF;height: 80px;display:block;margin:0 auto;margin-top:10px;width:80px;background-color: #A5A5A5;border-radius:14px;text-align: center;line-height: 30px;font-size: 20px">
+        <button  style="pointer-events:none;color:#FFFFFF;height: 73px;display:block;margin:0 auto;margin-top:35px;width:102px;background-image: url(/images1/raise_hands.png); background-size: 100%; border-radius:14px;text-align: center;line-height: 30px;font-size: 20px">
             举手
         </button>
     </div>
     <div>
-        <button  style="pointer-events:none;color:#FFFFFF;height: 80px;display:block;margin:0 auto;margin-top:15px;width:80px;background-color: #A5A5A5;border-radius:14px;text-align: center;line-height: 30px;font-size: 20px">
+        <button  style="pointer-events:none;color:#FFFFFF;height: 73px;display:block;margin:0 auto;margin-top:70px;width:102px;border-width: 0px;background-image: url(/images1/raise_hands.png); background-size: 100%; border-radius:14px;text-align: center;line-height: 30px;font-size: 20px">
             请假
         </button>
     </div>
     <div>
-        <button style="color:#FFFFFF;height: 80px;display:block;margin:0 auto;margin-top:350px;width:80px;background-color: #4472c4;border-radius:14px;text-align: center;line-height: 27px;font-size: 26px">
+        <button style="color:#FFFFFF;height: 100px;display:block;margin:0 auto;margin-top:235px;width:100px; border-radius: 50%;background-color: #123360;border-width:0px;text-align: center;line-height: 27px;font-size: 20px">
             退出系统
         </button>
     </div>

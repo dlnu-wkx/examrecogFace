@@ -19,11 +19,11 @@
 
 </div>
 
-<div class="layui-layout layui-layout-admin"  style="background-color: #CDCDCD">
-    <div class="layui-header" style="border-bottom: 1px solid #c2c2c2;background-color: #CDCDCD">
-        <div class="layui-logo" style="osition: absolute;left: 0;top: 0;width: 200px;height: 100%;line-height: 60px;text-align: center;font-size: 16px;left:14px;letter-spacing:4px;color: #0C0C0C">登录界面</div>
+<div class="layui-layout layui-layout-admin"  style="background-image: url(/images1/background.png); background-size: 100%">
+    <div class="layui-header" style="border-bottom: 0px solid #c2c2c2;background-color: #114376">
+        <div class="layui-logo" style="osition: absolute;left: 0;top: 0;width: 200px;height: 100%;line-height: 60px;text-align: center;font-size: 23px;left:14px;letter-spacing:4px;color: #ffffff">登录界面</div>
         <ul class="layui-nav layui-layout-right" style="right: 35px">
-            <li class="layui-nav-item" style="letter-spacing:4px;left:30px;color: #0C0C0C">安浩智能学习工厂</li>
+            <li class="layui-nav-item" style="letter-spacing:4px;font-size:23px;left:30px;color: #ffffff">安浩智能学习工厂</li>
         </ul>
     </div>
     <div class="layui-row ">
@@ -38,7 +38,7 @@
         </div>
 
 
-        <div class="layui-col-xs1" align="right" style="height:700px;left: 124px;border-left: 1px solid #c2c2c2;"></div>
+        <div class="layui-col-xs1" align="right" style="height:700px;left: 124px;border-left: 0px solid #c2c2c2;"></div>
 
     </div>
 </div>

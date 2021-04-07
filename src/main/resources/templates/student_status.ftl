@@ -36,8 +36,8 @@
 
 <!--头部导航条-->
 <div class="top">
-    <div class="leftfont"><font size="3" >测 试 管 理</font></div>
-    <div class="rightfont"><font size="2" >安 浩 智 能 学 习 工 厂</font></div>
+    <div class="leftfont">测 试 管 理</div>
+    <div class="rightfont">安 浩 智 能 学 习 工 厂</div>
 </div>
 
 
@@ -619,7 +619,7 @@
         getteacherroom();
         loadfaclity(static_trainroomid);
 
-        interval= window.setInterval(function () {
+      interval= window.setInterval(function () {
             loadfaclity(static_trainroomid);
         }, 20000);
     }

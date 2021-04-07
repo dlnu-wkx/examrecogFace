@@ -11,19 +11,19 @@
     <script src="./layui/layui.js"></script>
     <script src="./jquery/jquery.cookie.js"></script>
 </head>
-<body class="layui-layout-body" style="width: 100%;height: 100%;background-color: #CDCDCD">
+<body class="layui-layout-body" style="width: 100%;height: 100%;background-image:url(/images1/background.png); background-size: 100%;">
 
 
 
 <div class="layui-layout layui-layout-admin" >
-    <div class="layui-header" style="border-bottom: 1px solid #c2c2c2;background-color: #C6C6C6">
-        <div class="layui-logo" style="osition: absolute;left: 0;top: 0;width: 200px;height: 100%;line-height: 60px;text-align: center;font-size: 16px;left:14px;letter-spacing:4px;color: #0C0C0C">教师端登陆</div>
+    <div class="layui-header" style="border-bottom: 0px solid #c2c2c2;background-color: #114376">
+        <div class="layui-logo" style="osition: absolute;left: 0;top: 0;width: 200px;height: 100%;line-height: 60px;text-align: center;font-size: 23px;left:14px;letter-spacing:4px;color: #ffffff">教师端登陆</div>
         <ul class="layui-nav layui-layout-right" style="right: 35px">
-            <li class="layui-nav-item" style="letter-spacing:4px;left:30px;color: #0C0C0C">安浩智能学习工厂</li>
+            <li class="layui-nav-item" style="letter-spacing:4px;left:30px; font-size:23px;color: #ffffff">安浩智能学习工厂</li>
         </ul>
     </div>
     <div class="layui-row ">
-        <div class="layui-col-xs1" align="center" style="width: 17%;font-size: 70px;margin-top: 40px">
+        <div class="layui-col-xs1" align="center" style="width: 17%;font-size: 70px;color:#ffffff;margin-top: 40px">
             欢迎
         </div>
         <div class="layui-col-xs9" align="center" style="width: 69%">

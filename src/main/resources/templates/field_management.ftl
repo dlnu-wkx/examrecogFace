@@ -25,19 +25,19 @@
         videojs.options.flash.swf='./jquery/video-js.swf'
     </script>-->
 </head>
-<body class="layui-layout-body" style="width: 100%;height: 100%;background-color: #CDCDCD">
+<body class="layui-layout-body" style="width: 100%;height: 100%;background-image:url(/images1/background.png);background-size: 100%;height: 100%">
 <div class="layui-layout layui-layout-admin" >
-    <div class="layui-header" style="border-bottom: 1px solid #c2c2c2;background-color: #C6C6C6">
-        <div class="layui-logo" style="osition: absolute;left: 0;top: 0;width: 200px;height: 100%;line-height: 60px;text-align: center;font-size: 16px;left:14px;letter-spacing:4px;color: #0C0C0C">登录界面</div>
+    <div class="layui-header" style="border-bottom: 0px solid #c2c2c2;background-color: #114376">
+        <div class="layui-logo" style="osition: absolute;left: 0;top: 0;width: 200px;height: 100%;line-height: 60px;text-align: center;font-size: 23px;left:14px;letter-spacing:4px;color: #ffffff">登录界面</div>
         <ul class="layui-nav layui-layout-right" style="right: 35px">
-            <li class="layui-nav-item" style="letter-spacing:4px;left:30px;color: #0C0C0C">安浩智能学习工厂</li>
+            <li class="layui-nav-item" style="letter-spacing:4px;font-size:23px; left:30px;color: #ffffff">安浩智能学习工厂</li>
         </ul>
     </div>
     <div class="layui-row ">
         <div id='welcomeField' class="layui-col-xs1" align="center" style="width: 17%;font-size: 70px;margin-top: 40px">
         </div>
         <div id='teach' class="layui-col-xs9" align="center" style="width: 74%">
-            <div style="margin: 0,auto;margin-top:40px;height:80px;text-align:center;line-height:40px;font-size: 40px;color: #E51C23">
+            <div style="margin: 0,auto;margin-top:40px;height:80px;text-align:center;line-height:40px;font-size: 40px;color: #e51c23">
             </div>
             <#--<div style=";margin:0 auto;margin-top:0px;height: 100px"><img src='${path}'style='width: 15rem;height: 16rem;'></div>
             <div style="margin: 0,auto;margin-top:220px;height: 80px;text-align:center;line-height:80px;font-size:34px;color:#0C0C0C"> 进入安浩智能学习工厂</div>-->
