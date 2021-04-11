@@ -242,6 +242,33 @@ public class Zfixed_taskController {
         return ztraining_task_assessService.findallbyztrainingtaskID(ztraining_taskID);
     }
 
+
+    @RequestMapping("/findsatcheckbytid")
+    @ResponseBody
+    public Ztask_input findsatcheckbytid(String ztrainingtaskassessID,String ztraining_taskID,HttpSession session){
+        //System.out.println(ztrainingtaskassessID+ztraining_taskID);
+        Zstudent_cookie zstudent_cookie=(Zstudent_cookie) session.getAttribute("zstudent_cookie");
+        String zstudent_scheduleid=zstudent_cookie.getZstudent_scheduleid();
+
+       /* System.out.println("ztrainingtaskassessID:"+ztrainingtaskassessID+"      ztraining_taskID:"+ztraining_taskID+"    zstudent_scheduleid:"+zstudent_scheduleid);
+        System.out.println(ztask_inputService.findsatcheckbyid(ztrainingtaskassessID,ztraining_taskID,zstudent_scheduleid));*/
+
+        return ztask_inputService.findsatcheckbyid(ztrainingtaskassessID,ztraining_taskID,zstudent_scheduleid);
+
+    }
+
+
+    @RequestMapping("/updatetcheckbyid")
+    @ResponseBody
+    public void updatetcheckbyid(String zid,String zteachercheck){
+
+        ztask_inputService.updatetasktcheckbyid(zid,zteachercheck);
+
+    }
+
+
+
+
     @RequestMapping("/inserttaskinput")
     @ResponseBody
     public int inserttaskinput(@RequestParam(value = "zassign_scheduleid")String zassign_scheduleid,@RequestParam(value = "zselfcheck[]")String [] zselfcheck,@RequestParam(value = "ztrainingtaskassessID[]")String [] ztrainingtaskassessID){

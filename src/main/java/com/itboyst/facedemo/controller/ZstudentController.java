@@ -40,6 +40,13 @@ public class ZstudentController {
         return zstudentService.findallbystudentname(name);
     }
 
+    @RequestMapping("/findAllstudentbyg")
+    @ResponseBody
+    public List<Zstudent> findAllstudentbyg(String zgradeID){
+        return zstudentService.findstudentbyzgradid(zgradeID);
+    }
+
+
     @RequestMapping("/findstudentnamelike")
     @ResponseBody
     public List<String> findstudentnamelike(String name){

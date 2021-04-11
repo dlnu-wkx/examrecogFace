@@ -25,5 +25,13 @@
         update ztask_input set zselfcheck = #{zselfcheck} where zassignscheduleID=#{zassignscheduleID} AND ztrainingtaskassessID=#{ztrainingtaskassessID};
     </update>
 
+    <update id="updatetasktcheckbyid" parameterType="com.itboyst.facedemo.dto.Ztask_input">
+        update ztask_input set zteachercheck = #{zteachercheck} where zid=#{zid};
+    </update>
+
+    <select id="findsatcheckbyid"  resultType="com.itboyst.facedemo.dto.Ztask_input"  >
+            select * from ztask_input where ztrainingtaskassessID=#{ztrainingtaskassessID} and zassignscheduleID=(select zid from zassign_schedule where ztrainingtaskID=#{ztrainingtaskID} and zstudentscheduleID=#{zstudentscheduleID})
+    </select>
+
 
 </mapper>

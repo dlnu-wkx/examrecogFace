@@ -1,0 +1,30 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itboyst.facedemo.mapper.Zteacher_measureMapper">
+    <resultMap id="zteacherlogin" type="com.itboyst.facedemo.dto.Zteacher_measure">
+        <result column="zid" property="zid" javaType="java.lang.String"/>
+        <result column="zname" property="zName" javaType="java.lang.String"/>
+        <result column="zidentity" property="zgradeName" javaType="java.lang.String"/>
+        <result column="zselfcheck" property="zselfcheck" javaType="java.lang.String"/>
+        <result column="zteachercheck" property="zteachercheck" javaType="java.lang.String"/>
+    </resultMap>
+
+    <select id="findmeasurebygat"  resultType="com.itboyst.facedemo.dto.Zteacher_measure">
+        select A.zid as zid,E.zid as ztaskinputid,A.zname as zname,A.zidentity as zidentity,E.zselfcheck as zselfcheck,E.zteachercheck as zteachercheck,F.zorder from zstudent A,ztraining_task B,zassign_schedule C,zstudent_schedule D,ztask_input E ,ztraining_task_assess F
+where   A.zid=#{zgradeID} and C.ztrainingtaskID=B.zid and D.zid=C.zstudentscheduleID and
+A.zid=D.zstudentID and B.zid=#{ztraining_taskID}
+and E.zassignscheduleID=C.zid and E.ztrainingtaskassessID=F.zid and F.ztrainingtaskID=B.zid
+ORDER BY A.zidentity,F.zorder;
+
+    </select>
+
+    <select id="findmeasurebygatgroupid"  resultType="int">
+        select max(A.zidentity) from zstudent A,ztraining_task B,zassign_schedule C,zstudent_schedule D,ztask_input E ,ztraining_task_assess F
+where  A.zid=#{zgradeID} and C.ztrainingtaskID=B.zid and D.zid=C.zstudentscheduleID and
+A.zid=D.zstudentID and B.zid=#{ztraining_taskID}
+and E.zassignscheduleID=C.zid and E.ztrainingtaskassessID=F.zid and F.ztrainingtaskID=B.zid
+group by A.zid  ORDER BY A.zidentity,F.zorder  ;
+
+    </select>
+</mapper>

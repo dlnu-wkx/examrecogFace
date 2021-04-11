@@ -53,6 +53,18 @@ public class QbankController {
     }
 
 
+    /**
+     * 老师名字
+     * @param session
+     * @return
+     */
+    @RequestMapping("/getteachername")
+    @ResponseBody
+    public String getteachername(HttpSession session){
+       Zteacher_cookie zteacher_cookie=(Zteacher_cookie)session.getAttribute("zteacher_cookie");
+       return zteacher_cookie.getZname();
+    }
+
 
 
     /*
@@ -345,6 +357,8 @@ public class QbankController {
      * 跳转测试
      * @return
      */
+    @RequestMapping(value = "/teacher_measure")
+    public String teacher_measure(){return "teacher_measure";}
 
     @RequestMapping(value = "/power_controller")
     public String power_controller(){return "power_controller";}

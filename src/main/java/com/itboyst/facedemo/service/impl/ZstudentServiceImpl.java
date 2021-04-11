@@ -83,4 +83,6 @@ public class ZstudentServiceImpl implements ZstudentService {
     @Override
     public Zstudent findstudentbyfaceid(String zfaceinfoID){return zstu.findstudentbyfaceid(zfaceinfoID);}
 
+    @Override
+    public List<Zstudent> findstudentbyzgradid(String zgradeID){return zstu.findstudentbyzgradid(zgradeID);};
 }

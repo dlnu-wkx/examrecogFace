@@ -17,6 +17,7 @@
 <body class="body">
 <!--警示消息-->
 <div>
+
     <script>
         var layer;
         $(function () {
@@ -36,10 +37,11 @@
 </div>
 
 
+
 <!--头部导航条-->
 <div class="top">
-    <div class="leftfont"><font size="5">实训任务</font></div>
-    <div class="rightfont"><font size="5">安浩智能学习工厂</font></div>
+    <div class="leftfont"><font size="5" >实训任务</font></div>
+    <div class="rightfont"><font size="5" >安浩智能学习工厂</font></div>
 </div>
 <#--隐藏区域是为了解决摄像头显示其他不能点击的问题-->
 <div class = "mid" style="background-image: url(/images1/background.png); background-size:100%; height: 100%">
@@ -476,7 +478,7 @@
             contentType: false,
             processData: false,
             async: false,
-            success: function (data) {
+            success: function (data){
 
                 if (data.length != static_fixleng) {
                     static_fixleng = data.length;
@@ -822,6 +824,7 @@
         });
         $("#nextpage").css("background-color", "#A5A5A5");
     }
+
 
 
 </script>
