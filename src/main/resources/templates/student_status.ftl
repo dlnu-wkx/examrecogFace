@@ -604,7 +604,7 @@
             $("input[name='topchose']").hide()
             interval= window.setInterval(function () {
                 loadfaclity(static_trainroomid);
-            }, 20000);
+            }, 10000);
         }
 
     }
@@ -621,7 +621,7 @@
 
         interval= window.setInterval(function () {
             loadfaclity(static_trainroomid);
-        }, 20000);
+        }, 10000);
     }
 
 

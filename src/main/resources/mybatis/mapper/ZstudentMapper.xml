@@ -70,6 +70,10 @@
             SELECT * FROM zstudent WHERE zidentity=#{zfaceinfoID};
         </select>
 
+        <select id="findstudentbyzgradid"  resultType="com.itboyst.facedemo.dto.Zstudent">
+            SELECT * FROM zstudent WHERE zgradeID=#{zgradeID};
+        </select>
+
 
         <update id="updatestudent" parameterType="com.itboyst.facedemo.dto.Zstudent" >
             UPDATE zstudent SET zname=#{zname},zpass=#{zpass},zsex=#{zsex},zphone=#{zphone},zfaceinfoID=#{zfaceinfoID},zphoto=#{zphoto},zstatus='待审核' WHERE zidentity=#{zidentity}

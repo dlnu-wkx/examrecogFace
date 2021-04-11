@@ -17,6 +17,7 @@
 <body  class="body" >
 <!--警示消息-->
 <div>
+
     <script>
         var layer;
         $(function () {
@@ -121,6 +122,7 @@
 </body>
 
 <script>
+
 
     var indexleft=1;
     var indexright=1;
@@ -414,7 +416,7 @@
                         str+=" <div class='left_table2'><img src='"+content[0]+"'  alt='测试用' class='right_message' /></div>"
                         str+=" <div class='reight_mes2'>"
                         str+=" <table class='r_table2'>";
-                        str+="<tr><th class='r_tableth1'>序号</th><th class='r_tableth2'>尺寸值</th><th class='r_tableth3'>输入尺寸</th></tr>"
+                        str+="<tr><th class='r_tableth1'>序号</th><th class='r_tableth2'>自检值</th><th class='r_tableth3'>师检值</th></tr>"
 
                         //加载测量值的个数及id
                         $.ajax({
@@ -427,7 +429,34 @@
                                 for (var i=0;i<data.length;i++){
                                     ztrainingtaskassessID[i]=data[i].zid;
                                     j=i+1;
-                                    str+=" <tr><th class='r_tableth1'>"+data[i].zorder+"</th><th class='r_tableth3'><input class='rmes_input' type='tel'  id='"+data[i].zid+"'></th></tr>"
+
+                                    $.ajax({
+                                        type: "post",
+                                        url: "/findsatcheckbytid",
+                                        async: false,
+                                        data:{"ztrainingtaskassessID":ztrainingtaskassessID[i],"ztraining_taskID":static_taskid},
+                                        success: function (data2) {
+                                           // alert(data2.zselfcheck)
+                                            if(data2.zteachercheck && data2.zselfcheck){
+                                                str+=" <tr><th class='r_tableth1'>"+data[i].zorder+"</th><th class='r_tableth3'><input class='rmes_input' type='tel' value='"+data2.zselfcheck+"'  id='"+data[i].zid+"'></th><th class='r_tableth3'>"+data2.zteachercheck+"</th></tr>"
+                                            }else if(!data2.zteachercheck && data2.zselfcheck){
+                                                str+=" <tr><th class='r_tableth1'>"+data[i].zorder+"</th><th class='r_tableth3'><input class='rmes_input' type='tel'  value='"+data2.zselfcheck+"'  id='"+data[i].zid+"'></th><th class='r_tableth3'></th></tr>"
+                                            }
+                                            else if(!data2.zteachercheck && !data2.zselfcheck){
+                                                str+=" <tr><th class='r_tableth1'>"+data[i].zorder+"</th><th class='r_tableth3'><input class='rmes_input' type='tel'   id='"+data[i].zid+"'></th><th class='r_tableth3'></th></tr>"
+                                            }
+
+
+                                        }
+                                    })
+                                   /* if(data[i].zteachercheck && data[i].zselfcheck){
+                                        str+=" <tr><th class='r_tableth1'>"+data[i].zorder+"</th><th class='r_tableth3'><input class='rmes_input' type='tel' value='"+data[i].zselfcheck+"'  id='"+data[i].zid+"'></th><th class='r_tableth3'>"+data[i].zteachercheck+"</th></tr>"
+                                    }else if(!data[i].zteachercheck && data[i].zselfcheck){
+                                        str+=" <tr><th class='r_tableth1'>"+data[i].zorder+"</th><th class='r_tableth3'><input class='rmes_input' type='tel'  value='"+data[i].zselfcheck+"'  id='"+data[i].zid+"'></th><th class='r_tableth3'></th></tr>"
+                                    }
+                                    else if(!data[i].zteachercheck && !data[i].zselfcheck){
+                                        str+=" <tr><th class='r_tableth1'>"+data[i].zorder+"</th><th class='r_tableth3'><input class='rmes_input' type='tel'   id='"+data[i].zid+"'></th><th class='r_tableth3'></th></tr>"
+                                    }*/
                                 }
                             }
                         });

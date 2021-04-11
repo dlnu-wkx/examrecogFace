@@ -6,6 +6,8 @@ import com.itboyst.facedemo.service.Ztask_inputService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class Ztask_inputServiceImpl implements Ztask_inputService {
     @Autowired
@@ -26,5 +28,12 @@ public class Ztask_inputServiceImpl implements Ztask_inputService {
         return ztask_inputMapper.updatetaskselfcheck(ztask_input);
     }
 
+    @Override
+    public int updatetasktcheckbyid(String zid,String zteachercheck){
+        return ztask_inputMapper.updatetasktcheckbyid(zid, zteachercheck);
+    }
 
+    public Ztask_input findsatcheckbyid(String ztrainingtaskassessID, String ztrainingtaskID, String zstudentscheduleID){
+        return ztask_inputMapper.findsatcheckbyid(ztrainingtaskassessID, ztrainingtaskID, zstudentscheduleID);
+    }
 }

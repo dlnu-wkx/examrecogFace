@@ -640,7 +640,7 @@ public class FaceController {
 
             zsl.setZstatus("正常");
             //zsc为空说明该学生该时间段内没有课程并且不是临时学生
-            if (CollectionUtil.isEmpty(zsclist) && !zstudent.getZidentity().contains("L")) {
+          /*  if (CollectionUtil.isEmpty(zsclist) && !zstudent.getZidentity().contains("L")) {
                 String lpictureurl = zstudent.getZphoto();
                 //把之前所有的临时申请干掉然后插入一条最新的
                 int g = ztempuserService.updatestatustostudent(lpictureurl);
@@ -656,7 +656,7 @@ public class FaceController {
                 int a = ztempuserService.insertoneztempuser(ztempuser);
                 //当为临时人员时没有课也能进入
                 return Results.newFailedResult(ErrorCodeEnum.NO_STUDENTSCHDULE_MESSAGE);
-            }
+            }*/
 
                 zsl.setZscheduleID(zsclist.get(0).getZscheduleID());
             //临时学生要查看是否是第二次登录如果是就删除临时信息并且不让登录
@@ -736,7 +736,7 @@ public class FaceController {
         if(strdate>=1){//删除文件夹类的所有图片
             deletenottodaypicture("D:\\SchoolTrainFiles\\FacePic\\ztempuser\\student\\");
         }
-        Ztempuser ztempuser = new Ztempuser();
+       /* Ztempuser ztempuser = new Ztempuser();
         String uuid1 = UUID.randomUUID().toString().replaceAll("-", "");
         ztempuser.setZid(uuid1);
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
@@ -746,7 +746,7 @@ public class FaceController {
         String ip4 = Iputil.getClientIpAddress(request);
         ztempuser.setZrecognizeIP(ip4);
         ztempuser.setZstatus("申请中");
-        int a = ztempuserService.insertoneztempuser(ztempuser);
+        int a = ztempuserService.insertoneztempuser(ztempuser);*/
 
 
         return Results.newFailedResult(ErrorCodeEnum.FACE_DOES_NOT_MATCH);
@@ -985,7 +985,7 @@ public class FaceController {
 
             }
 
-                 session.setMaxInactiveInterval(60*60*24*30);
+               //  session.setMaxInactiveInterval(60*60*24*30);
                 //人脸表id
                 int faceid = faceengine.selectidbyname(faceUserInfo.getPath());
                 //教师信息、课程信息和实训室信息
@@ -1097,7 +1097,7 @@ public class FaceController {
         if(day>=1){
             deletenottodaypicture("D:\\SchoolTrainFiles\\FacePic\\ztempuser\\teacher\\");
         }
-        Ztempuser ztempuser = new Ztempuser();
+       /* Ztempuser ztempuser = new Ztempuser();
         String uuid1 = UUID.randomUUID().toString().replaceAll("-", "");
         ztempuser.setZid(uuid1);
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
@@ -1107,7 +1107,7 @@ public class FaceController {
         String ip4 = Iputil.getClientIpAddress(request);
         ztempuser.setZrecognizeIP(ip4);
         ztempuser.setZstatus("申请中");
-        int a = ztempuserService.insertoneztempuser(ztempuser);
+        int a = ztempuserService.insertoneztempuser(ztempuser);*/
 
         return Results.newFailedResult(ErrorCodeEnum.FACE_DOES_NOT_MATCH);
     }
