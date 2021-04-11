@@ -30,4 +30,11 @@
         select zid from zgrade where zname=#{zname}
     </select>
 
+    <select id="findallgradebytrainroom" resultType="com.itboyst.facedemo.dto.Zgrade">
+        SELECT	* FROM zgrade where zid IN
+			(select zgradeID FROM zstudent where zid IN
+				(SELECT zstudentID from zstudent_schedule where zscheduleID in
+					(select zid from zschedule where  ztrainingroomID=#{ztrainingroomID} and  now() BETWEEN zstartdate and zenddate)) GROUP BY zgradeID)
+    </select>
+
 </mapper>

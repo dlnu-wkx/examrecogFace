@@ -36,6 +36,7 @@ public enum ErrorCodeEnum {
     Two_training_room(27,"老师有两个实训室"),
     INSPECT_END(28,"查岗结束"),
     SESSION_NOT_ACTIVE(29,"session失活"),
+    NOT_CAN_PITURE_LOGIN(30,"不可以使用图片登录"),
 
     INVALID_APP_ID(28673, "无效的AppId"),
     INVALID_SDK_ID(28674, "无效的SdkKey"),

@@ -32,4 +32,9 @@ public class ZgradeServiceImpl implements ZgradeService {
         return zgradeMapper.findzidbyzname(zname);
     }
 
+    @Override
+    public List<Zgrade> findallgradebytrainroom(String ztrainingroomID) {
+        return zgradeMapper.findallgradebytrainroom(ztrainingroomID);
+    }
+
 }

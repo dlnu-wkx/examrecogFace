@@ -35,5 +35,10 @@ public interface FaceEngineService {
      */
     List<FaceUserInfo> compareFaceFeature(byte[] faceFeature, Integer groupId) throws InterruptedException, ExecutionException;
 
+    /**
+     * 测试活体检测
+     * @param imageInfoGray
+     */
+    void ceshi(ImageInfo imageInfoGray);
 
 }

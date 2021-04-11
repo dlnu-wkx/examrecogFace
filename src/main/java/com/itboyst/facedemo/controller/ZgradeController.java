@@ -2,6 +2,7 @@ package com.itboyst.facedemo.controller;
 
 import com.itboyst.facedemo.dto.Zgrade;
 import com.itboyst.facedemo.dto.Zstudent;
+import com.itboyst.facedemo.dto.Zteacher_cookie;
 import com.itboyst.facedemo.service.ZgradeService;
 import com.itboyst.facedemo.service.ZstudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -62,5 +64,28 @@ public class ZgradeController {
         return zstudentList;
 
     }
+
+
+    @RequestMapping("/findallgradebytrainroom")
+    @ResponseBody
+    public List<Zgrade> findallgradebytrainroom(HttpSession session){
+        Zteacher_cookie zteacher_cookie =(Zteacher_cookie) session.getAttribute("zteacher_cookie");
+        String ztrainingroomID=zteacher_cookie.getZtrainingroomid();
+        List<Zgrade> list = null;
+        if(ztrainingroomID !=null){
+            list = zgradeService.findallgradebytrainroom(ztrainingroomID);
+        }
+
+        return list;
+
+    }
+
+    @RequestMapping("/findgradestudentnumbbyID")
+    @ResponseBody
+    public List<Zstudent>  findallgradebyID(String zid){
+       List<Zstudent>  list  = zstudentService.findAllstudentbygradeid(zid);
+        return list;
+    }
+
 
 }

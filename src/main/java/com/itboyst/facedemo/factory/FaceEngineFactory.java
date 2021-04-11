@@ -38,6 +38,8 @@ public class FaceEngineFactory extends BasePooledObjectFactory<FaceEngine> {
         System.out.println("faceEngineActiveCode:" + activeCode + "==========================");
         int initCode = faceEngine.init(engineConfiguration);
         System.out.println("faceEngineInitCode:" + initCode + "==========================");
+        //设置活体检测的值，文档要求是0.5、0.7，但是准确度不高（暂时没找到问题所在）所以定位0.8f
+        int errorCode = faceEngine.setLivenessParam(0.8f, 0.7f);
         return faceEngine;
     }
 

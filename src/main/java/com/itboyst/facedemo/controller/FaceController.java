@@ -130,6 +130,12 @@ public class FaceController {
     }
 
 
+    @RequestMapping(value = "/exam_field_management")
+    public String exam_field_management() {
+        return "exam_field_management";
+    }
+
+
     @RequestMapping(value = "/findnamelike")
     @ResponseBody
     public List<String> findallface(String name) {
@@ -454,6 +460,7 @@ public class FaceController {
 
         BufferedImage bufImage = ImageIO.read(new ByteArrayInputStream(decode));
         ImageInfo imageInfo = ImageFactory.bufferedImage2ImageInfo(bufImage);
+        ImageInfo imageInfoGray = ImageFactory.bufferedImage2GrayImageInfo(bufImage);
         //人脸特征获取
         byte[] bytes = faceEngineService.extractFaceFeature(imageInfo);
         if (bytes == null) {
@@ -483,6 +490,10 @@ public class FaceController {
             BeanUtil.copyProperties(faceUserInfo, faceSearchResDto);
             List<ProcessInfo> processInfoList = faceEngineService.process(imageInfo);
             if (CollectionUtil.isNotEmpty(processInfoList)) {
+                //如果活体检测不为1则默认是图片登录，拒接图片登录
+                if(processInfoList.get(0).getLiveness() != 1){
+                    return Results.newFailedResult(ErrorCodeEnum.NOT_CAN_PITURE_LOGIN);
+                }
                 //人脸检测
                 List<FaceInfo> faceInfoList = faceEngineService.detectFaces(imageInfo);
                 int left = faceInfoList.get(0).getRect().getLeft();

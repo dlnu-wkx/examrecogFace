@@ -38,6 +38,17 @@ public class InspectSitStudentController {
     @Autowired
     ZstrangeService zstrangeService;
 
+
+    /**
+     * 人脸识别的数据处理方法
+     * @param session
+     * @param mytime
+     * @param zcheck
+     * @param renliandata
+     * @return
+     * @throws IOException
+     * @throws ParseException
+     */
     @RequestMapping(value = "/InspectSitStudent", method = RequestMethod.POST)
     @ResponseBody
     public List<InspectSitStudent> InspectSitStudent(HttpSession session,String mytime,String zcheck,@RequestParam(value = "renliandata") String renliandata) throws IOException, ParseException {
@@ -96,13 +107,11 @@ public class InspectSitStudentController {
             List<InspectSitStudent>  zstudentList = new ArrayList<>();
             zstudentList =inspectSitStudentService.findStudentByDateAndTrainingId(ztrainingroomID,timestamp,zcheck);
             //教师的信息
-            System.out.println(jieshiip);
             List<InspectSitTeacher> zteacherList = new ArrayList<>();
              zteacherList =  inspectSitStudentService.findTeacherByDateAndTrainingIDdistinct(jieshiip,timestamp,zcheck);
             if(CollectionUtil.isNotEmpty(zteacherList)){
 
                 for(InspectSitTeacher a:zteacherList){
-                    System.out.println(" zteacher a:"+a);
                     InspectSitStudent inspectSitStudent =new InspectSitStudent();
                     inspectSitStudent.setZgradeName("教师");
                     inspectSitStudent.setZName(a.getZName());
@@ -162,13 +171,56 @@ public class InspectSitStudentController {
         }
 
         List<InspectSitStudent>  zstudentList = new ArrayList<>();
+
         zstudentList =inspectSitStudentService.inspectfindStudentByDateAndTrainingId(ztrainingroomID,timestamp,zcheck);
-
-
 
         return zstudentList;
     }
 
+    /**
+     * 签到的数据处理方法
+     * @param session
+     * @param mytime
+     * @param zcheck
+     * @param zid
+     * @return
+     * @throws IOException
+     * @throws ParseException
+     */
+    @RequestMapping(value = "/signInInspectSitStudent", method = RequestMethod.POST)
+    @ResponseBody
+    public List<InspectSitStudent> signInInspectSitStudent(HttpSession session,String mytime,String zcheck,String zid) throws IOException, ParseException {
+
+        Zteacher_cookie zteacher_cookie =(Zteacher_cookie) session.getAttribute("zteacher_cookie");
+        String ztrainingroomID ="";
+        if(zteacher_cookie !=null){
+            ztrainingroomID = zteacher_cookie.getZtrainingroomid();
+        }
+        Timestamp timestamp=new Timestamp(System.currentTimeMillis());
+        if(mytime!=null){
+            Long time =Long.parseLong(mytime);
+            timestamp.setTime(time);
+        }
+
+        List<InspectSitStudent>  zstudentList = new ArrayList<>();
+
+        zstudentList =inspectSitStudentService.signIninspectfindStudentByDateAndTrainingId(ztrainingroomID,timestamp,zcheck,zid);
+
+        return zstudentList;
+    }
+
+
+
+
+        /**
+         * 人脸识别和查岗显示界面中左下侧显示的全部识别人员
+         * @param session
+         * @param mytime
+         * @param zcheck
+         * @return
+         * @throws IOException
+         * @throws ParseException
+         */
 
     @RequestMapping(value = "/InspectSitStudentandTeacher", method = RequestMethod.POST)
     @ResponseBody

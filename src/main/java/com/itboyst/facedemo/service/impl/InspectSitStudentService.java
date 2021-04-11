@@ -19,4 +19,7 @@ public interface InspectSitStudentService {
     List<InspectSitStudent> inspectfindStudentByDateAndTrainingIdASC(String ztrainingroomID, Timestamp timestamp,String zcheck);
     //查岗，去重
     List<InspectSitStudent>  inspectfindStudentByDateAndTrainingId(String ztrainingroomID, Timestamp timestamp,String zcheck);
+    //签到
+    List<InspectSitStudent>  signIninspectfindStudentByDateAndTrainingId(String ztrainingroomID, Timestamp timestamp,String zcheck,String zid);
+
 }

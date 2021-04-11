@@ -234,11 +234,15 @@
                         }else if (text.code==23){
                             layer.msg("学生上课表(zstudent_schedule)没有该名学生的信息", { icon: 1, offset: "auto", time:2000 });
                             //alert("学生上课表(zstudent_schedule)没有该名学生的信息");
+                        } else if (text.code==30){
+                            layer.msg("不可以使用图片登录", { icon: 1, offset: "auto", time:2000 });
+                            //alert("学生上课表(zstudent_schedule)没有该名学生的信息");
                         }
                         else{
                             //alert("摄像头未开或其它错误")
                             layer.msg("摄像头未开或人脸识别失败", { icon: 1, offset: "auto", time:2000 });
                         }
+
                     }
 
                 },

@@ -360,7 +360,8 @@ var renliandata = new Array();
 function OpenOTimer(a) {
         filterjieshiLoop=1;
         var zcheck="";
-        if(a==2){
+        var cameraID = document.getElementById("cameraID").innerHTML;
+    if(a==2){
             zcheck="查岗";
             insertCheckPoint();
             $("#startID2").css('background-color','rgba(237,125,49)')

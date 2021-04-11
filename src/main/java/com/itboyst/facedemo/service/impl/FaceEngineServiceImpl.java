@@ -47,7 +47,7 @@ public class FaceEngineServiceImpl implements FaceEngineService {
     public Integer threadPoolSize;
 
 
-    private Integer passRate = 60;
+    private Integer passRate = 80;
 
     private ExecutorService executorService;
 
@@ -110,12 +110,12 @@ public class FaceEngineServiceImpl implements FaceEngineService {
         try {
             //获取引擎对象
             faceEngine = faceEngineObjectPool.borrowObject();
-
             //人脸检测得到人脸列表
             List<FaceInfo> faceInfoList = new ArrayList<FaceInfo>();
 
             //人脸检测
             faceEngine.detectFaces(imageInfo.getImageData(), imageInfo.getWidth(), imageInfo.getHeight(), imageInfo.getImageFormat(), faceInfoList);
+
             return faceInfoList;
         } catch (Exception e) {
             logger.error("", e);
@@ -128,6 +128,33 @@ public class FaceEngineServiceImpl implements FaceEngineService {
         return null;
     }
 
+    @Override
+    public void ceshi(ImageInfo imageInfoGray) {
+        FaceEngine faceEngine = null;
+        try {
+            //获取引擎对象
+            faceEngine = faceEngineObjectPool.borrowObject();
+            //人脸检测得到人脸列表
+            List<FaceInfo> faceInfoList = new ArrayList<FaceInfo>();
+            //人脸检测
+            faceEngine.detectFaces(imageInfoGray.getImageData(), imageInfoGray.getWidth(), imageInfoGray.getHeight(), imageInfoGray.getImageFormat(), faceInfoList);
+
+            int errorCode = faceEngine.processIr(imageInfoGray.getImageData(), imageInfoGray.getWidth(), imageInfoGray.getHeight(), imageInfoGray.getImageFormat(), faceInfoList, FunctionConfiguration.builder().supportIRLiveness(true).build());
+
+            List<IrLivenessInfo> irLivenessInfo = new ArrayList<>();
+            errorCode = faceEngine.getLivenessIr(irLivenessInfo);
+            System.out.println("IR活体：" + irLivenessInfo.get(0).getLiveness());
+
+        } catch (Exception e) {
+            logger.error("", e);
+        } finally {
+            if (faceEngine != null) {
+                //释放引擎对象
+                faceEngineObjectPool.returnObject(faceEngine);
+            }
+        }
+
+    }
 
     @Override
     public List<ProcessInfo> process(ImageInfo imageInfo) {
@@ -139,8 +166,9 @@ public class FaceEngineServiceImpl implements FaceEngineService {
             List<FaceInfo> faceInfoList = new ArrayList<FaceInfo>();
             //人脸检测
             faceEngine.detectFaces(imageInfo.getImageData(), imageInfo.getWidth(), imageInfo.getHeight(), imageInfo.getImageFormat(), faceInfoList);
-            int processResult = faceEngine.process(imageInfo.getImageData(), imageInfo.getWidth(), imageInfo.getHeight(), imageInfo.getImageFormat(), faceInfoList, FunctionConfiguration.builder().supportAge(true).supportGender(true).build());
-            List<ProcessInfo> processInfoList = Lists.newLinkedList();
+            int processResult = faceEngine.process(imageInfo.getImageData(), imageInfo.getWidth(), imageInfo.getHeight(), imageInfo.getImageFormat(), faceInfoList, FunctionConfiguration.builder().supportAge(true).supportGender(true).supportLiveness(true).build());
+
+             List<ProcessInfo> processInfoList = Lists.newLinkedList();
 
             List<GenderInfo> genderInfoList = new ArrayList<GenderInfo>();
             //性别提取
@@ -148,12 +176,19 @@ public class FaceEngineServiceImpl implements FaceEngineService {
             //年龄提取
             List<AgeInfo> ageInfoList = new ArrayList<AgeInfo>();
             int ageCode = faceEngine.getAge(ageInfoList);
+            //活体检测
+            List<LivenessInfo> livenessInfoList = new ArrayList<LivenessInfo>();
+            int errorCode = faceEngine.getLiveness(livenessInfoList);
+            System.err.println(livenessInfoList.get(0).getLiveness());
             for (int i = 0; i < genderInfoList.size(); i++) {
                 ProcessInfo processInfo = new ProcessInfo();
                 processInfo.setGender(genderInfoList.get(i).getGender());
                 processInfo.setAge(ageInfoList.get(i).getAge());
+                processInfo.setLiveness(livenessInfoList.get(i).getLiveness());
                 processInfoList.add(processInfo);
             }
+
+
             return processInfoList;
 
         } catch (Exception e) {
@@ -188,6 +223,15 @@ public class FaceEngineServiceImpl implements FaceEngineService {
 
             //人脸检测，这个方法返回检测到的合适的人脸数量，粗滤的检测
             int i = faceEngine.detectFaces(imageInfo.getImageData(), imageInfo.getWidth(), imageInfo.getHeight(), imageInfo.getImageFormat(), faceInfoList);
+            //添加活体检测
+            int errorCode = faceEngine.processIr(imageInfo.getImageData(), imageInfo.getWidth(), imageInfo.getHeight(), imageInfo.getImageFormat(), faceInfoList,FunctionConfiguration.builder().supportIRLiveness(true).build());
+            //IR活体检测2
+            List<IrLivenessInfo> irLivenessInfo = new ArrayList<>();
+            errorCode = faceEngine.getLivenessIr(irLivenessInfo);
+            //System.err.println("IR活体：" + irLivenessInfo.get(0).getLiveness());
+            for (int a= 0; a < irLivenessInfo.size(); a++) {
+                System.err.println(irLivenessInfo.get(a));
+            }
 
             if (CollectionUtil.isNotEmpty(faceInfoList)) {
                 FaceFeature faceFeature = new FaceFeature();
@@ -232,6 +276,8 @@ public class FaceEngineServiceImpl implements FaceEngineService {
 
         return resultFaceInfoList;
     }
+
+
 
     private static String bytes2HexString(byte[] b) {
         String ret = "";
@@ -292,4 +338,10 @@ public class FaceEngineServiceImpl implements FaceEngineService {
         }
 
     }
+
+
+
+
+
+
 }

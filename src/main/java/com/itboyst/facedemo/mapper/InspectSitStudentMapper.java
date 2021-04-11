@@ -19,4 +19,6 @@ public interface InspectSitStudentMapper {
     List<InspectSitStudent> inspectfindStudentByDateAndTrainingIdASC(String ztrainingroomID, Timestamp timestamp,String zcheck);
 
     List<InspectSitStudent>  inspectfindStudentByDateAndTrainingId(String ztrainingroomID, Timestamp timestamp,String zcheck);
+
+    List<InspectSitStudent>  signIninspectfindStudentByDateAndTrainingId(String ztrainingroomID, Timestamp timestamp,String zcheck,String zid);
 }

@@ -45,21 +45,32 @@
         <#--二级菜单-->
         <div id='twoMenu' class="layui-col-xs10" style="display: none; margin-top: 40px;width: 90%">
             <div>
-                <ul style="margin-top: 10%;width: 80%;left: 40%;margin: 37px auto">
-                    <li style="margin: 0 auto;margin-left: 10% "><button onclick="faceShow()" style="float:left;color:#FFFFFF;height: 100px;display:block;margin:0 auto;margin-top:0px;width:250px;background-color:#71B863;border-radius:32px;text-align: center;line-height: 50px;font-size: 35px">人脸识别</button></li>
-                    <li style=" margin: 0 auto;margin-right: 10%"><button onclick="studentStatus()" style="float:right;color:#FFFFFF;height: 100px;display:block;margin:0 auto;margin-top:0px;width:250px;background-color:#71B863;border-radius:32px;text-align: center;line-height: 50px;font-size: 35px">测试管理</button></li>
+                <ul >
+                    <li style="margin: 0 auto;margin-left: 10% "><button onclick="signIn()" style="float:left;color:#FFFFFF;height: 100px;display:block;margin:0 auto;margin-top:0px;width:250px;background-color:#71B863;border-radius:32px;text-align: center;line-height: 50px;font-size: 35px">签到</button></li>
+                    <li style="margin: 0 auto;margin-left: 10% "><button onclick="loginManagement()" style="float:left;color:#FFFFFF;height: 100px;display:block;margin:0 12%;margin-top:0px;width:250px;background-color:#71B863;border-radius:32px;text-align: center;line-height: 50px;font-size: 35px">登录管理</button></li>
+                    <li style="margin: 0 auto;margin-left: 10% "><button  style="float:left;color:#FFFFFF;height: 100px;display:block;margin:0 auto;margin-top:0px;width:250px;background-color:#71B863;border-radius:32px;text-align: center;line-height: 50px;font-size: 35px">试卷管理</button></li>
+                    <#--<li style=" margin: 0 auto;margin-right: 10%"><button onclick="studentStatus()" style="float:left;color:#FFFFFF;height: 100px;display:block;margin:0 auto;margin-top:0px;width:250px;background-color:#71B863;border-radius:32px;text-align: center;line-height: 50px;font-size: 35px">测试管理</button></li>-->
                 </ul>
             </div>
-            <div>
-                <ul style="margin: 16% auto;width: 80%">
-                    <li style="margin: 0 auto;margin-left: 10% "><button onclick="loginManagement()" style="float:left;color:#FFFFFF;height: 100px;display:block;margin:0 auto;margin-top:0px;width:250px;background-color:#71B863;border-radius:32px;text-align: center;line-height: 50px;font-size: 35px">登录管理</button></li>
-                    <li style="margin: 0 auto;margin-right: 10% "><button onclick="courseManagement()" style="float:right;color:#FFFFFF;height: 100px;display:block;margin:0 auto;margin-top:0px;width:250px;background-color:#71B863;border-radius:32px;text-align: center;line-height: 50px;font-size: 35px">任务管理</button></li>
+            <div style="margin-top: 10%">
+                <ul >
+                    <li style="margin: 0 auto;margin-left: 10% "><button onclick="measure()" style="float:left;color:#FFFFFF;height: 100px;display:block;margin:0 auto;margin-top:0px;width:250px;background-color:#71B863;border-radius:32px;text-align: center;line-height: 50px;font-size: 35px">测量</button></li>
+                    <li style="margin: 0 auto;margin-left: 10% "><button onclick="courseManagement()" style="float:left;color:#FFFFFF;height: 100px;display:block;margin:0 12%;margin-top:0px;width:250px;background-color:#71B863;border-radius:32px;text-align: center;line-height: 50px;font-size: 35px">上课安排</button></li>
+                    <li style="margin: 0 auto;margin-left: 10% "><button  style="float:left;color:#FFFFFF;height: 100px;display:block;margin:0 auto;margin-top:0px;width:250px;background-color:#71B863;border-radius:32px;text-align: center;line-height: 50px;font-size: 35px">任务发送</button></li>
                 </ul>
             </div>
-            <div>
-                <ul style="margin: 30% auto;width: 80% ">
-                    <li style="margin-left: 10%"><button id="checkPointColor" onclick="checkPoint()" style="float:left;color:#FFFFFF;height: 100px;display:block;margin:0 auto;margin-top:0px;width:250px;background-color:#71B863;border-radius:32px;text-align: center;line-height: 50px;font-size: 35px">查岗</button></li>
-                    <li style="margin-right: 10%"><button  id="courseRecordColor" onclick="courseRecord()" style="float:right;color:#FFFFFF;height: 100px;display:block;margin:0 auto;margin-top:0px;width:250px;background-color:#71B863;border-radius:32px;text-align: center;line-height: 50px;font-size: 35px">课堂记录</button></li>
+            <div style="margin-top: 20%">
+                <ul >
+                    <li style="margin: 0 auto;margin-left: 10% "><button onclick="faceShow()" style="float:left;color:#FFFFFF;height: 100px;display:block;margin:0 auto;margin-top:0px;width:250px;background-color:#71B863;border-radius:32px;text-align: center;line-height: 50px;font-size: 35px">出入口</button></li>
+                    <li style="margin-left: 10%"><button id="checkPointColor" onclick="checkPoint()" style="float:left;color:#FFFFFF;height: 100px;display:block;margin:0 12%;margin-top:0px;width:250px;background-color:#71B863;border-radius:32px;text-align: center;line-height: 50px;font-size: 35px">查岗</button></li>
+
+            </div>
+            <div style="margin-top: 30%">
+                <ul>
+                    <li style="margin-left: 10%"><button  id="courseRecordColor" onclick="courseRecord()" style="float:left;color:#FFFFFF;height: 100px;display:block;margin:0 auto;margin-top:0px;width:250px;background-color:#71B863;border-radius:32px;text-align: center;line-height: 50px;font-size: 35px">课堂记录</button></li>
+                    <li style="margin-left: 10%"><button   style="float:left;color:#FFFFFF;height: 100px;display:block;margin:0 12%;margin-top:0px;width:250px;background-color:#71B863;border-radius:32px;text-align: center;line-height: 50px;font-size: 35px">分组管理</button></li>
+                </ul>
+                </ul>
                 </ul>
             </div>
         </div>
@@ -80,7 +91,7 @@
         <div id="hiddenArea"style="position: absolute;height: 100%;width: 100%;filter: alpha(opacity=60);opacity: 0.6;display: none;z-index: 11">
         </div>
         <#--三级菜单-->
-        <div id='threeMenu' class="layui-col-xs10" style="display: none; margin-top: 40px;margin: 10px 20px;width: 85%">
+        <div id='threeMenu' class="layui-col-xs10" style="display: none; margin-top: 40px;margin: 10px 20px;width: 87.4%">
 
         </div>
         <#--查岗的下级功能表-->
@@ -114,22 +125,6 @@
                 </div>
                 <#--按照顺序排出识别的人脸，顺序是最早的在最下最右边-->
                 <div id="mainBody"style="width: 100%;height: 90%;overflow: auto">
-                    <#--<table>
-                        <tr>
-                            <th>
-                                <div style="background-color: #BDD7EE;width: 20%;border: 1px solid red;position: absolute;left: 1%">乔峰</div>
-                            </th>
-                            <th>
-                                <div style="background-color: #BDD7EE;width: 20%;border: 1px solid red;position: absolute;left: 26%">阿朱</div>
-                            </th>
-                            <th>
-                                <div style="background-color: #BDD7EE;width: 20%;border: 1px solid red;position: absolute;left: 51%">段玉</div>
-                            </th>
-                            <th>
-                                <div style="background-color: #BDD7EE;width: 20%;border: 1px solid red;position: absolute;left: 75%">虚竹</div>
-                            </th>
-                        </tr>
-                    </table>-->
                 </div>
             </div>
             <#--人脸识别时显示的开始和结束按钮-->
@@ -181,6 +176,8 @@
     </div>
 </div>
 
+<#--隐藏摄像头的ID-->
+<div style="display: none" id="cameraID"></div>
 <!--弹框-->
 <div hidden class="popup" id="popup" align="center">
     <br><br>
@@ -243,6 +240,9 @@
         document.getElementById("teach").style.display="none";
         document.getElementById("twoMenu").style.display="block";
     }
+    function signIn() {
+        location.href="/exam_field_management"
+    }
     //登录管理
     function loginManagement() {
         location.href="/loginManagement"
@@ -263,7 +263,8 @@
     }
     //数控车讨论区显示每台机的人脸识别情况
     function studentShow(e){
-
+       //$("#cameraID").val("改变成功")
+        document.getElementById("cameraID").innerHTML = e
        /* var b =$("#zcameraIP"+e).val();
         alert(b)*/
 
@@ -392,6 +393,11 @@
 
     function fieldManagement() {
         location.href="/field_management";
+    }
+
+
+    function measure() {
+        location.href="/teacher_measure";
     }
 
 

@@ -23,6 +23,19 @@
 
     </select>
 
+    <select id="signIninspectfindStudentByDateAndTrainingId" resultMap="inspectSitStudent" resultType="com.itboyst.facedemo.dto.InspectSitStudent">
+		SELECT * FROM (select MAX(h.zrecognizetime) zrecognizetime ,h.grade_name,h.zid,h.zname,h.ztrainingroomID,h.originalPictureUrl from
+                  (select m.zrecognizetime,m.zid,m.zname,m.grade_name,n.ztrainingroomID,m.originalPictureUrl from
+                              (select c.zrecognizetime,d.zid,d.zname,f.zname grade_name,c.originalPictureUrl,c.zscheduleID from zstudent_login c ,zstudent d,zgrade f
+                              where d.zgradeID=f.zid  and d.zid=c.zstudentID and (c.zcheck=#{zcheck} OR c.zcheck= '人脸识别') and f.zid = #{zid} and c.zrecognizetime BETWEEN #{timestamp} and NOW())m LEFT OUTER JOIN zschedule n
+                  on m.zscheduleID=n.zid)h
+            GROUP BY h.zid,h.ztrainingroomID) j
+      ORDER BY j.zrecognizetime DESC
+
+    </select>
+
+
+
     <select id="inspectfindStudentByDateAndTrainingId" resultMap="inspectSitStudent" resultType="com.itboyst.facedemo.dto.InspectSitStudent">
 		SELECT * FROM (select MAX(h.zrecognizetime) zrecognizetime ,h.grade_name,h.zid,h.zname,h.ztrainingroomID,h.originalPictureUrl from
                   (select m.zrecognizetime,m.zid,m.zname,m.grade_name,n.ztrainingroomID,m.originalPictureUrl from
@@ -35,7 +48,6 @@
 
 
     </select>
-
 
     <select id="findStudentByDateAndTrainingIdASC" resultMap="inspectSitStudent" resultType="com.itboyst.facedemo.dto.InspectSitStudent">
         select m.zrecognizetime,m.zid,m.zname,m.grade_name,n.ztrainingroomID,m.originalPictureUrl from
