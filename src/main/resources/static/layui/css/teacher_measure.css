@@ -1,0 +1,86 @@
+.m_centerfont{
+    left: 40%;
+    top: 2%;
+    position: fixed;
+}
+
+.m_titleselect{
+    top: 7%;
+    position: fixed;
+    height: 10%;
+    width: 100%;
+
+}
+
+.m_classfont{
+    position: absolute;
+    width: 5%;
+    left: 2%;
+    top: 5%;
+}
+
+.m_classselect{
+    position: absolute;
+    left: 8%;
+    width: 10%;
+    height: 30%;
+    top: 5%;
+}
+
+.m_taskfont{
+    left: 23%;
+    position: absolute;
+    width: 8%;
+    top: 5%;
+}
+
+.m_taskselect{
+    left: 30%;
+    position: absolute;
+    width: 10%;
+    height: 30%;
+    top: 5%;
+}
+
+.m_submitbutton{
+    left: 70%;
+    width: 8%;
+    position: absolute;
+    top: 3%;
+    height: 50%;
+}
+.m_savebutton{
+    left: 80%;
+    width: 8%;
+    position: absolute;
+    top: 3%;
+    height: 50%;
+}
+
+.m_tablemes{
+    top: 18%;
+    position: absolute;
+    width: 90%;
+    right: 10%;
+}
+
+.m_table2{
+    border: 1px solid black;
+    position: fixed;
+    left: 13.5%;
+    top: 15.3%;
+}
+
+.meausre_input{
+    width: 50px;
+    height: 10px;
+}
+
+.m_table{
+    border: 1px solid black;
+    position: fixed;
+    left: 2%;
+    top: 18%;
+}
+.m_table tr th{border-left:1px solid black;border-top:1px solid black}
+.m_table2 tr th{border-left:1px solid black;border-top:1px solid black}
