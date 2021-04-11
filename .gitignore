@@ -1,0 +1,20 @@
+# Created by .ignore support plugin (hsz.mobi)
+src/main/webapp/
+target/*
+lib/*
+src/main/resources/application.*
+.idea/*
+target/classes/com/itboyst/facedemo/controller/ZmeasureController.class
+target/classes/com/itboyst/facedemo/dto/Zteacher_measure.class
+target/classes/com/itboyst/facedemo/mapper/Zteacher_measureMapper.class
+target/classes/com/itboyst/facedemo/service/Zteacher_measureService.class
+target/classes/com/itboyst/facedemo/service/impl/Zteacher_measureServiceImpl.class
+target/classes/mybatis/mapper/Zteacher_measureMapper.xml
+target/classes/static/images/jineng.jpg
+target/classes/static/images1/
+target/classes/static/layui/css/exam_field_management.css
+target/classes/static/layui/css/teacher_measure.css
+target/classes/static/layui/js/exam_field_management.js
+target/classes/templates/exam_field_management.ftl
+target/classes/templates/teacher_measure.ftl
+target/generated-sources/
