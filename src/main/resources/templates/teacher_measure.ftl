@@ -140,6 +140,7 @@
         loadallgrad();
         loadalltask();
 
+        getmeasurebygt2()
     }
     function loadteachername(){
         $.ajax({
@@ -202,7 +203,7 @@
     }
     var max=0;
 
-    function getmeasurebygt(m_classselect,m_taskselect){
+    function getmeasurebygt(){
         var m_classselect=$("#m_classselect").val();
         var m_taskselect=$("#m_taskselect").val();
 

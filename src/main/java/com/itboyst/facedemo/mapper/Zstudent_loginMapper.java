@@ -39,4 +39,8 @@ public interface Zstudent_loginMapper {
     int updatetatbyip2(Zstudent_login zstudent_login);
 
     public Zstudent_login findnowinbystuid(String zstudentID);
+
+    int updateloginbyzid(String zid);
+
+    Zstudent_login findloginbyss(String zstudentID,String zscheduleID);
 }

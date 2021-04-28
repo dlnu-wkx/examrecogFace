@@ -13,4 +13,6 @@ public interface Ztraining_taskMapper {
     public List<Ztraining_task> findtasknamelike(String zname);
 
     public List<Ztraining_task> findalltask();
+
+    public Ztraining_task findtaskbyid(String zid);
 }

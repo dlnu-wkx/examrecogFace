@@ -166,7 +166,10 @@
                             alert("设备表（ztraining_facility）中没有这台设备的所处的实训室(ztrainingroomID)");
                         } else if (text.code == 23) {
                             alert("学生上课表(zstudent_schedule)没有该名学生的信息");
-                        } else {
+                        }else if (text.code==31){
+                            alert("不能重复登陆,请退出当前登陆的机器");
+                        }
+                        else {
                             alert(text.code)
                         }
 

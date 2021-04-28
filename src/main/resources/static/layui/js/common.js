@@ -18,8 +18,6 @@ function upheads() {
 }
 
 
-
-
 function loadisevent(){
     //alert(111)
     $.ajax({
@@ -68,7 +66,7 @@ function findfiveport(){
 
 //学生退出系统
 function leaveclass() {
-    //alert(11)
+   // alert(11)
     //结算测试题和实训任务
     $.ajax({
         type: "post",
@@ -135,6 +133,17 @@ function leaveclass() {
     $.ajax({
         type:"post",
         url:"/updatealleventbystu",
+        data:{},
+        async: false,
+        success:function(data){
+
+        }
+    })
+
+    //更改学生登陆的状态
+    $.ajax({
+        type:"post",
+        url:"/updatestatusbout",
         data:{},
         async: false,
         success:function(data){
@@ -360,8 +369,7 @@ var renliandata = new Array();
 function OpenOTimer(a) {
         filterjieshiLoop=1;
         var zcheck="";
-        var cameraID = document.getElementById("cameraID").innerHTML;
-    if(a==2){
+        if(a==2){
             zcheck="查岗";
             insertCheckPoint();
             $("#startID2").css('background-color','rgba(237,125,49)')

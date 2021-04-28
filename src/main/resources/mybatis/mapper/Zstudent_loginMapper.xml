@@ -42,6 +42,10 @@
     </select>
 
 
+    <select id="findloginbyss"  resultType="com.itboyst.facedemo.dto.Zstudent_login">
+            SELECT * FROM zstudent_login where zstudentID=#{zstudentID} and zscheduleID=#{zscheduleID} and zcheck='登陆' and zstatus='正常' order by zrecognizetime desc  LIMIT 1;
+    </select>
+
 
     <!--<insert id="insertnowmessage" parameterType="com.itboyst.facedemo.dto.Zstudent_login" >
         INSERT INTO zstudent_login (zid,zstudentID,zrecognizetime,zcheck, ztype, zrecognizeIP) VALUES(#{zid}, #{zstudentID},#{zrecongnizetime},#{zcheck}, #{ztype}, #{zrecognizeIP});
@@ -51,6 +55,9 @@
       UPDATE zstudent_login SET zstatus=#{zstatus} WHERE ztype='机床' AND zstatus='正常' AND zrecognizeIP IN (SELECT zstudentPCIP FROM ztraining_facility WHERE ztrainingroomID=#{ztrainingroomID});
     </update>
 
+    <update id="updateloginbyzid" parameterType="com.itboyst.facedemo.dto.Zstudent_login" >
+      UPDATE zstudent_login SET zstatus='退出' WHERE zid=#{zid}
+    </update>
 
     <update id="updatetanbyipasch" parameterType="com.itboyst.facedemo.dto.Zstudent_login" >
         UPDATE zstudent_login SET zstatus=#{zstatus} WHERE zrecognizeIP=#{zrecognizeIP} anad zscheduleID=#{zscheduleID}

@@ -45,13 +45,6 @@
             <!--摄像头的位置-->
           <div id="regcoDiv"></div>
 
-          <#--  <div style=";margin:0 auto;margin-top:0px;height: 100px"><h2>点击图片区域上传文件</h2><input style='display: none' type='file' name='file1' id='file1' multiple='multiple' /><br><img onclick='chooseFile()' src='images/shibie.jpg'style='width: 15rem;height: 16rem;'></div>
-            <div style="margin: 0,auto;margin-top:220px;height: 80px;text-align:center;line-height:80px;font-size:20px;color:#0C0C0C"> </div>-->
-         <#--   <div>
-                <button style="color:#FFFFFF;height: 75px;display:block;margin:0 auto;margin-top:0px;width:211px;background-color:#71B863;border-radius:32px;text-align: center;line-height: 50px;font-size: 32px">
-                    开始测试
-                </button>
-            </div>-->
         </div>
         <div class="layui-col-xs1" align="right" style="height:700px;left: 75px;border-left: 0px solid #c2c2c2;">
             <div>
@@ -298,6 +291,8 @@
                                 alert("设备表（ztraining_facility）中没有这台设备的所处的实训室(ztrainingroomID)");
                             }else if (text.code==23){
                                 alert("学生上课表(zstudent_schedule)没有该名学生的信息");
+                            }else if (text.code==31){
+                                alert("不能重复登陆,请退出当前登陆的机器");
                             }
                             else{
                                 alert("摄像头未开或其它错误")

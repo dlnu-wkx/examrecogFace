@@ -21,4 +21,6 @@ public interface Zsafe_testingMapper {
     public List<String> findallsafetype();
 
     public int findnumberbytype(String ztype);
+
+    public List<Zsafe_testingDto> findalltestbytype(String ztype);
 }

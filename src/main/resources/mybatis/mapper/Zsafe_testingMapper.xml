@@ -32,6 +32,10 @@
         SELECT count(*) FROM zsafe_testing  where ztype=#{ztype};
     </select>
 
+    <select id="findalltestbytype"  resultType="com.itboyst.facedemo.dto.Zsafe_testingDto">
+        SELECT * FROM zsafe_testing  where ztype=#{ztype} order by ztitletype;
+    </select>
+
 
     <!--
         <insert id="insertUserFaceInfo" parameterType="com.itboyst.facedemo.domain.UserFaceInfo" >

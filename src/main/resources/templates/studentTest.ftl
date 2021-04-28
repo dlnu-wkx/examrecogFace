@@ -11,7 +11,7 @@
     <script src="./jquery/jquery.cookie.js"></script>
     <script src="./layui/layui.js"></script>
 </head>
-<body  class="body" >
+<body  class="body" onunload="goodbye()" >
 
 <!--警示消息-->
 <div>
@@ -101,6 +101,96 @@
 </body>
 
 <script>
+    //window
+    window.onbeforeunload=function(e){
+        if(event.clientX>document.body.clientWidth && event.clientY < 0 || event.altKey)
+            a()
+    }
+
+    function a(){
+        $.ajax({
+            type: "post",
+            url: "/findsessionprogress",
+            data:{},
+          //  async: false,
+            success: function (data){
+                submit2()
+            }
+        });
+
+        $.ajax({
+            type: "post",
+            url: "/deletemes",
+            data:{},
+            //    async: false,
+            success: function (data){
+
+            }
+        });
+
+        //将继电器6号端口断开
+        $.ajax({
+            type: "post",
+            url: "/usixout",
+            data:{},
+            //    async: false,
+            success: function (data){
+
+            }
+        });
+
+        //设备状态的更改
+        $.ajax({
+            type: "post",
+            url: "/updateprogress",
+            data:{},
+            //    async: false,
+            success: function (data){
+
+            }
+        });
+
+        //学生退出时改变实训设备的zprogress
+        $.ajax({
+            type:"post",
+            url:"/exitsystem",
+            data:{},
+            //    async: false,
+            success:function(data){
+
+            }
+        })
+
+        //清除当堂课请假与举手状态
+        $.ajax({
+            type:"post",
+            url:"/updatealleventbystu",
+            data:{},
+            //    async: false,
+            success:function(data){
+
+            }
+        })
+
+        //更改学生登陆的状态
+        $.ajax({
+            type:"post",
+            url:"/updatestatusbout",
+            data:{},
+         //   async: false,
+            success:function(data){
+
+            }
+        })
+
+    }
+
+
+
+   /* window.onunload = function() {
+        alert('ddd');
+        leaveclass()
+    }*/
 
     function clicksubmit1(){
         $("#t_centerindex").hide()
@@ -113,7 +203,6 @@
         var str=" <font size='5'>"+i+"/"+static_questionnum+"</font>"
         var pagesnumber=$("#pagesnumber")
         pagesnumber.html(str)
-
     }
 
 
@@ -450,8 +539,9 @@
         qbank.html(str3);
         //提交按键隐藏（防止分数多次叠加）
         $("#nextpage").hide();
-
-        $.ajax({
+        $("#lastpage").hide();
+        //安全测试题可以不计分数，而计次数
+      /*  $.ajax({
             type: "post",
             url: "/insertscore",
             data: {"zscore":code},
@@ -459,7 +549,7 @@
             success: function (data) {
                 //alert(data)
             }
-        });
+        });*/
 
      //  更改输入
       $.ajax({

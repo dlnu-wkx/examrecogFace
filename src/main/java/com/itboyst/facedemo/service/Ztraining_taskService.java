@@ -10,4 +10,6 @@ public interface Ztraining_taskService {
     public List<Ztraining_task> findtasklike(String zname);
 
     public List<Ztraining_task> findalltaskbyzcourseID(String zcourseID);
+
+    public Ztraining_task findtaskbyid(String zid);
 }

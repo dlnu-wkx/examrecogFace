@@ -180,6 +180,14 @@ public class Zfixed_taskController {
     }
 
 
+    @RequestMapping("/findtaskbyid")
+    @ResponseBody
+    public Ztraining_task findtaskbyid(String zid){
+
+        return ztraining_taskService.findtaskbyid(zid);
+    }
+
+
     @RequestMapping("/findtasklikename")
     @ResponseBody
     public List<Ztraining_task> findtasklikename(String zname){
@@ -264,6 +272,32 @@ public class Zfixed_taskController {
 
         ztask_inputService.updatetasktcheckbyid(zid,zteachercheck);
 
+    }
+
+
+
+    @RequestMapping("/inserttaskoneinput")
+    @ResponseBody
+    public int inserttaskoneinput(String zassign_scheduleid,String  zselfcheck,String  ztrainingtaskassessID){
+       // System.out.println(zselfcheck);
+        //System.out.println("ztrainingtaskassessID:  "+ztrainingtaskassessID+"        zassign_scheduleid: "+zassign_scheduleid);
+        int i=0;
+        Ztask_input ztask_input=new Ztask_input();
+        ztask_input.setZselfcheck(zselfcheck);
+        ztask_input.setZtrainingtaskassessID(ztrainingtaskassessID);
+        ztask_input.setZassignscheduleID(zassign_scheduleid);
+
+        int w=ztask_inputService.findistaskinput(ztask_input);
+        //System.out.println(w);
+        if(w==0){
+            String zid = UUID.randomUUID().toString().replaceAll("-","");
+            ztask_input.setZid(zid);
+            i=ztask_inputService.isnerttaskinput(ztask_input);
+        }
+        else {
+            i=ztask_inputService.updatetaskselfcheck(ztask_input);
+        }
+        return i;
     }
 
 

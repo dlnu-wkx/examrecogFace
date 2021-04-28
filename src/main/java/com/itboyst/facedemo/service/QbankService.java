@@ -19,4 +19,5 @@ public interface QbankService {
 
     public int findnumberbytype(String ztype);
 
+    public List<Zsafe_testingDto> findalltestbytype(String ztype);
 }

@@ -111,6 +111,70 @@ public class QbankController {
     }
 
 
+    @RequestMapping("/findthetest")
+    @ResponseBody
+    public int findthetest(){
+
+        return Qservice.findnumberbytype("理论测试");
+    }
+
+    @RequestMapping("/getsessionthid")
+    @ResponseBody
+    public List<String> getsessionthid(HttpSession session){
+        List<String> data=(List<String>) session.getAttribute("thid");
+        return data;
+    }
+
+
+    @RequestMapping("/findtheanws")
+    @ResponseBody
+    public List<String> findtheanws(HttpSession session){
+        List<String> data=(List<String>) session.getAttribute("answer2");
+        return data;
+    }
+
+
+
+    @RequestMapping("/findalltestbytype")
+    @ResponseBody
+    public List<Zsafe_testingDto> findalltestbytype(HttpSession session){
+
+        List<Zsafe_testingDto> data2=Qservice.findalltestbytype("理论测试");
+
+        Zstudent_cookie zstudent_cookie=(Zstudent_cookie) session.getAttribute("zstudent_cookie");
+
+        List<Ztesting_input>data=new ArrayList<>();
+
+        List<String> answer2 = new ArrayList<>();
+
+        List<String> thid=new ArrayList<>();
+
+        for(int i=0;i<data2.size();i++){
+
+            Ztesting_input ztesting_input=new Ztesting_input();
+            ztesting_input.setZstudentscheduleID(zstudent_cookie.getZstudent_scheduleid());
+            String zid = UUID.randomUUID().toString().replaceAll("-","");
+            thid.add(zid);
+            ztesting_input.setZid(zid);
+            ztesting_input.setZsafetestingID(data2.get(i).getZid());
+            ztesting_input.setZstate("未做");
+            ztesting_input.setZorder(i+1);
+            data.add(ztesting_input);
+            answer2.add(i,data2.get(i).getZresult());
+        }
+
+        int i=ztesting_inputService.addtestinput(data);
+        session.setAttribute("answer2",answer2);
+        session.setAttribute("thid",thid);
+
+        return data2;
+    }
+
+
+
+
+
+
     /*
     根据上课表id更新是否需要考试及考试分数
      */
@@ -365,6 +429,10 @@ public class QbankController {
 
     @RequestMapping(value = "/face_search")
     public String face_search(){return "face_search";}
+
+
+    @RequestMapping(value = "/sodeom")
+    public String sodeom(){return "sodeom";}
 
 
     @RequestMapping(value = "/student_LoginTest")

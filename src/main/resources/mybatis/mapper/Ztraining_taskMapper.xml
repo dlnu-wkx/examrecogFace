@@ -14,6 +14,10 @@
         select * from ztraining_task
     </select>
 
+    <select id="findtaskbyid"  resultType="com.itboyst.facedemo.dto.Ztraining_task">
+        select * from ztraining_task where zid=#{zid}
+    </select>
+
     <select id="findtasknamelike"  resultType="com.itboyst.facedemo.dto.Ztraining_task">
         select * from ztraining_task where zname like "%"#{zname}"%"
     </select>
@@ -21,5 +25,7 @@
     <select id="findalltaskbyzcourseID"  resultType="com.itboyst.facedemo.dto.Ztraining_task">
         select * from ztraining_task where zcourseID=#{zcourseID}
     </select>
+
+
 
 </mapper>

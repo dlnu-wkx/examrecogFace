@@ -20,4 +20,7 @@ public class Zteacher_loginServiceImpl implements Zteacher_loginService {
         int j =zteacher_loginMapper.insertteacher(zteacher_login);
         return j;
     }
+
+
+
 }

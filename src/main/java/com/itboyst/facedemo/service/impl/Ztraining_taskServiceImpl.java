@@ -6,6 +6,7 @@ import com.itboyst.facedemo.service.Ztraining_taskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.websocket.OnOpen;
 import java.util.List;
 
 @Service
@@ -26,4 +27,7 @@ public class Ztraining_taskServiceImpl implements Ztraining_taskService {
 
     @Override
     public List<Ztraining_task> findtasklike(String zname){return ztraining_taskMapper.findtasknamelike(zname);}
+
+    @Override
+    public Ztraining_task findtaskbyid(String zid){return ztraining_taskMapper.findtaskbyid(zid);};
 }

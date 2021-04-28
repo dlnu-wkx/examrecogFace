@@ -38,6 +38,9 @@ public enum ErrorCodeEnum {
     SESSION_NOT_ACTIVE(29,"session失活"),
     NOT_CAN_PITURE_LOGIN(30,"不可以使用图片登录"),
 
+    Double_Login(31,"不能重复登陆,请退出当前登陆的机器"),
+
+
     INVALID_APP_ID(28673, "无效的AppId"),
     INVALID_SDK_ID(28674, "无效的SdkKey"),
     INVALID_ID_PAIR(28675, "AppId和SdkKey不匹配"),

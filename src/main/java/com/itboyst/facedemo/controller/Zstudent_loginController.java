@@ -1,6 +1,7 @@
 package com.itboyst.facedemo.controller;
 
 
+import com.itboyst.facedemo.dto.Zstudent;
 import com.itboyst.facedemo.dto.Zstudent_login;
 import com.itboyst.facedemo.dto.Zteacher_cookie;
 import com.itboyst.facedemo.service.Zstudent_loginService;
@@ -17,5 +18,13 @@ import java.util.List;
 
 @Controller
 public class Zstudent_loginController {
+    @Autowired
+    Zstudent_loginService zstudent_loginService;
 
+    @RequestMapping("/updatestatusbout")
+    @ResponseBody
+    public int updatestatusbout(HttpSession session){
+        Zstudent_login zstudent_login=(Zstudent_login)session.getAttribute("zstudent_login");
+        return zstudent_loginService.updateloginbyzid(zstudent_login.getZid());
+    }
 }

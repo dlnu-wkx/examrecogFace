@@ -78,4 +78,8 @@ public class Zstudent_loginServiceImpl implements Zstudent_loginService {
     public int updatetatbyip2(Zstudent_login zstudent_login){return zstulogma.updatetatbyip2(zstudent_login);};
 
     public Zstudent_login findnowinbystuid(String zstudentID){return zstulogma.findnowinbystuid(zstudentID);}
+
+    public int updateloginbyzid(String zid){return zstulogma.updateloginbyzid(zid);}
+
+    public Zstudent_login findloginbyss(String zstudentID,String zscheduleID){return zstulogma.findloginbyss(zstudentID, zscheduleID);};
 }

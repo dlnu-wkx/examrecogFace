@@ -65,7 +65,7 @@
 }
 
 .m_table2{
-    border: 1px solid black;
+    border: 1px solid wheat;
     position: fixed;
     left: 13.5%;
     top: 15.3%;
@@ -77,10 +77,16 @@
 }
 
 .m_table{
-    border: 1px solid black;
+    border: 1px solid wheat;
     position: fixed;
     left: 2%;
     top: 18%;
 }
-.m_table tr th{border-left:1px solid black;border-top:1px solid black}
-.m_table2 tr th{border-left:1px solid black;border-top:1px solid black}
+.m_table tr th{
+    border-left: 1px solid wheat;
+    border-top: 1px solid wheat;
+    color: wheat;}
+.m_table2 tr th{
+    border-left: 1px solid wheat;
+    border-top: 1px solid wheat;
+    color: wheat;}

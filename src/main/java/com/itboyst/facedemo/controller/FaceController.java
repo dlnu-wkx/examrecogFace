@@ -453,6 +453,7 @@ public class FaceController {
 
         System.out.println(ip + "," + ztype + "," + groupId);
 
+
         if (groupId == null) {
             return Results.newFailedResult("groupId is null");
         }
@@ -514,7 +515,7 @@ public class FaceController {
                 faceSearchResDto.setGender(processInfoList.get(0).getGender().equals(1) ? "女" : "男");
 
             }
-            session.setMaxInactiveInterval(60*60*24*30);
+            //session.setMaxInactiveInterval(60*60*24*30);
 
             //System.out.println(faceUserInfo.getPath());
             //student表信息更改
@@ -525,7 +526,6 @@ public class FaceController {
             if (faceUserInfo.getPath() == null)
                 return Results.newFailedResult(ErrorCodeEnum.NO_FACE_PATH);
 
-            session.setAttribute("faceUserInfo", faceUserInfo);
 
             int faceid = faceengine.selectidbyname(faceUserInfo.getPath());
 
@@ -563,7 +563,6 @@ public class FaceController {
 
 
             //学生信息存session
-            session.setAttribute("zstudent", zstudent);
 
             zsl.setZstudentID(zstudent.getZid());
             Timestamp timestamp = new Timestamp(System.currentTimeMillis());
@@ -572,26 +571,24 @@ public class FaceController {
             //首次电脑界面登陆设置类型为机床
             zsl.setZtype("机床");
 
-            session.setAttribute("zprogress","登陆");
-
             InetAddress addr = InetAddress.getLocalHost();
 
             String ip4 = Iputil.getClientIpAddress(request);
-            int b = ztrinfser.updatezprogressbyip(ip4, "登陆");
+
 
             //清除学生登陆表
             Zstudent_login zstudent_login2=new Zstudent_login();
             zstudent_login2.setZnowtaskname("");
             zstudent_login2.setZtesttime(0);
             zstudent_login2.setZrecognizeIP(ip4);
-            int c=zstudent_loginService.updatetatbyip2(zstudent_login2);
+
 
 
             //清除学生事务表
             Zstudent_event zstudent_event=new Zstudent_event();
             zstudent_event.setZstatus("取消");
             zstudent_event.setZrecognizeIP(ip4);
-            int d=zstudent_eventService.updatebeforebyip(zstudent_event);
+
 
 
             zsl.setZcheck("登陆");
@@ -623,14 +620,11 @@ public class FaceController {
             });
 
 
-
-            session.setAttribute("ztraining_facility", ztrfac);
-
             if (ztrfac.getZtrainingroomID().isEmpty())
                 return Results.newFailedResult(ErrorCodeEnum.NO_FACILITY_TRAINROOMID);
             //实训室
             ztraining_room ztr = ztraining_roomService.findbyip(ztrfac.getZtrainingroomID());
-            session.setAttribute("ztraining_room", ztr);
+
 
             //System.out.println(ztr);
 
@@ -650,26 +644,9 @@ public class FaceController {
             }
 
             zsl.setZstatus("正常");
-            //zsc为空说明该学生该时间段内没有课程并且不是临时学生
-          /*  if (CollectionUtil.isEmpty(zsclist) && !zstudent.getZidentity().contains("L")) {
-                String lpictureurl = zstudent.getZphoto();
-                //把之前所有的临时申请干掉然后插入一条最新的
-                int g = ztempuserService.updatestatustostudent(lpictureurl);
-                //该学生已经注册但是该学生现在这个时间还没有课程所以添加到临时人员表中
-                Ztempuser ztempuser = new Ztempuser();
-                String uuid1 = UUID.randomUUID().toString().replaceAll("-", "");
-                ztempuser.setZid(uuid1);
-                ztempuser.setZlogintime(timestamp);
-                ztempuser.setZtype("学生");
-                ztempuser.setOriginalPictureUrl(zstudent.getZphoto());
-                ztempuser.setZrecognizeIP(ip4);
-                ztempuser.setZstatus("申请中");
-                int a = ztempuserService.insertoneztempuser(ztempuser);
-                //当为临时人员时没有课也能进入
-                return Results.newFailedResult(ErrorCodeEnum.NO_STUDENTSCHDULE_MESSAGE);
-            }*/
 
-                zsl.setZscheduleID(zsclist.get(0).getZscheduleID());
+
+            zsl.setZscheduleID(zsclist.get(0).getZscheduleID());
             //临时学生要查看是否是第二次登录如果是就删除临时信息并且不让登录
 
             if (zstudent.getZidentity().contains("L")) {//临时学生进入
@@ -682,19 +659,8 @@ public class FaceController {
                 }
 
             }
-            session.setAttribute("zstudent_cookie", zsclist.get(0));
-            // System.out.println(session.getAttribute("zstudent_cookie"));
-            //插入学生登陆信息
-            int i = zstudent_loginService.insertnowmessage(zsl);
-           // zsl.setZrecongnizetime(timestamp);
-            session.setAttribute("zstudent_login",zsl);
-
-            /*Cookie zselecttest = new Cookie("zselecttest",zsc.getZselecttest());//设置路径在cookie中的值
-
-            zselecttest.setMaxAge(86400);
-            //存cookie
-            response.addCookie(zselecttest);*/
-
+            Zstudent_login zstudent_login3=zstudent_loginService.findloginbyss(zstudent.getZid(),zsl.getZscheduleID());
+            if(zstudent_login3!=null)return Results.newFailedResult(ErrorCodeEnum.Double_Login);
 
             //插入日志信息
             Zstudent_journal zstudentJournal = new Zstudent_journal();
@@ -704,9 +670,23 @@ public class FaceController {
             String uuid3 = UUID.randomUUID().toString().replaceAll("-", "");
             zstudentJournal.setZid(uuid3);
 
+
+            //登陆后要存的session
+            session.setAttribute("zstudent_login",zsl);
+            session.setAttribute("zstudent_cookie", zsclist.get(0));
+            session.setAttribute("ztraining_room", ztr);
+            session.setAttribute("ztraining_facility", ztrfac);
+            session.setAttribute("zprogress","登陆");
+            session.setAttribute("zstudent", zstudent);
+            session.setAttribute("faceUserInfo", faceUserInfo);
+
+            //登陆后要做的信息操作
             t.start();
             int j = zstudentJournalService.insertstujournal(zstudentJournal);
-
+            int b = ztrinfser.updatezprogressbyip(ip4, "登陆");
+            int i = zstudent_loginService.insertnowmessage(zsl);
+            int d=zstudent_eventService.updatebeforebyip(zstudent_event);
+            int c=zstudent_loginService.updatetatbyip2(zstudent_login2);
 
             if (zstudent != null && i != 0) {
                 //将验证信息保存到Cookie
@@ -738,6 +718,8 @@ public class FaceController {
 
             }
         }
+
+
         //向临时表中添加一条记录临时学生数据
         String path = "D:\\SchoolTrainFiles\\FacePic\\ztempuser\\student\\" + System.currentTimeMillis() + ".jpg";
         GenerateImage(file, path);
