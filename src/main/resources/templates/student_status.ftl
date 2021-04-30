@@ -67,13 +67,13 @@
 <!--下方按键及内容-->
 <div class="p_text" align="center" onclick="removebig()">
 
-    <font class="P_fachoose" size="5">机床选择</font>
-        <button class="singlechoose" onclick="openchose()" id="openchose">点选</button>
-        <button class="allchoose" onclick="allchose()" id="allchose">全选</button>
-    <font class="p_testopen" size="5">测试开关</font>
+    <font class="P_fachoose" size="5">机床选择:</font>
+        <button class="singlechoose" onclick="openchose()" id="openchose">点选:</button>
+        <button class="allchoose" onclick="allchose()" id="allchose">全选:</button>
+    <font class="p_testopen" size="5">测试开关:</font>
     <input type="checkbox" id="p_testisopen" class="p_testisopen" name="p_isconnectopen" onchange="istestchange()">
 
-    <font class="p_isconnect" size="5">测试与电源联动</font>
+    <font class="p_isconnect" size="5">测试与电源联动:</font>
     <input type="checkbox" id="p_isconnectopen" class="p_isconnectopen" hidden>
 
     <div class="p_trainroomchose" id="p_trainroomchose">
@@ -87,7 +87,7 @@
     </div>
 
 
-    <font class="p_tetestnum" size="5">题目数量</font>
+    <font class="p_tetestnum" size="5">题目数量:</font>
 
     <select class="p_stestnmchose" id="p_testnum">
         <option value="5">5</option>
@@ -98,7 +98,7 @@
         <option value="9999">全部</option>
     </select>
 
-    <font class="p_tefpass" size="5">合格分数</font>
+    <font class="p_tefpass" size="5">合格分数:</font>
 
     <input type="tel" id="p_passcode" class="p_tepasschose" value="0">
 
@@ -621,7 +621,7 @@
 
       interval= window.setInterval(function () {
             loadfaclity(static_trainroomid);
-        }, 10000);
+        }, 20000);
     }
 
 

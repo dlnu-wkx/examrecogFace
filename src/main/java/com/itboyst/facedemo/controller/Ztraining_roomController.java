@@ -244,7 +244,7 @@ public class Ztraining_roomController {
     @RequestMapping("/usixout")
     @ResponseBody
     public void usixout(HttpSession session){
-
+            //System.out.println(555555555);
             Ztraining_facility ztraining_facility=(Ztraining_facility)session.getAttribute("ztraining_facility");
 
             String IP=ztraining_facility.getZpowerIP();
@@ -311,7 +311,7 @@ public class Ztraining_roomController {
     @RequestMapping("/findsessionprogress")
     @ResponseBody
     public String findsessionprogress(HttpSession session){
-        System.out.println(session.getAttribute("zprogress"));
+       // System.out.println(session.getAttribute("zprogress"));
        return (String) session.getAttribute("zprogress");
     }
 

@@ -103,7 +103,7 @@
 <script>
     //window
     window.onbeforeunload=function(e){
-        if(event.clientX>document.body.clientWidth && event.clientY < 0 || event.altKey)
+      // if(event.clientX>document.body.clientWidth && event.clientY < 0 || event.altKey)
             a()
     }
 
