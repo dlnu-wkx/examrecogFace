@@ -135,11 +135,11 @@ public class QbankController {
 
 
 
-    @RequestMapping("/findalltestbytype")
+    @RequestMapping("/findalltestbytypename")
     @ResponseBody
-    public List<Zsafe_testingDto> findalltestbytype(HttpSession session){
+    public List<Zsafe_testingDto> findalltestbytype(HttpSession session,String name){
 
-        List<Zsafe_testingDto> data2=Qservice.findalltestbytype("理论测试");
+        List<Zsafe_testingDto> data2=Qservice.findalltestbytype(name);
 
         Zstudent_cookie zstudent_cookie=(Zstudent_cookie) session.getAttribute("zstudent_cookie");
 

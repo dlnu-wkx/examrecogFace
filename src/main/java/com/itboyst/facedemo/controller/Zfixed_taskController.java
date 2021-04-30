@@ -95,8 +95,6 @@ public class Zfixed_taskController {
 
         Zstudent_cookie zstudent_cookie =(Zstudent_cookie)session.getAttribute("zstudent_cookie");
 
-      //  System.out.println(zfixed_taskService.findallfixedtask());
-        //**这个地方有null情况需要处理
 
         return zfixed_taskService.findallfixedtask(zstudent_cookie.getZstudent_scheduleid());
 

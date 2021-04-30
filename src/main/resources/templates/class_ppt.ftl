@@ -30,6 +30,7 @@
 </div>
 
 
+
 <!--分屏-->
 <div class="com_screen" id="com_screen" hidden>
     <div class="com_screen21" id="com_screen21"></div>
@@ -105,6 +106,8 @@
 
     <!--翻页-->
     <div class="pages" hidden id="pages">
+        <!--任务页码-->
+        <div class="cp_number" id="cp_number"></div>
         <button class="button3" id="lastpage" onclick="lastpage()">上一页</button>
         <button class="sbutton" id="submit" onclick="submit()">提交</button>
         <button class="button4" id="nextpage" onclick="nextpage()">下一页</button>
@@ -406,11 +409,10 @@
         var pagesnumber=$("#pagesnumber")
         pagesnumber.html(str)
     }
-
+    var t_tasktype;
 
     //加载页面前页码及按键逻辑处理（名称,任务表id,任务类型，固定任务Id）
     function loadcontentbypages2(zname,taskid,kindid,assid) {
-        var t_tasktype;
         $.ajax({
             type: "post",
             url: "/findtaskbyid",
@@ -531,8 +533,8 @@
         //获取理论测试
         $.ajax({
             type: "post",
-            url: "/findalltestbytype",
-            data:{},
+            url: "/findalltestbytypename",
+            data:{"name":name},
             async: false,
             success: function (data){
                 static_questionnum=data.length;
@@ -1022,9 +1024,11 @@
 
                 if (data.length!=static_fixleng){
                     static_fixleng=data.length;
-                    if(static_ismes==1)
+                    findalltask()
+                    if(static_ismes==1){
                         loadcontentbypages2(static_zname,static_ztaskid,static_kindid,static_assid)
-                        location.reload();
+                    }
+                    reload();
                     }
 
                 }
@@ -1042,14 +1046,14 @@
             processData: false,
             async: false,
             success: function (data){
-
                 if (data.length!=static_temleng) {
+                    findalltask();
                     static_temleng = data.length;
-                    if(static_ismes==1){
 
+                    if(static_ismes==1){
                         loadcontentbypages2(static_zname,static_ztaskid,static_kindid,static_assid)
-                        location.reload();
                     }
+                    reload();
                 }
             }
         });
@@ -1081,7 +1085,7 @@
             gettemporary();
             getfixtask();
             loadscreentime();
-            findalltask();
+
         }, 3000);
     }
 
@@ -1163,7 +1167,7 @@
             processData: false,
             async: false,
             success: function (data){
-                static_temleng=data.length
+               // static_temleng=data.length
                 //alert(data.length);
                 for(var i=0;i<data.length;i++){
                     str+="<button class='cp_button1' onclick='loadcontentbypages2(\""+data[i].ztitle+"\",\""+data[i].zcontentID+"\",2,\"  \")' id='"+data[i].zcontentID+"'>"+data[i].ztitle+"</button> <br><br>"
