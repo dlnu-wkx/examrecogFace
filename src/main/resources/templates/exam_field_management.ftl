@@ -11,25 +11,24 @@
     <link href="http://vjs.zencdn.net/5.20.1/video-js.css" rel="stylesheet">
     <link href="./layui/css/right_public_bar.css" rel="stylesheet" type="text/css">
     <link href="./layui/css/exam_field_management.css" rel="stylesheet" type="text/css">
-
+    <link href="./layui/css/top_bar.css" rel="stylesheet" type="text/css">
 
     <script type="text/javascript" src="./layui/js/common.js "></script>
     <script type="text/javascript" src="./layui/js/field_management.js "></script>
     <script src="jquery/jquery-3.3.1.min.js"></script>
     <script src="/layui/layui.js"></script>
     <script src="jquery/jquery.cookie.js"></script>
-    <script src="./layui/js/field_management.js "></script>
     <script src="./layui/js/exam_field_management.js "></script>
+    <script src="./layui/js/exit.js "></script>
 
     <script src="./layui/js/common.js "></script>
 </head>
 <body class="layui-layout-body" style="width: 100%;height: 100%;background-color: #CDCDCD">
 <div class="layui-layout layui-layout-admin">
-    <div class="layui-header" style="border-bottom: 1px solid #c2c2c2;background-color: #C6C6C6">
-        <div class="layui-logo" style="osition: absolute;left: 0;top: 0;width: 200px;height: 100%;line-height: 60px;text-align: center;font-size: 16px;left:14px;letter-spacing:4px;color: #0C0C0C">签到</div>
-        <ul class="layui-nav layui-layout-right" style="right: 35px">
-            <li class="layui-nav-item" style="letter-spacing:4px;left:30px;color: #0C0C0C">安浩智能学习工厂</li>
-        </ul>
+    <div class="layui-header" style="border-bottom: 1px solid #c2c2c2;background-color: #114376"">
+        <div  class="left-bar"><span id="trainroomname"></span>/点名签到</div>
+        <div class="mid-bar">安浩智能学习工厂</div>
+        <div class="right-bar" id="m_rightfont"></div>
     </div>
     <div class="layui-row ">
         <div id='welcomeField' class="layui-col-xs1" align="center" style="width: 17%;font-size: 70px;margin-top: 40px">
@@ -38,27 +37,7 @@
             <div style="margin: 0,auto;margin-top:40px;height:80px;text-align:center;line-height:40px;font-size: 40px;color: #E51C23">
             </div>
              </div>
-        <#--二级菜单-->
-        <#--<div id='twoMenu' class="layui-col-xs10" style="display: none; margin-top: 40px;width: 90%">
-            <div>
-                <ul style="margin-top: 10%;width: 80%;left: 40%;margin: 37px auto">
-                    <li style="margin: 0 auto;margin-left: 10% "><button onclick="faceShow()" style="float:left;color:#FFFFFF;height: 100px;display:block;margin:0 auto;margin-top:0px;width:250px;background-color:#71B863;border-radius:32px;text-align: center;line-height: 50px;font-size: 35px">签到</button></li>
-                    &lt;#&ndash;<li style=" margin: 0 auto;margin-right: 10%"><button onclick="studentStatus()" style="float:right;color:#FFFFFF;height: 100px;display:block;margin:0 auto;margin-top:0px;width:250px;background-color:#71B863;border-radius:32px;text-align: center;line-height: 50px;font-size: 35px">测试管理</button></li>&ndash;&gt;
-                </ul>
-            </div>
-            <div>
-                <ul style="margin: 16% auto;width: 80%">
-                   &lt;#&ndash; <li style="margin: 0 auto;margin-left: 10% "><button onclick="loginManagement()" style="float:left;color:#FFFFFF;height: 100px;display:block;margin:0 auto;margin-top:0px;width:250px;background-color:#71B863;border-radius:32px;text-align: center;line-height: 50px;font-size: 35px">登录管理</button></li>
-                    <li style="margin: 0 auto;margin-right: 10% "><button onclick="courseManagement()" style="float:right;color:#FFFFFF;height: 100px;display:block;margin:0 auto;margin-top:0px;width:250px;background-color:#71B863;border-radius:32px;text-align: center;line-height: 50px;font-size: 35px">任务管理</button></li>&ndash;&gt;
-                </ul>
-            </div>
-            <div>
-                <ul style="margin: 30% auto;width: 80% ">
-                    &lt;#&ndash;<li style="margin-left: 10%"><button id="checkPointColor" onclick="checkPoint()" style="float:left;color:#FFFFFF;height: 100px;display:block;margin:0 auto;margin-top:0px;width:250px;background-color:#71B863;border-radius:32px;text-align: center;line-height: 50px;font-size: 35px">查岗</button></li>
-                    <li style="margin-right: 10%"><button  id="courseRecordColor" onclick="courseRecord()" style="float:right;color:#FFFFFF;height: 100px;display:block;margin:0 auto;margin-top:0px;width:250px;background-color:#71B863;border-radius:32px;text-align: center;line-height: 50px;font-size: 35px">课堂记录</button></li>&ndash;&gt;
-                </ul>
-            </div>
-        </div>-->
+
         <div id="courseRecordContent"style="display: none;width: 50%;height: 300px;position: fixed;background-color: #CDCDCD;border: 1px solid;top:50%;left: 7%;z-index: 12">
         </div>
         <div id="hiddenArea"style="position: absolute;height: 100%;width: 100%;filter: alpha(opacity=60);opacity: 0.6;display: none;z-index: 11">
@@ -131,7 +110,7 @@
                 实时状态
             </button>
 
-            <button onclick="informationDelivery()" class="f_field_delivery" >
+            <button  class="f_field_delivery" >
                 信息发布
             </button>
 
@@ -169,6 +148,8 @@
         document.getElementById("teach").style.display="none";
         findAllCameras();
         document.getElementById("threeMenu").style.display="block";
+        loadteachername();
+        gettrainroom();
     }
     //数控车讨论区显示每台机的人脸识别情况
     function studentShow(e){
@@ -248,5 +229,7 @@
         })
 
     }
+
+
 </script>
 </html>

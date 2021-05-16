@@ -17,6 +17,7 @@
     <script src="./jquery/jquery.cookie.js"></script>
     <script type="text/javascript" src="./layui/js/common.js "></script>
     <script src="./layui/layui.js"></script>
+    <script src="./layui/js/exit.js "></script>
     <style>
         html,body{
             height: 97%;
@@ -26,7 +27,7 @@
 <body  class="body" >
 <!--头部导航条-->
 <div class="top">
-    <div class="leftfont">测量</div>
+    <div class="leftfont"><span id="trainroomname"></span>/测量</div>
     <div class="m_centerfont">安浩智能学习工厂</div>
     <div class="rightfont" id="m_rightfont"></div>
 </div>
@@ -58,7 +59,7 @@
         <select class="m_classselect" id="m_classselect" onchange="getmeasurebygt2()"></select>
         <font class="m_taskfont" size="5">实训任务：</font>
         <select class="m_taskselect" id="m_taskselect"  onchange="getmeasurebygt2()"></select>
-        <#--<button class="m_submitbutton">提交</button>-->  <button class="m_savebutton" onclick="saveteachercheck()">保存</button>
+        <#--<button class="m_submitbutton">提交</button>--> <#-- <button class="m_savebutton" onclick="saveteachercheck()">保存</button>-->
     </div>
 
     <div class="m_tablemes">
@@ -89,7 +90,7 @@
             实时状态
         </button>
 
-        <button onclick="informationDelivery()" class="f_field_delivery" >
+        <button  class="f_field_delivery" >
             信息发布
         </button>
 
@@ -139,6 +140,7 @@
         loadteachername();
         loadallgrad();
         loadalltask();
+        gettrainroom();
 
         getmeasurebygt2()
     }
@@ -155,6 +157,7 @@
             }
         });
     }
+
 
     function loadalltask(){
         var m_taskselect=$("#m_taskselect")

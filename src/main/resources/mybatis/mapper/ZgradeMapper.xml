@@ -37,4 +37,20 @@
 					(select zid from zschedule where  ztrainingroomID=#{ztrainingroomID} and  now() BETWEEN zstartdate and zenddate)) GROUP BY zgradeID)
     </select>
 
+    <select id="findgrade" resultType="com.itboyst.facedemo.dto.Zgrade">
+        select * from zgrade where zname not in ('临时班级')
+    </select>
+
+    <insert id="addgroup" parameterType="com.itboyst.facedemo.dto.Zgrade" >
+        insert into zgrade(zid,zmajorID,zidentity,zname,zassistant)
+        values (#{zid},#{zmajorID},'666',#{zname},'默认')
+    </insert>
+
+    <delete id="deletgroup" parameterType="java.lang.String">
+        delete from zgrade where zid=#{zid}
+    </delete>
+
+
+
+
 </mapper>

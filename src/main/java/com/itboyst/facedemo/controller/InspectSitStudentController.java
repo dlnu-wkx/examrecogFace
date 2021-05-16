@@ -102,8 +102,6 @@ public class InspectSitStudentController {
                 }
             }
 
-
-
             List<InspectSitStudent>  zstudentList = new ArrayList<>();
             zstudentList =inspectSitStudentService.findStudentByDateAndTrainingId(ztrainingroomID,timestamp,zcheck);
             //教师的信息
@@ -135,7 +133,7 @@ public class InspectSitStudentController {
                         if(sid.equals(list.get(j).getZstudentID())){
                             Long time2 = list.get(j).getZrecognizetime().getTime();
                             int a = (int) ((time1-time2)/60000);
-                            if(a>=10){//大于10分钟则保留在relist中
+                            if(a>=1){//大于1分钟则保留在relist中
                                 relist.add(list.get(j));
                             }else{//否则先从relist中移除，然后加上页面上的
                                 relist.remove(zstudentList.get(i));
@@ -178,7 +176,7 @@ public class InspectSitStudentController {
     }
 
     /**
-     * 签到的数据处理方法
+     * 点名签到的数据处理方法
      * @param session
      * @param mytime
      * @param zcheck
@@ -233,7 +231,10 @@ public class InspectSitStudentController {
         }
         List<InspectSitStudent>  zstudentList = new ArrayList<>();
         Zteacher_cookie zteacher_cookie =(Zteacher_cookie) session.getAttribute("zteacher_cookie");
-        String ztrainingroomID=zteacher_cookie.getZtrainingroomid();
+        String ztrainingroomID = "";
+        if(zteacher_cookie !=null){
+            ztrainingroomID = zteacher_cookie.getZtrainingroomid();
+        }
         if(zcheck.equals("人脸识别")){
             zstudentList =inspectSitStudentService.findStudentByDateAndTrainingIdASC(ztrainingroomID,timestamp,zcheck);
         }

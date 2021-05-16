@@ -1,0 +1,17 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itboyst.facedemo.mapper.ZgroupStudentMapper">
+    <insert id="add" parameterType="java.lang.String">
+        insert into zgroup_student (zid,zgradeID,zstudentID)
+        values (#{zid},#{zgradeID},#{zstudentID})
+    </insert>
+
+    <delete id="deleteZgroupStudentByZid" parameterType="java.lang.String">
+        delete from zgroup_student where zgradeID=#{zgradeID}
+    </delete>
+
+    <delete id="deleteZgroupStudentByStudentID" parameterType="java.lang.String">
+        delete from zgroup_student where zstudentID=#{zstudentID}
+    </delete>
+</mapper>

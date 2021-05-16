@@ -11,6 +11,7 @@ public class Zstudent {
     private int zfaceinfoID;
     private String zphoto;
     private String zstatus;
+    private String groupID;
 
     public String getZid() {
         return zid;
@@ -105,6 +106,7 @@ public class Zstudent {
                 ", zfaceinfoID=" + zfaceinfoID +
                 ", zphoto='" + zphoto + '\'' +
                 ", zstatus='" + zstatus + '\'' +
+                ", groupID='" + groupID + '\'' +
                 '}';
     }
 }

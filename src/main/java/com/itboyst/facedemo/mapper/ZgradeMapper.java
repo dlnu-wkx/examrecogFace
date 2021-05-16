@@ -18,4 +18,11 @@ public interface ZgradeMapper {
     String findzidbyzname(String zname);
 
     List<Zgrade> findallgradebytrainroom(String ztrainingroomID);
+
+    List<Zgrade> findgrade();
+
+    int addgroup(Zgrade zgrade);
+
+    int deletgroup(String zid);
+
 }

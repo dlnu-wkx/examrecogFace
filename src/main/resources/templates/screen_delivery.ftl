@@ -344,7 +344,7 @@
             document.getElementById('captureImgId').src = event.data;
         };
     }
-    
+
 
     function  findHaveStudent(zid){
         $.ajax({
@@ -491,13 +491,13 @@
 
 
 
-    function outpower(){
+   /* function outpower(){
         $("#popup").show()
     }
 
     function lockscreen() {
         $("#parent").show()
-    }
+    }*/
 
     function outmessage() {
         $("#de_popup").show()

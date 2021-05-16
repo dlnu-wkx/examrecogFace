@@ -80,7 +80,19 @@
         </update>
 
         <select id="findAllstudentbygradeid" resultType="com.itboyst.facedemo.dto.Zstudent">
-           select a.zid,b.zname as zgradeID,a.zidentity,a.zname,a.zfaceinfoID,a.zpass,a.zphone,a.zphoto,a.zsex,a.zstatus
-            from zstudent a,zgrade b where a.zgradeID=#{zgradeID} and a.zgradeID=b.zid
+          select * FROM (
+							select a.zid,b.zname as zgradeID,a.zidentity,a.zname,a.zfaceinfoID,a.zpass,a.zphone,a.zphoto,a.zsex,a.zstatus
+                            from zgrade b,zgroup_student c,zstudent a
+                            where  a.zgradeID=#{zgradeID} and a.zgradeID = b.zid or( b.zid = #{zgradeID} and c.zgradeID=b.zid  and  a.zid = c.zstudentID )) c
+          GROUP BY c.zid
         </select>
+
+        <select id="findAllStudents" resultType="com.itboyst.facedemo.dto.Zstudent">
+            select a.zid,b.zname as zgradeID,a.zidentity,a.zname,a.zfaceinfoID,a.zpass,a.zphone,a.zphoto,a.zsex,a.zstatus
+            from zstudent a,zgrade b
+            where a.zgradeID=b.zid and b.zname != '临时班级'
+        </select>
+
+
+
 </mapper>

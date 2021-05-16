@@ -148,7 +148,7 @@
      right: 9%;
      bottom: 10%;
      position: fixed;
-     background-color: #C8C8C8 ;
+    /* background-color: #C8C8C8 ;*/
  }
 
 
@@ -1061,7 +1061,7 @@
 }
 
 .p_information_delivery{
-    background-color:  #4472C4;
+    background-color:  grey;
     border: none;
     color: white;
     /*padding: 10px 10px;*/

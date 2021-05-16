@@ -41,7 +41,6 @@ public class QbankController {
 
     @Autowired
     Zstudent_loginService zstudent_loginService;
-
     /*
    勾选开启安全测试
   */
@@ -62,9 +61,27 @@ public class QbankController {
     @ResponseBody
     public String getteachername(HttpSession session){
        Zteacher_cookie zteacher_cookie=(Zteacher_cookie)session.getAttribute("zteacher_cookie");
-       return zteacher_cookie.getZname();
+       if(zteacher_cookie != null){
+           return zteacher_cookie.getZname();
+       }
+       return "";
     }
 
+    /**
+     * 实训室的名字
+     * @param session
+     * @return
+     */
+    @RequestMapping("/gettrainroom")
+    @ResponseBody
+    public String gettrainroom(HttpSession session){
+        Zteacher_cookie zteacher_cookie=(Zteacher_cookie)session.getAttribute("zteacher_cookie");
+
+        if(zteacher_cookie != null){
+            return zteacher_cookie.getZroomname();
+        }
+        return "";
+    }
 
 
     /*
@@ -502,6 +519,10 @@ public class QbankController {
 
     @RequestMapping(value = "/1")
     public String down(){return "down";}
+
+    @RequestMapping(value = "/autoSignIn")
+    public String autoSignIn(){return "auto_signIn";}
+
 
     /**
      * 查十个题目，备用

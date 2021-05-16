@@ -129,10 +129,31 @@ public class FaceController {
         return "field_management";
     }
 
-
+    /**
+     * 点名签到
+     * @return
+     */
     @RequestMapping(value = "/exam_field_management")
     public String exam_field_management() {
         return "exam_field_management";
+    }
+
+    /**
+     * 群组管理
+     * @return
+     */
+    @RequestMapping(value = "/group_management")
+    public String group_management() {
+        return "group_management";
+    }
+
+    /**
+     * 信息展板
+     * @return
+     */
+    @RequestMapping(value = "/informationPanel")
+    public String informationPanel() {
+        return "informationPanel";
     }
 
 
@@ -143,8 +164,8 @@ public class FaceController {
     }
 
 
-    /*
-    人脸添加
+    /**
+     *人脸添加
      */
     @RequestMapping(value = "/faceAdd", method = RequestMethod.POST)
     @ResponseBody
@@ -729,7 +750,7 @@ public class FaceController {
         if(strdate>=1){//删除文件夹类的所有图片
             deletenottodaypicture("D:\\SchoolTrainFiles\\FacePic\\ztempuser\\student\\");
         }
-       /* Ztempuser ztempuser = new Ztempuser();
+        Ztempuser ztempuser = new Ztempuser();
         String uuid1 = UUID.randomUUID().toString().replaceAll("-", "");
         ztempuser.setZid(uuid1);
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
@@ -739,7 +760,7 @@ public class FaceController {
         String ip4 = Iputil.getClientIpAddress(request);
         ztempuser.setZrecognizeIP(ip4);
         ztempuser.setZstatus("申请中");
-        int a = ztempuserService.insertoneztempuser(ztempuser);*/
+        int a = ztempuserService.insertoneztempuser(ztempuser);
 
 
         return Results.newFailedResult(ErrorCodeEnum.FACE_DOES_NOT_MATCH);
@@ -1063,6 +1084,10 @@ public class FaceController {
             if(data.size()==0 && face_id.contains("L")){
                 return Results.newResult(faceSearchResDto,"2",false,0);
             }
+            //教师没课时给其添加权限可以查看所有的信息
+            if(data.size()==0 ){
+                return Results.newResult(faceSearchResDto,"2",false,0);
+            }
 
             session.setAttribute("zteacher_cookie", zteacher_cookie);
             System.out.println(session.getAttribute("zteacher_cookie"));
@@ -1090,7 +1115,7 @@ public class FaceController {
         if(day>=1){
             deletenottodaypicture("D:\\SchoolTrainFiles\\FacePic\\ztempuser\\teacher\\");
         }
-       /* Ztempuser ztempuser = new Ztempuser();
+        Ztempuser ztempuser = new Ztempuser();
         String uuid1 = UUID.randomUUID().toString().replaceAll("-", "");
         ztempuser.setZid(uuid1);
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
@@ -1100,7 +1125,7 @@ public class FaceController {
         String ip4 = Iputil.getClientIpAddress(request);
         ztempuser.setZrecognizeIP(ip4);
         ztempuser.setZstatus("申请中");
-        int a = ztempuserService.insertoneztempuser(ztempuser);*/
+        int a = ztempuserService.insertoneztempuser(ztempuser);
 
         return Results.newFailedResult(ErrorCodeEnum.FACE_DOES_NOT_MATCH);
     }

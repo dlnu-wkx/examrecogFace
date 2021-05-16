@@ -1,4 +1,4 @@
-let time;
+let time1;
 var layer;
 $(function () {
     layui.use("layer",function () {
@@ -14,7 +14,6 @@ function startcollect() {
     }
     //每次点击开始的时候数据刷新
     $("#mainBody").empty()
-    console.log(backup);
     $("#mainBody").append(backup)
     document.getElementById("currentnumber").innerHTML = 0
     $("#startID").css('background-color', 'rgba(237,125,49)')
@@ -24,7 +23,7 @@ function startcollect() {
     var zid = document.getElementById("gradeID").innerText
     var myDate = new Date();
     var mytime = myDate.getTime();
-    time = setInterval(function () {
+    time1 = setInterval(function () {
         showRecognitionFaceexam(mytime, "签到", zid)
         findAllLoginpeopleexam(mytime,"人脸识别")
     }, 3000)
@@ -60,6 +59,7 @@ function showRecognitionFaceexam(mytime,zcheck,zid) {
             processData: false,
             async: false,
             success:function (data) {
+                console.log(data);
                 if(data!=null){
                     if(data.length>0){//不大于三个则显示现有的个数
                         for(var i = 0;i<data.length;i++){
@@ -161,5 +161,5 @@ function endcollect(){
         $("#startID").css('background-color','rgba(0,0,255)')
         //结束连接杰视数据接口
         handlewebsocket("结束")
-        window.clearInterval(time);
+        window.clearInterval(time1);
 }

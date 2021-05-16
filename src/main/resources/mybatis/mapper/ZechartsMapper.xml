@@ -1,0 +1,18 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itboyst.facedemo.mapper.ZechartsMapper">
+    <select id="yearStatistics" resultType="java.lang.Integer">
+        select COUNT(*) from zstudent_login where YEAR(zrecognizetime)=YEAR(NOW());
+    </select>
+    <select id="monthStatistics" resultType="java.lang.Integer">
+        select COUNT(*) from zstudent_login where date_format(zrecognizetime,'%Y-%m')=date_format(now(),'%Y-%m')
+    </select>
+    <select id="weekStatistics" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM zstudent_login WHERE YEARWEEK(date_format(zrecognizetime,'%Y-%m-%d')) = YEARWEEK(now());
+    </select>
+
+    <select id="todayStatistics" resultType="java.lang.Integer">
+       select COUNT(*) from zstudent_login where to_days(zrecognizetime) = to_days(now());
+    </select>
+</mapper>

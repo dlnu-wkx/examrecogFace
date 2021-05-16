@@ -13,7 +13,7 @@
     <script src="./jquery/jquery.cookie.js"></script>
     <script src="./layui/layui.js"></script>
     <script src="./layui/js/common.js"></script>
-
+    <script src="./layui/js/exit.js "></script>
 </head>
 <body  class="body" >
 
@@ -141,7 +141,7 @@
 </body>
 
 <script>
-    
+
     function stopaction() {
         $.ajax({
             type: "post",
@@ -154,8 +154,8 @@
             }
         })
     }
-    
-    
+
+
 
     function delivermes(){
         var time=$("#timein").val();
@@ -364,19 +364,6 @@
 
 
 
-
-
-    function outpower(){
-        $("#popup").show()
-    }
-
-    function lockscreen() {
-        $("#parent").show()
-        $("#popup").hide();
-        $("#exit").css('background-color','#FFC000');
-        $("#exit").text('解锁');
-        $("#exit").attr("onclick","removescreer();");
-    }
     function removescreer(){
         $("#parent").hide();
         $("#exit").text('退出系统');
@@ -637,7 +624,7 @@ function addchoice(checkbox) {
 
 
 
-    
+
     function outmessage() {
         //$("#de_popup").show()
     }

@@ -1,0 +1,119 @@
+
+/*头部*/
+.teach-son{
+    margin:0 auto;
+    margin-top:40px;
+    height:80px;
+    text-align:center;
+    line-height:40px;
+    font-size: 40px;
+    color: #E51C23
+}
+.hiddenArea{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    filter: alpha(opacity=60);
+    opacity: 0.6;
+    display: none;
+    z-index: 11
+}
+
+/*左边班级列表*/
+.grades{
+    width: 80%;
+    height: 478px;
+    overflow:auto
+}
+.grades-foot{
+    width: 80%;
+    font-size: 20px;
+    margin-top: 50%
+}
+.add{
+    width: 40%;
+    height: 40px;
+    float: left;
+    background-color: #4472c4;
+    color:#FFFFFF;
+    border-radius:8px
+}
+.undo{
+    width: 40%;
+    height: 40px;
+    float: right;
+    background-color: #4472c4;
+    color:#FFFFFF;
+    border-radius:8px
+}
+/*中间部分*/
+.middle{
+    width: 100%;
+    margin-top: 1%
+}
+.gradename{
+    float:left;
+    margin-left: 2%;
+    font-size: 20px;
+    margin-top: 1%
+}
+.center-right{
+    float: right;
+    margin-right: 2%;
+    font-size: 20px
+}
+.center-right-add{
+    background-color: #4472c4;
+    color:#FFFFFF;
+    border-radius:8px;
+    width: 36%;
+    height: 60px
+}
+.center-right-undo{
+    background-color: #4472c4;
+    color:#FFFFFF;
+    border-radius:8px;
+    width: 36%;
+    height: 60px;
+}
+.mainBody-parent{
+    height: 500px;
+    text-align:center;
+    line-height:40px;
+    font-size: 40px;
+    background-color: #ffff;
+    border: 1px solid red;
+    margin-top: 7%
+}
+.mainBody{
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+}
+.determine{
+    width: 10%;
+    height: 40px;
+    margin-top: 1%;
+    margin-left: 60%;
+    border-radius: 10px;
+    background-color: #4472c4;
+    color:#FFFFFF;
+    font-size: 25px
+}
+.gm_button1{
+    /* background-color: #BDD7EE;*/
+    border: 1px solid red;
+    /*padding: 0px 0px;*/
+    font-size: 20px;
+    /*圆角控制器*/
+    /* border-radius: 10px; */
+}
+
+
+.gm_table1{
+    /*height: 90%;
+    width: 100%;*/
+    margin-left:3px;
+    border-spacing:20px;
+    border-collapse:separate;
+}

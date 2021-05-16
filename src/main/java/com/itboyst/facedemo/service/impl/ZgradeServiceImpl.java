@@ -37,4 +37,19 @@ public class ZgradeServiceImpl implements ZgradeService {
         return zgradeMapper.findallgradebytrainroom(ztrainingroomID);
     }
 
+    @Override
+    public List<Zgrade> findgrade() {
+        return zgradeMapper.findgrade();
+    }
+
+    @Override
+    public int addgroup(Zgrade zgrade) {
+        return zgradeMapper.addgroup(zgrade);
+    }
+
+    @Override
+    public int deletgroup(String zid) {
+        return zgradeMapper.deletgroup(zid);
+    }
+
 }

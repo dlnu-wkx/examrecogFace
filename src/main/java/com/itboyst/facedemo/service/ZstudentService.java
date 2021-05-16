@@ -35,4 +35,6 @@ public interface ZstudentService {
     public Zstudent findstudentbyfaceid(String zfaceinfoID);
 
     List<Zstudent> findstudentbyzgradid(String zgradeID);
+
+    List<Zstudent> findAllStudents();
 }

@@ -9,7 +9,9 @@
     <link href="./layui/css/demo.css" rel="stylesheet" type="text/css">
     <link href="./bootstrap-3.3.7-dist/css/bootstrap.css" rel="stylesheet" type="text/css">
     <link href="./bootstrap-3.3.7-dist/css/bootstrap-select.min.css" rel="stylesheet" type="text/css">
+    <link href="./layui/css/top_bar.css" rel="stylesheet" type="text/css">
 
+    <script type="text/javascript" src="./layui/js/common.js "></script>
     <script src="jquery/jquery-3.3.1.min.js"></script>
     <script src="/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
     <script src="/bootstrap-3.3.7-dist/js/bootstrap-select.min.js"></script>
@@ -17,6 +19,7 @@
     <script src="jquery/jquery.cookie.js"></script>
     <script src="My97DatePicker/WdatePicker.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="./layui/js/exit.js "></script>
 </head>
 <style>
     html,body{
@@ -36,8 +39,9 @@
 </style>
 <body style="text-align: center;margin: 0 auto">
 <div class="top1">
-    <div class="leftfont">现场管理</div>
-    <div class="rightfont">安浩智能学习工厂</div>
+    <div  class="left-bar"><span id="trainroomname"></span>/课程管理</div>
+    <div class="mid-bar">安浩智能学习工厂</div>
+    <div class="right-bar" id="m_rightfont"></div>
 </div>
 <div style="width: 100%;height: 90%;background-color: #CDCDCD">
     <div  class="lefelist">
@@ -305,7 +309,6 @@ function savecourse() {
     //当是多选时的获取id的方式
     var trainingtaskID = [];
     trainingtaskID = $("#trainingtaskselect").val();
-    console.log(trainingtaskID);
 
     if(0==trainingtaskID.length){
         layer.msg("请选择学生任务", { icon: 1, offset: "auto", time:1000 });
@@ -340,7 +343,6 @@ function savecourse() {
         url:"/addzscheduleAndzstudentscheduleAndassignschedule",
         data:{"zid":startchose,"trainingroomID":trainingroomID,"zstartdate":zstartdate,"zenddate":zenddate,"courseID":courseID,"trainingtaskID":trainingtaskID,"scheduleteacherid":scheduleteacherid},
         success:function (data) {
-            console.log(data)
         if(data=="success"){
             layer.msg("新增课程表成功", { icon: 1, offset: "auto", time:1000 });
 
@@ -349,7 +351,6 @@ function savecourse() {
             layer.msg("上课表已经存在", { icon: 1, offset: "auto", time:1000 });
         }
         }
-
     })
 }
 
@@ -451,7 +452,7 @@ function savecourse() {
     <button onclick="fieldManagement()" id="managementid" class="f_field_management">现场管理</button>
     <button  class="f_field_service" onclick="informationService()">信息查询</button>
     <button onclick="timeStatus()" class="f_field_status">实时状态</button>
-    <button onclick="informationDelivery()"class="f_field_delivery">信息发布</button>
+    <button  class="f_field_delivery">信息发布</button>
     <button class="f_field_exit" id="exit" onclick="outpower()">退出系统</button>
 </div>
 
@@ -485,6 +486,8 @@ function savecourse() {
     function aaa(){
         var servicebutton = document.getElementById("managementid");
         servicebutton.style.backgroundColor="#ED7D31"
+        loadteachername();
+        gettrainroom();
     }
     //信息发布
     function informationDelivery() {

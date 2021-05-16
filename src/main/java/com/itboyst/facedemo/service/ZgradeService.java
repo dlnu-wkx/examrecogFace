@@ -14,4 +14,9 @@ public interface ZgradeService {
 
     List<Zgrade> findallgradebytrainroom(String ztrainingroomID);
 
+    List<Zgrade> findgrade();
+
+    int addgroup(Zgrade zgrade);
+
+    int deletgroup(String zid);
 }

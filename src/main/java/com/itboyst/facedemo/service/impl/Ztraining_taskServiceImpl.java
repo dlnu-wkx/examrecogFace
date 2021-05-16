@@ -6,7 +6,6 @@ import com.itboyst.facedemo.service.Ztraining_taskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.websocket.OnOpen;
 import java.util.List;
 
 @Service

@@ -36,4 +36,7 @@ public interface ZstudentMapper {
     List<Zstudent> findAllstudentbygradeid(String zgradeID);
 
     List<Zstudent> findstudentbyzgradid(String zgradeID);
+
+    List<Zstudent> findAllStudents();
+
 }

@@ -109,7 +109,14 @@
             <version>1.18.8</version>
             <scope>provided</scope>
         </dependency>
-        <!--*****************因为这个项目要servlet但是下面一个配置取出tomcat要加上一个servlet,就是打成jar时要把这个注掉，否则加载错误-->
+        <!--热部署项目-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <optional>true</optional>
+            <scope>true</scope>
+        </dependency>
+        <!--打成jar时需要注释掉，打成war时要解开注释-->
      <!--<dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
@@ -120,7 +127,7 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-            <!--*************************取出web自带的tomcat-->
+            <!--打成jar时需要注释掉，打成war时要解开注释-->
             <!--<exclusions>
                 <exclusion>
                     <groupId>org.springframework.boot</groupId>

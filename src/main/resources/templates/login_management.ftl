@@ -6,13 +6,18 @@
     <link href="./layui/css/login_management.css" rel="stylesheet" type="text/css">
     <link href="./layui/css/right_public_bar.css" rel="stylesheet" type="text/css">
     <link href="./layui/css/demo.css" rel="stylesheet" type="text/css">
+    <link href="./layui/css/power_controller.css" rel="stylesheet" type="text/css">
     <link href="./layui/css/information_service.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/css/select2.min.css"/>
+    <link href="./layui/css/top_bar.css" rel="stylesheet" type="text/css">
 
+    <script type="text/javascript" src="./layui/js/common.js "></script>
+    <script src="./layui/js/exit.js "></script>
     <script src="jquery/jquery-3.3.1.min.js"></script>
     <script src="/layui/layui.js"></script>
     <script src="jquery/jquery.cookie.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="./layui/js/exit.js "></script>
 </head>
 <style>
     html,body{
@@ -32,8 +37,9 @@
 </style>
 <body style="text-align: center;margin: 0 auto">
 <div class="logintop">
-    <div class="leftfont">登录管理</div>
-    <div class="rightfont">安浩智能学习工厂</div>
+    <div  class="left-bar"><span id="trainroomname"></span>/登录管理</div>
+    <div class="mid-bar">安浩智能学习工厂</div>
+    <div class="right-bar" id="m_rightfont"></div>
 </div>
 <div style="width: 100%;height: 90%;background-color: #CDCDCD">
 
@@ -62,20 +68,26 @@
         <button onclick="fieldManagement()" id="managementid" class="f_field_management">现场管理</button>
         <button  class="f_field_service" onclick="informationService()">信息查询</button>
         <button onclick="timeStatus()" class="f_field_status">实时状态</button>
-        <button onclick="informationDelivery()"class="f_field_delivery">信息发布</button>
+        <button class="f_field_delivery">信息发布</button>
         <button class="f_field_exit" id="exit" onclick="outpower()">退出系统</button>
     </div>
 
 
 </div>
-
+<!--弹框-->
 <div hidden class="popup" id="popup" align="center">
     <br><br>
     <button class="p_button2" onclick="lockscreen()">锁屏</button><br>
-
     <button class="p_button2" onclick="overclass()">下课</button>
 </div>
-
+<!--蒙版-->
+<div id="parent" class="facebox_exit" hidden></div>
+<div id="showVdieo" style="position: absolute;z-index:10;top: 24%;left: 41%"></div>
+<!-- 增加选择班级的蒙版 -->
+<div id="masking" class="masking"></div>
+<!-- 增加课程的弹框信息 -->
+<div id="grade-pop-up" class="pop-up">
+</div>
 </body>
 <script>
 
@@ -84,6 +96,8 @@
     function aaa(){
         var servicebutton = document.getElementById("managementid");
         servicebutton.style.backgroundColor="#ED7D31"
+        loadteachername();
+        gettrainroom();
     }
     //信息发布
     function informationDelivery() {

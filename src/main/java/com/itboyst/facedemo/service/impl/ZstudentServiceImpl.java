@@ -21,7 +21,7 @@ public class ZstudentServiceImpl implements ZstudentService {
     @Override
     public int registerstud(Zstudent zstud){
         int i =0;
-        i =zstu.registerstu(zstud);   
+        i =zstu.registerstu(zstud);
         return i;
     }
 
@@ -84,5 +84,12 @@ public class ZstudentServiceImpl implements ZstudentService {
     public Zstudent findstudentbyfaceid(String zfaceinfoID){return zstu.findstudentbyfaceid(zfaceinfoID);}
 
     @Override
-    public List<Zstudent> findstudentbyzgradid(String zgradeID){return zstu.findstudentbyzgradid(zgradeID);};
+    public List<Zstudent> findstudentbyzgradid(String zgradeID){return zstu.findstudentbyzgradid(zgradeID);}
+
+    @Override
+    public List<Zstudent> findAllStudents() {
+        return zstu.findAllStudents();
+    }
+
+    ;
 }

@@ -18,6 +18,8 @@ function upheads() {
 }
 
 
+
+
 function loadisevent(){
     //alert(111)
     $.ajax({
@@ -66,7 +68,7 @@ function findfiveport(){
 
 //学生退出系统
 function leaveclass() {
-   // alert(11)
+    //alert(11)
     //结算测试题和实训任务
     $.ajax({
         type: "post",
@@ -192,16 +194,7 @@ function removeout() {
 }
 
 
-function overclass(){
-    $.ajax({
-        type: "post",
-        url: "/overclass2",
-        success: function (data){
-            layer.msg("已下课，等待学生端电源关闭", { icon: 1, offset: "auto", time:1000 });
-        }
-    });
 
-}
 
 
 //判断字符串长度
@@ -369,7 +362,8 @@ var renliandata = new Array();
 function OpenOTimer(a) {
         filterjieshiLoop=1;
         var zcheck="";
-        if(a==2){
+        var cameraID = document.getElementById("cameraID").innerHTML;
+    if(a==2){
             zcheck="查岗";
             insertCheckPoint();
             $("#startID2").css('background-color','rgba(237,125,49)')
@@ -1402,4 +1396,31 @@ function getIPAdress() {
             }
         }
     }*/
+}
+function loadteachername(){
+    $.ajax({
+        type: "post",
+        url: "/getteachername",
+        data:{},
+        async: false,
+        success: function (data){
+            var m_rightfont=$("#m_rightfont")
+            var str="指导老师："+data+"";
+            m_rightfont.html(str);
+        }
+    });
+}
+
+function gettrainroom() {
+    $.ajax({
+        type: "post",
+        url: "/gettrainroom",
+        data:{},
+        async: false,
+        success: function (data){
+            var m_rightfont=$("#trainroomname")
+            var str=data;
+            m_rightfont.html(str);
+        }
+    });
 }

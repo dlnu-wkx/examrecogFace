@@ -525,6 +525,13 @@
     position: fixed;
 }
 
+.midfont {
+    font-size: 23px;
+    left: 42%;
+    top: 2%;
+    position: fixed;
+}
+
 
 
 .body {
