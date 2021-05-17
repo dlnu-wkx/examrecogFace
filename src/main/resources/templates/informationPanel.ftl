@@ -130,6 +130,24 @@
                 document.getElementById("todaydata").innerHTML = data
             }
         });
+
+        $.ajax({
+            type: "post",
+            url: "/useRate",
+            success: function (data) {
+                console.log(data);
+            }
+        });
+
+        $.ajax({
+            type: "post",
+            url: "/passRate",
+            success: function (data) {
+                console.log(data);
+            }
+        });
+
+
     }
 
 </script>

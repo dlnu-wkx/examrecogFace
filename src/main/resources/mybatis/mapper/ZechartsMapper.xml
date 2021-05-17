@@ -5,9 +5,11 @@
     <select id="yearStatistics" resultType="java.lang.Integer">
         select COUNT(*) from zstudent_login where YEAR(zrecognizetime)=YEAR(NOW());
     </select>
+
     <select id="monthStatistics" resultType="java.lang.Integer">
-        select COUNT(*) from zstudent_login where date_format(zrecognizetime,'%Y-%m')=date_format(now(),'%Y-%m')
+        select COUNT(*) from zstudent_login where date_format(zrecognizetime,'%Y-%m')=date_format(now(),'%Y-%m');
     </select>
+
     <select id="weekStatistics" resultType="java.lang.Integer">
         SELECT COUNT(*) FROM zstudent_login WHERE YEARWEEK(date_format(zrecognizetime,'%Y-%m-%d')) = YEARWEEK(now());
     </select>
@@ -15,4 +17,44 @@
     <select id="todayStatistics" resultType="java.lang.Integer">
        select COUNT(*) from zstudent_login where to_days(zrecognizetime) = to_days(now());
     </select>
+
+    <select id="trainingNumber" resultType="java.lang.Integer">
+    select count(*) from schooltrain.ztraining_facility where zprogress="实训" and zlocation in
+					(select zlocation from schooltrain.ztraining_facility where zstudentPCIP = #{ip4});
+    </select>
+
+    <select id="leaveNumber" resultType="java.lang.Integer">
+    select count(*) from schooltrain.ztraining_facility where zprogress="下课" and zlocation in
+					    (select zlocation from schooltrain.ztraining_facility where zstudentPCIP = #{ip4});
+    </select>
+
+    <select id="exitNumber" resultType="java.lang.Integer">
+    select count(*) from schooltrain.ztraining_facility where zprogress="退出系统" and zlocation in
+					    (select zlocation from schooltrain.ztraining_facility where zstudentPCIP = #{ip4});
+    </select>
+
+    <select id="yearTestPassNumber" resultType="java.lang.Integer">
+        select count(*) from schooltrain.ztesting_score where zscore >= 40 and year(zchecktime) = year(now());
+    </select>
+
+    <select id="monthTestPassNumber" resultType="java.lang.Integer">
+        select count(*) from schooltrain.ztesting_score where zscore>=40 and date_format(zchecktime,'%Y-%m')=date_format(now(),'%Y-%m');
+    </select>
+
+    <select id="weekTestPassNumber" resultType="java.lang.Integer">
+        select count(*) from schooltrain.ztesting_score where zscore>=40 and yearweek(date_format(zchecktime, '%Y-%m-%d')) = yearweek(now());
+    </select>
+
+    <select id="yearTestTotalNumber" resultType="java.lang.Integer">
+        select count(*) from schooltrain.ztesting_score where year(zchecktime) = year(now());
+    </select>
+
+    <select id="monthTestTotalNumber" resultType="java.lang.Integer">
+        select count(*) from schooltrain.ztesting_score where date_format(zchecktime, '%Y-%m') = date_format(now(), '%Y-%m');
+    </select>
+
+    <select id="weekTestTotalNumber" resultType="java.lang.Integer">
+        select count(*) from schooltrain.ztesting_score where yearweek(date_format(zchecktime, '%Y-%m-%d')) = yearweek(now());
+    </select>
+
 </mapper>

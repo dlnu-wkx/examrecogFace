@@ -280,9 +280,9 @@
             type: 'pie',
             radius: '50%',
             data: [
-                { value: 70, name: '已开机' },
-                { value: 40, name: '实习中' },
-                { value: 40, name: '已关机' }
+                { value: 70, name: '闲置中' },
+                { value: 40, name: '实训中' },
+                { value: 40, name: '退出系统' }
             ],
             label: {
                 show: true,
