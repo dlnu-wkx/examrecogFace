@@ -627,20 +627,6 @@ public class FaceController {
             ztrinfser.updattwoportbyip(ip4,0);
 
 
-            Thread t = new Thread(new Runnable() {
-                public void run() {
-                    try {
-                        if (ztrfac.getZpowerIP() != null)
-                            if (Powerutil.pingIp(ztrfac.getZpowerIP()))
-                                Powerutil.powercontroller(ztrfac.getZpowerIP(), "11");
-                                Powerutil.powercontroller(ztrfac.getZpowerIP(), "22");
-                    } catch (Exception e) {
-                        // e.printStackTrace();
-                    }
-                }
-            });
-
-
             if (ztrfac.getZtrainingroomID().isEmpty())
                 return Results.newFailedResult(ErrorCodeEnum.NO_FACILITY_TRAINROOMID);
             //实训室
@@ -702,7 +688,21 @@ public class FaceController {
             session.setAttribute("faceUserInfo", faceUserInfo);
 
             //登陆后要做的信息操作
+            Thread t = new Thread(new Runnable() {
+                    public void run() {
+                        try {
+                            if (ztrfac.getZpowerIP() != null)
+                                if (Powerutil.pingIp(ztrfac.getZpowerIP()))
+                                    Powerutil.powercontroller(ztrfac.getZpowerIP(), "11");
+                            Powerutil.powercontroller(ztrfac.getZpowerIP(), "22");
+                        } catch (Exception e) {
+                            // e.printStackTrace();
+                        }
+                    }
+                });
+
             t.start();
+
             int j = zstudentJournalService.insertstujournal(zstudentJournal);
             int b = ztrinfser.updatezprogressbyip(ip4, "登陆");
             int i = zstudent_loginService.insertnowmessage(zsl);

@@ -494,6 +494,9 @@
         clock += ii + ":";
         if (ss < 10) clock += '0';
         clock += ss;
+
+        if(clock=="1970-01-01 08:00:00")
+            return "";
         return clock;
     }
 

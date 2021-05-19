@@ -108,6 +108,7 @@
     }
 
     function a(){
+        static_testtimes--;
         $.ajax({
             type: "post",
             url: "/findsessionprogress",
@@ -230,8 +231,32 @@
 
     var static_tnumber2=0;
 
+    var static_testtimes=0;
+
+    var shuxingtime=0;
+
+
+
+    function gettestmessage(){
+        static_testtimes++;
+       // alert(static_testtimes)
+        $.ajax({
+            type: "post",
+            url: "/updatetesttime",
+            async: false,
+            data:{"ztesttime":static_testtimes},
+            success: function (data){
+                //  alert(data)
+            }
+        });
+    }
+
+
     //页面加载前方法
     window.onload =function () {
+
+      //  gettestmessage()
+
         loadisevent()
 
         //通过的分数
@@ -294,6 +319,109 @@
             findisleave()
         }, 3000);
     }
+
+    function findisleave(){
+        // alert(1)
+        $.ajax({
+            type: "post",
+            url: "/findisleave",
+            async: false,
+            success: function (data) {
+                // alert(data)
+                if (data>0) {
+                    //结算测试题和实训任务
+                    $.ajax({
+                        type: "post",
+                        url: "/findsessionprogress",
+                        data:{},
+                        async: false,
+                        success: function (data){
+                            // console.log(data)
+                            submit2()
+                            /* else if(data=="实训")
+                                 sumbmitpages()*/
+                        }
+                    });
+
+                    /*submit2()
+                    sumbmitpages()*/
+
+                    //删除临时任务
+                    $.ajax({
+                        type: "post",
+                        url: "/deletemes",
+                        data:{},
+                        async: false,
+                        success: function (data){
+
+                        }
+                    });
+
+                    //将继电器6号端口断开
+                    $.ajax({
+                        type: "post",
+                        url: "/usixout",
+                        data:{},
+                        async: false,
+                        success: function (data){
+
+                        }
+                    });
+
+                    //设备状态的更改
+                    $.ajax({
+                        type: "post",
+                        url: "/updateprogress",
+                        data:{},
+                        async: false,
+                        success: function (data){
+
+                        }
+                    });
+
+                    //学生退出时改变实训设备的zprogress
+                    $.ajax({
+                        type:"post",
+                        url:"/exitsystem",
+                        data:{},
+                        async: false,
+                        success:function(data){
+
+                        }
+                    })
+
+                    //清除当堂课请假与举手状态
+                    $.ajax({
+                        type:"post",
+                        url:"/updatealleventbystu",
+                        data:{},
+                        async: false,
+                        success:function(data){
+
+                        }
+                    })
+
+                    //更改学生登陆的状态
+                    $.ajax({
+                        type:"post",
+                        url:"/updatestatusbout",
+                        data:{},
+                        async: false,
+                        success:function(data){
+
+                        }
+                    })
+
+                    setTimeout(function (){ location.href="/student"},1500);
+                }
+            }
+        })
+    }
+
+
+
+
+
 
     var static_testinputnum=new Array();
 
@@ -541,7 +669,7 @@
         $("#nextpage").hide();
         $("#lastpage").hide();
         //安全测试题可以不计分数，而计次数
-      /*  $.ajax({
+      $.ajax({
             type: "post",
             url: "/insertscore",
             data: {"zscore":code},
@@ -549,7 +677,7 @@
             success: function (data) {
                 //alert(data)
             }
-        });*/
+        });
 
      //  更改输入
       $.ajax({
@@ -572,6 +700,7 @@
         for(var c=0;c<static_questionnum;c++)
             ananswer[c]="";
 
+        gettestmessage()
 
     }
 
@@ -584,6 +713,8 @@
     function reanswer() {
         //下一页出现
         $("#nextpage").show();
+        $("#lastpage").show();
+
         //颜色改变
         $("#lastpage").css("background-color","#4472C4");
         $("#nextpage").css("background-color","#4472C4");
@@ -593,15 +724,7 @@
 
         //加载题目
         load();
-        $.ajax({
-            type: "post",
-            url: "/updatetesttime",
-            async: false,
-            data:{},
-            success: function (data){
 
-            }
-        });
         loadpagenumber(1);
 
     }

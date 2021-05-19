@@ -21,7 +21,7 @@ public interface Zstudent_loginService {
 
     Zstudent_login findtatbyip(String zid);
 
-    int updatetesttime(String zstudentID,String zscheduleID);
+    int updatetesttime(String zstudentID,String zscheduleID,int ztesttime);
 
     int updateznowtaskname(String zstudentID,String zscheduleID,String znowtaskname);
 

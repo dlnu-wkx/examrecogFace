@@ -68,8 +68,8 @@
     </update>
 
 
-    <update id="updatetesttime" parameterType="java.lang.String" >
-        update zstudent_login set ztesttime=ztesttime+1 where zrecognizetime=( select max(a.zrecognizetime) from ( select * from zstudent_login where zstudentID=#{zstudentID} and zscheduleID=#{zscheduleID} )a)
+    <update id="updatetesttime"  >
+        update zstudent_login set ztesttime=#{ztesttime} where zrecognizetime=( select max(a.zrecognizetime) from ( select * from zstudent_login where zstudentID=#{zstudentID} and zscheduleID=#{zscheduleID} )a)
     </update>
 
     <update id="updateznowtaskname" parameterType="java.lang.String" >

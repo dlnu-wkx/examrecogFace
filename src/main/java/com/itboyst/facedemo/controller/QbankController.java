@@ -46,9 +46,11 @@ public class QbankController {
   */
     @RequestMapping("/updatetesttime")
     @ResponseBody
-    public int updatetesttime(HttpSession session){
+    public int updatetesttime(HttpSession session,int ztesttime){
+       //System.out.println(11111111);
         Zstudent_cookie zstudent_cookie=(Zstudent_cookie) session.getAttribute("zstudent_cookie");
-        return zstudent_loginService.updatetesttime(zstudent_cookie.getZstudentID(),zstudent_cookie.getZscheduleID());
+      //  System.out.println(zstudent_loginService.updatetesttime(zstudent_cookie.getZstudentID(),zstudent_cookie.getZscheduleID()));
+        return zstudent_loginService.updatetesttime(zstudent_cookie.getZstudentID(),zstudent_cookie.getZscheduleID(),ztesttime);
     }
 
 

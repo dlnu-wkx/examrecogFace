@@ -18,8 +18,6 @@ function upheads() {
 }
 
 
-
-
 function loadisevent(){
     //alert(111)
     $.ajax({
@@ -66,95 +64,7 @@ function findfiveport(){
 
 
 
-//学生退出系统
-function leaveclass() {
-    //alert(11)
-    //结算测试题和实训任务
-    $.ajax({
-        type: "post",
-        url: "/findsessionprogress",
-        data:{},
-        async: false,
-        success: function (data){
-           // console.log(data)
-            if (data=="安全测试")
-                submit2()
-            else if(data=="实训")
-                sumbmitpages()
-        }
-    });
 
-    /*submit2()
-    sumbmitpages()*/
-
-    //删除临时任务
-    $.ajax({
-        type: "post",
-        url: "/deletemes",
-        data:{},
-        async: false,
-        success: function (data){
-
-        }
-    });
-
-    //将继电器6号端口断开
-    $.ajax({
-        type: "post",
-        url: "/usixout",
-        data:{},
-        async: false,
-        success: function (data){
-
-        }
-    });
-
-    //设备状态的更改
-    $.ajax({
-        type: "post",
-        url: "/updateprogress",
-        data:{},
-        async: false,
-        success: function (data){
-
-        }
-    });
-
-    //学生退出时改变实训设备的zprogress
-    $.ajax({
-        type:"post",
-        url:"/exitsystem",
-        data:{},
-        async: false,
-        success:function(data){
-
-        }
-    })
-
-    //清除当堂课请假与举手状态
-    $.ajax({
-        type:"post",
-        url:"/updatealleventbystu",
-        data:{},
-        async: false,
-        success:function(data){
-
-        }
-    })
-
-    //更改学生登陆的状态
-    $.ajax({
-        type:"post",
-        url:"/updatestatusbout",
-        data:{},
-        async: false,
-        success:function(data){
-
-        }
-    })
-
-    location.href="/student"
-}
 
 
 //申请退出系统
@@ -194,7 +104,16 @@ function removeout() {
 }
 
 
+function overclass(){
+    $.ajax({
+        type: "post",
+        url: "/overclass2",
+        success: function (data){
+            layer.msg("已下课，等待学生端电源关闭", { icon: 1, offset: "auto", time:1000 });
+        }
+    });
 
+}
 
 
 //判断字符串长度
@@ -362,8 +281,7 @@ var renliandata = new Array();
 function OpenOTimer(a) {
         filterjieshiLoop=1;
         var zcheck="";
-        var cameraID = document.getElementById("cameraID").innerHTML;
-    if(a==2){
+        if(a==2){
             zcheck="查岗";
             insertCheckPoint();
             $("#startID2").css('background-color','rgba(237,125,49)')
@@ -959,20 +877,6 @@ function powerController() {
     window.location.href = "/power_controller";
 }
 
-
-function findisleave(){
-   // alert(1)
-    $.ajax({
-        type: "post",
-        url: "/findisleave",
-        async: false,
-        success: function (data) {
-           // alert(data)
-            if (data>0)
-                leaveclass()
-        }
-    })
-}
 
 
 //获取命令

@@ -60,8 +60,8 @@ public class Zstudent_loginServiceImpl implements Zstudent_loginService {
     }
 
 
-        public int updatetesttime(String zstudentID,String zscheduleID){
-        return zstulogma.updatetesttime(zstudentID,zscheduleID);
+        public int updatetesttime(String zstudentID,String zscheduleID,int ztesttime){
+        return zstulogma.updatetesttime(zstudentID,zscheduleID, ztesttime);
     }
 
         public int updateznowtaskname(String zstudentID,String zscheduleID,String znowtaskname){
