@@ -39,4 +39,6 @@ public interface ZstudentMapper {
 
     List<Zstudent> findAllStudents();
 
+    String findzgardeidbyscheduid(String zscheduleID);
+
 }

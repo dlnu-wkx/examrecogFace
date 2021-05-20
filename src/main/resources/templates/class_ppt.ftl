@@ -517,6 +517,9 @@
 
     //加载页面前页码及按键逻辑处理（名称,任务表id,任务类型，固定任务Id）
     function loadcontentbypages2(zname,taskid,kindid,assid) {
+
+        pages=0;
+
         $.ajax({
             type: "post",
             url: "/findtaskbyid",
@@ -638,7 +641,7 @@
         $.ajax({
             type: "post",
             url: "/findalltestbytypename",
-            data:{"name":name},
+            data:{"name":static_zname},
             async: false,
             success: function (data){
                 static_questionnum=data.length;
@@ -680,6 +683,7 @@
                         str+="</div>";
                         str+=""
                     }
+
 
                     //先清空里面的
                     $("#cp_content").empty();

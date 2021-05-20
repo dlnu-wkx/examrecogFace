@@ -160,6 +160,8 @@ public class QbankController {
 
         List<Zsafe_testingDto> data2=Qservice.findalltestbytype(name);
 
+       // System.out.println(data2.size());
+       // System.out.println(name);
         Zstudent_cookie zstudent_cookie=(Zstudent_cookie) session.getAttribute("zstudent_cookie");
 
         List<Ztesting_input>data=new ArrayList<>();
@@ -180,6 +182,7 @@ public class QbankController {
             ztesting_input.setZorder(i+1);
             data.add(ztesting_input);
             answer2.add(i,data2.get(i).getZresult());
+
         }
 
         int i=ztesting_inputService.addtestinput(data);

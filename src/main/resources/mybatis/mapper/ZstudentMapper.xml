@@ -25,6 +25,10 @@
             SELECT zname FROM zstudent WHERE zname  like CONCAT('%',#{zname},'%') AND  zstatus='审核通过';
         </select>
 
+        <select id="findzgardeidbyscheduid"  resultType="java.lang.String">
+           SELECT zgradeid from zstudent where zid=( select zstudentID from zstudent_schedule where zscheduleID =#{zscheduleID} ORDER BY zstudentID desc LIMIT 1)
+        </select>
+
 
         <select id="findadoptstudent"  resultType="com.itboyst.facedemo.dto.Zstudent">
             SELECT * FROM zstudent WHERE zfaceinfoID=#{zfaceinfoID}  AND  zstatus='审核通过';

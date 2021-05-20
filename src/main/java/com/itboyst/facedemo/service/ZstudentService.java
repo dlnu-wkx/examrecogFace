@@ -37,4 +37,6 @@ public interface ZstudentService {
     List<Zstudent> findstudentbyzgradid(String zgradeID);
 
     List<Zstudent> findAllStudents();
+
+    public String findzgardeidbyscheduid(String zscheduleID);
 }

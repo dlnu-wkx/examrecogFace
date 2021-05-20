@@ -20,6 +20,7 @@ public class Zteacher_cookie {
     private String zroomname;
     private String zlocation;
     private String znote;
+    private String zgradeid;
 
     public String getZteacherid() {
         return zteacherid;
@@ -157,6 +158,14 @@ public class Zteacher_cookie {
         this.znote = znote;
     }
 
+    public String getZgradeid() {
+        return zgradeid;
+    }
+
+    public void setZgradeid(String zgradeid) {
+        this.zgradeid = zgradeid;
+    }
+
     @Override
     public String toString() {
         return "Zteacher_cookie{" +
@@ -177,6 +186,7 @@ public class Zteacher_cookie {
                 ", zroomname='" + zroomname + '\'' +
                 ", zlocation='" + zlocation + '\'' +
                 ", znote='" + znote + '\'' +
+                ", zgradeid='" + zgradeid + '\'' +
                 '}';
     }
 }

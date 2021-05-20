@@ -91,5 +91,8 @@ public class ZstudentServiceImpl implements ZstudentService {
         return zstu.findAllStudents();
     }
 
-    ;
+
+    @Override
+    public String findzgardeidbyscheduid(String zscheduleID){return zstu.findzgardeidbyscheduid(zscheduleID);}
+
 }

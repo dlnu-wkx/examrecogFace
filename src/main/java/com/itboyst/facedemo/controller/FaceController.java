@@ -1089,7 +1089,11 @@ public class FaceController {
                 return Results.newResult(faceSearchResDto,"2",false,0);
             }
 
+            String zgradid=zstuservice.findzgardeidbyscheduid(zteacher_cookie.getZscheduleID());
+            zteacher_cookie.setZgradeid(zgradid);
+
             session.setAttribute("zteacher_cookie", zteacher_cookie);
+            System.out.println(zgradid);
             System.out.println(session.getAttribute("zteacher_cookie"));
 
             //插入教师日志
