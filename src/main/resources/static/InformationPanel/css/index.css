@@ -116,8 +116,10 @@ header .showTime {
   height: 3rem;
 }
 .no {
-  background: rgba(101, 132, 226, 0.1);
+  background: rgba(101, 132, 226, 0.05);
+  border: 1px solid rgba(25, 186, 139, 0.17);
   padding: 0.1875rem;
+  height: 3.875rem;
 }
 .no .no-hd {
   position: relative;
@@ -135,26 +137,6 @@ header .showTime {
   text-align: center;
   font-family: "electronicFont";
 }
-.no .no-hd::before {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 30px;
-  height: 10px;
-  border-left: 2px solid #02a6b5;
-  border-top: 2px solid #02a6b5;
-  content: "";
-}
-.no .no-hd::after {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  width: 30px;
-  height: 10px;
-  border-right: 2px solid #02a6b5;
-  border-bottom: 2px solid #02a6b5;
-  content: "";
-}
 .no .no-bd ul {
   display: flex;
 }
@@ -169,40 +151,103 @@ header .showTime {
 .no .no-hd1 {
   margin-top: 0.1375rem;
 }
-.no .no-bd1 {
-  border-bottom: 1px solid rgba(25, 186, 139, 0.4);
-}
 .map {
   margin-top: 0.175rem;
   position: relative;
-  height: 8rem;
+  height: 7.95rem;
+  background: rgba(101, 132, 226, 0.05);
+  border: 1px solid rgba(25, 186, 139, 0.17);
+}
+.map .map_panel {
+  height: 7.95rem;
+}
+.map .map_panel .info {
+  height: 0.75rem;
+  margin: 0 auto;
+}
+.map .map_panel .info ul {
+  height: 0.75rem;
+  width: 70%;
+  margin: 0 auto;
+}
+.map .map_panel .info ul li {
+  float: left;
+  padding: 0 0.2rem;
+  line-height: 0.75rem;
+  font-size: 0.25rem;
+  color: #fff;
+}
+.map .map_panel .chart {
+  height: 4.25rem;
+}
+.map .map_panel .title {
+  color: #fff;
+  font-size: 0.3rem;
+}
+.map .map_panel .not_sign {
+  position: relative;
+  overflow: hidden;
+  height: 1.5rem;
+  width: 95%;
+  margin: 0 auto;
+  margin-top: 0.75rem;
+}
+.map .map_panel .not_sign h4 {
+  float: left;
+  width: 20%;
+  line-height: 1rem;
+  font-size: 0.3rem;
+  color: #fff;
+}
+.map .map_panel .not_sign .not_sign_name {
+  position: relative;
+  float: left;
+  overflow: hidden;
+  width: 75%;
+  height: 1rem;
+}
+.map .map_panel .not_sign .not_sign_name .text_box {
+  position: absolute;
+  line-height: 1rem;
+  height: 1rem;
+  left: 100%;
+  line-height: 0.375rem;
+  font-size: 0.275rem;
+  display: block;
+  color: #fff;
+  word-break: keep-all;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.map .map_panel .not_sign .not_sign_name .text_box p {
+  line-height: 1rem;
 }
 .map .map1 {
   width: 6.475rem;
   height: 6.475rem;
   position: absolute;
-  top: 50%;
+  top: 42%;
   left: 50%;
   transform: translate(-50%, -50%);
   background: url(../images/map.png);
   background-size: 100% 100%;
-  opacity: 0.3;
+  opacity: 0.2;
 }
 .map .map2 {
   position: absolute;
-  top: 50%;
+  top: 42%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 6rem;
   height: 6rem;
   background: url("../images/lbx.png");
   background-size: 100% 100%;
-  opacity: 0.4;
-  animation: rotate1 15s linear infinite;
+  opacity: 0.2;
+  animation: rotate1 20s linear infinite;
 }
 .map .map3 {
   position: absolute;
-  top: 50%;
+  top: 42%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 7.075rem;
@@ -210,7 +255,7 @@ header .showTime {
   background: url("../images/jt.png");
   background-size: 100% 100%;
   opacity: 0.4;
-  animation: rotate2 15s linear infinite;
+  animation: rotate2 20s linear infinite;
 }
 @keyframes rotate1 {
   from {

@@ -1,14 +1,16 @@
 package com.itboyst.facedemo.service;
 
-public interface ZechartsService {
-    int yearStatistics();
-    int monthStatistics();
-    int weekStatistics();
-    int todayStatistics();
+import java.util.List;
 
-    int trainingNumber(String ip4);
-    int leaveNumber(String ip4);
-    int exitNumber(String ip4);
+public interface ZechartsService {
+    int yearTrainNumber(String trainRoomID);
+    int monthTrainNumber(String trainRoomID);
+    int weekTrainNumber(String trainRoomID);
+    int todayTrainNumber(String trainRoomID);
+
+    int loginNumber(String zLocation);
+    int trainingNumber(String zLocation);
+    int freeNumber(String zLocation);
 
     int yearTestPassNumber();
     int monthTestPassNumber();
@@ -16,4 +18,9 @@ public interface ZechartsService {
     int yearTestTotalNumber();
     int monthTestTotalNumber();
     int weekTestTotalNumber();
+
+    String getClassName(String zGradeId);
+    int getTotalNumber(String zGradeId);
+    int getArrivedNumber(String zScheduleId, String zGradeId);
+    List<String> getNotArrivedStudents(String zScheduleId, String zGradeId);
 }

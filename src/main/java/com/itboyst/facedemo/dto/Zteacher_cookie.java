@@ -5,16 +5,16 @@ import java.sql.Timestamp;
 public class Zteacher_cookie {
     private String zteacherid;
     private String zmajorID;
-    private String zauthorityID;
-    private String zidentity;
+    private String zauthorityID;//权限ID
+    private String zidentity;//工号
     private String zpass;
     private String zname;
     private String zsex;
     private String zphone;
     private int zfaceinfoID;
     private String zphoto;
-    private String zteacher_scheduleid;
-    private String zscheduleID;
+    private String zteacher_scheduleid; //教师上课表
+    private String zscheduleID;  //上课表id
     private String zteacherID;
     private String ztrainingroomid;
     private String zroomname;

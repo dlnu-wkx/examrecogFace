@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>信息展示面板</title>
-    <link rel="stylesheet" href="./InformationPanel/css/index.css" />
+    <link rel="stylesheet" href="./InformationPanel/css/index.css"/>
 </head>
 
 <body>
@@ -38,8 +38,8 @@
         <div class="no">
             <div class="no-hd ">
                 <ul>
-                    <li id="yeardata">12356</li>
-                    <li id="monthdata">2133</li>
+                    <li id="yeardata">--</li>
+                    <li id="monthdata">--</li>
                 </ul>
             </div>
             <div class="no-bd no-bd1">
@@ -50,8 +50,8 @@
             </div>
             <div class="no-hd no-hd1">
                 <ul>
-                    <li id="weekdata">124</li>
-                    <li id="todaydata">213</li>
+                    <li id="weekdata">--</li>
+                    <li id="todaydata">--</li>
                 </ul>
             </div>
             <div class="no-bd">
@@ -63,10 +63,32 @@
         </div>
         <!-- 地图模块 -->
         <div class="map">
-
+            <div class="map_panel">
+                <div class="info">
+                    <ul>
+                        <li id="className">当前上课班级：xxxx班</li>
+                        <li id="totalNumber">应到人数：xx</li>
+                        <li id="arrivedNumber">实到人数：xx</li>
+                    </ul>
+                </div>
+                <div class="chart">
+                </div>
+                <div class="title">
+                    学生签到率
+                </div>
+                <div class="not_sign">
+                    <h4>未签到学生:</h4>
+                    <div class="not_sign_name">
+                        <div class="text_box">
+                            <p id="notArrivedStudents"> </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="map1"></div>
             <div class="map2"></div>
             <div class="map3"></div>
+
         </div>
     </div>
     <div class="cloumn">
@@ -82,7 +104,7 @@
             </div>
             <div class="panel-footer"></div>
         </div>
-        <div class="panel pie">
+        <div class="panel use-time">
             <h2>全部机床的累计使用时间</h2>
             <div class="chart">
             </div>
@@ -96,63 +118,5 @@
 <script src="InformationPanel/js/echarts.min.js"></script>
 <script src="InformationPanel/js/index.js"></script>
 <script src="InformationPanel/js/showTime.js "></script>
-<script type="text/javascript">
-    window.onload =function () {
-
-
-        $.ajax({
-            type: "post",
-            url: "/yeardata",
-            success: function (data) {
-                document.getElementById("yeardata").innerHTML = data
-
-            }
-        });
-        $.ajax({
-            type: "post",
-            url: "/monthdata",
-            success: function (data) {
-                document.getElementById("monthdata").innerHTML = data
-            }
-        });
-
-        $.ajax({
-            type: "post",
-            url: "/weekdata",
-            success: function (data) {
-                document.getElementById("weekdata").innerHTML = data
-            }
-        });
-        $.ajax({
-            type: "post",
-            url: "/todaydata",
-            success: function (data) {
-                document.getElementById("todaydata").innerHTML = data
-            }
-        });
-
-        $.ajax({
-            type: "post",
-            url: "/useRate",
-            success: function (data) {
-                console.log(data);
-            }
-        });
-
-        $.ajax({
-            type: "post",
-            url: "/passRate",
-            success: function (data) {
-                console.log(data);
-            }
-        });
-
-
-    }
-
-</script>
 </body>
-
-
-
 </html>

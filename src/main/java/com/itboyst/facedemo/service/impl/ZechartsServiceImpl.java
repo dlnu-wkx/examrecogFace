@@ -5,6 +5,8 @@ import com.itboyst.facedemo.service.ZechartsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ZechartsServiceImpl implements ZechartsService {
 
@@ -12,39 +14,39 @@ public class ZechartsServiceImpl implements ZechartsService {
     ZechartsMapper zechartsMapper;
 
     @Override
-    public int yearStatistics() {
-        return zechartsMapper.yearStatistics();
+    public int yearTrainNumber(String trainRoomID) {
+        return zechartsMapper.yearTrainNumber(trainRoomID);
     }
 
     @Override
-    public int monthStatistics() {
-        return zechartsMapper.monthStatistics();
+    public int monthTrainNumber(String trainRoomID) {
+        return zechartsMapper.monthTrainNumber(trainRoomID);
     }
 
     @Override
-    public int weekStatistics() {
+    public int weekTrainNumber(String trainRoomID) {
 
-        return zechartsMapper.weekStatistics();
+        return zechartsMapper.weekTrainNumber(trainRoomID);
     }
 
     @Override
-    public int todayStatistics() {
-        return zechartsMapper.todayStatistics();
+    public int todayTrainNumber(String trainRoomID) {
+        return zechartsMapper.todayTrainNumber(trainRoomID);
     }
 
     @Override
-    public int trainingNumber(String ip4) {
-        return zechartsMapper.trainingNumber(ip4);
+    public int loginNumber(String zLocation) {
+        return zechartsMapper.loginNumber(zLocation);
     }
 
     @Override
-    public int leaveNumber(String ip4){
-        return zechartsMapper.leaveNumber(ip4);
+    public int trainingNumber(String zLocation) {
+        return zechartsMapper.trainingNumber(zLocation);
     }
 
     @Override
-    public int exitNumber(String ip4) {
-        return zechartsMapper.exitNumber(ip4);
+    public int freeNumber(String zLocation) {
+        return zechartsMapper.freeNumber(zLocation);
     }
 
     @Override
@@ -77,4 +79,23 @@ public class ZechartsServiceImpl implements ZechartsService {
         return zechartsMapper.weekTestTotalNumber();
     }
 
+    @Override
+    public String getClassName(String zGradeId) {
+        return zechartsMapper.getClassName(zGradeId);
+    }
+
+    @Override
+    public int getTotalNumber(String zGradeId) {
+        return zechartsMapper.getTotalNumber(zGradeId);
+    }
+
+    @Override
+    public int getArrivedNumber(String zScheduleId, String zGradeId) {
+        return zechartsMapper.getArrivedNumber(zScheduleId, zGradeId);
+    }
+
+    @Override
+    public List<String> getNotArrivedStudents(String zScheduleId, String zGradeId) {
+        return zechartsMapper.getNotArrivedStudents(zScheduleId,zGradeId);
+    }
 }

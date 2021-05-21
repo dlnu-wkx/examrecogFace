@@ -2,59 +2,94 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.itboyst.facedemo.mapper.ZechartsMapper">
-    <select id="yearStatistics" resultType="java.lang.Integer">
-        select COUNT(*) from zstudent_login where YEAR(zrecognizetime)=YEAR(NOW());
+    <select id="yearTrainNumber" resultType="java.lang.Integer">
+        select count(*) from (select * from (select * from schooltrain.zstudent_login
+        where year(zrecognizetime)=year(NOW())) n group by zstudentID) m where zcheck = "登陆"
     </select>
 
-    <select id="monthStatistics" resultType="java.lang.Integer">
-        select COUNT(*) from zstudent_login where date_format(zrecognizetime,'%Y-%m')=date_format(now(),'%Y-%m');
+    <select id="monthTrainNumber" resultType="java.lang.Integer">
+        select count(*) from (select * from (select * from schooltrain.zstudent_login
+        where date_format(zrecognizetime,'%Y-%m')=date_format(now(),'%Y-%m')) n group by zstudentID) m where zcheck = "登陆"
     </select>
 
-    <select id="weekStatistics" resultType="java.lang.Integer">
-        SELECT COUNT(*) FROM zstudent_login WHERE YEARWEEK(date_format(zrecognizetime,'%Y-%m-%d')) = YEARWEEK(now());
+    <select id="weekTrainNumber" resultType="java.lang.Integer">
+        select count(*) from (select * from (select * from schooltrain.zstudent_login
+        where YEARWEEK(date_format(zrecognizetime,'%Y-%m-%d')) = YEARWEEK(now())) n group by zstudentID) m where zcheck = "登陆"
     </select>
 
-    <select id="todayStatistics" resultType="java.lang.Integer">
-       select COUNT(*) from zstudent_login where to_days(zrecognizetime) = to_days(now());
+    <select id="todayTrainNumber" resultType="java.lang.Integer">
+       select count(*) from (select * from (select * from schooltrain.zstudent_login
+        where to_days(zrecognizetime) = to_days(now())) n group by zstudentID) m where zcheck = "登陆"
     </select>
 
+    <!--已登录系统的人数-->
+    <select id="loginNumber" resultType="java.lang.Integer">
+    select count(*) from schooltrain.ztraining_facility where (zprogress = "登陆" or zprogress = "测试") and zlocation = #{zLocation}
+    </select>
+
+    <!--实训中的人数-->
     <select id="trainingNumber" resultType="java.lang.Integer">
-    select count(*) from schooltrain.ztraining_facility where zprogress="实训" and zlocation in
-					(select zlocation from schooltrain.ztraining_facility where zstudentPCIP = #{ip4});
+    select count(*) from schooltrain.ztraining_facility where zprogress="实训" and zlocation = #{zLocation}
     </select>
 
-    <select id="leaveNumber" resultType="java.lang.Integer">
-    select count(*) from schooltrain.ztraining_facility where zprogress="下课" and zlocation in
-					    (select zlocation from schooltrain.ztraining_facility where zstudentPCIP = #{ip4});
-    </select>
-
-    <select id="exitNumber" resultType="java.lang.Integer">
-    select count(*) from schooltrain.ztraining_facility where zprogress="退出系统" and zlocation in
-					    (select zlocation from schooltrain.ztraining_facility where zstudentPCIP = #{ip4});
+    <!--空闲的机器数-->
+    <select id="freeNumber" resultType="java.lang.Integer">
+    select count(*) from schooltrain.ztraining_facility where (zprogress="下课" or zprogress="退出系统") and zlocation = #{zLocation}
     </select>
 
     <select id="yearTestPassNumber" resultType="java.lang.Integer">
-        select count(*) from schooltrain.ztesting_score where zscore >= 40 and year(zchecktime) = year(now());
+        select count(*) from schooltrain.ztesting_score where zscore >= 20 and year(zchecktime) = year(now())
     </select>
 
     <select id="monthTestPassNumber" resultType="java.lang.Integer">
-        select count(*) from schooltrain.ztesting_score where zscore>=40 and date_format(zchecktime,'%Y-%m')=date_format(now(),'%Y-%m');
+        select count(*) from schooltrain.ztesting_score where zscore>=20 and
+                    date_format(zchecktime,'%Y-%m')=date_format(now(),'%Y-%m')
     </select>
 
     <select id="weekTestPassNumber" resultType="java.lang.Integer">
-        select count(*) from schooltrain.ztesting_score where zscore>=40 and yearweek(date_format(zchecktime, '%Y-%m-%d')) = yearweek(now());
+        select count(*) from schooltrain.ztesting_score where zscore>=20 and
+        yearweek(date_format(zchecktime, '%Y-%m-%d')) = yearweek(now())
     </select>
 
     <select id="yearTestTotalNumber" resultType="java.lang.Integer">
-        select count(*) from schooltrain.ztesting_score where year(zchecktime) = year(now());
+        select count(*) from schooltrain.ztesting_score where year(zchecktime) = year(now())
     </select>
 
     <select id="monthTestTotalNumber" resultType="java.lang.Integer">
-        select count(*) from schooltrain.ztesting_score where date_format(zchecktime, '%Y-%m') = date_format(now(), '%Y-%m');
+        select count(*) from schooltrain.ztesting_score where date_format(zchecktime, '%Y-%m') = date_format(now(), '%Y-%m')
     </select>
 
     <select id="weekTestTotalNumber" resultType="java.lang.Integer">
-        select count(*) from schooltrain.ztesting_score where yearweek(date_format(zchecktime, '%Y-%m-%d')) = yearweek(now());
+        select count(*) from schooltrain.ztesting_score where yearweek(date_format(zchecktime, '%Y-%m-%d')) = yearweek(now())
+    </select>
+
+    <select id="getClassName" resultType="java.lang.String">
+        select zname from schooltrain.zgrade where zid = #{zGradeId}
+    </select>
+
+    <select id="getTotalNumber" resultType="java.lang.Integer">
+        select count(*) from schooltrain.zstudent where zgradeID = #{zGradeId}
+    </select>
+
+    <select id="getArrivedNumber" resultType="java.lang.Integer">
+        select count(*) from zstudent where zid in (select zstudentID from (select * from schooltrain.zstudent_login where
+				zscheduleID = #{zScheduleId} and
+				zcheck = '登陆' and
+                zrecognizetime between (select zstartdate from zschedule where zid = #{zScheduleId}) and
+                (select zenddate from zschedule where zid = #{zScheduleId})) n
+		group by n.zstudentID)
+				and zgradeID = #{zGradeId}
+    </select>
+
+    <select id="getNotArrivedStudents" resultType="java.lang.String">
+        select zname from schooltrain.zstudent where zgradeID = #{zGradeId}
+				and zid not in (select zid from zstudent where zid in (select zstudentID from (select * from schooltrain.zstudent_login
+                where zscheduleID = #{zScheduleId}
+                and zcheck = '登陆'
+                and zrecognizetime between (select zstartdate from zschedule where zid = #{zScheduleId})
+                and (select zenddate from zschedule where zid = #{zScheduleId})) n
+				group by n.zstudentID)
+				and zgradeID = #{zGradeId})
     </select>
 
 </mapper>
