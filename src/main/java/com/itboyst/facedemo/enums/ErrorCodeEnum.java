@@ -37,7 +37,7 @@ public enum ErrorCodeEnum {
     INSPECT_END(28,"查岗结束"),
     SESSION_NOT_ACTIVE(29,"session失活"),
     NOT_CAN_PITURE_LOGIN(30,"不可以使用图片登录"),
-
+    NOT_SCHEDULE(32,"改时间段没有课程"),
     Double_Login(31,"不能重复登陆,请退出当前登陆的机器"),
 
 

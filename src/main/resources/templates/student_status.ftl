@@ -14,6 +14,13 @@
     <script src="./layui/layui.js"></script>
     <script src="./layui/js/exit.js "></script>
 </head>
+<style>
+    html,body{
+        height: 100%;
+        margin: 0;
+        padding: 0;}
+    #side_nav ul{display:none}
+</style>
 <body  class="body">
 <!--警示消息-->
 <div>
@@ -496,9 +503,9 @@
         getteacherroom();
         loadfaclity(static_trainroomid);
 
-      interval= window.setInterval(function () {
+      /*interval= window.setInterval(function () {
             loadfaclity(static_trainroomid);
-        }, 20000);
+        }, 2000000);*/
     }
 
 
@@ -561,14 +568,21 @@
             success: function (data) {
                 //alert(data.length)
 
-                //alert(data)
+                //alert(data) str+="<table class='p_bbbox' id='p_bbox'>"
                 if(data.length <7){
-                    str+="<table class='p_bbbox' id='p_bbox'>"
+                    str+="<table class='p_bbbox_1' id='p_bbox'>"
+                    str+="<tr  align='center'>";
+                    str+="<th></th>";
+                    str+="<th></th>";
+                    str+="<th></th>";
+                    str+="<th></th>";
+                    str+="<th></th>";
+                    str+="</tr>";
                     str+=" <tr>";
 
                     for(var i=0; i<data.length;i++){
 
-                        str+="<th ><div class='power_bbox2'  align='center'> "
+                        str+="<th ><div class='power_bbox2_1'  align='center'> "
                         str+="<input type='checkbox' id='"+data[i].zid+"' value='"+data[i].zid+"' class='chosetop' hidden name='topchose'>"
                         str+="<div  class='delivery_unpowerbox2' align='center' onclick='loadth(\""+data[i].zid+"\")'>"
 
@@ -718,8 +732,9 @@
                     var j=0;
                     str+="<table class='p_bbbox' id='p_bbox'>"
 
-                    for (var i=0;i<(data.length/6+1);i++){
 
+                    for (var i=0;i<(data.length/6+1);i++){
+                       /* str+="<tr style='height: 20%;' >";*/
                         str+=" <tr>";
 
                         for(;j<6*(i+1);j++){

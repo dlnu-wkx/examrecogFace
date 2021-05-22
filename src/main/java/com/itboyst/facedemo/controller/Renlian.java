@@ -108,9 +108,10 @@ public class Renlian  {
                     String originalPictureUrl =dongtaipayload.getString("originalPictureUrl");
                     String strangername =dongtaipayload.getString("personName");
                     //如果type的类型为1则进入允许执行写入登录日志
+                    String cameraName =dongtaipayload.getString("cameraName");
                     if(1==type){
 
-                        String cameraName =dongtaipayload.getString("cameraName");
+
 
                         System.out.println("识别:" + xuehao + " , " + dongtaipayload.getString("personName"));
 
@@ -139,7 +140,7 @@ public class Renlian  {
                                 if(!list.isEmpty()){
                                     zsl.setZscheduleID(list.get(0));
                                 }
-
+                                zsl.setCameraname(cameraName);
                                 int a =zstudentLoginService.updateloginmessage(zsl);
                             }
                             //把识别的老师信息加入到登录日志中
@@ -155,6 +156,7 @@ public class Renlian  {
                                 zteacher_login.setZrecognizeIP(jieshiip);
                                /* String teacherpath =faceEngineService.findfopathByfaceid(zteacher.getZfaceinfoID());*/
                                 zteacher_login.setOriginalPictureUrl(originalPictureUrl);
+                                zteacher_login.setCameraname(cameraName);
                                 int b = zteacher_loginService.delAndinsertteacher(zteacher_login);
                             }
 
@@ -172,6 +174,7 @@ public class Renlian  {
                         zstrange.setZrecognizeIP(jieshiip);
                         zstrange.setOriginalPictureUrl(originalPictureUrl);
                         zstrange.setZstatus("陌生人");
+                        zstrange.setCameraname(cameraName);
                         int c = zstrangeService.insertZstrange(zstrange);
                     }
                 }

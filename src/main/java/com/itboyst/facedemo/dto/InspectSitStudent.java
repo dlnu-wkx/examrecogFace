@@ -12,4 +12,5 @@ public class InspectSitStudent {
     private Timestamp zrecognizetime;
     private String ztrainingroomID;
     private String originalPictureUrl;
+    private String cameraname;
 }

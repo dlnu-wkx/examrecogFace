@@ -230,6 +230,10 @@
                         } else if (text.code==30){
                             layer.msg("不可以使用图片登录", { icon: 1, offset: "auto", time:2000 });
                             //alert("学生上课表(zstudent_schedule)没有该名学生的信息");
+                        }else if(text.code==31){
+                            layer.msg("不能重复登陆,请退出当前登陆的机器", { icon: 1, offset: "auto", time:2000 });
+                        }else if(text.code==32){
+                            layer.msg("改时间段没有课程", { icon: 1, offset: "auto", time:2000 });
                         }
                         else{
                             //alert("摄像头未开或其它错误")

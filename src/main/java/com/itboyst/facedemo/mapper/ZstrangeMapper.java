@@ -12,5 +12,7 @@ public interface ZstrangeMapper {
 
     List<Zstrange> findAll(String zrecognizeIP, Timestamp timestamp, String zcheck);
 
+    List<Zstrange> findAllByCameraname(String zrecognizeIP, Timestamp timestamp, String zcheck,String cameraname);
+
     int deleteOriginalPictureUrl(String originalPictureUrl);
 }

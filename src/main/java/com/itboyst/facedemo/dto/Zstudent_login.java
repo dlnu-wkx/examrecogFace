@@ -14,6 +14,15 @@ public class Zstudent_login {
     private String originalPictureUrl;
     private int ztesttime;
     private String znowtaskname;
+    private String cameraname;
+
+    public String getCameraname() {
+        return cameraname;
+    }
+
+    public void setCameraname(String cameraname) {
+        this.cameraname = cameraname;
+    }
 
     public String getZid() {
         return zid;
@@ -117,6 +126,7 @@ public class Zstudent_login {
                 ", originalPictureUrl='" + originalPictureUrl + '\'' +
                 ", ztesttime=" + ztesttime +
                 ", znowtaskname='" + znowtaskname + '\'' +
+                ", cameraname='" + cameraname + '\'' +
                 '}';
     }
 }

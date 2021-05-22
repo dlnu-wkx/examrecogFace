@@ -13,19 +13,14 @@ public class Zteacher_login {
     private String ztype;
     private String  zrecognizeIP;
     private String originalPictureUrl;
+    private String cameraname;
 
-    @Override
-    public String toString() {
-        return "Zteacher_login{" +
-                "zid='" + zid + '\'' +
-                ", zteacherID='" + zteacherID + '\'' +
-                ", zscheduleID='" + zscheduleID + '\'' +
-                ", zrecognizetime=" + zrecognizetime +
-                ", zcheck='" + zcheck + '\'' +
-                ", ztype='" + ztype + '\'' +
-                ", zrecognizeIP='" + zrecognizeIP + '\'' +
-                ", originalPictureUrl='" + originalPictureUrl + '\'' +
-                '}';
+    public String getCameraname() {
+        return cameraname;
+    }
+
+    public void setCameraname(String cameraname) {
+        this.cameraname = cameraname;
     }
 
     public String getZid() {
@@ -91,4 +86,6 @@ public class Zteacher_login {
     public void setOriginalPictureUrl(String originalPictureUrl) {
         this.originalPictureUrl = originalPictureUrl;
     }
+
+
 }

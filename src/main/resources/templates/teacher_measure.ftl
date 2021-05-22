@@ -47,7 +47,7 @@
 </div>
 
 
-<div style="width: 100%;height: 100%">
+<div style="width: 100%;height: 90%">
     <!--中间信息查询-->
     <div class="i_center" >
 
@@ -59,7 +59,7 @@
         <select class="m_classselect" id="m_classselect" onchange="getmeasurebygt2()"></select>
         <font class="m_taskfont" size="5">实训任务：</font>
         <select class="m_taskselect" id="m_taskselect"  onchange="getmeasurebygt2()"></select>
-        <#--<button class="m_submitbutton">提交</button>--> <#-- <button class="m_savebutton" onclick="saveteachercheck()">保存</button>-->
+        <#--<button class="m_submitbutton">提交</button>--> <button class="m_savebutton" onclick="saveteachercheck()">保存</button>
     </div>
 
     <div class="m_tablemes">

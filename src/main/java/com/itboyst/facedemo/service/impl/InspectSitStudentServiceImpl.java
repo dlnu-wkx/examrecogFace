@@ -15,40 +15,60 @@ public class InspectSitStudentServiceImpl implements InspectSitStudentService{
     InspectSitStudentMapper inspectSitStudentMapper;
 
     @Override
-    public List<InspectSitStudent> findStudentByDateAndTrainingId(String ztrainingroomID, Timestamp timestamp,String zcheck) {
-        return inspectSitStudentMapper.findStudentByDateAndTrainingId(ztrainingroomID,timestamp,zcheck);
+    public List<InspectSitStudent> findStudentByDateAndTrainingId(String ztrainingroomID, Timestamp timestamp,String zcheck,String cameraname) {
+        if(cameraname.equals("")){
+            return inspectSitStudentMapper.findStudentByDateAndTrainingId(ztrainingroomID,timestamp,zcheck);
+        }
+        return inspectSitStudentMapper.findStudentByDateAndTrainingIdHavecamera(ztrainingroomID,timestamp,zcheck,cameraname);
     }
 
     @Override
-    public List<InspectSitStudent> findStudentByDateAndTrainingIdASC(String ztrainingroomID, Timestamp timestamp,String zcheck) {
-        return inspectSitStudentMapper.findStudentByDateAndTrainingIdASC(ztrainingroomID,timestamp,zcheck);
+    public List<InspectSitStudent> findStudentByDateAndTrainingIdASC(String ztrainingroomID, Timestamp timestamp,String zcheck,String cameraname) {
+        if(cameraname.equals("")){
+            return inspectSitStudentMapper.findStudentByDateAndTrainingIdASC(ztrainingroomID,timestamp,zcheck);
+        }
+        return inspectSitStudentMapper.findStudentByDateAndTrainingIdASCHavecamera(ztrainingroomID,timestamp,zcheck,cameraname);
     }
 
     @Override
-    public List<InspectSitTeacher> findTeacherByDateAndTrainingIdASC(String camerasIP, Timestamp timestamp,String zcheck) {
-        return inspectSitStudentMapper.findTeacherByDateAndTrainingIdASC(camerasIP,timestamp,zcheck);
+    public List<InspectSitTeacher> findTeacherByDateAndTrainingIdASC(String camerasIP, Timestamp timestamp,String zcheck,String cameraname) {
+        if(cameraname.equals("")){
+            return inspectSitStudentMapper.findTeacherByDateAndTrainingIdASC(camerasIP,timestamp,zcheck);
+        }
+        return inspectSitStudentMapper.findTeacherByDateAndTrainingIdASCHavecamera(camerasIP,timestamp,zcheck,cameraname);
     }
 
     @Override
-    public List<InspectSitTeacher> findTeacherByDateAndTrainingIDdistinct(String camerasIP, Timestamp timestamp, String zcheck) {
-        return inspectSitStudentMapper.findTeacherByDateAndTrainingIDdistinct(camerasIP,timestamp,zcheck);
+    public List<InspectSitTeacher> findTeacherByDateAndTrainingIDdistinct(String camerasIP, Timestamp timestamp, String zcheck,String cameraname) {
+        if(cameraname.equals("")){
+            return inspectSitStudentMapper.findTeacherByDateAndTrainingIDdistinct(camerasIP,timestamp,zcheck);
+        }
+        return inspectSitStudentMapper.findTeacherByDateAndTrainingIDdistinctHavecamera(camerasIP,timestamp,zcheck,cameraname);
     }
 
     @Override
-    public List<InspectSitStudent> inspectfindStudentByDateAndTrainingIdASC(String ztrainingroomID, Timestamp timestamp, String zcheck) {
-        return inspectSitStudentMapper.inspectfindStudentByDateAndTrainingIdASC(ztrainingroomID,timestamp,zcheck);
+    public List<InspectSitStudent> inspectfindStudentByDateAndTrainingIdASC(String ztrainingroomID, Timestamp timestamp, String zcheck,String cameraname) {
+        if(cameraname.equals("")){
+            inspectSitStudentMapper.inspectfindStudentByDateAndTrainingIdASC(ztrainingroomID,timestamp,zcheck);
+        }
+        return inspectSitStudentMapper.inspectfindStudentByDateAndTrainingIdHavecamera(ztrainingroomID,timestamp,zcheck,cameraname);
     }
 
 
-
     @Override
-    public List<InspectSitStudent> signIninspectfindStudentByDateAndTrainingId(String ztrainingroomID, Timestamp timestamp, String zcheck, String zid) {
-        return inspectSitStudentMapper.signIninspectfindStudentByDateAndTrainingId(ztrainingroomID,timestamp,zcheck,zid);
+    public List<InspectSitStudent> signIninspectfindStudentByDateAndTrainingId(String ztrainingroomID, Timestamp timestamp, String zcheck, String zid,String cameraname) {
+        if(cameraname.equals("")){
+            return inspectSitStudentMapper.signIninspectfindStudentByDateAndTrainingId(ztrainingroomID,timestamp,zcheck,zid);
+        }
+        return inspectSitStudentMapper.signIninspectfindStudentByDateAndTrainingIdHavecamera(ztrainingroomID,timestamp,zcheck,zid,cameraname);
     }
 
     @Override
-    public List<InspectSitStudent> inspectfindStudentByDateAndTrainingId(String ztrainingroomID, Timestamp timestamp, String zcheck) {
-        return inspectSitStudentMapper.inspectfindStudentByDateAndTrainingId(ztrainingroomID,timestamp,zcheck);
+    public List<InspectSitStudent> inspectfindStudentByDateAndTrainingId(String ztrainingroomID, Timestamp timestamp, String zcheck,String cameraname) {
+        if(cameraname.equals("")){
+            return inspectSitStudentMapper.inspectfindStudentByDateAndTrainingId(ztrainingroomID,timestamp,zcheck);
+        }
+        return inspectSitStudentMapper.inspectfindStudentByDateAndTrainingIdHavecamera(ztrainingroomID,timestamp,zcheck,cameraname);
     }
 
 

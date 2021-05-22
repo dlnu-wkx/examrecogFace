@@ -18,9 +18,8 @@
     </delete>
 
     <insert id="insertteacher" parameterType="com.itboyst.facedemo.dto.Zteacher_login" >
-        insert into zteacher_login (zid,zteacherID,zscheduleID,zrecognizetime,zcheck,ztype,zrecognizeIP,zstatus,originalPictureUrl)
-        values (#{zid},#{zteacherID},#{zscheduleID},#{zrecognizetime},#{zcheck},#{ztype},#{zrecognizeIP},'正常',#{originalPictureUrl})
-
+        insert into zteacher_login (zid,zteacherID,zscheduleID,zrecognizetime,zcheck,ztype,zrecognizeIP,zstatus,originalPictureUrl,cameraname)
+        values (#{zid},#{zteacherID},#{zscheduleID},#{zrecognizetime},#{zcheck},#{ztype},#{zrecognizeIP},'正常',#{originalPictureUrl},#{cameraname})
     </insert>
 
 </mapper>

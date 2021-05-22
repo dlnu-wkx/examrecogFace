@@ -20,7 +20,8 @@ function startcollect() {
     $("#endID").css('background-color', 'rgba(0,0,255)')
     //打开杰视的远程socket,建立连接websocket的端口
     handlewebsocket("开始");
-    var zid = document.getElementById("gradeID").innerText
+    var zid = document.getElementById("gradeID").innerText;
+
     var myDate = new Date();
     var mytime = myDate.getTime();
     time1 = setInterval(function () {
@@ -47,10 +48,12 @@ function handlewebsocket(a) {
 //从数据库中显示已经检测到的人脸信息
 //从数据中找到签到的学生
 function showRecognitionFaceexam(mytime,zcheck,zid) {
+    var cameraname = $("#trainingroomselect option:selected").val();
     var formData = new FormData();
     formData.append("zcheck",zcheck);
     formData.append("mytime",mytime );
-    formData.append("zid",zid);
+    formData.append("zid",zid)
+    formData.append("cameraname",cameraname)
         $.ajax({
             type:"post",
             url:"/signInInspectSitStudent",
@@ -80,9 +83,11 @@ function showRecognitionFaceexam(mytime,zcheck,zid) {
 }
 //查找所有的人包括学生和教师
 function findAllLoginpeopleexam(mytime,zcheck) {
+    var cameraname = $("#trainingroomselect option:selected").val();
     var formData = new FormData();
     formData.append("zcheck",zcheck)
     formData.append("mytime",mytime );
+    formData.append("cameraname",cameraname)
     $.ajax({
         type:"post",
         url:"/InspectSitStudentandTeacher",

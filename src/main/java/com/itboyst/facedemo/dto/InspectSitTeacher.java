@@ -10,4 +10,5 @@ public class InspectSitTeacher {
     private String zgradeName;
     private Timestamp zrecognizetime;
     private String originalPictureUrl;
+    private String cameraname;
 }

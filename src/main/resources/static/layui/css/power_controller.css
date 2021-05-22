@@ -834,6 +834,14 @@
     margin-left: 1%;
 }
 
+.p_bbbox_1{
+    left: 1%;
+    width: 100%;
+    height: 100%;
+    margin-left: 1%;
+}
+
+
 .power_bbox{
     width: 15%;
     position: absolute;
@@ -844,6 +852,14 @@
     width: 18%;
     height: 30%;
     position: absolute;
+}
+
+
+.power_bbox2_1{
+    width: 18%;
+    height: 30%;
+    position: absolute;
+    margin-top: -22%;
 }
 
 .power_bbox3{

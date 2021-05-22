@@ -38,7 +38,6 @@ public class InspectSitStudentController {
     @Autowired
     ZstrangeService zstrangeService;
 
-
     /**
      * 人脸识别的数据处理方法
      * @param session
@@ -51,9 +50,10 @@ public class InspectSitStudentController {
      */
     @RequestMapping(value = "/InspectSitStudent", method = RequestMethod.POST)
     @ResponseBody
-    public List<InspectSitStudent> InspectSitStudent(HttpSession session,String mytime,String zcheck,@RequestParam(value = "renliandata") String renliandata) throws IOException, ParseException {
-
-
+    public List<InspectSitStudent> InspectSitStudent(HttpSession session,String mytime,String zcheck,@RequestParam(value = "renliandata") String renliandata,String cameraname) throws IOException, ParseException {
+        if(cameraname.equals("全部")){
+            cameraname = "";
+        }
         JSONArray json = JSONArray.fromObject(renliandata);
         //System.out.println("InspectSitStudent 的json : "+json);
 
@@ -103,12 +103,11 @@ public class InspectSitStudentController {
             }
 
             List<InspectSitStudent>  zstudentList = new ArrayList<>();
-            zstudentList =inspectSitStudentService.findStudentByDateAndTrainingId(ztrainingroomID,timestamp,zcheck);
+            zstudentList =inspectSitStudentService.findStudentByDateAndTrainingId(ztrainingroomID,timestamp,zcheck,cameraname);
             //教师的信息
             List<InspectSitTeacher> zteacherList = new ArrayList<>();
-             zteacherList =  inspectSitStudentService.findTeacherByDateAndTrainingIDdistinct(jieshiip,timestamp,zcheck);
+             zteacherList =  inspectSitStudentService.findTeacherByDateAndTrainingIDdistinct(jieshiip,timestamp,zcheck,cameraname);
             if(CollectionUtil.isNotEmpty(zteacherList)){
-
                 for(InspectSitTeacher a:zteacherList){
                     InspectSitStudent inspectSitStudent =new InspectSitStudent();
                     inspectSitStudent.setZgradeName("教师");
@@ -116,11 +115,11 @@ public class InspectSitStudentController {
                     inspectSitStudent.setZstudentID(a.getZteacherID());
                     inspectSitStudent.setZrecognizetime(a.getZrecognizetime());
                     inspectSitStudent.setOriginalPictureUrl(a.getOriginalPictureUrl());
+                    inspectSitStudent.setCameraname(a.getCameraname());
                     //把老师的信息变形添加到学生数组中
                     zstudentList.add(inspectSitStudent);
                 }
             }
-
             List<InspectSitStudent> relist = new ArrayList<>();
                 relist.addAll(zstudentList);
             //10分钟后相同和新增的人员也要显示出来
@@ -129,17 +128,33 @@ public class InspectSitStudentController {
 
                     for(int j=0;j<list.size();j++){
                         String sid =zstudentList.get(i).getZstudentID();
+                        String camera = zstudentList.get(i).getCameraname();
                         Long time1 = zstudentList.get(i).getZrecognizetime().getTime();
-                        if(sid.equals(list.get(j).getZstudentID())){
-                            Long time2 = list.get(j).getZrecognizetime().getTime();
-                            int a = (int) ((time1-time2)/60000);
-                            if(a>=1){//大于1分钟则保留在relist中
-                                relist.add(list.get(j));
-                            }else{//否则先从relist中移除，然后加上页面上的
-                                relist.remove(zstudentList.get(i));
-                                relist.add(list.get(j));
+
+                        if(cameraname.equals("")){
+                            if(sid.equals(list.get(j).getZstudentID())){
+                                Long time2 = list.get(j).getZrecognizetime().getTime();
+                                int a = (int) ((time1-time2)/60000);
+                                if(a>=1){//大于1分钟则保留在relist中
+                                    relist.add(list.get(j));
+                                }else{//否则先从relist中移除，然后加上页面上的
+                                    relist.remove(zstudentList.get(i));
+                                    relist.add(list.get(j));
+                                }
+                            }
+                        }else {
+                            if(sid.equals(list.get(j).getZstudentID()) && camera.equals(list.get(j).getCameraname()) ){
+                                Long time2 = list.get(j).getZrecognizetime().getTime();
+                                int a = (int) ((time1-time2)/60000);
+                                if(a>=1){//大于1分钟则保留在relist中
+                                    relist.add(list.get(j));
+                                }else{//否则先从relist中移除，然后加上页面上的
+                                    relist.remove(zstudentList.get(i));
+                                    relist.add(list.get(j));
+                                }
                             }
                         }
+
                     }
 
                 }
@@ -170,7 +185,7 @@ public class InspectSitStudentController {
 
         List<InspectSitStudent>  zstudentList = new ArrayList<>();
 
-        zstudentList =inspectSitStudentService.inspectfindStudentByDateAndTrainingId(ztrainingroomID,timestamp,zcheck);
+        zstudentList =inspectSitStudentService.inspectfindStudentByDateAndTrainingId(ztrainingroomID,timestamp,zcheck,cameraname);
 
         return zstudentList;
     }
@@ -187,8 +202,10 @@ public class InspectSitStudentController {
      */
     @RequestMapping(value = "/signInInspectSitStudent", method = RequestMethod.POST)
     @ResponseBody
-    public List<InspectSitStudent> signInInspectSitStudent(HttpSession session,String mytime,String zcheck,String zid) throws IOException, ParseException {
-
+    public List<InspectSitStudent> signInInspectSitStudent(HttpSession session,String mytime,String zcheck,String zid,String cameraname) throws IOException, ParseException {
+        if(cameraname.equals("全部")){
+            cameraname = "";
+        }
         Zteacher_cookie zteacher_cookie =(Zteacher_cookie) session.getAttribute("zteacher_cookie");
         String ztrainingroomID ="";
         if(zteacher_cookie !=null){
@@ -202,7 +219,7 @@ public class InspectSitStudentController {
 
         List<InspectSitStudent>  zstudentList = new ArrayList<>();
 
-        zstudentList =inspectSitStudentService.signIninspectfindStudentByDateAndTrainingId(ztrainingroomID,timestamp,zcheck,zid);
+        zstudentList =inspectSitStudentService.signIninspectfindStudentByDateAndTrainingId(ztrainingroomID,timestamp,zcheck,zid,cameraname);
 
         return zstudentList;
     }
@@ -222,8 +239,10 @@ public class InspectSitStudentController {
 
     @RequestMapping(value = "/InspectSitStudentandTeacher", method = RequestMethod.POST)
     @ResponseBody
-    public List<InspectSitStudent> InspectSitStudentandTeacher(HttpSession session,String mytime,String zcheck) throws IOException, ParseException {
-
+    public List<InspectSitStudent> InspectSitStudentandTeacher(HttpSession session,String mytime,String zcheck,String cameraname) throws IOException, ParseException {
+        if(cameraname.equals("全部")){
+            cameraname = "";
+        }
         Timestamp timestamp=new Timestamp(System.currentTimeMillis());
         if(mytime!=null){
             Long time =Long.parseLong(mytime);
@@ -236,16 +255,16 @@ public class InspectSitStudentController {
             ztrainingroomID = zteacher_cookie.getZtrainingroomid();
         }
         if(zcheck.equals("人脸识别")){
-            zstudentList =inspectSitStudentService.findStudentByDateAndTrainingIdASC(ztrainingroomID,timestamp,zcheck);
+            zstudentList =inspectSitStudentService.findStudentByDateAndTrainingIdASC(ztrainingroomID,timestamp,zcheck,cameraname);
         }
         if(zcheck.equals("查岗")){
-            zstudentList = inspectSitStudentService.inspectfindStudentByDateAndTrainingIdASC(ztrainingroomID,timestamp,zcheck);
+            zstudentList = inspectSitStudentService.inspectfindStudentByDateAndTrainingIdASC(ztrainingroomID,timestamp,zcheck,cameraname);
             return zstudentList;
         }
         //查找摄像头识别成功的教师
         Zsysconfig zsysconfig =zsysconfigService.findIPByZname("杰视服务器IP地址");
         String jieshiip =zsysconfig.getZvalue();
-        List<InspectSitTeacher> zteacherList =inspectSitStudentService.findTeacherByDateAndTrainingIdASC(jieshiip,timestamp,zcheck);
+        List<InspectSitTeacher> zteacherList =inspectSitStudentService.findTeacherByDateAndTrainingIdASC(jieshiip,timestamp,zcheck,cameraname);
         if(CollectionUtil.isNotEmpty(zteacherList)){
 
             for(int i =0;i<zteacherList.size();i++){
@@ -255,12 +274,13 @@ public class InspectSitStudentController {
                 inspectSitStudent.setZstudentID(zteacherList.get(i).getZteacherID());
                 inspectSitStudent.setZrecognizetime(zteacherList.get(i).getZrecognizetime());
                 inspectSitStudent.setOriginalPictureUrl(zteacherList.get(i).getOriginalPictureUrl());
+                inspectSitStudent.setCameraname(zteacherList.get(i).getCameraname());
                 //把老师的信息变形添加到学生数组中
                 zstudentList.add(inspectSitStudent);
             }
         }
         //把陌生人的信息也添加进来
-        List<Zstrange> zstrangeslist = zstrangeService.findAll(jieshiip,timestamp,zcheck);
+        List<Zstrange> zstrangeslist = zstrangeService.findAll(jieshiip,timestamp,zcheck,cameraname);
         if(CollectionUtil.isNotEmpty(zstrangeslist)){
             for(Zstrange a:zstrangeslist){
                 InspectSitStudent inspectSitStudent =new InspectSitStudent();
@@ -268,6 +288,7 @@ public class InspectSitStudentController {
                 inspectSitStudent.setZName(a.getZname());
                 inspectSitStudent.setZrecognizetime(a.getZrecognizetime());
                 inspectSitStudent.setOriginalPictureUrl(a.getOriginalPictureUrl());
+                inspectSitStudent.setCameraname(a.getCameraname());
                 zstudentList.add(inspectSitStudent);
             }
         }

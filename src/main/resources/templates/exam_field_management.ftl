@@ -26,7 +26,9 @@
 <body class="layui-layout-body" style="width: 100%;height: 100%;background-color: #CDCDCD">
 <div class="layui-layout layui-layout-admin">
     <div class="layui-header" style="border-bottom: 1px solid #c2c2c2;background-color: #114376"">
-        <div  class="left-bar"><span id="trainroomname"></span>/点名签到</div>
+    <div id="selectdivid">
+
+    </div>
         <div class="mid-bar">安浩智能学习工厂</div>
         <div class="right-bar" id="m_rightfont"></div>
     </div>
@@ -146,13 +148,16 @@
         document.getElementById("colorType").style.backgroundColor="#ED7D31";
         document.getElementById("welcomeField").style.display="none";
         document.getElementById("teach").style.display="none";
-        findAllCameras();
+        //findAllCameras();
+        showAllCamera();
+        studentShow();
         document.getElementById("threeMenu").style.display="block";
         loadteachername();
         gettrainroom();
+
     }
     //数控车讨论区显示每台机的人脸识别情况
-    function studentShow(e){
+    function studentShow(){
 
         /* var b =$("#zcameraIP"+e).val();
          alert(b)*/
@@ -229,7 +234,37 @@
         })
 
     }
+    //加载所有的摄像头
+    function showAllCamera(){
+        var str = "";
+        $.ajax({
+            type:"post",
+            url:"/autoFindAllCameras",
+            data:{"type":"入口","ztrainingroomID":"1"},
+            success:function (data) {
+                if(""!=data){
+                    console.log(data);
+                    $("#selectdivid").empty();
+                    str+="<select  class='left-bar-auto' onchange='selectStr()' id='trainingroomselect'>";
+                    str+="<option>全部</option>";
+                    for(var i =0;i<data.length;i++){
+                        str+="<option value='"+data[i].zcameraName+"'>"+data[i].zcameraName+"/自动签到</option>";
+                    }
+                    str+="</select>";
+                    $("#selectdivid").append(str)
+                }
+            }
+        })
+    }
 
+    //获取所选摄像头的名称
+
+    function selectStr() {
+        //摄像头的名字
+        var optionvalue = $("#trainingroomselect option:selected").val();
+
+
+    }
 
 </script>
 </html>

@@ -637,6 +637,9 @@ public class FaceController {
 
             //课程，日期，上课学生表
             List<Zstudent_cookie> zsclist = zstudent_cooikeService.findscookiemes(ztr.getZid(), timestamp, zstudent.getZid());
+            if(zsclist.size()==0 ){
+                return Results.newFailedResult(ErrorCodeEnum.NOT_SCHEDULE);
+            }
             if(zsclist.size()>1){
                 //删除临时课程的制约
                 List<String> findallzschedulelist = zscheuleService.findallzschedule("临时课程");

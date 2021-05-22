@@ -22,7 +22,11 @@ public class ZstrangeServiceImpl implements ZstrangeService {
     }
 
     @Override
-    public List<Zstrange> findAll(String zrecognizeIP, Timestamp timestamp, String zcheck) {
-        return zstrangeMapper.findAll(zrecognizeIP,timestamp,zcheck);
+    public List<Zstrange> findAll(String zrecognizeIP, Timestamp timestamp, String zcheck,String cameraname) {
+        if(cameraname.equals("")){
+            return zstrangeMapper.findAll(zrecognizeIP,timestamp,zcheck);
+        }
+        return zstrangeMapper.findAllByCameraname(zrecognizeIP,timestamp,zcheck,cameraname);
     }
+
 }

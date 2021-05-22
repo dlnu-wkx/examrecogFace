@@ -400,6 +400,7 @@ function showStudentStatus(){
         type: "post",
         url: "/findfacilitybytrainingroom",
         success: function (data) {
+            data.length = 2;
             if(data.length <7){
                 center.empty();
                 str+="<table class='t_table' align='center' id='p_bbox'>"
@@ -615,10 +616,12 @@ function presentProgess(zid){
 //从数据库中显示已经检测到的人脸信息
 //从数据中找到签到的学生
 function showRecognitionFace(mytime,zcheck,filterjieshiLoop,renliandata) {
+    var cameraname = $("#trainingroomselect_auto option:selected").val();
     var formData = new FormData();
     formData.append("zcheck",zcheck);
     formData.append("mytime",mytime );
     formData.append("renliandata",JSON.stringify(renliandata) );
+    formData.append("cameraname",cameraname );
     if(filterjieshiLoop==1){
     $.ajax({
         type:"post",
@@ -744,9 +747,11 @@ function showRecognitionFace(mytime,zcheck,filterjieshiLoop,renliandata) {
 }
 //查找所有的人包括学生和教师
 function findAllLoginpeople(mytime,zcheck) {
+    var cameraname = $("#trainingroomselect_auto option:selected").val();
     var formData = new FormData();
     formData.append("zcheck",zcheck)
     formData.append("mytime",mytime );
+    formData.append("cameraname",cameraname );
     $.ajax({
         type:"post",
         url:"/InspectSitStudentandTeacher",
@@ -1328,3 +1333,5 @@ function gettrainroom() {
         }
     });
 }
+
+

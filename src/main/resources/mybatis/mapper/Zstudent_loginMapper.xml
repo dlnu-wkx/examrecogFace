@@ -12,6 +12,7 @@
         <result column="zstatus" property="zstatus" javaType="String"/>
         <result column="ztesttime" property="ztesttime" javaType="int"/>
         <result column="znowtaskname" property="znowtaskname" javaType="String"/>
+        <result column="cameraname" property="cameraname" javaType="String"/>
     </resultMap>
 
 
@@ -87,7 +88,8 @@
   	</delete>
 
     <insert id="insertnowmessage" parameterType="com.itboyst.facedemo.dto.Zstudent_login" >
-        INSERT INTO zstudent_login (zid,zstudentID,zscheduleID,zrecognizetime,zcheck, ztype, zrecognizeIP,zstatus,originalPictureUrl) VALUES(#{zid}, #{zstudentID}, #{zscheduleID},#{zrecongnizetime},#{zcheck}, #{ztype}, #{zrecognizeIP},#{zstatus},#{originalPictureUrl});
+        INSERT INTO zstudent_login (zid,zstudentID,zscheduleID,zrecognizetime,zcheck, ztype, zrecognizeIP,zstatus,originalPictureUrl,cameraname)
+        VALUES(#{zid}, #{zstudentID}, #{zscheduleID},#{zrecongnizetime},#{zcheck}, #{ztype}, #{zrecognizeIP},#{zstatus},#{originalPictureUrl},#{cameraname});
     </insert>
 
     <select id="findScheduleBytimeandzstudentID" resultType="java.lang.String">

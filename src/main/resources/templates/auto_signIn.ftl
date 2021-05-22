@@ -103,31 +103,11 @@
         //显示开始和结束按钮
         document.getElementById("fourMenu1").style.display="block";
         //显示摄像头的信息
-
         $("#left").hide();
         $("#middle").hide();
         $("#right").hide();
     }
-    function showCamera(e) {
-        var info ={username:"admin",password:"djtu13840903462",channel:"1",ip:"192.168.1.64",stream:"main"}
-        $.ajax({
-            type: 'post',
-            url: '/cameras',
-            contentType:'application/json',
-            data:  JSON.stringify(info) ,
-            dataType:'json',
-            success:function (data) {
-                if(data.code==0){
-                    var src=data.url;
-                    console.log(src);
-                    document.getElementById("videosrc").src=src;
-                    document.getElementById("video").load();
-                    var player = videojs('video', {autoplay:true,preload:"auto"}, function onPlayerReady(){ console.log("视频准备好了")})
-                }
 
-            }
-        })
-    }
     //数控铣讨论区显示每台机的人脸识别情况
     function studentShow1(e){
         document.getElementById("checkPointMenu").style.display="none";
@@ -144,6 +124,8 @@
         $("#middle").hide();
         $("#right").hide();
     }
+
+
     //加载所有的摄像头
     function showAllCamera(){
         var str = "";
@@ -155,10 +137,10 @@
                 if(""!=data){
                     console.log(data);
                     $("#selectdivid").empty();
-                    str+="<select  class='left-bar-auto' onchange='selectStr()' id='trainingroomselect'>";
-                    str+="<option>请选择</option>";
+                    str+="<select  class='left-bar-auto' onchange='selectStr()' id='trainingroomselect_auto'>";
+                    str+="<option>全部</option>";
                     for(var i =0;i<data.length;i++){
-                        str+="<option value='"+data[i].zid+"'>"+data[i].zcameraName+"/自动签到</option>";
+                        str+="<option value='"+data[i].zcameraName+"'>"+data[i].zcameraName+"/自动签到</option>";
                     }
                     str+="</select>";
                     $("#selectdivid").append(str)
@@ -167,10 +149,13 @@
         })
     }
 
-    //获取所选摄像头的id
+    //获取所选摄像头的名称
+
     function selectStr() {
-        var options=$("#trainingroomselect option:selected");
-        console.log(options.val());
+        //摄像头的名字
+        var optionvalue = $("#trainingroomselect_auto option:selected").val();
+
+
     }
 
 </script>

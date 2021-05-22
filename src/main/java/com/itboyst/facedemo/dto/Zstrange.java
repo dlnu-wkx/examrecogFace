@@ -13,4 +13,5 @@ public class Zstrange {
     private Timestamp zrecognizetime;
     private String originalPictureUrl;
     private String zstatus;
+    private String cameraname;
 }
