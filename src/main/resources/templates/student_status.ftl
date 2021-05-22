@@ -503,9 +503,9 @@
         getteacherroom();
         loadfaclity(static_trainroomid);
 
-      /*interval= window.setInterval(function () {
+      interval= window.setInterval(function () {
             loadfaclity(static_trainroomid);
-        }, 2000000);*/
+        }, 20000);
     }
 
 
@@ -568,7 +568,7 @@
             success: function (data) {
                 //alert(data.length)
 
-                //alert(data) str+="<table class='p_bbbox' id='p_bbox'>"
+                //alert(data)
                 if(data.length <7){
                     str+="<table class='p_bbbox_1' id='p_bbox'>"
                     str+="<tr  align='center'>";
@@ -724,6 +724,10 @@
 
                     }
                     str+="</tr>";
+
+                    for(var i=0;i<4;i++){
+                        str+="<tr><th></th><th></th><th></th><th></th><th></th><th></th><th></th></tr>"
+                    }
                     str+="</table>";
 
 
@@ -732,9 +736,8 @@
                     var j=0;
                     str+="<table class='p_bbbox' id='p_bbox'>"
 
-
                     for (var i=0;i<(data.length/6+1);i++){
-                       /* str+="<tr style='height: 20%;' >";*/
+
                         str+=" <tr>";
 
                         for(;j<6*(i+1);j++){

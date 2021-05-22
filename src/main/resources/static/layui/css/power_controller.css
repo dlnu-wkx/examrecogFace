@@ -16,6 +16,9 @@
 }
 
 
+
+
+
 .power_bbox4{
     width: 50%;
     height: 50%;
@@ -830,8 +833,9 @@
 .p_bbbox{
     left: 1%;
     width: 100%;
-    height: 200%;
+    height: 100%;
     margin-left: 1%;
+    position: absolute;
 }
 
 .p_bbbox_1{
@@ -843,14 +847,27 @@
 
 
 .power_bbox{
-    width: 15%;
+    width: 90%;
+    height: 90%;
     position: absolute;
-    height: 12%;
 }
 
+.p_bbbox tr {
+    height: 180px;
+    width: 1000px;
+    position: relative;
+}
+
+.p_bbbox tr th{
+    height:100px;
+    width: 150px;
+    position: relative;
+}
+
+
 .power_bbox2{
-    width: 18%;
-    height: 30%;
+    width: 90%;
+    height: 90%;
     position: absolute;
 }
 

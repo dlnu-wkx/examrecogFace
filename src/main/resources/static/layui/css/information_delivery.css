@@ -28,7 +28,18 @@
     width: 85%;
     position: absolute;
     border-style: solid;
+    border: 3px solid lightyellow;
+}
 
+.delivery_unpowerbox3{
+    bottom: 0%;
+    background-color: whitesmoke;
+    height: 100%;
+    top: -20%;
+    width: 80%;
+    position: absolute;
+    border-style: solid;
+    border: 10px solid lightyellow;
 }
 
 

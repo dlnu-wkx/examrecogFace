@@ -41,13 +41,18 @@
 
 
 <!--右侧按键-->
-<div class="d_right" align="center">
-    <button  onclick="fieldManagement()" class="f_field_management">现场管理</button>
-    <button onclick="informationService()" class="f_field_service">信息查询</button>
-    <button onclick="timeStatus()"class="f_field_status">实时状态</button>
-    <button class="f_field_delivery" id="deliveryid" onclick="outmessage()">信息发布</button>
-    <button onclick="outpower()" id="exit" class="p_exit">退出系统</button>
+<div class="p_right" align="center">
+    <button onclick="fieldManagement()" class="p_field_management">现场管理</button>
+    <br><br>
+    <button onclick="informationService()" class="p_information_service">信息查询</button>
+    <br><br>
+    <button onclick="timeStatus()" id="statusid" class="p_time_status">实时状态</button>
+    <br><br>
+    <button  class="p_information_delivery" id="deliveryid" onclick="outmessage()">信息发布</button>
+    <br><br>
+    <button class="p_exit" id="p_button4" onclick="outpower()">退出系统</button>
 </div>
+
 
 <!--左侧人员信息-->
 <div class="f_left">
