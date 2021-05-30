@@ -5,6 +5,7 @@ import com.itboyst.facedemo.dto.Zteacher;
 import com.itboyst.facedemo.dto.Zteacher_cookie;
 import com.itboyst.facedemo.service.ZechartsService;
 import com.sun.xml.internal.ws.resources.HttpserverMessages;
+import org.apache.ibatis.jdbc.Null;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -217,7 +218,12 @@ public class ZechartsController {
     @RequestMapping(value = "/arrivedRate", method = RequestMethod.POST)
     @ResponseBody
     public double getArrivedRate(HttpSession session) {
-        return ((double) getArrivedNumber(session) / getTotalNumber(session)) * 100;
+        if (getTotalNumber(session) == 0 ){
+            return 0;
+        }
+        DecimalFormat df = new DecimalFormat("#######0.0");
+        double rate = Double.parseDouble(df.format(((double) getArrivedNumber(session) / getTotalNumber(session)) * 100));
+        return rate;
     }
 
     //未签到的学生的姓名

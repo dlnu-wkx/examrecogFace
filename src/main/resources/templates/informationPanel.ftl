@@ -4,31 +4,36 @@
     <meta charset="UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>信息展示面板</title>
+    <title>数控车实训信息展板</title>
     <link rel="stylesheet" href="./InformationPanel/css/index.css"/>
 </head>
 
 <body>
 <!-- 头部的盒子 -->
 <header>
-    <h1>实训车间信息展示面板</h1>
+    <ul>
+        <li>
+            <a href="/field_management">Exit</a>
+        </li>
+    </ul>
+    <h1>数控车实训信息展板</h1>
     <div class="showTime"></div>
 </header>
 <!-- 页面主体部分 -->
 <section class="mainbox">
     <div class="cloumn">
         <div class="panel year">
-            <h2>各个工种本年度实训人数</h2>
+            <h2>今年计划/实际完成人数</h2>
             <div class="chart"></div>
             <div class="panel-footer"></div>
         </div>
         <div class="panel month">
-            <h2>各个工种本月实训人数</h2>
+            <h2>本月计划/实际完成人数</h2>
             <div class="chart"></div>
             <div class="panel-footer"></div>
         </div>
         <div class="panel week">
-            <h2>各个工种今天实训人数</h2>
+            <h2>今日计划/实际完成人数</h2>
             <div class="chart"></div>
             <div class="panel-footer"></div>
         </div>
@@ -66,7 +71,7 @@
             <div class="map_panel">
                 <div class="info">
                     <ul>
-                        <li id="className">当前上课班级：xxxx班</li>
+                        <li id="className">当前课程：xxxx班</li>
                         <li id="totalNumber">应到人数：xx</li>
                         <li id="arrivedNumber">实到人数：xx</li>
                     </ul>
@@ -105,7 +110,7 @@
             <div class="panel-footer"></div>
         </div>
         <div class="panel use-time">
-            <h2>全部机床的累计使用时间</h2>
+            <h2>机床的平均使用时间</h2>
             <div class="chart">
             </div>
             <div class="panel-footer"></div>

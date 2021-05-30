@@ -21,7 +21,7 @@
         },
         xAxis: [{
             type: 'category',
-            data: ["钳工", "铣工", "车工"],
+            data: ["计划人数","实际完成人数"],
             axisTick: {
                 alignWithLabel: true
             },
@@ -65,7 +65,7 @@
         series: [{
             name: '实训人数',
             type: 'bar',
-            barWidth: '30%',
+            barWidth: '18%',
             data: [
                 {
                     value: 2312,
@@ -81,7 +81,7 @@
                     }
                 },
                 {
-                    value: 1232,
+                    value: 2214,
                     itemStyle: {
                         color: new echarts.graphic.LinearGradient(
                             0, 0, 0, 1,
@@ -93,19 +93,20 @@
                         )
                     }
                 },
-                {
-                    value: 3901,
-                    itemStyle: {
-                        color: new echarts.graphic.LinearGradient(
-                            0, 0, 0, 1,
-                            [
-                                {offset: 0, color: '#D9FFFF'},
-                                {offset: 0.5, color: '#00FFFF'},
-                                {offset: 1, color: '#007979'}
-                            ]
-                        )
-                    }
-                }],
+                // {
+                //     value: 3901,
+                //     itemStyle: {
+                //         color: new echarts.graphic.LinearGradient(
+                //             0, 0, 0, 1,
+                //             [
+                //                 {offset: 0, color: '#D9FFFF'},
+                //                 {offset: 0.5, color: '#00FFFF'},
+                //                 {offset: 1, color: '#007979'}
+                //             ]
+                //         )
+                //     }
+                // }
+                ],
             itemStyle: {
                 normal: {
                     barBorderRadius: 3
@@ -153,7 +154,7 @@
         },
         xAxis: [{
             type: 'category',
-            data: ["钳工", "铣工", "车工"],
+            data: ["计划完成人数","实际完成人数"],
             axisTick: {
                 alignWithLabel: true
             },
@@ -195,7 +196,7 @@
         series: [{
             name: '实训人数',
             type: 'line',
-            data: [876, 320, 302],
+            data: [158,146],
             label: {
                 show: true,
                 position: "top",
@@ -235,7 +236,7 @@
         },
         xAxis: [{
             type: 'category',
-            data: ["铣工", "钳工", "车工"],
+            data: ["计划人数","实际完成人数"],
             axisTick: {
                 alignWithLabel: true
             },
@@ -278,7 +279,7 @@
         series: [{
             name: '实训人数',
             type: 'bar',
-            barWidth: '30%',
+            barWidth: '18%',
             data: [
                 {
                     value: 98,
@@ -294,7 +295,7 @@
                     }
                 },
                 {
-                    value: 29,
+                    value: 80,
                     itemStyle: {
                         color: new echarts.graphic.LinearGradient(
                             0, 0, 0, 1,
@@ -306,19 +307,20 @@
                         )
                     }
                 },
-                {
-                    value: 50,
-                    itemStyle: {
-                        color: new echarts.graphic.LinearGradient(
-                            0, 0, 0, 1,
-                            [
-                                {offset: 0, color: '#C4E1E1'},
-                                {offset: 0.5, color: '#6FB7B7'},
-                                {offset: 1, color: '#336666'}
-                            ]
-                        )
-                    }
-                }],
+                // {
+                //     value: 50,
+                //     itemStyle: {
+                //         color: new echarts.graphic.LinearGradient(
+                //             0, 0, 0, 1,
+                //             [
+                //                 {offset: 0, color: '#C4E1E1'},
+                //                 {offset: 0.5, color: '#6FB7B7'},
+                //                 {offset: 1, color: '#336666'}
+                //             ]
+                //         )
+                //     }
+                // }
+                ],
             itemStyle: {
                 normal: {
                     barBorderRadius: 3,
@@ -759,7 +761,7 @@ function marquee() {
             type: "post",
             url: "/className",
             success: function (data) {
-                document.getElementById("className").innerHTML = "当前上课班级：" + data
+                document.getElementById("className").innerHTML = "当前实训班级：" + data
             }
         })
 

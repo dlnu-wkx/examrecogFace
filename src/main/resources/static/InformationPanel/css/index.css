@@ -6,10 +6,25 @@
 li {
   list-style: none;
 }
+a {
+  text-decoration: none;
+}
 @font-face {
   font-family: electronicFont;
-  src: url(../font/DS-DIGIT.TTF);
+  src: url(../fonts/DS-DIGIT.TTF);
 }
+@font-face {
+  font-family: "icomoon";
+  src: url("../fonts/icomoon.eot?ceyp0u");
+  src: url("../fonts/icomoon.eot?ceyp0u#iefix") format("embedded-opentype"),
+  url("../fonts/icomoon.ttf?ceyp0u") format("truetype"),
+  url("../fonts/icomoon.woff?ceyp0u") format("woff"),
+  url("../fonts/icomoon.svg?ceyp0u#icomoon") format("svg");
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
 body {
   background: url(../images/bg.jpg) no-repeat top center;
   background-size: 100% 100%;
@@ -18,9 +33,32 @@ body {
 }
 header {
   position: relative;
-  height: 1.25rem;
+  height: 1.15rem;
   background: url(../images/head_bg.png) no-repeat top center;
   background-size: 100% 100%;
+}
+header ul {
+  position: absolute;
+  left: 1rem;
+  top: 0.25rem;
+}
+
+header ul li a {
+  color: #999999;
+}
+
+header ul li a:visited {
+  color:#999999;
+}
+
+header ul li a:hover {
+  cursor: pointer;
+  color: #e4e4e4;
+}
+header ul li a::before {
+  font-family: "icomoon";
+  content: "\eb54";
+  /*margin-top: 3px;*/
 }
 header h1 {
   font-size: 0.475rem;
