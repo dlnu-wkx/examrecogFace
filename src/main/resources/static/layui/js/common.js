@@ -17,6 +17,19 @@ function upheads() {
 
 }
 
+function leaveclass(){
+    $.ajax({
+        type: "post",
+        url: "/updatestatusbout",
+        data:{},
+        success: function (){
+            location.href="student"
+        }
+    });
+
+}
+
+
 
 function loadisevent(){
     //alert(111)
@@ -929,7 +942,7 @@ function getcommand() {
                     //j++;
                     } else{
                         if (data[i].ztype == "滚屏信息") {
-                            str += " <marquee  id='marquee'><span style='font-weight: bolder;font-size: 40px;color: white;'><font size='7'>" + data[i].zcontent + "</font></span></marquee>"
+                            str += " <marquee  id='marquee'><span style='font-weight: bolder;font-size: 40px;color:  black;'><font size='7'>" + data[i].zcontent + "</font></span></marquee>"
                             rolling_barrage.html(str)
                             rolling_barrage.show()
                             document.getElementById("gundongID").innerHTML = data[i].zid;
@@ -963,8 +976,6 @@ function getcommand() {
 
 
 }
-
-
 
 
 

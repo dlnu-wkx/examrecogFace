@@ -250,8 +250,7 @@
 
     //window
     window.onbeforeunload=function(e){
-        //if(event.clientX>document.body.clientWidth && event.clientY < 0 || event.altKey)
-                a()
+       a();
 
     }
 
@@ -629,11 +628,12 @@
         var cp_number=$("#cp_number");
         var str2=""
 
+        getcenterpages=pages+1;
         //页码前端加载
         if(static_ztitle){
-            str2="<font size='5'>"+pages+"页/共"+last_page+"页  ("+static_ztitle+")</font>"
+            str2="<font size='5'>"+getcenterpages+"页/共"+last_page+"页  ("+static_ztitle+")</font>"
         }else{
-            str2="<font size='5'>"+pages+"页/共"+last_page+"页</font>"
+            str2="<font size='5'>"+getcenterpages+"页/共"+last_page+"页</font>"
         }
         cp_number.html(str2)
 

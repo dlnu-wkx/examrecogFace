@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title> 测量 </title>
     <link href="./layui/css/demo.css" rel="stylesheet" type="text/css">
+    <link href="./layui/css/power_controller.css" rel="stylesheet" type="text/css">
     <link href="./layui/css/teacher_measure.css" rel="stylesheet" type="text/css">
     <link href="./layui/css/power_controller.css" rel="stylesheet" type="text/css">
     <link href="./layui/css/information_service.css" rel="stylesheet" type="text/css">
@@ -28,7 +29,21 @@
 <!--头部导航条-->
 <div class="top">
     <div class="leftfont"><span id="trainroomname"></span>/测量</div>
-    <div class="m_centerfont">安浩智能学习工厂</div>
+    <div class="topcenter">
+        <div class="topcenter1">
+            <font size="5">实训室：</font>
+            <select class="topcenterchose1">
+                <option>测试选择1</option>
+            </select>
+        </div>
+
+        <div class="topcenter2">
+            <font size="5">课程选择：</font>
+            <select class="topcenterchose2">
+                <option>测试选择2</option>
+            </select>
+        </div>
+    </div>
     <div class="rightfont" id="m_rightfont"></div>
 </div>
 
@@ -118,6 +133,7 @@
 </body>
 
 <script>
+
     //按enter跳转文本框
     $(function(){
         $('input').bind('keypress',function(event){
@@ -136,7 +152,7 @@
 
 
     window.onload =function () {
-        $("#f_field_management").css('background-color','#ED7D31');
+       // $("#f_field_management").css('background-color','#ED7D31');
         loadteachername();
         loadallgrad();
         loadalltask();
@@ -206,7 +222,15 @@
     }
     var max=0;
 
+    var static_nullinput=0;
+    var static_havevalue=0;
+
     function getmeasurebygt(){
+
+        static_nullinput=0;
+        static_havevalue=0;
+
+
         var m_classselect=$("#m_classselect").val();
         var m_taskselect=$("#m_taskselect").val();
 
@@ -278,17 +302,19 @@
                         str2+="<tr>"
                         if(data.length==0){
                             for(var j=0;j<=max-1;j++){
-                              str2+="<th class='m_font' value='0'></th><th><input  onkeydown='return changeTab(event,this)'  class='meausre_input'></th>";
+                                str2+="<th class='m_font' value='0'></th><th><input  onkeydown='return changeTab(event,this)' id='input2"+static_nullinput+"' onclick='showlight2(\""+static_nullinput+"\")'  class='meausre_input'></th>";
+
+                                static_nullinput++;
                             }
                         }else{
                             for(var j=0;j<=max-1;j++){
                                 if(!data[j].zteachercheck){
-                                    str2+="<th class='m_font' value='"+data[j].zselfcheck+"'>"+data[j].zselfcheck+"</th><th><input type='tel' id='"+data[j].ztaskinputid+"' onkeydown='return changeTab(event,this)' class='meausre_input' ></th>";
+                                    str2+="<th class='m_font' value='"+data[j].zselfcheck+"'>"+data[j].zselfcheck+"</th><th><input type='tel' id='input"+static_havevalue+"' onclick='showlight(\""+static_havevalue+"\")' onkeydown='return changeTab(event,this)' class='meausre_input' ></th>";
                                 }
                                 else{
-                                    str2+="<th class='m_font' value='"+data[j].zselfcheck+"'>"+data[j].zselfcheck+"</th><th><input type='tel' id='"+data[j].ztaskinputid+"' onkeydown='return changeTab(event,this)' class='meausre_input' value='"+data[j].zteachercheck+"'></th>";
+                                    str2+="<th class='m_font' value='"+data[j].zselfcheck+"'>"+data[j].zselfcheck+"</th><th><input type='tel' id='input"+static_havevalue+"'  onclick='showlight(\""+static_havevalue+"\")' onkeydown='return changeTab(event,this)' class='meausre_input' value='"+data[j].zteachercheck+"'></th>";
                                 }
-
+                                static_havevalue++;
                             }
                         }
 
@@ -384,6 +410,17 @@
         return true;
     }
 
+    function showlight(id){
+      //  alert(1)
+        $(":input").css("border","");
+        $("#input"+id+"").css("border","5px solid green");
+    }
+
+    function showlight2(id){
+        $(":input").css("border","");
+        $("#input2"+id+"").css("border","5px solid green");
+    }
+
 
     //信息发布
     function informationDelivery() {
@@ -402,10 +439,9 @@
         location.href="/student_status";
     }
 
-    function fieldManagement() {
+    function fieldManagement(){
         location.href="/field_management";
     }
-
 
 </script>
 

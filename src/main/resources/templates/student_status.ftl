@@ -35,15 +35,31 @@
 
 </div>
 
+<!--在线-->
 <div class="s_online">
     <font size="5">在线：</font><input type="checkbox" class="delivery_quanxuan2" id="s_onlinebox" onclick="getisonline()">
 </div>
 
 
-
 <!--头部导航条-->
 <div class="top">
-    <div class="leftfont">测 试 管 理</div>
+    <div class="leftfont">实 时 状 态</div>
+   <#-- <div class="topcenter">
+        <div class="topcenter1">
+            <font size="5">实训室：</font>
+            <select class="topcenterchose1">
+                <option>测试选择1</option>
+            </select>
+        </div>
+
+        <div class="topcenter2">
+            <font size="5">课程选择：</font>
+            <select class="topcenterchose2">
+                <option>测试选择2</option>
+            </select>
+        </div>
+
+    </div>-->
     <div class="rightfont">安 浩 智 能 学 习 工 厂</div>
 </div>
 
@@ -144,6 +160,7 @@
 
 <!--放大设备信息-->
 <div id="trainfactity" class="bigfactity" hidden>
+
 
 </div>
 
@@ -327,6 +344,8 @@
             success: function (data) {
                 str+="<div class='power_bbox4'  align='center'> "
 
+                str+="<div class='p_bigclose' onclick='removebig()'> <img src='/images/close.jpg'  class='p_close'/></div>"
+
                 str+="<div  class='delivery_unpowerbox2' align='center'>"
                 str+="<div class='p_islogin'>"
 
@@ -503,9 +522,9 @@
         getteacherroom();
         loadfaclity(static_trainroomid);
 
-      interval= window.setInterval(function () {
+      /*interval= window.setInterval(function () {
             loadfaclity(static_trainroomid);
-        }, 20000);
+        }, 20000);*/
     }
 
 

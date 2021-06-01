@@ -151,11 +151,30 @@
 <div id="showVdieo" style="position: absolute;z-index:10;top: 24%;left: 41%"></div>
 
 
+<!--在线-->
+<div class="s_online">
+    <font size="5">在线：</font><input type="checkbox" class="delivery_quanxuan2" id="s_onlinebox" onclick="getisonline2()">
+</div>
+
+
+
 </body>
 
 
 
 <script>
+    var static_isonline=0;
+
+    function getisonline2(){
+        if(static_isonline==0)
+            static_isonline=1;
+        else
+            static_isonline=0;
+
+        findfacbyrid(ztrainroomid);
+    }
+
+
     //全部开启
     function startallfacti() {
        //alert(1)
@@ -370,7 +389,7 @@
         $.ajax({
             type: "post",
             url: "/findfacilitybyrid",
-            data:{"id":id},
+            data:{"id":id,"isonline":static_isonline},
             async: false,
             success: function (data) {
                 //alert(data.length)

@@ -93,15 +93,31 @@
 <div id="parent" class="parent" hidden></div>
 <div id="showVdieo" style="position: absolute;z-index:10;top: 24%;left: 41%"></div>
 
-</body>
-
-
+<!--在线-->
+<div class="s_online">
+    <font size="5">在线：</font><input type="checkbox" class="delivery_quanxuan2" id="s_onlinebox" onclick="getisonline2()">
+</div>
 
 
 
 </body>
 
 <script>
+    var static_isonline=0;
+
+    function getisonline2(){
+        if(static_isonline==0)
+            static_isonline=1;
+        else
+            static_isonline=0;
+
+        findfacbyrid(ztrainroomid);
+    }
+
+
+
+
+
     window.onLoad=aaa();
     function aaa(){
         var servicebutton = document.getElementById("deliveryid");
@@ -115,63 +131,62 @@
     }
     var zlocation="";
     //查到被点击实训室的所有设备
+    //查到被点击实训室的所有设备
     function findfacbyrid(id) {
-        zlocation =id;
+        ztrainroomid =id;
+
         $("#p_left button").css("background-color","#70AD47");
+
         var str="";
         var p_center=$("#p_center");
         p_center.empty();
         $.ajax({
             type: "post",
             url: "/findfacilitybyrid",
-            data:{"id":id},
+            data:{"id":id,"isonline":static_isonline},
             async: false,
             success: function (data) {
-
+             //   alert(data.length)
 
                 $("#"+id+"").css("background-color","#FFC000")
 
                 if(data.length <7){
-                    str+="<table class='p_bbbox2' id='p_bbox'>"
-                    str+="<tr style='height:0%;'><th style='width:50px '></th><th style='width:50px '></th><th style='width:50px '></th><th style='width:50px '></th><th style='width:50px '></th><th style='width:50px '></th></tr>";
-                    str+=" <tr style='height: 40%'>";
-
-                    //var类型，不能写成int
+                    str+="<table class='p_bbbox' id='p_bbox'>"
+                    str+=" <tr>";
                     for(var i=0; i<data.length;i++){
+                        //str+="<th><div class='power_bbox'  align='center'> <font size='3'>"+data[i].zidentity+"</font><div id='div"+data[i].zid+"' class='delivery_unpowerbox'><input name='check' id='"+data[i].zid+"' value='"+data[i].zid+"' type='checkbox' class='p_check'/></div></th>";
+             //           static_teststate[i]=data[i].zid
 
-                        if (data[i].zpowerstatus=="已开机"){
-                            $.ajax({
-                                type: "post",
-                                url: "/findstunamebyfacid",
-                                data:{"zid":data[i].zid},
-                                async: false,
-                                success: function (data2) {
-                                    if (data2){
-                                        str+="<th ><div class='power_bbox'  align='center'> <font size='3'>"+data[i].zidentity+"</font><div id='div"+data[i].zid+"' class='delivery_sbox'>"+data2+"<input name='check' id='"+data[i].zid+"' value='"+data[i].zid+"' type='checkbox'onclick='addchoice(this)' class='p_check'/></div></th>";
-                                    }else{
-                                        str+="<th ><div class='power_bbox'  align='center'> <font size='3'>"+data[i].zidentity+"</font><div id='div"+data[i].zid+"' class='delivery_sbox'><input name='check' id='"+data[i].zid+"' value='"+data[i].zid+"' type='checkbox'onclick='addchoice(this)' class='p_check'/></div></th>";
-                                    }
+                        $.ajax({
+                            type: "post",
+                            url: "/findstunamebyfacid",
+                            data:{"zid":data[i].zid},
+                            async: false,
+                            success: function (data2) {
+                                if (data2){
+                                    str+="<th><div class='power_bbox'  align='center'> <font size='3'>"+data[i].zidentity+"</font><div id='div"+data[i].zid+"' class='delivery_sbox'>"+data2+"<input name='check' id='"+data[i].zid+"' value='"+data[i].zid+"' type='checkbox'onclick='addchoice(this)' class='p_check'/></div></th>";
+                                }else{
+                                    str+="<th><div class='power_bbox'  align='center'> <font size='3'>"+data[i].zidentity+"</font><div id='div"+data[i].zid+"' class='delivery_sbox'><input name='check' id='"+data[i].zid+"' value='"+data[i].zid+"' type='checkbox'onclick='addchoice(this)' class='p_check'/></div></th>";
                                 }
-                            })
-                            //   findHaveStudent(data[i].zid)
-                        }else if (data[i].zpowerstatus=="未开机"){
-                            str+="<th ><div class='power_bbox'  align='center'> <font size='3'>"+data[i].zidentity+"</font><div id='div"+data[i].zid+"' class='delivery_unpowerbox'><input name='check' id='"+data[i].zid+"' value='"+data[i].zid+"' type='checkbox' class='p_check'/></div></th>";
-                            //  findHaveStudent(data[i].zid)
-                        }
+                            }
+                        })
+              //          static_teststate[i]=data[i].zid
                     }
                     str+="</tr>";
-                    str+="<tr></tr>";
                     str+="</table>";
-                    //str+="<button class='d_button1' onclick='allchose()'>全选</button>"
                     str+="<div class='d_button1'><font size='5'>全选：</font><input class='delivery_quanxuan' type='checkbox' name='checkall' onclick='allchose()'/> </div>"
+                  //  alert(1)
+                   // alert(str)
+                    p_center.html(str)
                 }else {
                     var j=0;
-                    str+="<table class='p_bbbox2' id='p_bbox' >"
+                    str+="<table class='p_bbbox' id='p_bbox'>"
                     for (var i=0;i<(data.length/6+1);i++){
+
                         str+=" <tr>";
                         for(;j<6*(i+1);j++){
                             if(j==data.length){break;}
-                            if (data[j].zpowerstatus=="已开机"){
+                            else {
                                 $.ajax({
                                     type: "post",
                                     url: "/findstunamebyfacid",
@@ -185,22 +200,37 @@
                                         }
                                     }
                                 })
-                                // str+="<th><div class='power_bbox'  align='center'> <font size='3'>"+data[j].zidentity+"</font><div id='div"+data[j].zid+"' class='delivery_sbox'><input name='check' id='"+data[j].zid+"' value='"+data[i].zid+"' type='checkbox'onclick='addchoice(this)' class='p_check'/></div></th>";
-                                //  findHaveStudent(data[j].zid)
-                            }else if (data[j].zpowerstatus=="未开机"){
-                                str+="<th><div class='power_bbox'  align='center'> <font size='3'>"+data[j].zidentity+"</font><div id='div"+data[j].zid+"' class='delivery_unpowerbox'><input name='check' id='"+data[j].zid+"' value='"+data[i].zid+"' type='checkbox' onclick='addchoice(this)' class='p_check'/></div></th>";
-                                // findHaveStudent(data[j].zid)
+                            //    static_teststate[j]=data[j].zid
                             }
                         }
                         str+="</tr>";
                         //  j+=6;
                     }
-                    str+="</table>";
-                    //str+="<button  id='quanxuan' class='d_button1' onclick='allchose()'>全选</button>"
-                    str+="<div class='d_button1' ><font size='5'>全选</font><input class='delivery_quanxuan' type='checkbox' name='checkall' onclick='allchose()'/> </div>"
-                }
-                p_center.html(str)
 
+                    str+="</table>";
+                    //str+="<button class='d_button1' onclick='allchose()'>全选</button>"
+                    str+="<div class='d_button1' ><font size='5'>全选：</font><input class='delivery_quanxuan' type='checkbox' name='checkall' onclick='allchose()'/> </div>"
+                   // alert(2)
+                  //  alert(str)
+                    p_center.html(str)
+                }
+            //    p_center.html(str)
+
+               /* //电源管理
+                for (var i=0;i<static_teststate.length;i++){
+                    $.ajax({
+                        type: "post",
+                        url: "/findteststatebyfid",
+                        data:{"id":static_teststate[i]},
+                        async: false,
+                        success: function (data) {
+                            // alert(data)
+                            if(data==0){
+                                $("#div"+static_teststate[i]+"").css('background-color','rgba(112,167,71)');
+                            }
+                        }
+                    });
+                }*/
             }
         });
     }

@@ -49,7 +49,7 @@
     height: 50%;
 }
 .m_savebutton{
-    left: 80%;
+    left: 50%;
     width: 8%;
     position: absolute;
     top: 3%;
@@ -58,34 +58,42 @@
 
 .m_tablemes{
     top: 18%;
-    position: absolute;
     width: 90%;
     right: 10%;
+    overflow: auto;
+    height: 80%;
+    position: absolute;
 }
 
 .m_table2{
     border: 1px solid wheat;
-    position: fixed;
-    left: 17%;
-    top: 19.5%;
+    position: absolute;
+    left: 20%;
+    top: 1.5%;
+    overflow: auto;
 }
 
 .meausre_input{
-    width: 50px;
-    height: 10px;
+    width: 100px;
+    height: 20px;
 }
 
 .m_table{
     border: 1px solid wheat;
-    position: fixed;
+    position: absolute;
     left: 2%;
-    top: 23%;
+    top: 8%;
+    overflow: auto;
 }
 .m_table tr th{
     border-left: 1px solid wheat;
     border-top: 1px solid wheat;
-    color: wheat;}
+    color: wheat;
+    height: 30px;
+}
 .m_table2 tr th{
     border-left: 1px solid wheat;
     border-top: 1px solid wheat;
-    color: wheat;}
+    color: wheat;
+    height: 30px;
+}

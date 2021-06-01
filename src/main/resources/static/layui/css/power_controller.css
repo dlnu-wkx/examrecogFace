@@ -5,17 +5,15 @@
     color: #ffffff;
     top: 81%;
     z-index: 90;
-    left: 47%;
+    left: 82%;
 }
 .delivery_quanxuan2 {
-    width: 20%;
+    width: 40%;
     height: 40%;
-    top: -2%;
-    right: 40%;
+    top: 0%;
+    right: 12%;
     position: absolute;
 }
-
-
 
 
 
@@ -27,6 +25,13 @@
     top: 30%;
 }
 
+.p_close{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+
 
 .p_center3{
     left: 15%;
@@ -36,6 +41,7 @@
     top: 6.5%;
     position: fixed;
     overflow-y: auto;
+    z-index: 99;
 }
 
 .p_bbbox2{
@@ -809,7 +815,7 @@
 
 
 .p_trainroomchose{
-    left: 80%;
+    left: 75%;
     top: 20%;
     position: absolute;
     width: 10%;
@@ -836,6 +842,7 @@
     height: 100%;
     margin-left: 1%;
     position: absolute;
+    color: wheat
 }
 
 .p_bbbox_1{
@@ -863,6 +870,17 @@
     width: 150px;
     position: relative;
 }
+
+.p_bigclose{
+    position: absolute;
+    right: 1.75%;
+    top: -40%;
+    height: 5%;
+    width: 5%;
+    z-index: 99;
+}
+
+
 
 
 .power_bbox2{
@@ -896,10 +914,10 @@
 .p_check{
     background-color: whitesmoke;
     position: absolute;
-    height: 40%;
-    left: 12%;
-    top: 50%;
-    width: 40%;
+    height: 20%;
+    left: 20%;
+    top: 12%;
+    width: 20%;
     transform: scale(1.5,1.5);
 }
 
@@ -948,7 +966,7 @@
 .p_button2{
     background-color:#70AD47;
     border-right: 1px solid white;
-    width: 180px;
+    width: 120px;
     color: white;
     padding: 10px 20px;
     text-align: center;

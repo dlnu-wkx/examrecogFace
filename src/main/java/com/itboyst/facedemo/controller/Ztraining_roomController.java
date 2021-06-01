@@ -129,8 +129,10 @@ public class Ztraining_roomController {
     @ResponseBody
     public List<Ztraining_facility> findfacilitybyrid(String id,int isonline){
         if(isonline==0){
+           // System.out.println(ztraining_facilityService.findfacilitybyrid(id));
             return ztraining_facilityService.findfacilitybyrid(id);
         }else{
+          //  System.out.println(ztraining_facilityService.findfacilitybyrid(id));
             return ztraining_facilityService.findfactibyrid2(id);
         }
 
