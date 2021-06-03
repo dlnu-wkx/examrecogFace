@@ -57,7 +57,7 @@
     </update>
 
     <update id="updateloginbyzid" parameterType="com.itboyst.facedemo.dto.Zstudent_login" >
-      UPDATE zstudent_login SET zstatus='退出' WHERE zid=#{zid}
+      UPDATE zstudent_login SET zstatus=#{zstatus} WHERE zid=#{zid}
     </update>
 
     <update id="updatetanbyipasch" parameterType="com.itboyst.facedemo.dto.Zstudent_login" >
@@ -81,6 +81,7 @@
     <update id="removetat" parameterType="com.itboyst.facedemo.dto.Zstudent_login" >
         update zstudent_login set znowtaskname=#{znowtaskname},ztesttime=#{ztesttime} where zrecognizeIP=#{zrecognizeIP} and zcheck=#{zcheck}
     </update>
+
 
     <!--删除登录表的相关学生之前的信息-->
     <delete id="deleteStudentLoginByzidentity" parameterType="java.lang.String">

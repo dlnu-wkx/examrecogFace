@@ -204,7 +204,7 @@
 
 
 .topcenter{
-    left: 25%;
+    left: 40%;
     top: 2%;
     position: fixed;
     width: 50%;
@@ -666,7 +666,7 @@
 }
 
 .te_information_delivery{
-    background-color:  #4472C4;
+    background-color:  grey;
     border: none;
     color: white;
     /*padding: 10px 10px;*/

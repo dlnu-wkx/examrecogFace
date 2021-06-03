@@ -25,6 +25,16 @@ public class Zstudent_loginController {
     @ResponseBody
     public int updatestatusbout(HttpSession session){
         Zstudent_login zstudent_login=(Zstudent_login)session.getAttribute("zstudent_login");
-        return zstudent_loginService.updateloginbyzid(zstudent_login.getZid());
+        return zstudent_loginService.updateloginbyzid(zstudent_login.getZid(),"退出");
     }
+
+
+    @RequestMapping("/updatestatusbout2")
+    @ResponseBody
+    public int updatestatusbout2(HttpSession session){
+        Zstudent_login zstudent_login=(Zstudent_login)session.getAttribute("zstudent_login");
+        return zstudent_loginService.updateloginbyzid(zstudent_login.getZid(),"正常");
+    }
+
+
 }

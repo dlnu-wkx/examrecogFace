@@ -29,21 +29,12 @@
 <!--头部导航条-->
 <div class="top">
     <div class="leftfont"><span id="trainroomname"></span>/测量</div>
-    <div class="topcenter">
-        <div class="topcenter1">
-            <font size="5">实训室：</font>
-            <select class="topcenterchose1">
-                <option>测试选择1</option>
-            </select>
-        </div>
 
-        <div class="topcenter2">
-            <font size="5">课程选择：</font>
-            <select class="topcenterchose2">
-                <option>测试选择2</option>
-            </select>
-        </div>
+    <div class="topcenter">
+        安 浩 智 能 学 习 工 厂
     </div>
+
+
     <div class="rightfont" id="m_rightfont"></div>
 </div>
 
@@ -160,19 +151,7 @@
 
         getmeasurebygt2()
     }
-    function loadteachername(){
-        $.ajax({
-            type: "post",
-            url: "/getteachername",
-            data:{},
-            async: false,
-            success: function (data){
-                var m_rightfont=$("#m_rightfont")
-                var str="指导老师："+data+"";
-                m_rightfont.html(str);
-            }
-        });
-    }
+
 
 
     function loadalltask(){
@@ -288,7 +267,7 @@
 
             str2+="<tr>"
             for(var i=1;i<=max;i++){
-                str2+="<th>自测</th><th>师测</th>"
+                str2+="<th>自&nbsp;&nbsp;&nbsp;测</th><th>师&nbsp;&nbsp;&nbsp;测</th>"
             }
             str2+="</tr>"
 
@@ -302,17 +281,17 @@
                         str2+="<tr>"
                         if(data.length==0){
                             for(var j=0;j<=max-1;j++){
-                                str2+="<th class='m_font' value='0'></th><th><input  onkeydown='return changeTab(event,this)' id='input2"+static_nullinput+"' onclick='showlight2(\""+static_nullinput+"\")'  class='meausre_input'></th>";
+                                str2+="<th class='m_font' value='0'></th><th><input id='"+data[j].ztaskinputid+"'  onkeydown='return changeTab(event,this)'   class='meausre_input'></th>";
 
                                 static_nullinput++;
                             }
                         }else{
                             for(var j=0;j<=max-1;j++){
                                 if(!data[j].zteachercheck){
-                                    str2+="<th class='m_font' value='"+data[j].zselfcheck+"'>"+data[j].zselfcheck+"</th><th><input type='tel' id='input"+static_havevalue+"' onclick='showlight(\""+static_havevalue+"\")' onkeydown='return changeTab(event,this)' class='meausre_input' ></th>";
+                                    str2+="<th class='m_font' value='"+data[j].zselfcheck+"'>"+data[j].zselfcheck+"</th><th><input type='tel' id='"+data[j].ztaskinputid+"'  onkeydown='return changeTab(event,this)' class='meausre_input' ></th>";
                                 }
                                 else{
-                                    str2+="<th class='m_font' value='"+data[j].zselfcheck+"'>"+data[j].zselfcheck+"</th><th><input type='tel' id='input"+static_havevalue+"'  onclick='showlight(\""+static_havevalue+"\")' onkeydown='return changeTab(event,this)' class='meausre_input' value='"+data[j].zteachercheck+"'></th>";
+                                    str2+="<th class='m_font' value='"+data[j].zselfcheck+"'>"+data[j].zselfcheck+"</th><th><input type='tel'  id='"+data[j].ztaskinputid+"'  onkeydown='return changeTab(event,this)' class='meausre_input' value='"+data[j].zteachercheck+"'></th>";
                                 }
                                 static_havevalue++;
                             }
@@ -346,6 +325,10 @@
         for(var i=0;i<inputs.length;i++){
             var inputid=inputs.eq(i).attr('id');
             var inputvalue=inputs.eq(i).val();
+
+          //  alert(inputid);
+          //  alert(inputvalue);
+
             if(inputvalue){
                 //alert(inputvalue)
                 $.ajax({

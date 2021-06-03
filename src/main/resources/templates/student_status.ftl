@@ -43,24 +43,13 @@
 
 <!--头部导航条-->
 <div class="top">
-    <div class="leftfont">实 时 状 态</div>
-   <#-- <div class="topcenter">
-        <div class="topcenter1">
-            <font size="5">实训室：</font>
-            <select class="topcenterchose1">
-                <option>测试选择1</option>
-            </select>
-        </div>
+    <div class="leftfont">实 时 状 态 显 示</div>
 
-        <div class="topcenter2">
-            <font size="5">课程选择：</font>
-            <select class="topcenterchose2">
-                <option>测试选择2</option>
-            </select>
-        </div>
+    <div class="topcenter">
+        安 浩 智 能 学 习 工 厂
+    </div>
 
-    </div>-->
-    <div class="rightfont">安 浩 智 能 学 习 工 厂</div>
+    <div class="rightfont" id="m_rightfont"></div>
 </div>
 
 
@@ -517,6 +506,7 @@
 
     var interval;
     window.onload =function () {
+        loadteachername()
         onloadallroom();
         loadalltesttype();
         getteacherroom();

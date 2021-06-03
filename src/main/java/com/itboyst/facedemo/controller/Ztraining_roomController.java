@@ -718,6 +718,14 @@ public class Ztraining_roomController {
 
 
 
+    @RequestMapping("/updatecheckvaluestuid")
+    @ResponseBody
+    public void updatecheckvaluestuid(@RequestParam(value = "id[]")String [] id,HttpSession session){
+        System.out.println(id[0]);
+        session.setAttribute("ckeckstudentid",id);
+    }
+
+
 
     //电源管理更改
     @RequestMapping("/updateallfacilitybyzid")
@@ -790,6 +798,46 @@ public class Ztraining_roomController {
         }
 
         int i =ztraining_facilityService.updatezprogressbyip(zstudentPCIP,"退出系统");
+
+    }
+
+    @RequestMapping("/noexitsystem")
+    @ResponseBody
+    public void noexitsystem(HttpSession session){
+        Ztraining_facility ztraining_facility=(Ztraining_facility)session.getAttribute("ztraining_facility");
+        String zstudentPCIP="";
+        if(null!=ztraining_facility){
+            zstudentPCIP =ztraining_facility.getZstudentPCIP();
+        }
+
+        int i =ztraining_facilityService.updatezprogressbyip(zstudentPCIP,"登陆");
+
+    }
+
+
+    @RequestMapping("/noexitsystem2")
+    @ResponseBody
+    public void noexitsystem2(HttpSession session){
+        Ztraining_facility ztraining_facility=(Ztraining_facility)session.getAttribute("ztraining_facility");
+        String zstudentPCIP="";
+        if(null!=ztraining_facility){
+            zstudentPCIP =ztraining_facility.getZstudentPCIP();
+        }
+
+        int i =ztraining_facilityService.updatezprogressbyip(zstudentPCIP,"测试中");
+
+    }
+
+    @RequestMapping("/noexitsystem3")
+    @ResponseBody
+    public void noexitsystem3(HttpSession session){
+        Ztraining_facility ztraining_facility=(Ztraining_facility)session.getAttribute("ztraining_facility");
+        String zstudentPCIP="";
+        if(null!=ztraining_facility){
+            zstudentPCIP =ztraining_facility.getZstudentPCIP();
+        }
+
+        int i =ztraining_facilityService.updatezprogressbyip(zstudentPCIP,"实训中");
 
     }
 

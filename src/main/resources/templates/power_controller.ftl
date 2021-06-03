@@ -153,7 +153,7 @@
 
 <!--在线-->
 <div class="s_online">
-    <font size="5">在线：</font><input type="checkbox" class="delivery_quanxuan2" id="s_onlinebox" onclick="getisonline2()">
+    <font size="5">在线：</font><input type="checkbox" class="delivery_quanxuan2" id="s_onlinebox" name="s_onlinebox" onclick="getisonline2()">
 </div>
 
 
@@ -528,6 +528,8 @@
             $("[type='checkbox']:checkbox").prop('checked', false);
             /*$("#p_center  input[type='checkbox']").attr("checked",false)*/
         }
+
+
     }
 
 

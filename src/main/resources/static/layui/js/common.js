@@ -973,11 +973,22 @@ function getcommand() {
         }
     })
 
-
-
 }
 
 
+function loadteachername(){
+    $.ajax({
+        type: "post",
+        url: "/getteachername",
+        data:{},
+        async: false,
+        success: function (data){
+            var m_rightfont=$("#m_rightfont")
+            var str="指导老师："+data+"";
+            m_rightfont.html(str);
+        }
+    });
+}
 
 
 

@@ -236,8 +236,6 @@
 
 
 
-
-
     function clicksubmit1(){
         $("#t_centerindex").hide()
         submit2()
@@ -1167,12 +1165,35 @@
         });
     }
 
+    function refresh3(){
+        $.ajax({
+            type:"post",
+            url:"/noexitsystem3",
+            data:{},
+            //    async: false,
+            success:function(data){
 
+            }
+        })
+
+        //更改学生登陆的状态
+        $.ajax({
+            type:"post",
+            url:"/updatestatusbout2",
+            data:{},
+            //   async: false,
+            success:function(data){
+
+            }
+        })
+
+    }
 
 
     //页面加载前方法
     window.onload =function () {
 
+        refresh3()
 
         //getcommand2();
         getclassmesssion();

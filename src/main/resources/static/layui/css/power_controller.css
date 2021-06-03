@@ -163,7 +163,7 @@
 
 .p_left{
     width: 15%;
-    height: 68.5%;
+    height: 70.5%;
     left: 0%;
     top: 6.5%;
     border-right: 2px solid #BBBBBB;
@@ -838,11 +838,11 @@
 
 .p_bbbox{
     left: 1%;
-    width: 100%;
+    width: 97.5%;
     height: 100%;
     margin-left: 1%;
     position: absolute;
-    color: wheat
+
 }
 
 .p_bbbox_1{
@@ -857,6 +857,7 @@
     width: 90%;
     height: 90%;
     position: absolute;
+    color: wheat;
 }
 
 .p_bbbox tr {
@@ -915,7 +916,7 @@
     background-color: whitesmoke;
     position: absolute;
     height: 20%;
-    left: 20%;
+    left: 10%;
     top: 12%;
     width: 20%;
     transform: scale(1.5,1.5);
@@ -945,7 +946,7 @@
     width: 90%;
     height: 25%;
     left: 0%;
-    top: 75%;
+    top: 77%;
     position: fixed;
     border-top: 2px solid #BBBBBB;
 }

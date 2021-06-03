@@ -33,7 +33,7 @@ public interface Zstudent_loginService {
 
     public Zstudent_login findnowinbystuid(String zstudentID);
 
-    int updateloginbyzid(String zid);
+    int updateloginbyzid(String zid,String zstatus);
 
     Zstudent_login findloginbyss(String zstudentID,String zscheduleID);
 }

@@ -258,6 +258,10 @@
                 async: false,
                 success: function (data){
                     for (var i=0;i<data.length;i++){
+                        if(!data[i].leavetype){
+                            continue;
+                            i--;
+                        }
                         //data[i].mestime=data[i].mestime..slice(0,9)+"  "+data[i].mestime..slice(10,18)
                         str+="<tr><th class='i_tableth1'>"+(i+1)+"</th><th class='i_tableth1'>"+data[i].studentname+"</th><th class='i_tableth2'>"+data[i].trainingroomname+"</th><th class='i_tableth2'>"+data[i].score+"</th><th class='i_tableth2'>"+data[i].leavetype+"</th><th class='i_tableth2'>"+data[i].approver+"</th><th class='i_tableth3'>"+createTime(data[i].mestime)+"</th></tr>"
                     }

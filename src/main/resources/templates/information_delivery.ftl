@@ -114,14 +114,27 @@
         findfacbyrid(ztrainroomid);
     }
 
+    var static_checkvalue=new Array();
 
+    function sendallcheckstudentid(){
+        static_checkvalue=$("input[name='check']").val()
+        alert(static_checkvalue)
+        $.ajax({
+            type: "post",
+            url: "/updatecheckvaluestuid",
+            data:{"id":static_checkvalue},
+            async: false,
+            success: function (data) {
 
+            }
+        })
+    }
 
 
     window.onLoad=aaa();
     function aaa(){
         var servicebutton = document.getElementById("deliveryid");
-        servicebutton.style.backgroundColor="#ED7D31"
+   //     servicebutton.style.backgroundColor="#ED7D31"
         loadteachername();
         gettrainroom();
     }
@@ -290,51 +303,9 @@
             $("[type='checkbox']:checkbox").prop('checked', false);
             /*$("#p_center  input[type='checkbox']").attr("checked",false)*/
         }
-
+        $("#s_onlinebox").prop("checked",false);
         /*$("#p_center  input[type='checkbox']").attr("checked","true");*/
     }
-
-
-
-    /*function insertcommandbychose() {
-
-        var startchose =[];
-        $("input[name='zid']:checked").each(function(i){//把所有被选中的复选框的值存入数组
-            startchose[i] =$(this).val();
-        });
-
-        var i_time=$("#i_time").val()
-
-        var inputmes=$("#inputmes").val()
-        //alert(inputmes)
-        if(inputmes && inputmes !="点击输入滚动消息"){
-            $.ajax({
-                type: "post",
-                url: "/insertcommandbychose",
-                data:{"zcontent":inputmes,"zid":startchose},
-                success: function (data) {
-                    if(data>0){
-                        layer.msg("成功发布滚屏信息", { icon: 1, offset: "auto", time:2000 });
-                    }
-                }
-            });
-        }
-
-        setTimeout(function (){
-            $.ajax({
-                type: "post",
-                url: "/upadtestates",
-                success: function (data) {
-                    if(data>0){
-                        layer.msg("滚屏消息已失效", { icon: 1, offset: "auto", time:2000 });
-                    }
-                }
-            });
-        }, 1000*i_time+5000);
-    }
-*/
-
-
 
 
 
@@ -386,11 +357,12 @@
     }
 
     function temporary_task() {
-
+       // sendallcheckstudentid()
         location.href = "/temporary_task";
     }
 
     function fixed_task() {
+       // sendallcheckstudentid()
         location.href = "/fixed_task";
     }
 

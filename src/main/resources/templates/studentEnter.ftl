@@ -88,44 +88,11 @@
 <script>
 
     //window
-    window.onbeforeunload=function(){
-        a();
+    window.onbeforeunload=function(e){
+       a();
     }
 
     function a(){
-
-
-        $.ajax({
-            type: "post",
-            url: "/deletemes",
-            data:{},
-            //    async: false,
-            success: function (data){
-
-            }
-        });
-
-        //将继电器6号端口断开
-        $.ajax({
-            type: "post",
-            url: "/usixout",
-            data:{},
-            //    async: false,
-            success: function (data){
-
-            }
-        });
-
-        //设备状态的更改
-        $.ajax({
-            type: "post",
-            url: "/updateprogress",
-            data:{},
-            //    async: false,
-            success: function (data){
-
-            }
-        });
 
         //学生退出时改变实训设备的zprogress
         $.ajax({
@@ -160,7 +127,6 @@
             }
         })
     }
-
 
 
     function findisleave(){
@@ -244,10 +210,35 @@
         })
     }
 
+    function refresh(){
+        $.ajax({
+            type:"post",
+            url:"/noexitsystem",
+            data:{},
+            //    async: false,
+            success:function(data){
 
+            }
+        })
+
+        //更改学生登陆的状态
+        $.ajax({
+            type:"post",
+            url:"/updatestatusbout2",
+            data:{},
+            //   async: false,
+            success:function(data){
+
+            }
+        })
+
+    }
 
 
     window.onload = function(){
+
+        refresh()
+
         loadisevent()
 
         $.ajax({

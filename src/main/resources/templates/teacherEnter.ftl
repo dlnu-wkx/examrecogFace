@@ -44,7 +44,7 @@
             <br><br>
             <button onclick="timeStatus()" class="te_time_status">实时状态</button>
             <br><br>
-            <button onclick="informationDelivery()" class="te_information_delivery">信息发布</button>
+            <button  class="te_information_delivery">信息发布</button>
             <br><br>
             <button class="te_exit" id="p_button3" onclick="powerController()">退出</button>
         </div>

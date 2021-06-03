@@ -250,9 +250,35 @@
         });
     }
 
+    function refresh2(){
+        $.ajax({
+            type:"post",
+            url:"/noexitsystem2",
+            data:{},
+            //    async: false,
+            success:function(data){
+
+            }
+        })
+
+        //更改学生登陆的状态
+        $.ajax({
+            type:"post",
+            url:"/updatestatusbout2",
+            data:{},
+            //   async: false,
+            success:function(data){
+
+            }
+        })
+
+    }
+
+
 
     //页面加载前方法
     window.onload =function () {
+        refresh2()
 
       //  gettestmessage()
 
