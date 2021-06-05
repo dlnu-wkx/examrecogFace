@@ -242,6 +242,37 @@ public class Ztraining_roomController {
     }
 
 
+    @RequestMapping("/reloadgreenlight")
+    @ResponseBody
+    public void reloadgreenlight(HttpSession session){
+        //System.out.println(555555555);
+        Ztraining_facility ztraining_facility=(Ztraining_facility)session.getAttribute("ztraining_facility");
+
+        String IP=ztraining_facility.getZpowerIP();
+
+        int i=ztraining_facilityService.updateoneportbyip(IP,1);
+
+        Thread t = new Thread(new Runnable(){
+
+            public void run(){
+                try {
+                    if (Powerutil.pingIp(IP)){
+                        Powerutil.powercontroller(IP,"11");
+                    }
+
+                }catch(Exception e) {
+                    //打印输出异常
+                    e.printStackTrace();
+                }
+
+            }});
+        t.start();
+
+      //  System.out.println(111111111);
+    }
+
+
+
 
     @RequestMapping("/usixout")
     @ResponseBody
@@ -274,8 +305,6 @@ public class Ztraining_roomController {
 
                 }});
             t.start();
-
-
     }
 
 

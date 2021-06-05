@@ -106,8 +106,14 @@
         a();
     }
 
+  //  var static_light=1;
+
+
     function a(){
         static_testtimes--;
+        //记录当前状态信息
+     //   sendnowstatusmes();
+
         $.ajax({
             type: "post",
             url: "/findsessionprogress",
@@ -361,15 +367,11 @@
                         data:{},
                         async: false,
                         success: function (data){
-                            // console.log(data)
                             submit2()
-                            /* else if(data=="实训")
-                                 sumbmitpages()*/
+
                         }
                     });
 
-                    /*submit2()
-                    sumbmitpages()*/
 
                     //删除临时任务
                     $.ajax({

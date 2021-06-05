@@ -628,12 +628,14 @@
 
         getcenterpages=pages+1;
         //页码前端加载
-        if(static_ztitle){
+        /* if(static_ztitle){
             str2="<font size='5'>"+getcenterpages+"页/共"+last_page+"页  ("+static_ztitle+")</font>"
         }else{
             str2="<font size='5'>"+getcenterpages+"页/共"+last_page+"页</font>"
         }
-        cp_number.html(str2)
+        cp_number.html(str2)*/
+
+        cp_number.hide()
 
         //获取理论测试
         $.ajax({
@@ -973,7 +975,6 @@
     //根据页面与任务id加载任务主体内容
     //任务表id,任务类型（1为固定任务,2为临时任务），固定任务id
     function  loadcontentbypages(taskid,kindid,assid){
-        sendclassmessage(static_zname,taskid,kindid,assid,pages);
 
        //将传进来的三个值附值给全局变量
         static_kindid=kindid;
@@ -1085,6 +1086,7 @@
         });
 
         cp_content.html(str);
+
         //加载任务的页码
         $.ajax({
             type: "post",
@@ -1098,6 +1100,8 @@
                 last_page=data2;
             }
         });
+            if(pages==0)
+                pages=1;
         //页码前端加载
         if(static_ztitle){
             str2="<font size='5'>"+pages+"页/共"+last_page+"页  ("+static_ztitle+")</font>"
@@ -1106,6 +1110,7 @@
         }
         cp_number.html(str2)
 
+        cp_number.show();
         //如果是固定任务就更新任务的日志表
         if(static_kindid==1) {
             //更新固定任务的各种时间及状态
@@ -1118,6 +1123,8 @@
                 }
             });
         }
+
+        sendclassmessage(static_zname,taskid,kindid,assid,pages);
     }
     function getfixtask(){
         $.ajax({
@@ -1189,11 +1196,25 @@
 
     }
 
+    function reloadlightstatus(){
+        $.ajax({
+            type:"post",
+            url:"/reloadgreenlight",
+            data:{},
+            async: false,
+            success:function(data){
+
+            }
+        })
+    }
+
 
     //页面加载前方法
     window.onload =function () {
 
         refresh3()
+
+        reloadlightstatus()
 
         //getcommand2();
         getclassmesssion();
@@ -1224,6 +1245,7 @@
     var static_kindid;
     var static_assid;
 
+
     //获取任务页面的session
     function getclassmesssion(){
         $.ajax({
@@ -1239,8 +1261,7 @@
                     static_ztaskid=data.taskid;
                     static_kindid=data.kindid;
                     static_assid=data.assid;
-                    pages=data.pages;
-
+                 //   pages=1;
                 }
             }
         })

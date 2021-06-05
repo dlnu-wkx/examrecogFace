@@ -1,6 +1,6 @@
 <head>
     <meta charset="UTF-8">
-    <title> 测试管理 </title>
+    <title> 实时状态 </title>
     <link href="./layui/css/demo.css" rel="stylesheet" type="text/css">
     <link href="./layui/css/power_controller.css" rel="stylesheet" type="text/css">
     <link href="./layui/css/information_delivery.css" rel="stylesheet" type="text/css">

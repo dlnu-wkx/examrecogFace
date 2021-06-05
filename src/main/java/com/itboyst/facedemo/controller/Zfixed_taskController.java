@@ -67,7 +67,7 @@ public class Zfixed_taskController {
         zclassmessession.setKindid(kindid);
         zclassmessession.setZname(zname);
         zclassmessession.setPages(pages);
-        //System.out.println(zclassmessession);
+       // System.out.println(pages);
 
         session.setAttribute("zclassmessession",zclassmessession);
 

@@ -14,6 +14,7 @@ function upheads() {
               $("#upheads").attr("onclick","removeup()");
         }
     });
+  //  static_light=2;
 
 }
 
@@ -240,6 +241,8 @@ function common_leave(){
                 }
             }
         });
+
+    //    static_light=2;
     }
 
 }

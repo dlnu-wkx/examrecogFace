@@ -281,16 +281,20 @@
                         str2+="<tr>"
                         if(data.length==0){
                             for(var j=0;j<=max-1;j++){
-                                str2+="<th class='m_font' value='0'></th><th><input id='"+data[j].ztaskinputid+"'  onkeydown='return changeTab(event,this)'   class='meausre_input'></th>";
+                                str2+="<th class='m_font' value='0'></th><th><input  onkeydown='return changeTab(event,this)'   class='meausre_input'></th>";
 
                                 static_nullinput++;
                             }
                         }else{
                             for(var j=0;j<=max-1;j++){
-                                if(!data[j].zteachercheck){
-                                    str2+="<th class='m_font' value='"+data[j].zselfcheck+"'>"+data[j].zselfcheck+"</th><th><input type='tel' id='"+data[j].ztaskinputid+"'  onkeydown='return changeTab(event,this)' class='meausre_input' ></th>";
+                                if(data[j].zteachercheck==null&&data[j].zselfcheck==null){
+                                    str2+="<th class='m_font' ></th><th><input type='tel' id='"+data[j].ztaskinputid+"'  onkeydown='return changeTab(event,this)' class='meausre_input' ></th>";
                                 }
-                                else{
+                                else if(data[j].zteachercheck==null){
+                                    str2+="<th class='m_font' value='"+data[j].zselfcheck+"'>"+data[j].zselfcheck+"</th><th><input type='tel'  id='"+data[j].ztaskinputid+"'  onkeydown='return changeTab(event,this)' class='meausre_input'></th>";
+                                }else if(data[j].zselfcheck==null){
+                                    str2+="<th class='m_font' ></th><th><input type='tel'  id='"+data[j].ztaskinputid+"'  onkeydown='return changeTab(event,this)' class='meausre_input' value='"+data[j].zteachercheck+"'></th>";
+                                }else{
                                     str2+="<th class='m_font' value='"+data[j].zselfcheck+"'>"+data[j].zselfcheck+"</th><th><input type='tel'  id='"+data[j].ztaskinputid+"'  onkeydown='return changeTab(event,this)' class='meausre_input' value='"+data[j].zteachercheck+"'></th>";
                                 }
                                 static_havevalue++;
