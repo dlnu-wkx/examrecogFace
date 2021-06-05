@@ -300,6 +300,7 @@
 
     //全选
     function allchose() {
+
         //alert(2)
         openchose()
         if(static_chose==0){
@@ -485,7 +486,7 @@
     //点选方法
     function openchose(){
 
-        if (static_choseval==0){
+        if (static_choseval==0||static_chose==0){
             $("#openchose").css("background","#F2A774");
             static_choseval=1;
             $("input[name='topchose']").show()
