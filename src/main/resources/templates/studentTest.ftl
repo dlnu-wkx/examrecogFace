@@ -107,10 +107,12 @@
     }
 
   //  var static_light=1;
-
+    var static_testtimes2=0;
 
     function a(){
-        static_testtimes--;
+        static_testtimes2=static_testtimes;
+
+        static_testtimes=0;
         //记录当前状态信息
      //   sendnowstatusmes();
 
@@ -243,7 +245,10 @@
 
 
     function gettestmessage(){
-        static_testtimes++;
+        if(static_testtimes2!=0)
+            static_testtimes=static_testtimes2;
+
+        static_testtimes2++;
        // alert(static_testtimes)
         $.ajax({
             type: "post",
@@ -360,92 +365,13 @@
             success: function (data) {
                 // alert(data)
                 if (data>0) {
-                    //结算测试题和实训任务
-                    $.ajax({
-                        type: "post",
-                        url: "/findsessionprogress",
-                        data:{},
-                        async: false,
-                        success: function (data){
-                            submit2()
-
-                        }
-                    });
-
-
-                    //删除临时任务
-                    $.ajax({
-                        type: "post",
-                        url: "/deletemes",
-                        data:{},
-                        async: false,
-                        success: function (data){
-
-                        }
-                    });
-
-                    //将继电器6号端口断开
-                    $.ajax({
-                        type: "post",
-                        url: "/usixout",
-                        data:{},
-                        async: false,
-                        success: function (data){
-
-                        }
-                    });
-
-                    //设备状态的更改
-                    $.ajax({
-                        type: "post",
-                        url: "/updateprogress",
-                        data:{},
-                        async: false,
-                        success: function (data){
-
-                        }
-                    });
-
-                    //学生退出时改变实训设备的zprogress
-                    $.ajax({
-                        type:"post",
-                        url:"/exitsystem",
-                        data:{},
-                        async: false,
-                        success:function(data){
-
-                        }
-                    })
-
-                    //清除当堂课请假与举手状态
-                    $.ajax({
-                        type:"post",
-                        url:"/updatealleventbystu",
-                        data:{},
-                        async: false,
-                        success:function(data){
-
-                        }
-                    })
-
-                    //更改学生登陆的状态
-                    $.ajax({
-                        type:"post",
-                        url:"/updatestatusbout",
-                        data:{},
-                        async: false,
-                        success:function(data){
-
-                        }
-                    })
-
+                    static_testtimes=0;
+                    a()
                     setTimeout(function (){ location.href="/student"},1500);
                 }
             }
         })
     }
-
-
 
 
 

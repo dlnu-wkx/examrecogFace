@@ -513,9 +513,9 @@
         getteacherroom();
         loadfaclity(static_trainroomid);
 
-      /*interval= window.setInterval(function () {
+      interval= window.setInterval(function () {
             loadfaclity(static_trainroomid);
-        }, 20000);*/
+        }, 20000);
     }
 
 
