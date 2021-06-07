@@ -203,6 +203,9 @@
 
     var static_nullinput=0;
     var static_havevalue=0;
+    var static_classes=""
+
+
 
     function getmeasurebygt(){
 
@@ -212,6 +215,7 @@
 
         var m_classselect=$("#m_classselect").val();
         var m_taskselect=$("#m_taskselect").val();
+        static_classes=$("#m_classselect  option:selected").text();
 
         var studentid=new Array();
         //任务的输入框中的最大值
@@ -244,6 +248,7 @@
 
                 var measure_table=$("#measure_table")
                 var str="";
+                str+="<tr><th colspan='3'><font size='5'>"+static_classes+"</font></th>"
                 str+="<tr><th>序号</th><th>学号</th><th>姓名</th></tr>" ;
 
                 for(var i=0;i<data.length;i++){
@@ -281,7 +286,7 @@
                         str2+="<tr>"
                         if(data.length==0){
                             for(var j=0;j<=max-1;j++){
-                                str2+="<th class='m_font' value='0'></th><th><input  onkeydown='return changeTab(event,this)'   class='meausre_input'></th>";
+                                str2+="<th class='m_font' value='0'></th><th></th>";
 
                                 static_nullinput++;
                             }
@@ -291,11 +296,11 @@
                                     str2+="<th class='m_font' ></th><th><input type='tel' id='"+data[j].ztaskinputid+"'  onkeydown='return changeTab(event,this)' class='meausre_input' ></th>";
                                 }
                                 else if(data[j].zteachercheck==null){
-                                    str2+="<th class='m_font' value='"+data[j].zselfcheck+"'>"+data[j].zselfcheck+"</th><th><input type='tel'  id='"+data[j].ztaskinputid+"'  onkeydown='return changeTab(event,this)' class='meausre_input'></th>";
+                                    str2+="<th class='m_font' value='"+data[j].zselfcheck+"'>"+data[j].zselfcheck+"</th><th><input type='tel' id='"+data[j].ztaskinputid+"' onclick='showlight(\""+data[j].ztaskinputid+"\")'  onkeydown='return changeTab(event,this)' class='meausre_input' ></th>";
                                 }else if(data[j].zselfcheck==null){
-                                    str2+="<th class='m_font' ></th><th><input type='tel'  id='"+data[j].ztaskinputid+"'  onkeydown='return changeTab(event,this)' class='meausre_input' value='"+data[j].zteachercheck+"'></th>";
+                                    str2+="<th class='m_font' ></th><th><input type='tel'  id='"+data[j].ztaskinputid+"'  onclick='showlight(\""+data[j].ztaskinputid+"\")' onkeydown='return changeTab(event,this)' class='meausre_input' value='"+data[j].zteachercheck+"'></th>";
                                 }else{
-                                    str2+="<th class='m_font' value='"+data[j].zselfcheck+"'>"+data[j].zselfcheck+"</th><th><input type='tel'  id='"+data[j].ztaskinputid+"'  onkeydown='return changeTab(event,this)' class='meausre_input' value='"+data[j].zteachercheck+"'></th>";
+                                    str2+="<th class='m_font' value='"+data[j].zselfcheck+"'>"+data[j].zselfcheck+"</th><th><input type='tel'  id='"+data[j].ztaskinputid+"'  onclick='showlight(\""+data[j].ztaskinputid+"\")'  onkeydown='return changeTab(event,this)' class='meausre_input' value='"+data[j].zteachercheck+"'></th>";
                                 }
                                 static_havevalue++;
                             }
@@ -362,6 +367,7 @@
         var num=0.00;
         num=parseFloat(fonts.eq(idx).text());
         var num2=parseFloat(inputs.eq(idx).val());
+
         //alert(num)
         if(keyCode==13||keyCode==37||keyCode==38||keyCode==39){
             //自检>
@@ -374,22 +380,32 @@
             case 13:
                 inputs[idx + 1].focus(); // 设置焦点
                 inputs[idx + 1].select(); // 选中
+                $(":input").css("border","");
+                inputs.eq(idx + 1).css("border","5px solid green");
                 break;
             case 37:        //←
                 inputs[idx - 1].focus(); // 设置焦点
                 inputs[idx - 1].select(); // 选中
+                $(":input").css("border","");
+                inputs.eq(idx - 1).css("border","5px solid green");
                 break;
             case 38:        //↑
                 inputs[idx - max].focus(); // 设置焦点
                 inputs[idx - max].select(); // 选中
+                $(":input").css("border","");
+                inputs.eq(idx - max).css("border","5px solid green");
                 break;
             case 39:        //→
                 inputs[idx + 1].focus(); // 设置焦点
                 inputs[idx + 1].select(); // 选中
+                $(":input").css("border","");
+                inputs.eq(idx + 1).css("border","5px solid green");
                 break;
             case 40:        //↓
                 inputs[idx + max].focus(); // 设置焦点
                 inputs[idx + max].select(); // 选中
+                $(":input").css("border","");
+                inputs.eq(idx+max).css("border","5px solid green");
                 break;
             default:
                 break;
@@ -400,7 +416,7 @@
     function showlight(id){
       //  alert(1)
         $(":input").css("border","");
-        $("#input"+id+"").css("border","5px solid green");
+        $("#"+id+"").css("border","5px solid green");
     }
 
     function showlight2(id){
