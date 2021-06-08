@@ -280,9 +280,13 @@ function subContent() {
         if(success==1){
             //alert("提交成功");
             layer.msg("提交成功", { icon: 1, offset: "auto", time:2000 });
+            document.getElementById("hiddenArea").style.display="none";
+            document.getElementById("courseRecordContent").style.display="none";
+            document.getElementById("courseRecordColor").style.backgroundColor="#71B863";
         }else{
             //alert("提交失败没有提交成功");
             layer.msg("提交失败", { icon: 1, offset: "auto", time:2000 });
+
         }
         }
     })
@@ -297,7 +301,8 @@ var renliandata = new Array();
 function OpenOTimer(a) {
         filterjieshiLoop=1;
         var zcheck="";
-        if(a==2){
+
+    if(a==2){
             zcheck="查岗";
             insertCheckPoint();
             $("#startID2").css('background-color','rgba(237,125,49)')
@@ -314,9 +319,10 @@ function OpenOTimer(a) {
             $("#endID").css('background-color','rgba(0,0,255)')
             //打开杰视的远程socket
             //loadjieshisocket();
-            //建立连接websocket的端口
-            handlewebsocket("开始");
+
         }
+        //建立连接websocket的端口
+         handlewebsocket("开始");
         //每次开始时给renliandata清空
         renliandata.splice(0,renliandata.length);
         var myDate = new Date();
@@ -632,7 +638,7 @@ function presentProgess(zid){
 //从数据库中显示已经检测到的人脸信息
 //从数据中找到签到的学生
 function showRecognitionFace(mytime,zcheck,filterjieshiLoop,renliandata) {
-    var cameraname = $("#trainingroomselect_auto option:selected").val();
+    var cameraname = document.getElementById("cameranamepoint").innerHTML
     var formData = new FormData();
     formData.append("zcheck",zcheck);
     formData.append("mytime",mytime );
@@ -655,7 +661,6 @@ function showRecognitionFace(mytime,zcheck,filterjieshiLoop,renliandata) {
                      $("#right").hide();
                  }
                  if(data.length==1){
-                     console.log(data.length)
                      $("#left").empty();
                      $("#middle").hide();
                      $("#right").hide();
@@ -763,7 +768,7 @@ function showRecognitionFace(mytime,zcheck,filterjieshiLoop,renliandata) {
 }
 //查找所有的人包括学生和教师
 function findAllLoginpeople(mytime,zcheck) {
-    var cameraname = $("#trainingroomselect_auto option:selected").val();
+    var cameraname  = document.getElementById("cameranamepoint").innerHTML;
     var formData = new FormData();
     formData.append("zcheck",zcheck)
     formData.append("mytime",mytime );
@@ -811,18 +816,18 @@ function findAllLoginpeople(mytime,zcheck) {
                 if(data.length>5){
                     for(var i=0;i<5;i++){
                         if(data[i].zgradeName=="陌生人"){
-                            content =" <div style='font-size: 30px;width: 80%;margin-top: 15px'>"+data[i].zname+"</div>";
+                            content =" <div style='font-size: 15px;width: 80%;margin-top: 15px'>"+data[i].zname+"</div>";
                         }else{
-                            content =" <div style='font-size: 30px;width: 80%;margin-top: 15px'>"+data[i].zname+"&emsp;"+data[i].zgradeName+"</div>";
+                            content =" <div style='font-size: 15px;width: 80%;margin-top: 15px'>"+data[i].zname+"&emsp;"+data[i].zgradeName+"</div>";
                         }
                         $("#identifyAreas").append(content);
                     }
                 }else {
                     for(var i=0;i<data.length;i++){
                         if(data[i].zgradeName=="陌生人"){
-                            content =" <div style='font-size: 30px;width: 80%;margin-top: 15px'>"+data[i].zname+"</div>";
+                            content =" <div style='font-size: 15px;width: 80%;margin-top: 15px'>"+data[i].zname+"</div>";
                         }else{
-                            content =" <div style='font-size: 30px;width: 80%;margin-top: 15px'>"+data[i].zname+"&emsp;"+data[i].zgradeName+"</div>";
+                            content =" <div style='font-size: 15px;width: 80%;margin-top: 15px'>"+data[i].zname+"&emsp;"+data[i].zgradeName+"</div>";
                         }
                         $("#identifyAreas").append(content);
                     }
@@ -1174,11 +1179,16 @@ function showTips(content) {
     }, 2000);
 }
 
-function CheckPointFindAllCameras() {
-    var checkPointMenu =$("#checkPointMenu");
+function CheckPointFindAllCameras(type) {
+    var checkPointMenu ="";
+    if(type=="查岗"){
+        checkPointMenu =$("#checkPointMenu");
+    }else{
+        checkPointMenu =$("#threeMenu");
+    }
     checkPointMenu.empty();
     var formData = new FormData();
-    formData.append("type", "查岗")
+    formData.append("type", type)
     $.ajax({
         type: "post",
         url: "/findAllCameras",
@@ -1193,7 +1203,7 @@ function CheckPointFindAllCameras() {
                     str+=" <ul style='margin-top: 10%;width: 80%;left: 40%;margin: 37px auto'>"
                     for(var i=0;i<data.length;i++){
                         if (i == data.length) {break;}
-                        str+="<li style='margin-left: 10% '><button onclick='studentShow1(this.value)' value='' style='float:left;color:#FFFFFF;height: 80px;display:block;margin:0 auto;margin-top:0px;width:250px;background-color:#71B863;border-radius:32px;text-align: center;line-height: 50px;font-size: 35px'>"+(data[i].ztrainingroomID)+"</button></li>"
+                        str+="<li style='margin-left: 10% '><button onclick='studentShow1(\""+data[i].zcameraIP+"\",\""+data[i].zcameraName+"\")' value='' style='float:left;color:#FFFFFF;height: 80px;display:block;margin:0 auto;margin-top:0px;width:250px;background-color:#71B863;border-radius:32px;text-align: center;line-height: 50px;font-size: 35px'>"+(data[i].ztrainingroomID)+"</button></li>"
                     }
                     str+="</ul>";
                     str+="</div>";
@@ -1207,14 +1217,10 @@ function CheckPointFindAllCameras() {
                         for(;j<2 * (i + 1);j++){
                             if (j == data.length) {break;}
                             if(j%2==0){
-                                str+="<li style='margin-left: 30%'><button  onclick='studentShow1(this.value)' value='2' style='float:left;color:#FFFFFF;height: 80px;display:block;margin:0 auto;margin-top:0px;width:250px;background-color:#71B863;border-radius:32px;text-align: center;line-height: 50px;font-size: 35px'>"+(data[j].ztrainingroomID)+"</button>"
-                                str+="<button id='zcameraIP' style='display: none' value='"+(data[j].zcameraIP)+"'></button>";
-                                str+="<button id='zwebaddress'style='display: none' value='"+(data[j].zwebaddress)+"'></button> </li>";
+                                str+="<li style='margin-left: 30%'><button  onclick='studentShow1(\""+data[j].zcameraIP+"\",\""+data[j].zcameraName+"\")' value='2' style='float:left;color:#FFFFFF;height: 80px;display:block;margin:0 auto;margin-top:0px;width:250px;background-color:#71B863;border-radius:32px;text-align: center;line-height: 50px;font-size: 35px'>"+(data[j].ztrainingroomID)+"</button></li>"
                             }
                             if(j%2==1){
-                                str+="<li style='margin-left: 60%'><button  onclick='studentShow1(this.value)' value='2' style='float:left;color:#FFFFFF;height: 80px;display:block;margin:0 auto;margin-top:0px;width:250px;background-color:#71B863;border-radius:32px;text-align: center;line-height: 50px;font-size: 35px'>"+(data[j].ztrainingroomID)+"</button>"
-                                str+="<button id='zcameraIP' style='display: none' value='"+(data[j].zcameraIP)+"'></button>";
-                                str+="<button id='zwebaddress'style='display: none' value='"+(data[j].zwebaddress)+"'></button></li>";
+                                str+="<li style='margin-left: 60%'><button  onclick='studentShow1(\""+data[j].zcameraIP+"\",\""+data[j].zcameraName+"\")' value='2' style='float:left;color:#FFFFFF;height: 80px;display:block;margin:0 auto;margin-top:0px;width:250px;background-color:#71B863;border-radius:32px;text-align: center;line-height: 50px;font-size: 35px'>"+(data[j].ztrainingroomID)+"</button></li>"
                             }
                         }
                         str+="</ul>";
@@ -1233,7 +1239,7 @@ function CheckPointFindAllCameras() {
 
 }
 
-function findAllCameras() {
+/*function findAllCameras() {
 
     var threeMenu =$("#threeMenu");
     threeMenu.empty();
@@ -1295,7 +1301,7 @@ function findAllCameras() {
 
     })
 
-}
+}*/
 
 /*
 function findZtrainingroomName(zid) {

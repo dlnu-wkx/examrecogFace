@@ -29,6 +29,10 @@
         SELECT zstudentID from zstudent_schedule where zscheduleID=#{zscheduleID}
     </select>
 
+    <select id="findfirststuschedule"  resultType="com.itboyst.facedemo.dto.Zstudent_schedule">
+        SELECT zstudentID from zstudent_schedule where zscheduleID=#{zscheduleID}
+    </select>
+
 
     <update id="updatetestbyscheduleid" parameterType="com.itboyst.facedemo.dto.Zstudent_schedule" >
         update zstudent_schedule set zselecttest = #{zselecttest},zpassingscore=#{zpassingscore} where zscheduleID=#{zscheduleID}

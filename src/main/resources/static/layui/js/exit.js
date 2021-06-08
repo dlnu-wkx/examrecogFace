@@ -98,7 +98,6 @@ function chooseFileChangeCompF_M() {
                     $("#similarDiv").html("");
                     $("#ageDiv").html("");
                     $("#genderDiv").html("");
-
                     showTips(text.message);
                 }
 

@@ -32,4 +32,9 @@
         insert into zassign_schedule (zid,zstudentscheduleID,ztrainingtaskID,zpublishtime)
         values(#{zid},#{zstudentscheduleID},#{ztrainingtaskID},#{zpublishtime})
     </insert>
+
+    <select id="findtaskidbyscheduleid" resultType="java.lang.String">
+        select ztrainingtaskID from zassign_schedule
+        where zstudentscheduleID =#{zstudentscheduleID}
+    </select>
 </mapper>

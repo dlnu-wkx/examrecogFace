@@ -472,9 +472,6 @@ public class FaceController {
     @ResponseBody
     public Result<FaceSearchResDto> faceSearch(HttpServletRequest request, String ztype, String ip, String file, Integer groupId, HttpServletResponse response, HttpSession session, Model model) throws Exception {
 
-        System.out.println(ip + "," + ztype + "," + groupId);
-
-
         if (groupId == null) {
             return Results.newFailedResult("groupId is null");
         }
@@ -669,6 +666,7 @@ public class FaceController {
                 }
 
             }
+            //重复登录的相关代码
             Zstudent_login zstudent_login3=zstudent_loginService.findloginbyss(zstudent.getZid(),zsl.getZscheduleID());
             if(zstudent_login3!=null)return Results.newFailedResult(ErrorCodeEnum.Double_Login);
 
@@ -1007,7 +1005,6 @@ public class FaceController {
                 int faceid = faceengine.selectidbyname(faceUserInfo.getPath());
                 //教师信息、课程信息和实训室信息
                 List<Zteacher_cookie> data=zteacher_cookieSerice.findbyfaceid(faceid);
-                System.out.println(faceid);
                 System.out.println(data);
                 Zteacher_cookie zteacher_cookie=new Zteacher_cookie();
 
@@ -1034,7 +1031,6 @@ public class FaceController {
                 response.addCookie(aimPath1);//把路径存到cookie中
 
             String face_id = userFaceInfoService.selectfaceidbyfpath(faceUserInfo.getPath());
-            System.out.println(face_id);
 
             Zteacher teacher = zteacherService.findteacherByzidentity(face_id);
             System.out.println(teacher);
@@ -1063,7 +1059,6 @@ public class FaceController {
                 Date date2 = sdf.parse(str);
                 Timestamp timestamp2222 = new Timestamp(date2.getTime());
                 int compare = createtimestamp.compareTo(timestamp2222);
-                System.out.println("compare" + compare);
                 System.err.println(face_id);
                 if (compare < 0) {
                     //在人脸表中修改face_feature为null
@@ -1096,8 +1091,6 @@ public class FaceController {
             zteacher_cookie.setZgradeid(zgradid);
 
             session.setAttribute("zteacher_cookie", zteacher_cookie);
-            System.out.println(zgradid);
-            System.out.println(session.getAttribute("zteacher_cookie"));
 
             //插入教师日志
             Zteacher_journal zteacher_journal = new Zteacher_journal();

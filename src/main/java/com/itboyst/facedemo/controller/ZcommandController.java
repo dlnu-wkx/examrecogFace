@@ -188,7 +188,7 @@ public class ZcommandController {
         String ztrainingroomid =zteacher_cookie.getZtrainingroomid();
         //通过查岗和所在的房间id对所有的查岗进行更新
         int a =zteacher_commandService.updateCommandByroomandZtype("查岗",ztrainingroomid);
-        //插入一条最新的更新
+
 
 
     }

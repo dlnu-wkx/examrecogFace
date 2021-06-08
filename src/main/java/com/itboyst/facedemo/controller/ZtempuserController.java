@@ -90,7 +90,7 @@ public class ZtempuserController {
             userFaceInfo.setFaceFeature(bytes);
             //从人脸表中查找自增键的值作为face_id
             int num = userFaceInfoService.findAll();
-            int number = num;
+            int number = num+1;
             String face_id = "L" + number;
             //用学号或工号与face表相连
             userFaceInfo.setFaceId(face_id);

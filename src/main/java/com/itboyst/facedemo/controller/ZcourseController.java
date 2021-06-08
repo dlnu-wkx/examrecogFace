@@ -179,11 +179,11 @@ public class ZcourseController {
 
                     if(c>0){
                         Zassign_schedule zassign_schedule = new Zassign_schedule();
-                        if(null ==studentschedule){//如果没有课程直接添加新建的上课学生表的id,否则添加查询到的id
+                        /*if(null ==studentschedule){//如果没有课程直接添加新建的上课学生表的id,否则添加查询到的id*/
                             zassign_schedule.setZstudentscheduleID(uuid1);
-                        }else{
+                       /* }else{
                             zassign_schedule.setZstudentscheduleID(studentschedule);
-                        }
+                        }*/
                         Timestamp timestamp=new Timestamp(System.currentTimeMillis());
                         zassign_schedule.setZpublishtime(timestamp);
                         int m = 0;
@@ -194,8 +194,37 @@ public class ZcourseController {
                             m =zassign_scheduleService.insertzassignzschedule(zassign_schedule);
                         }
                         if(m>0){
-                            return "success";
+                            return "新建任务成功";
                         }
+                    }
+                    //在该上课表中给该同学追加新增的任务
+                    if(c ==0){
+                        //studentschedule
+                        Zassign_schedule zassign_schedule = new Zassign_schedule();
+                        zassign_schedule.setZstudentscheduleID(studentschedule);
+                        Timestamp timestamp=new Timestamp(System.currentTimeMillis());
+                        zassign_schedule.setZpublishtime(timestamp);
+                        int f = 0;
+                        for(int v =0;v<trainingtaskID.length;v++){
+                            String uuid2 = UUID.randomUUID().toString().replaceAll("-","");
+                            zassign_schedule.setZid(uuid2);
+                            zassign_schedule.setZtrainingtaskID(trainingtaskID[v]);
+                            //如果该生已经有该任务则不添加否则添加新任务
+                            List<String> liststring = zassign_scheduleService.findtaskidbyscheduleid(studentschedule);
+                            int z = 0;
+                            for(int x =0;x<liststring.size();x++){
+                                if(liststring.get(x).equals(trainingtaskID[v])){
+                                    z++;
+                                }
+                            }
+                            if(z == 0){
+                                f =zassign_scheduleService.insertzassignzschedule(zassign_schedule);
+                            }
+                        }
+                        if(f>0){
+                            return "新增任务成功";
+                        }
+
                     }
 
                 }

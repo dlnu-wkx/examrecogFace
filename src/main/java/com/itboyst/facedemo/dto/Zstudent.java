@@ -12,6 +12,23 @@ public class Zstudent {
     private String zphoto;
     private String zstatus;
     private String groupID;
+    private String zgradeName;
+
+    public String getGroupID() {
+        return groupID;
+    }
+
+    public void setGroupID(String groupID) {
+        this.groupID = groupID;
+    }
+
+    public String getZgradeName() {
+        return zgradeName;
+    }
+
+    public void setZgradeName(String zgradeName) {
+        this.zgradeName = zgradeName;
+    }
 
     public String getZid() {
         return zid;
@@ -107,6 +124,7 @@ public class Zstudent {
                 ", zphoto='" + zphoto + '\'' +
                 ", zstatus='" + zstatus + '\'' +
                 ", groupID='" + groupID + '\'' +
+                ", zgradeName='" + zgradeName + '\'' +
                 '}';
     }
 }

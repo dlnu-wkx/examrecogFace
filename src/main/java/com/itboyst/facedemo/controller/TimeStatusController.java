@@ -195,52 +195,9 @@ public class TimeStatusController {
 
     @RequestMapping("/autoFindAllCameras")
     @ResponseBody
-    public List<Ztraining_camera> autoFindAllCameras(String type,String ztrainingroomID){
-
+    public Ztraining_camera autoFindAllCameras(HttpSession session,String type){
         //把数据库中用","形式写的摄像头遍历出来并且组装成一个新的摄像头
-        List<Ztraining_camera> ztrainingCameraList =ztraining_cameraService.findAllByZtrainingroomID(ztrainingroomID,type);
-        if(ztrainingCameraList.size()>0){
-            for(int j=0;j<ztrainingCameraList.size(); j++){
-                Ztraining_camera a=ztrainingCameraList.get(j);
-                //System.out.println(a);
-                if(null !=a.getZcameraName()||a.getZcameraName().contains(",")){
-                    String[] str = a.getZcameraName().split(",");
-                    for(int i=0;i<str.length;i++){
-                        Ztraining_camera  ztraining_camera = new Ztraining_camera();
-                        ztraining_camera.setZid(a.getZid());
-                        ztraining_camera.setZtrainingroomID(a.getZtrainingroomID());
-                        ztraining_camera.setZidentity(a.getZidentity());
-                        ztraining_camera.setZcameraIP(a.getZcameraIP());
-                        ztraining_camera.setZcameraName(str[i]);
-                        ztraining_camera.setZstatus(a.getZstatus());
-                        ztraining_camera.setZtitle(a.getZtitle());
-                        ztraining_camera.setZwebaddress(a.getZwebaddress());
-                        ztrainingCameraList.add(ztraining_camera);
-                    }
-                    ztrainingCameraList.remove(j);
-                }
-            }
-        }
-
-        //如果有大于一个摄像头则对摄像头的名字进行排序
-        if(ztrainingCameraList.size()>1){
-            Collections.sort(ztrainingCameraList, new Comparator<Ztraining_camera>() {
-                @Override
-                public int compare(Ztraining_camera o1, Ztraining_camera o2) {
-                    int aim =Integer.parseInt(o1.getZcameraName())-Integer.parseInt(o2.getZcameraName());
-                    if(aim>0){
-                        return 1;
-                    }else if(aim<0){
-                        return -1;
-                    }
-                    return 0;
-                }
-            });
-        }
-        for(Ztraining_camera b:ztrainingCameraList){
-            String name =ztraining_roomService.findztrainroomNamebyfacilityID(b.getZid());
-            b.setZtrainingroomID(name);
-        }
+        Ztraining_camera ztrainingCameraList =ztraining_cameraService.findAllByType(type);
 
         return ztrainingCameraList;
     }

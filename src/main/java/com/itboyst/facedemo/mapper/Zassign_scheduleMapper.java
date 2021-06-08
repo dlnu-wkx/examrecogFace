@@ -4,6 +4,7 @@ import com.itboyst.facedemo.dto.Zassign_schedule;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 @Mapper
 public interface Zassign_scheduleMapper {
@@ -16,4 +17,6 @@ public interface Zassign_scheduleMapper {
     public int updatecompletetime(Zassign_schedule zassign_schedule);
 
     int insertzassignzschedule(Zassign_schedule zassign_schedule);
+
+    List<String> findtaskidbyscheduleid(String zstudentscheduleID);
 }

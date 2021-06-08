@@ -208,7 +208,7 @@
                             str+="<td>"+(i+1)+"</td>";
                             str+="<td>"+data[i].zidentity+"</td>";
                             str+="<td>"+data[i].zname+"</td>";
-                            str+="<td>"+data[i].zgradeID+"</td>";
+                            str+="<td>"+data[i].zgradeName+"</td>";
                             str+="</tr>";
                         }
                         str+="</table>";
@@ -344,11 +344,18 @@ function savecourse() {
         data:{"zid":startchose,"trainingroomID":trainingroomID,"zstartdate":zstartdate,"zenddate":zenddate,"courseID":courseID,"trainingtaskID":trainingtaskID,"scheduleteacherid":scheduleteacherid},
         success:function (data) {
         if(data=="success"){
-            layer.msg("新增课程表成功", { icon: 1, offset: "auto", time:1000 });
+            layer.msg("新增课程表、添加任务成功", { icon: 1, offset: "auto", time:1000 });
 
         }
-        if(""==data || "success"!=data){
-            layer.msg("上课表已经存在", { icon: 1, offset: "auto", time:1000 });
+        else if(data=="新建任务成功"){
+            layer.msg("新建任务并添加成功", { icon: 1, offset: "auto", time:1000 });
+
+        }
+        else if(data =="新增任务成功"){
+            layer.msg("新增任务成功", { icon: 1, offset: "auto", time:1000 });
+        }
+        else{
+            layer.msg("新增任务失败", { icon: 2, offset: "auto", time:1000 });
         }
         }
     })

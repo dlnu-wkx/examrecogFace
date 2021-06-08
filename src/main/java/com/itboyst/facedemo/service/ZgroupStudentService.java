@@ -5,5 +5,5 @@ public interface ZgroupStudentService {
 
     int deleteZgroupStudentByZid(String zgradeID);
 
-    int deleteZgroupStudentByStudentID(String zstudentID);
+    int deleteZgroupStudentByStudentID(String zstudentID,String zgradeID);
 }

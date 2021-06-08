@@ -8,6 +8,8 @@ public interface Ztraining_cameraService {
 
     List<Ztraining_camera> findAllByZtrainingroomID(String ZtrainingroomID,String type);
 
+    Ztraining_camera findAllByType(String type);
+
     int insertCamera(Ztraining_camera ztraining_camera);
 
 

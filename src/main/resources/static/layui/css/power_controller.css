@@ -163,7 +163,7 @@
 
 .p_left{
     width: 15%;
-    height: 70.5%;
+    height: 68.5%;
     left: 0%;
     top: 6.5%;
     border-right: 2px solid #BBBBBB;
@@ -838,11 +838,10 @@
 
 .p_bbbox{
     left: 1%;
-    width: 97.5%;
+    width: 100%;
     height: 100%;
     margin-left: 1%;
     position: absolute;
-
 }
 
 .p_bbbox_1{
@@ -857,7 +856,6 @@
     width: 90%;
     height: 90%;
     position: absolute;
-    color: wheat;
 }
 
 .p_bbbox tr {
@@ -892,10 +890,10 @@
 
 
 .power_bbox2_1{
-    width: 18%;
+    width: 15%;
     height: 30%;
     position: absolute;
-    margin-top: -22%;
+    margin-top: -4%;
 }
 
 .power_bbox3{
@@ -916,7 +914,7 @@
     background-color: whitesmoke;
     position: absolute;
     height: 20%;
-    left: 10%;
+    left: 20%;
     top: 12%;
     width: 20%;
     transform: scale(1.5,1.5);
@@ -946,7 +944,7 @@
     width: 90%;
     height: 25%;
     left: 0%;
-    top: 77%;
+    top: 75%;
     position: fixed;
     border-top: 2px solid #BBBBBB;
 }

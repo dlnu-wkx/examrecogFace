@@ -57,6 +57,9 @@ public class Zfixed_taskController {
     @Autowired
     ZscheuleService zscheuleService;
 
+    @Autowired
+    Zstudent_cooikeService zstudent_cooikeService;
+
 
     @RequestMapping("/sendclassmessage")
     @ResponseBody
@@ -201,10 +204,14 @@ public class Zfixed_taskController {
 
         Zteacher_cookie zteacher_cookie=(Zteacher_cookie)session.getAttribute("zteacher_cookie");
 
-        String zscheduleid=zteacher_cookie.getZscheduleID();
+
+        List<Zstudent_cookie> data=zstudent_cooikeService.findscookiemes(zteacher_cookie.getZtrainingroomid(),timestamp,studentid);
+
+        Zstudent_cookie zstudent_cookie=data.get(0);
+
+        String zscheduleid=zstudent_cookie.getZscheduleID();
 
        //System.out.println(zid+zscheduleid+studentid+taskid+timestamp);
-
 
         Zstudent zstudent=zstudentService.findStudentById(studentid);
         if (zstudent.getZidentity().contains("L")){

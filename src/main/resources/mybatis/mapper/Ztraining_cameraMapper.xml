@@ -5,7 +5,13 @@
 
     <select id="findAllByZtrainingroomID" resultType="com.itboyst.facedemo.dto.Ztraining_camera">
 
-        select * from ztraining_camera where ztrainingroomID=#{ZtrainingroomID} and ztitle=#{type}
+        select * from ztraining_camera where ztrainingroomID=#{ZtrainingroomID} and  ztitle=#{type}
+
+    </select>
+
+    <select id="findAllByType" resultType="com.itboyst.facedemo.dto.Ztraining_camera">
+
+        select * from ztraining_camera where  ztitle=#{type}
 
     </select>
 

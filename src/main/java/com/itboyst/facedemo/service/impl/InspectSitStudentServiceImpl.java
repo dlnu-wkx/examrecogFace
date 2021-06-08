@@ -49,7 +49,7 @@ public class InspectSitStudentServiceImpl implements InspectSitStudentService{
     @Override
     public List<InspectSitStudent> inspectfindStudentByDateAndTrainingIdASC(String ztrainingroomID, Timestamp timestamp, String zcheck,String cameraname) {
         if(cameraname.equals("")){
-            inspectSitStudentMapper.inspectfindStudentByDateAndTrainingIdASC(ztrainingroomID,timestamp,zcheck);
+            return  inspectSitStudentMapper.inspectfindStudentByDateAndTrainingIdASC(ztrainingroomID,timestamp,zcheck);
         }
         return inspectSitStudentMapper.inspectfindStudentByDateAndTrainingIdHavecamera(ztrainingroomID,timestamp,zcheck,cameraname);
     }

@@ -25,7 +25,7 @@
 <body class="layui-layout-body" style="width: 100%;height: 100%;background-image:url(/images1/background.png);background-size: 100%;height: 100%">
 <div class="layui-layout layui-layout-admin" >
     <div class="layui-header" style="border-bottom: 0px solid #c2c2c2;background-color: #114376">
-        <div id="selectdivid">
+        <div id="cameranamepoint" class="left-bar">
 
         </div>
         <div class="mid-bar" style="margin-left: 15%">安浩智能学习工厂</div>
@@ -128,22 +128,15 @@
 
     //加载所有的摄像头
     function showAllCamera(){
-        var str = "";
         $.ajax({
             type:"post",
             url:"/autoFindAllCameras",
-            data:{"type":"入口","ztrainingroomID":"1"},
+            data:{"type":"入口"},
             success:function (data) {
                 if(""!=data){
                     console.log(data);
-                    $("#selectdivid").empty();
-                    str+="<select  class='left-bar-auto' onchange='selectStr()' id='trainingroomselect_auto'>";
-                    str+="<option>全部</option>";
-                    for(var i =0;i<data.length;i++){
-                        str+="<option value='"+data[i].zcameraName+"'>"+data[i].zcameraName+"/自动签到</option>";
-                    }
-                    str+="</select>";
-                    $("#selectdivid").append(str)
+                    document.getElementById("cameranamepoint").innerHTML=data.zcameraName;
+
                 }
             }
         })
@@ -151,12 +144,12 @@
 
     //获取所选摄像头的名称
 
-    function selectStr() {
+   /* function selectStr() {
         //摄像头的名字
         var optionvalue = $("#trainingroomselect_auto option:selected").val();
 
 
-    }
+    }*/
 
 </script>
 </body>

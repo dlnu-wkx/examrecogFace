@@ -38,6 +38,11 @@ public class ZgradeServiceImpl implements ZgradeService {
     }
 
     @Override
+    public List<Zgrade> findgroup() {
+        return zgradeMapper.findgroup();
+    }
+
+    @Override
     public List<Zgrade> findgrade() {
         return zgradeMapper.findgrade();
     }

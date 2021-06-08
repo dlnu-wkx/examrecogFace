@@ -66,16 +66,29 @@ public class ZgradeController {
 
     }
 
-    @RequestMapping("/findAllgrade")
+    /**
+     * 查找所有的群组
+     * @return
+     */
+    @RequestMapping("/findgroup")
     @ResponseBody
-    public List<Zgrade> findAllgrade(){
-        List<Zgrade> listone =zgradeService.findgrade();
-
-        return listone;
+    public List<Zgrade> findgroup(){
+        List<Zgrade> listgroup =zgradeService.findgroup();
+        return listgroup;
 
     }
 
+    /**
+     * 查找所有的班级
+     * @return
+     */
+    @RequestMapping("/findgrade")
+    @ResponseBody
+    public List<Zgrade> findgrade(){
+        List<Zgrade> listgrades =zgradeService.findgrade();
+        return listgrades;
 
+    }
 
     @RequestMapping("/findAllstudentbygradeid")
     @ResponseBody
@@ -97,7 +110,7 @@ public class ZgradeController {
         /*if(ztrainingroomID !=null){
             list = zgradeService.findallgradebytrainroom(ztrainingroomID);
         }*/
-        list = zgradeService.findgrade();
+        list = zgradeService.findgroup();
         return list;
 
     }
@@ -156,13 +169,13 @@ public class ZgradeController {
         return list;
     }
 
-    @RequestMapping("/deleteStudentbyzid")
+    @RequestMapping("/deleteStudentbyzidandgradeID")
     @ResponseBody
-    public int  deleteStudentbyzid(@RequestParam(value = "zid[]")String[] zid) {
+    public int  deleteStudentbyzidandgradeID(@RequestParam(value = "zid[]")String[] zid,String gradeID) {
         int c = 0;
         if(zid != null){
             for(int i = 0;i<zid.length;i++){
-                c  = zgroupStudentService.deleteZgroupStudentByStudentID(zid[i]);
+                c  = zgroupStudentService.deleteZgroupStudentByStudentID(zid[i],gradeID);
             }
         }
         return c;

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 @Service
 public class Zassign_scheduleServiceImpl implements Zassign_scheduleService {
@@ -37,6 +38,11 @@ public class Zassign_scheduleServiceImpl implements Zassign_scheduleService {
     @Override
     public int insertzassignzschedule(Zassign_schedule zassign_schedule) {
         return zassign_scheduleMapper.insertzassignzschedule(zassign_schedule);
+    }
+
+    @Override
+    public List<String> findtaskidbyscheduleid(String zstudentscheduleID) {
+        return zassign_scheduleMapper.findtaskidbyscheduleid(zstudentscheduleID);
     }
 
 }

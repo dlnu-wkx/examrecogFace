@@ -51,7 +51,7 @@ public class InspectSitStudentController {
     @RequestMapping(value = "/InspectSitStudent", method = RequestMethod.POST)
     @ResponseBody
     public List<InspectSitStudent> InspectSitStudent(HttpSession session,String mytime,String zcheck,@RequestParam(value = "renliandata") String renliandata,String cameraname) throws IOException, ParseException {
-        if(cameraname.equals("全部")){
+        if(zcheck.equals("查岗")){
             cameraname = "";
         }
         JSONArray json = JSONArray.fromObject(renliandata);
@@ -203,6 +203,7 @@ public class InspectSitStudentController {
     @RequestMapping(value = "/signInInspectSitStudent", method = RequestMethod.POST)
     @ResponseBody
     public List<InspectSitStudent> signInInspectSitStudent(HttpSession session,String mytime,String zcheck,String zid,String cameraname) throws IOException, ParseException {
+
         if(cameraname.equals("全部")){
             cameraname = "";
         }
@@ -240,7 +241,7 @@ public class InspectSitStudentController {
     @RequestMapping(value = "/InspectSitStudentandTeacher", method = RequestMethod.POST)
     @ResponseBody
     public List<InspectSitStudent> InspectSitStudentandTeacher(HttpSession session,String mytime,String zcheck,String cameraname) throws IOException, ParseException {
-        if(cameraname.equals("全部")){
+        if(zcheck.equals("查岗")){
             cameraname = "";
         }
         Timestamp timestamp=new Timestamp(System.currentTimeMillis());
@@ -310,6 +311,7 @@ public class InspectSitStudentController {
 
         return zstudentList;
     }
+
 
     public static Timestamp dealDateFormat(String oldDate) {
         Timestamp timeStamp = null;

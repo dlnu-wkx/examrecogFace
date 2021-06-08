@@ -12,6 +12,6 @@
     </delete>
 
     <delete id="deleteZgroupStudentByStudentID" parameterType="java.lang.String">
-        delete from zgroup_student where zstudentID=#{zstudentID}
+        delete from zgroup_student where zstudentID=#{zstudentID} and zgradeID = #{zgradeID}
     </delete>
 </mapper>

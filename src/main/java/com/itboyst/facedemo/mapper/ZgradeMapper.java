@@ -19,6 +19,9 @@ public interface ZgradeMapper {
 
     List<Zgrade> findallgradebytrainroom(String ztrainingroomID);
 
+    //查找所有的群组
+    List<Zgrade> findgroup();
+    //查找所有的班级
     List<Zgrade> findgrade();
 
     int addgroup(Zgrade zgrade);

@@ -31,28 +31,8 @@
         <div class="right-bar" id="m_rightfont"></div>
     </div>
     <div class="layui-row ">
-        <div id='welcomeField' class="layui-col-xs1" align="center" style="width: 17%;font-size: 70px;margin-top: 40px">
-        </div>
-        <div id='teach' class="layui-col-xs9" align="center" style="width: 74%">
-            <div class="teach-son">
-            </div>
-        </div>
 
-        <div id="hiddenArea" class="hiddenArea">
-        </div>
-        <#--三级菜单-->
-        <div id='threeMenu' class="layui-col-xs10" style="display: none; margin-top: 40px;margin: 10px 20px;width: 87.4%">
-
-        </div>
-        <#--查岗的下级功能表-->
-        <div id='checkPointMenu' class="layui-col-xs10" style="display: none; margin-top: 40px;margin: 10px 20px;width: 87.3%">
-
-        </div>
-        <#--四级菜单-->
         <div id='fourMenu' class="layui-col-xs1" align="center" style="display:none;width: 15%;font-size: 40px">
-            <#--<div id="mainDiv">
-                <img id="img" style="width: 400px;height: 300px;" src="trophy.jpg">
-            </div>-->
             <div id="grades" class="grades">
 
             </div>
@@ -128,29 +108,30 @@
     //展示现场管理的二级菜单
     function show1() {
         document.getElementById("colorType").style.backgroundColor="#ED7D31";
-        document.getElementById("welcomeField").style.display="none";
+       /* document.getElementById("welcomeField").style.display="none";
         document.getElementById("teach").style.display="none";
         //document.getElementById("threeMenu").style.display="block";
-        document.getElementById("threeMenu").style.display="none";
+        document.getElementById("threeMenu").style.display="none";*/
         //摄像头下面的显示的五个人
         document.getElementById("fourMenu").style.display="block";
         //显示开始和结束按钮
         document.getElementById("fourMenu1").style.display="block";
-        showgrades();
+        showgroup();
         loadteachername();
         gettrainroom();
     }
-    function showgrades() {
+    //加载所有的群组
+    function showgroup() {
         var str = "";
         $.ajax({
             type:"post",
-            url:"/findAllgrade",
+            url:"/findgroup",
             data:{} ,
             success:function (data) {
                 if(""!=data){
                     $("#grades").empty();
                     for(var i=0;i<data.length;i++){
-                        str+=" <button id = '"+data[i].zid+"' onclick='showstudentbygradeid(\""+data[i].zid+"\",\""+data[i].zname+"\",this)'  style='width: 100%;font-size:20px;background-color: #4472c4;color:#FFFFFF; border-radius:8px'>"+data[i].zname+"</button>";
+                        str+=" <button id = '"+data[i].zid+"' onclick='showgropstudentbygradeid(\""+data[i].zid+"\",\""+data[i].zname+"\",this)'  style='width: 100%;font-size:20px;background-color: #4472c4;color:#FFFFFF; border-radius:8px'>"+data[i].zname+"</button>";
                     }
                     $("#grades").append(str);
                 }
@@ -158,21 +139,73 @@
         })
     }
 
+    //加载所有的班级
+    function showgrade() {
+        var str = "";
+        $.ajax({
+            type:"post",
+            url:"/findgrade",
+            data:{} ,
+            success:function (data) {
+                if(""!=data){
+                    $("#grades").empty();
+                    for(var i=0;i<data.length;i++){
+                        str+=" <button  onclick='showstudentbygradeid(\""+data[i].zid+"\",\""+data[i].zname+"\",this)'  style='width: 100%;font-size:20px;background-color: #4472c4;color:#FFFFFF; border-radius:8px'>"+data[i].zname+"</button>";
+                    }
+                    $("#grades").append(str);
+                }
+            }
+        })
+    }
 
-    //showstudentbygradeid展示改班级所有的人员
+    //显示班级的成员，首先把该班级的按钮变成黄色其次显示该班级所有的人员
     function showstudentbygradeid(zid,zname,event){
         //在中心体上面显示班级
-        $("#gradename").val(zname);
-        document.getElementById("gradeID").innerHTML=zid;
+       /* $("#gradename").val(zname);
+        document.getElementById("gradeID").innerHTML=zid;*/
         var buttons = document.getElementsByTagName("button");
-        //变色
-        //var buttons = document.getElementById("grades").getElementsByTagName("button")
         for(var a = 0;a<buttons.length;a++){
-            buttons[a].style.backgroundColor = "#4472c4"
+            if(!buttons[a].innerHTML.match("信息发布")){
+                buttons[a].style.backgroundColor = "#4472c4"
+            }
         }
         event.style.backgroundColor = "yellow";
-        showStudent(zid);
+      /*  //显示该班级所有的学生
+        showStudent(zid);*/
+        //document.getElementById(""+zid).style.display = "block"
+        //$(".gm_button1 input")
+        $(".gm_button1").css("display","none");
+        var list = $(".gm_button1 span")
+        for(var x =0;x<list.length;x++){
+            if(list[x].innerText.match(zname)){
+                //console.log($(""+list[x]).parent())
+                //$(""+list[x]).parent().css("display","block")
+                //console.log($($.parseHTML(list[x],document,true)).appendTo("body"))
+            $(list[x]).parent().css("display","block")
+            }
+        }
     }
+
+    function showgropstudentbygradeid(zid,zname,event){
+        //在中心体上面显示班级
+         $("#gradename").val(zname);
+         document.getElementById("gradeID").innerHTML=zid;
+        var buttons = document.getElementsByTagName("button");
+        for(var a = 0;a<buttons.length;a++){
+            if(!buttons[a].innerHTML.match("信息发布")){
+                buttons[a].style.backgroundColor = "#4472c4"
+            }
+
+        }
+        event.style.backgroundColor = "yellow";
+          //显示该班级所有的学生
+          showStudent(zid);
+
+
+
+    }
+
+
     <!---->
     //点击整个div变色
     function changecolor(event) {
@@ -213,7 +246,7 @@ function delegroup() {
         data:{"zid":gradeID},
         success:function (data) {
             if(data==1){
-                showgrades();
+                showgroup();
                 $("#gradename").val("")
                 $("#mainBody").empty();
             }
@@ -244,13 +277,13 @@ function commitAndAddStudent() {
             var str = "";
             $.ajax({
                 type:"post",
-                url:"/findAllgrade",
+                url:"/findgroup",
                 data:{} ,
                 success:function (data) {
                     if(""!=data){
                         $("#grades").empty();
                         for(var i=0;i<data.length;i++){
-                            str+=" <button id = '"+data[i].zid+"' onclick='showstudentbygradeid(\""+data[i].zid+"\",\""+data[i].zname+"\",this)'  style='width: 100%;font-size:20px;background-color: #4472c4;color:#FFFFFF; border-radius:8px'>"+data[i].zname+"</button>";
+                            str+=" <button id = '"+data[i].zid+"' onclick='showgropstudentbygradeid(\""+data[i].zid+"\",\""+data[i].zname+"\",this)'  style='width: 100%;font-size:20px;background-color: #4472c4;color:#FFFFFF; border-radius:8px'>"+data[i].zname+"</button>";
                         }
                         $("#grades").append(str);
                         var buttons = document.getElementById("grades").getElementsByTagName("button");
@@ -273,6 +306,7 @@ function commitAndAddStudent() {
 
 //显示所有的学生
 function showNameList(event) {
+    showgrade();
     $.ajax({
         type:"post",
         url:"/findAllStudents",
@@ -283,21 +317,23 @@ function showNameList(event) {
             var center=$("#mainBody");
             center.empty();
             var j=0;
-            str+="<table class='gm_table1' id='p_bbox'>";
-            for (var i=0;i<(data.length/4+1);i++) {
-                str += " <tr>";
-                for (; j < 4 * (i + 1); j++) {
+            str+="<div class='gm_table1' id='p_bbox'>";
+            for (var i=0;i<(data.length/6+1);i++) {
+                str += " <ul style='width: 100%'>";
+                for (; j < 6 * (i + 1); j++) {
                     if (j == data.length) {break;}
-                    str += "<th><div class='gm_button1' onclick='changecolor(this)' ><input type='checkbox' value='"+data[j].zid+"' name='check'/>" + data[j].zname +"&nbsp;&nbsp;"+ data[j].zgradeID+"</div></th>";
+                    str += "<li style='width: 16%;float: left'><div class='gm_button1' style='display: none' onclick='changecolor(this)'  ><input id= '"+data[j].zgradeID+"' type='checkbox' value='"+data[j].zid+"' name='check'/> <span>" +data[j].zname +"</span><span style='display: none'>"+data[j].zgradeName+"</span></div></li>";
                 }
+                str += "</ul>";
             }
-            str += "</tr>";
-            str+="</table>";
+            str+="</div>";
             center.html(str)
         }
 
     })
 }
+
+
 //删除学生名单
 function deleteStudent(event) {
     var gradeID = document.getElementById("gradeID").innerHTML;
@@ -305,11 +341,10 @@ function deleteStudent(event) {
     $("input[name='check']:checked").each(function(i){//把所有被选中的复选框的值存入数组
         studentid[i] =$(this).val();
     });
-    console.log(studentid);
     $.ajax({
         type:"post",
-        url:"/deleteStudentbyzid",
-        data:{"zid":studentid},
+        url:"/deleteStudentbyzidandgradeID",
+        data:{"zid":studentid,"gradeID":gradeID},
         success:function (data) {
             if(data == 1){
                 $("#mainBody").empty();
@@ -318,7 +353,7 @@ function deleteStudent(event) {
         }
     })
 }
-
+//展示相应班级的所有的学生
 function showStudent(zid) {
     $.ajax({
         type:"post",
@@ -330,16 +365,17 @@ function showStudent(zid) {
             var center=$("#mainBody");
             center.empty();
             var j=0;
-            str+="<table class='gm_table1' id='p_bbox'>";
-            for (var i=0;i<(data.length/4+1);i++) {
-                str += " <tr>";
-                for (; j < 4 * (i + 1); j++) {
+            str+="<div class='gm_table1' id='p_bbox'>";
+            for (var i=0;i<(data.length/7+1);i++) {
+                str += " <ul style='width: 100%'>";
+                for (; j < 7 * (i + 1); j++) {
                     if (j == data.length) {break;}
-                    str += "<th><div class='gm_button1' onclick='changecolor(this)' ><input type='checkbox' value='"+data[j].zid+"' name='check'/>" + data[j].zname +"&nbsp;&nbsp;"+ data[j].zgradeID+"</div></th>";
+                    str += "<li style='width:16%;float: left;'><div class='gm_button1' onclick='changecolor(this)' ><input type='checkbox' value='"+data[j].zid+"' name='check'/><span>" + data[j].zname +"</span></div></li>";
                 }
+                str += "</ul>";
             }
-            str += "</tr>";
-            str+="</table>";
+
+            str+="</div>";
             center.html(str)
         }
 

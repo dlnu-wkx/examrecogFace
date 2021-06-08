@@ -37,8 +37,12 @@
 					(select zid from zschedule where  ztrainingroomID=#{ztrainingroomID} and  now() BETWEEN zstartdate and zenddate)) GROUP BY zgradeID)
     </select>
 
+    <select id="findgroup" resultType="com.itboyst.facedemo.dto.Zgrade">
+        select * from zgrade where zid  in (select zgradeID from zgroup_student GROUP BY zgradeID )
+    </select>
+
     <select id="findgrade" resultType="com.itboyst.facedemo.dto.Zgrade">
-        select * from zgrade where zname not in ('临时班级')
+        select * from zgrade where zid not in (select zgradeID from zgroup_student GROUP BY zgradeID ) and zname not in ('临时班级')
     </select>
 
     <insert id="addgroup" parameterType="com.itboyst.facedemo.dto.Zgrade" >

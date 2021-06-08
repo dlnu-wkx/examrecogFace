@@ -10,7 +10,7 @@
 
     <select id="findAlltempuserbytime" resultType="com.itboyst.facedemo.dto.Ztempuser">
 
-        select * from ztempuser where to_days(zlogintime) = to_days(now()) and zstatus = '申请中' ORDER BY zlogintime DESC
+        select * from ztempuser where zlogintime > DATE_SUB(now(),INTERVAL 1 HOUR) and zstatus = '申请中' ORDER BY zlogintime DESC
 
     </select>
 

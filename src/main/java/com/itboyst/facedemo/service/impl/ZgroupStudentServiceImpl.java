@@ -17,8 +17,8 @@ public class ZgroupStudentServiceImpl implements ZgroupStudentService {
     }
 
     @Override
-    public int deleteZgroupStudentByStudentID(String zstudentID) {
-        return zgroupStudentMapper.deleteZgroupStudentByStudentID(zstudentID);
+    public int deleteZgroupStudentByStudentID(String zstudentID,String zgradeID) {
+        return zgroupStudentMapper.deleteZgroupStudentByStudentID(zstudentID,zgradeID);
     }
 
     @Override

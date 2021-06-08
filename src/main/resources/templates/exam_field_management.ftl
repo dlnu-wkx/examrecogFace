@@ -26,8 +26,11 @@
 <body class="layui-layout-body" style="width: 100%;height: 100%;background-color: #CDCDCD">
 <div class="layui-layout layui-layout-admin">
     <div class="layui-header" style="border-bottom: 1px solid #c2c2c2;background-color: #114376"">
-    <div id="selectdivid">
+    <div id="rollcallcamera" style="display: none">
 
+    </div>
+    <div  class="left-bar">
+        <span id="trainroomname"></span>/点名签到
     </div>
         <div class="mid-bar">安浩智能学习工厂</div>
         <div class="right-bar" id="m_rightfont"></div>
@@ -55,7 +58,7 @@
         <#--四级菜单-->
         <div id='fourMenu' class="layui-col-xs1" align="center" style="display:none;width: 26%;font-size: 70px">
             <div id="mainDiv">
-                <img id="img" style="width: 400px;height: 300px;" src="trophy.jpg">
+                <img id="img" style="width: 328px;height: 300px;" src="trophy.jpg">
             </div>
             <#--这个地方到时候要循环遍历出来拼接字符串-->
             <div id="identifyAreas"style="width: 80%;height:289px;background-color: #ffff;border: 1px solid red;margin-top: 5%;">
@@ -149,19 +152,16 @@
         document.getElementById("welcomeField").style.display="none";
         document.getElementById("teach").style.display="none";
         //findAllCameras();
-        showAllCamera();
-        studentShow();
+        signinFindAllCameras("签到");
         document.getElementById("threeMenu").style.display="block";
         loadteachername();
         gettrainroom();
 
     }
     //数控车讨论区显示每台机的人脸识别情况
-    function studentShow(){
-
-        /* var b =$("#zcameraIP"+e).val();
-         alert(b)*/
-
+    function studentShow1(zcameraName) {
+        //把摄像头的名字写到相应的位置上
+        document.getElementById("rollcallcamera").innerHTML = zcameraName;
         document.getElementById("threeMenu").style.display="none";
         //摄像头下面的显示的五个人
         document.getElementById("fourMenu").style.display="block";
@@ -200,11 +200,13 @@
     //显示签到的班级
     var backup ="";//这个参数是放置班级数据的初试值
     function showgradeandpeo(id,zname) {
-        document.getElementById("currentnumber").innerHTML = 0
-        document.getElementById("gradename").innerHTML=zname
-        document.getElementById("gradeID").innerHTML=id
-        document.getElementById("masking").style.display="none"
-        document.getElementById("grade-pop-up").style.display="none"
+        $("#startID").css('background-color','rgba(0,0,255)')
+        $("#endID").css('background-color','rgba(0,0,255)')
+        document.getElementById("currentnumber").innerHTML = 0;
+        document.getElementById("gradename").innerHTML=zname;
+        document.getElementById("gradeID").innerHTML=id;
+        document.getElementById("masking").style.display="none";
+        document.getElementById("grade-pop-up").style.display="none";
         //查找相应班级的人数并显示出来
         var str ="";
         var center=$("#mainBody");
@@ -235,7 +237,7 @@
 
     }
     //加载所有的摄像头
-    function showAllCamera(){
+   /* function showAllCamera(){
         var str = "";
         $.ajax({
             type:"post",
@@ -255,16 +257,72 @@
                 }
             }
         })
-    }
+    }*/
 
     //获取所选摄像头的名称
 
-    function selectStr() {
+   /* function selectStr() {
         //摄像头的名字
         var optionvalue = $("#trainingroomselect option:selected").val();
 
 
+    }*/
+
+    function signinFindAllCameras(type) {
+         var threeMenu =$("#threeMenu");
+        threeMenu.empty();
+        var formData = new FormData();
+        formData.append("type", type)
+        $.ajax({
+            type: "post",
+            url: "/findAllCameras",
+            data:formData,
+            contentType: false,
+            processData: false,
+            async: false,
+            success: function (data) {
+                if(data!=""){
+                    if(data.length<=2){
+                        var str ="<div>";
+                        str+=" <ul style='margin-top: 10%;width: 80%;left: 40%;margin: 37px auto'>"
+                        for(var i=0;i<data.length;i++){
+                            if (i == data.length) {break;}
+                            str+="<li style='margin-left: 10% '><button onclick='studentShow1("+data[i].zcameraName+")' value='' style='float:left;color:#FFFFFF;height: 80px;display:block;margin:0 auto;margin-top:0px;width:250px;background-color:#71B863;border-radius:32px;text-align: center;line-height: 50px;font-size: 35px'>"+(data[i].ztrainingroomID)+"</button></li>"
+                        }
+                        str+="</ul>";
+                        str+="</div>";
+                        threeMenu.append(str)
+                    }else {
+                        var j=0;
+                        var str ="";
+                        for(var i=0;i<(data.length/2);i++){
+                            str+="<div>";
+                            str+="<ul style='margin:"+(10*i)+"% auto;width: 80%;'>"
+                            for(;j<2 * (i + 1);j++){
+                                if (j == data.length) {break;}
+                                if(j%2==0){
+                                    str+="<li style='margin-left: 30%'><button  onclick='studentShow1("+data[j].zcameraName+")' value='2' style='float:left;color:#FFFFFF;height: 80px;display:block;margin:0 auto;margin-top:0px;width:250px;background-color:#71B863;border-radius:32px;text-align: center;line-height: 50px;font-size: 35px'>"+(data[j].ztrainingroomID)+"</button></li>"
+                                }
+                                if(j%2==1){
+                                    str+="<li style='margin-left: 60%'><button  onclick='studentShow1("+data[j].zcameraName+")' value='2' style='float:left;color:#FFFFFF;height: 80px;display:block;margin:0 auto;margin-top:0px;width:250px;background-color:#71B863;border-radius:32px;text-align: center;line-height: 50px;font-size: 35px'>"+(data[j].ztrainingroomID)+"</button></li>"
+                                }
+                            }
+                            str+="</ul>";
+                            str+="</div>";
+                        }
+                        threeMenu.append(str)
+                    }
+
+                }
+
+
+
+            }
+
+        })
+
     }
+
 
 </script>
 </html>

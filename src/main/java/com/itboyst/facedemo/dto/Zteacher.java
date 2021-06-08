@@ -1,6 +1,8 @@
 package com.itboyst.facedemo.dto;
 
-public class Zteacher {
+import java.io.Serializable;
+
+public class Zteacher implements Serializable {
     private String zid;
     private String zmajorID;
     private String zauthorityID;

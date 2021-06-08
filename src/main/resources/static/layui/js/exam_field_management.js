@@ -15,7 +15,7 @@ function startcollect() {
     //每次点击开始的时候数据刷新
     $("#mainBody").empty()
     $("#mainBody").append(backup)
-    document.getElementById("currentnumber").innerHTML = 0
+    document.getElementById("currentnumber").innerHTML = 0;
     $("#startID").css('background-color', 'rgba(237,125,49)')
     $("#endID").css('background-color', 'rgba(0,0,255)')
     //打开杰视的远程socket,建立连接websocket的端口
@@ -48,7 +48,7 @@ function handlewebsocket(a) {
 //从数据库中显示已经检测到的人脸信息
 //从数据中找到签到的学生
 function showRecognitionFaceexam(mytime,zcheck,zid) {
-    var cameraname = $("#trainingroomselect option:selected").val();
+    var cameraname = document.getElementById("rollcallcamera").innerHTML;
     var formData = new FormData();
     formData.append("zcheck",zcheck);
     formData.append("mytime",mytime );
@@ -83,7 +83,7 @@ function showRecognitionFaceexam(mytime,zcheck,zid) {
 }
 //查找所有的人包括学生和教师
 function findAllLoginpeopleexam(mytime,zcheck) {
-    var cameraname = $("#trainingroomselect option:selected").val();
+    var cameraname = document.getElementById("rollcallcamera").innerHTML;
     var formData = new FormData();
     formData.append("zcheck",zcheck)
     formData.append("mytime",mytime );

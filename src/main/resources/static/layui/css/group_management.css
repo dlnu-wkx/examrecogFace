@@ -107,6 +107,7 @@
     font-size: 20px;
     /*圆角控制器*/
     /* border-radius: 10px; */
+    /*display: none;*/
 }
 
 
@@ -114,6 +115,4 @@
     /*height: 90%;
     width: 100%;*/
     margin-left:3px;
-    border-spacing:20px;
-    border-collapse:separate;
 }

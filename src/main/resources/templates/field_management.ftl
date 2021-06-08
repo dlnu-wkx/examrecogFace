@@ -25,7 +25,9 @@
 <body class="layui-layout-body" style="width: 100%;height: 100%;background-image:url(/images1/background.png);background-size: 100%;height: 100%">
 <div class="layui-layout layui-layout-admin" >
     <div class="layui-header" style="border-bottom: 0px solid #c2c2c2;background-color: #114376">
-        <div  class="left-bar" ><span id="trainroomname"></span>/现场管理</div>
+        <div id ="cameranamepoint" style="display: none"></div>
+        <div class="left-bar" ><span id="trainroomname"></span>/现场管理</div>
+
         <div class="mid-bar">安浩智能学习工厂</div>
         <div class="right-bar" id="m_rightfont"></div>
 
@@ -132,7 +134,7 @@
                     <button id="startID2" onclick="OpenOTimer(this.value)" value="2" style="background-color: blue;color: #ffff;border-radius:32px;width: 150px">开始</button>
                 </div>
                 <div style="text-align:center;line-height:80px;font-size:34px;color:#0C0C0C;float:right;width: 50%">
-                    <button id="endID2"onclick="CloseTimer(this.value)" value="2" style="background-color: blue;color: #ffff;border-radius:32px;width: 150px;position: fixed;z-index: 12;">结束</button>
+                    <button id="endID2"onclick="CloseTimer(this.value)" value="2" style="background-color: blue;color: #ffff;border-radius:32px;width: 150px;z-index: 12;position: absolute;top:88%">结束</button>
                 </div>
             </div>
 
@@ -284,8 +286,10 @@
         })
     }
     //数控铣讨论区显示每台机的人脸识别情况
-    function studentShow1(e){
-        $().find("#")
+    function studentShow1(zcameraIP,zcameraName){
+        //把摄像头的名字写到相应的位置上
+        document.getElementById("cameranamepoint").innerHTML = zcameraName;
+
         document.getElementById("checkPointMenu").style.display="none";
         //摄像头下面显示的五个人
         document.getElementById("fourMenu").style.display="block";
@@ -336,7 +340,7 @@
         document.getElementById("checkPointColor").style.backgroundColor="#ED7D31";
         document.getElementById("twoMenu").style.display="none";
         //找出所有实训室所有的种类的摄像头
-        CheckPointFindAllCameras();
+        CheckPointFindAllCameras("查岗");
         document.getElementById("checkPointMenu").style.display="block";
 
     }
@@ -379,6 +383,22 @@
 
     function measure() {
         location.href="/teacher_measure";
+    }
+
+    //关闭浏览器时执行的函数
+    window.onbeforeunload = onbeforeunload_handler;
+    function onbeforeunload_handler(){
+        if($("#startID2").css("background-color") == "rgb(237, 125, 49)"){
+            $.ajax({
+                type: "post",
+                url: "/delCheckPoint",
+                data:{},
+                success: function (data){
+
+                }
+            })
+        }
+
     }
 
 

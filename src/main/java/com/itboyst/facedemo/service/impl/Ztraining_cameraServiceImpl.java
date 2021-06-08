@@ -18,6 +18,11 @@ public class Ztraining_cameraServiceImpl implements Ztraining_cameraService {
     }
 
     @Override
+    public Ztraining_camera findAllByType(String type) {
+        return ztraining_cameraMapper.findAllByType(type);
+    }
+
+    @Override
     public synchronized int insertCamera(Ztraining_camera ztraining_camera) {
         String zcamerIP = "";
         String ztitle = "";
