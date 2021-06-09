@@ -14,8 +14,8 @@ public class Zteacher_measureServiceImpl implements Zteacher_measureService {
     Zteacher_measureMapper zteacher_measureMapper;
 
     @Override
-    public int findmeasurebygatgroupid(String zgradeID,String ztraining_taskID){return zteacher_measureMapper.findmeasurebygatgroupid(zgradeID, ztraining_taskID);}
+    public int findmeasurebygatgroupid(String zgradeID,String ztraining_taskID,String zscheduleid){return zteacher_measureMapper.findmeasurebygatgroupid(zgradeID, ztraining_taskID,zscheduleid);}
 
     @Override
-    public List<Zteacher_measure> findmeasurebygat(String zgradeID, String ztraining_taskID){return zteacher_measureMapper.findmeasurebygat(zgradeID, ztraining_taskID);}
+    public List<Zteacher_measure> findmeasurebygat(String zgradeID, String ztraining_taskID,String zscheduleid){return zteacher_measureMapper.findmeasurebygat(zgradeID, ztraining_taskID,zscheduleid);}
 }

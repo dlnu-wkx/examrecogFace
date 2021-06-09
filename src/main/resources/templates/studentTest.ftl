@@ -248,7 +248,7 @@
         if(static_testtimes2!=0)
             static_testtimes=static_testtimes2;
 
-        static_testtimes2++;
+        static_testtimes++;
        // alert(static_testtimes)
         $.ajax({
             type: "post",

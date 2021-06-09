@@ -42,16 +42,18 @@ public class ZmeasureController {
 
     @RequestMapping("/getmeasurebygt")
     @ResponseBody
-    public List<Zteacher_measure> getmeasurebygt(String zgradeID, String ztrainingtaskID){
+    public List<Zteacher_measure> getmeasurebygt(String zgradeID, String ztrainingtaskID,HttpSession session){
+        Zteacher_cookie zteacher_cookie=(Zteacher_cookie)session.getAttribute("zteacher_cookie");
        /* System.out.println(zgradeID+ztrainingtaskID);
         System.out.println(zteacher_measureService.findmeasurebygat(zgradeID,ztrainingtaskID));*/
-        return zteacher_measureService.findmeasurebygat(zgradeID,ztrainingtaskID);
+        return zteacher_measureService.findmeasurebygat(zgradeID,ztrainingtaskID,zteacher_cookie.getZscheduleID());
     }
 
     @RequestMapping("/getmeasuremaxbyg")
     @ResponseBody
-    public int getmeasuremaxbyg(String zgradeID, String ztrainingtaskID){
-        return zteacher_measureService.findmeasurebygatgroupid(zgradeID, ztrainingtaskID);
+    public int getmeasuremaxbyg(String zgradeID, String ztrainingtaskID,HttpSession session){
+        Zteacher_cookie zteacher_cookie=(Zteacher_cookie)session.getAttribute("zteacher_cookie");
+        return zteacher_measureService.findmeasurebygatgroupid(zgradeID, ztrainingtaskID,zteacher_cookie.getZscheduleID());
     }
 
 }

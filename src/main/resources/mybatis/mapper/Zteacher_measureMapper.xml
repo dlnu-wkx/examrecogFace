@@ -11,20 +11,42 @@
     </resultMap>
 
     <select id="findmeasurebygat"  resultType="com.itboyst.facedemo.dto.Zteacher_measure">
-        select A.zid as zid,E.zid as ztaskinputid,A.zname as zname,A.zidentity as zidentity,E.zselfcheck as zselfcheck,E.zteachercheck as zteachercheck,F.zorder from zstudent A,ztraining_task B,zassign_schedule C,zstudent_schedule D,ztask_input E ,ztraining_task_assess F
-where   A.zid=#{zgradeID} and C.ztrainingtaskID=B.zid and D.zid=C.zstudentscheduleID and
-A.zid=D.zstudentID and B.zid=#{ztraining_taskID}
-and E.zassignscheduleID=C.zid and E.ztrainingtaskassessID=F.zid and F.ztrainingtaskID=B.zid
-ORDER BY A.zidentity,F.zorder;
+        select E.zid as zid,A.zid as ztaskinputid,E.zname as zname,E.zidentity as zidentity,A.zselfcheck as zselfcheck,
+
+A.zteachercheck as zteachercheck,C.zorder
+
+from ztask_input A , zassign_schedule B, ztraining_task_assess C, ztraining_task D,zstudent E,zschedule F,zstudent_schedule G
+
+where  A.zassignscheduleID=B.zid and A.ztrainingtaskassessID=C.zid
+
+and D.zid=C.ztrainingtaskID   and B.ztrainingtaskID=D.zid
+
+and D.zid=#{ztraining_taskID}  and E.zid=#{zgradeID} and F.zid=#{zscheduleid}
+
+and G.zscheduleID=F.zid and G.zstudentID=E.zid
+
+and B.zstudentscheduleID=G.zid
+
+ORDER BY C.zorder;
 
     </select>
 
     <select id="findmeasurebygatgroupid"  resultType="int">
-        select max(A.zidentity) from zstudent A,ztraining_task B,zassign_schedule C,zstudent_schedule D,ztask_input E ,ztraining_task_assess F
-where  A.zid=#{zgradeID} and C.ztrainingtaskID=B.zid and D.zid=C.zstudentscheduleID and
-A.zid=D.zstudentID and B.zid=#{ztraining_taskID}
-and E.zassignscheduleID=C.zid and E.ztrainingtaskassessID=F.zid and F.ztrainingtaskID=B.zid
-group by A.zid  ORDER BY A.zidentity,F.zorder  ;
+        select max(C.zorder)
+
+from ztask_input A , zassign_schedule B, ztraining_task_assess C, ztraining_task D,zstudent E,zschedule F,zstudent_schedule G
+
+where  A.zassignscheduleID=B.zid and A.ztrainingtaskassessID=C.zid
+
+and D.zid=C.ztrainingtaskID   and B.ztrainingtaskID=D.zid
+
+and D.zid=#{ztraining_taskID}  and E.zid=#{zgradeID} and F.zid=#{zscheduleid}
+
+and G.zscheduleID=F.zid and G.zstudentID=E.zid
+
+and B.zstudentscheduleID=G.zid
+
+ORDER BY C.zorder;
 
     </select>
 </mapper>

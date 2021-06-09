@@ -7,7 +7,7 @@ import java.util.List;
 
 @Mapper
 public interface Zteacher_measureMapper {
-    public List<Zteacher_measure> findmeasurebygat(String zgradeID,String ztraining_taskID);
+    public List<Zteacher_measure> findmeasurebygat(String zgradeID,String ztraining_taskID,String zscheduleid);
 
-    public int findmeasurebygatgroupid(String zgradeID,String ztraining_taskID);
+    public int findmeasurebygatgroupid(String zgradeID,String ztraining_taskID,String zscheduleid);
 }
